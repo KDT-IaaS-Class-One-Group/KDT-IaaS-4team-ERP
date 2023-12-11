@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+</head>
+<body>
+    <h1>Main Page</h1>
+    <input type="text" id="inputData" placeholder="데이터 입력">
+    <button id="submitButton">제출</button>
+    <a href="./sub.html">sub.html</a>
+
+    <script>
+        document.getElementById('submitButton').onclick = function() {
+            let inputData = document.getElementById('inputData').value;
+
+            fetch('/api/data', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ data: inputData })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('데이터 전송 성공:', data);
+                alert('데이터 저장 성공');
+            })
+            .catch(error => {
+                console.error('전송 중 에러 발생:', error);
+                alert('데이터 저장 실패');
+            });
+        };
+    </script>
+</body>
+</html>
+
