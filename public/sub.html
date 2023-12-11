@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sub Page</title>
+</head>
+<body>
+  <h1>Sub Page</h1>
+  <div id="dataContainer"></div>
+
+  <script>
+    window.onload = function() {
+      fetch('/api/data')
+      .then(response => response.json())
+      .then(data => {
+          let container = document.getElementById('dataContainer');
+          data.forEach(item => {
+              let div = document.createElement('div');
+              div.textContent = item.data;
+              container.appendChild(div);
+          });
+      })
+      .catch(error => {
+          console.error('조회 중 에러 발생:', error);
+          alert('데이터 조회 실패');
+      });
+    };
+  </script>
+</body>
+</html>
