@@ -1,0 +1,27 @@
+<!-- public/admin.html 파일 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Page</title>
+</head>
+<body>
+  <h2>Admin Page</h2>
+
+  <!-- 현재까지의 a.json 내용을 표시할 공간 -->
+  <h3>Admin Page 내용:</h3>
+  <pre id="adminContent"></pre>
+
+  <script>
+    // 서버에서 admin.html 내용을 가져와서 표시
+    fetch('/adminContent')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('adminContent').innerHTML = data;
+      })
+      .catch(error => console.error('Error fetching admin content:', error));
+  </script>
+</body>
+</html>
