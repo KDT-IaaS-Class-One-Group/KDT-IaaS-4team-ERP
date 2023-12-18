@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRUD Example</title>
+</head>
+
+<body>
+  <h1>Data from Database</h1>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="dataBody"></tbody>
+  </table>
+
+  <h2>Add Data</h2>
+  <form id="addForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+    <label for="age">Age:</label>
+    <input type="number" id="age" name="age" required>
+    <button type="submit">Add Data</button>
+  </form>
+
+  <script>
+    // 서버에서 데이터 가져오기
+    function fetchData() {
+      fetch('/users')
+        .then(response => response.json())
+        .then(data => {
+          // 가져온 데이터를 테이블에 추가
+          const dataBody = document.getElementById('dataBody');
+          dataBody.innerHTML = '';
+          data.forEach(row => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+              <td>${row.id}</td>
+              <td>${row.name}</td>
+              <td>${row.age}</td>
+              <td>
+                <button onclick="editData(${row.id}, '${row.name}', ${row.age})">Edit</button>
+                <button onclick="deleteData(${row.id})">Delete</button>
+              </td>
+            `;
+            dataBody.appendChild(tr);
+          });
+        })
+        .catch(error => console.error(error));
+    }
+
+    // 데이터 추가 폼 제출
+    document.getElementById('addForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+      const formData = new FormData(this);
+      fetch('/add', {
+        method: 'POST',
+        body: formData,
+      })
+        .then(response => response.text())
+        .then(data => {
+          console.log(data);
+          fetchData();
+        })
+        .catch(error => console.error(error));
+    });
+
+    // 데이터 수정 함수
+    function editData(id, name, age) {
+      const newName = prompt('Enter a new name:', name);
+      const newAge = prompt('Enter a new age:', age);
+      if (newName !== null && newAge !== null) {
+        fetch(`/edit/${id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ name: newName, age: newAge }),
+        })
+          .then(response => response.text())
+          .then(data => {
+            console.log(data);
+            fetchData();
+          })
+          .catch(error => console.error(error));
+      }
+    }
+
+    // 데이터 삭제 함수
+    function deleteData(id) {
+      if (confirm('Are you sure you want to delete this data?')) {
+        fetch(`/delete/${id}`, {
+          method: 'DELETE',
+        })
+          .then(response => response.text())
+          .then(data => {
+            console.log(data);
+            fetchData();
+          })
+          .catch(error => console.error(error));
+      }
+    }
+
+    // 초기 데이터 로딩
+    fetchData();
+  </script>
+</body>
+
+</html>
