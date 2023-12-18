@@ -12,11 +12,11 @@ async function addData(event) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ name, age }), // 이 문제인가..?
+      body: JSON.stringify({ name, age }),
     });
 
     if (response.ok) {
-      alert('User added successfully.');
+      alert('추가 완료');
     } else {
       const data = await response.json();
       alert(`Error: ${data.error}`);

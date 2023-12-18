@@ -10,17 +10,6 @@
 </head>
 
 <body>
-  <table id="list">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>이름</th>
-        <th>나이</th>
-      </tr>
-    </thead>
-    <tbody id="userList"></tbody>
-  </table>
-
   <form id="addForm">
     <label for="name">이름:</label>
     <input type="text" id="name" name="name" required>
@@ -28,6 +17,20 @@
     <input type="number" id="age" name="age" required>
     <button type="submit">추가</button>
   </form>
+
+  <div class="table-container">
+    <table id="list">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>이름</th>
+          <th>나이</th>
+        </tr>
+      </thead>
+      <tbody id="userList"></tbody>
+    </table>
+  </div>
+
 </body>
 
 </html>

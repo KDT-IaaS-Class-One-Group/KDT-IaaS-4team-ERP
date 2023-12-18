@@ -40,7 +40,9 @@ app.get('/', async (req, res) => {
     res.status(500).json({ error: err.message });
   } finally {
     // 연결을 종료합니다.
-    if (conn) return conn.end();
+    if (conn) {
+      return conn.end();
+    }
   }
 });
 
@@ -48,7 +50,7 @@ app.get('/', async (req, res) => {
 app.post('/add', async (req, res) => {
   const { name, age } = req.body;
 
-  // 요청 바디에서 이름과 나이를 추출합니다.
+  // 요청 바디에서 이름과 나이를 추출합니다. (값이 있을때만)
   if (!name || !age) {
     // 이름 또는 나이가 누락된 경우 400 Bad Request로 응답합니다.
     return res.status(400).json({ error: 'Name and age are required for adding a user.' });
@@ -95,6 +97,7 @@ app.post('/update', async (req, res) => {
     if (conn) return conn.end();
   }
 });
+*/
 
 // 삭제
 app.post('/delete', async (req, res) => {
@@ -115,7 +118,7 @@ app.post('/delete', async (req, res) => {
     if (conn) return conn.end();
   }
 });
-*/
+
 
 // 서버를 지정된 포트에서 실행합니다.
 app.listen(port, () => {
