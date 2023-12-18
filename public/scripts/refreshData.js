@@ -1,9 +1,4 @@
-const response = await fetch('http://localhost:3000');
-const users = await response.json();
-const userTable = document.getElementById('userTable');
-const userList = document.getElementById('userList');
-
-export default async function refreshData() {
+async function refreshData() {
   try {
     const response = await fetch('http://localhost:3000/');
     const data = await response.json();
@@ -26,3 +21,5 @@ export default async function refreshData() {
     console.error('Error:', error);
   }
 }
+
+export default refreshData;
