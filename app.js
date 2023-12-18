@@ -39,20 +39,22 @@ app.get('/', async (req, res) => {
 app.post('/add', async (req, res) => {
   const { name, age } = req.body;
 
-  if (!name || !age) {
-    return res.status(400).json({ error: 'Name and age are required for adding a user.' });
-  }
+  console.log(name, age);
 
-  let conn;
-  try {
-    conn = await pool.getConnection();
-    const result = await conn.query('INSERT INTO users (name, age) VALUES (?, ?)', [name, age]);
-    res.json({ message: 'User added successfully.', insertedId: result.insertId });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  } finally {
-    if (conn) return conn.end();
-  }
+  // if (!name || !age) {
+  //   return res.status(400).json({ error: 'Name and age are required for adding a user.' });
+  // }
+
+  // let conn;
+  // try {
+  //   conn = await pool.getConnection();
+  //   const result = await conn.query('INSERT INTO users (name, age) VALUES (?, ?)', [name, age]);
+  //   res.json({ message: 'User added successfully.', insertedId: result.insertId });
+  // } catch (err) {
+  //   res.status(500).json({ error: err.message });
+  // } finally {
+  //   if (conn) return conn.end();
+  // }
 });
 
 // 수정
