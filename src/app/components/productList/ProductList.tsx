@@ -7,12 +7,14 @@ interface PList {
   pSub: string;
   pPrice: number;
   pCount: number;
+  className?: string;
 }
 
-const ProductList: React.FC<PList> = ({pUrl, pSub, pPrice, pCount}) => {
+const ProductList: React.FC<PList> = ({ pUrl, pSub, pPrice, pCount, className }) => {
+  const combinedClassName = `w-full flex justify-between items-center border-2 border-slate-800 p-4 ${className}`;
+
   return (
-    <li 
-    className='w-full flex justify-between items-center border-2 border-slate-800 p-4'>
+    <li className={combinedClassName}>
       <Image src={pUrl} alt="이미지가 들어갈 자리입니다." width="65" height = "65"/>
       <p className='text-xs'>{pSub}</p>
       <div >{pPrice}</div>
