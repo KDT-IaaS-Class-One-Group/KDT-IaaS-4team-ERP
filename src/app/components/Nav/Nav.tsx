@@ -16,6 +16,9 @@ export default function Footer() {
         <li>
           <a href='/contact'>연락처</a>
         </li>
+        <li>
+          <a href='/cart'>장바구니</a>
+        </li>
       </ul>
     </nav>
   );
