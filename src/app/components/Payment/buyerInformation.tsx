@@ -4,7 +4,7 @@ export default function buyerInformation() {
   // const buyerinformation = await fetchbuyerinformationdata()
 
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex justify-center items-center mt-10">
       <div
         className={`${styles.buyerInformation} flex flex-col justify-center`}
       >

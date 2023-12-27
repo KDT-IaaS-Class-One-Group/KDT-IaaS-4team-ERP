@@ -1,0 +1,33 @@
+.productInformation {
+  width: 80vw;
+  height: 20vh;
+  display: flex;
+  flex-direction: column;
+  position:relative;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  flex-shrink: 0;
+  background: #b3b3b3;
+}
+
+.productInformation div {
+  display: flex;
+  justify-content: space-around;
+  position: relative;
+  
+}
+
+.productInformation div:nth-child(2){
+
+  background-color: grey;
+}
+
+.productInformation div:nth-child(1) div {
+  background-color: #E6E6E6;
+  position: relative;
+  
+}
+
+.productInformation div:nth-child(2) div {
+  background-color: pink;
+}
