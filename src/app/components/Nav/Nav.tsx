@@ -8,13 +8,13 @@ export default function Footer() {
           <a href='/'>홈</a>
         </li>
         <li>
-          <a href='/products'>상품 목록</a>
+          <a href='/a'>a</a>
         </li>
         <li>
-          <a href='/about'>회사 소개</a>
+          <a href='/b'>b</a>
         </li>
         <li>
-          <a href='/contact'>연락처</a>
+          <a href='/c'>c</a>
         </li>
         <li>
           <a href='/cart'>장바구니</a>
