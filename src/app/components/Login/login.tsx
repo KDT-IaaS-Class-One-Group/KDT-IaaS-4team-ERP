@@ -5,12 +5,12 @@ export default function Login() {
   return (
     <>
       <div>
-        <LoginPageForm />
-        <LoginPageForm />
+        <LoginPageForm logintitle={ID}/>
+        <LoginPageForm logintitle={PASSWORD}/>
       </div>
       <div>
-        <LoginPageButton />
-        <LoginPageButton />
+        <LoginPageButton buttonname={sign up}/>
+        <LoginPageButton buttonname={login}/>
       </div>
     </>
   )
