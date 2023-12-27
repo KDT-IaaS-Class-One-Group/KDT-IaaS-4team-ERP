@@ -1,0 +1,11 @@
+
+
+
+.button {
+  display: inline-flex;
+  width: 100px;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+  background-color: #FFC7C2;
+}

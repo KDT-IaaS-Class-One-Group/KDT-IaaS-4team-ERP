@@ -1,5 +1,8 @@
+import styles from './button.module.css'
+
+
 export default function LoginPageButton({buttonname}) {
   return (
-    <div>{buttonname}</div>
+    <div className={styles.button}>{buttonname}</div>
   )
 }
