@@ -1,11 +1,11 @@
-import Header from './components/Header';
-import Nav from './components/Nav';
-import Main from './components/Main';
-import Footer from './components/Footer';
+import Header from './components/Header/Header';
+import Nav from './components/Nav/Nav';
+import Main from './components/Main/Main';
+import Footer from './components/Footer/Footer'
 
 export default function Home() {
   return (
-    <div className='container'>
+    <div>
       <Header />
       <Nav />
       <Main />
