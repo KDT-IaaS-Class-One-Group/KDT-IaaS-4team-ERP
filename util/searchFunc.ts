@@ -1,4 +1,4 @@
-function b(obj: Record<string, unknown>, key: string): string | null {
+export default function b(obj: Record<string, unknown>, key: string): string | null {
   if (obj.hasOwnProperty(key)) {
     return String(obj[key]);
   } else {
