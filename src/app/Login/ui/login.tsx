@@ -1,3 +1,6 @@
+@tailwin
+
+
 import LoginPageButton from "./button";
 import LoginPageForm from "./texarea";
 

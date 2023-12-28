@@ -1,10 +1,10 @@
-import Login from "./ui/login";
+import Superstart from "./ui/test";
 
 
 export default function Home() {
   return (
     <>
-    <Login />
+    <Superstart />
     </>
   );
 }
