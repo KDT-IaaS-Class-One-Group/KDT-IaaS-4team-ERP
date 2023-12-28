@@ -2,7 +2,7 @@ export interface Classroom {
   instructor: string;
   field: string;
   computers: number;
-  students: string[]; // Student[] 대신 string[] 사용
+  students: string[];
 }
 
 export interface Classrooms {
