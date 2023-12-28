@@ -1,3 +1,4 @@
+'use client'
 
 import { useEffect, useState } from 'react';
 
@@ -7,7 +8,7 @@ const PaymentPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('/api/payment/data');
+        const response = await fetch('/payment/api/data');
         if (!response.ok) {
           throw new Error(`Network response was not ok: ${response.statusText}`);
         }
