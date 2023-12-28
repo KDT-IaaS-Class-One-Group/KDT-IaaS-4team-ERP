@@ -1,23 +1,30 @@
-"use client"
+'use client'
 
-import readJsonFile from './lib/datajoin'
-import React, {useState} from 'react'
+import { useEffect, useState } from 'react';
 
-const MyButton: React.FC = () => {
+const PaymentPage = () => {
   const [jsonData, setJsonData] = useState<any>(null);
 
-  const handleButtonClick = async () => {
-    try {
-      const data = await readJsonFile('./dummy.json'); // JSON 파일 경로
-      setJsonData(data);
-    } catch (error) {
-      console.error('Error reading JSON file:', error);
-    }
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/api/payment/data');
+        if (!response.ok) {
+          throw new Error(`Network response was not ok: ${response.statusText}`);
+        }
+        const data = await response.json();
+        setJsonData(data);
+      } catch (error) {
+        console.error('Error during API fetch:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div>
-      <button onClick={handleButtonClick}>Read JSON File</button>
+      <h1>Payment Page</h1>
       {jsonData && (
         <div>
           <h2>JSON Data:</h2>
@@ -28,4 +35,4 @@ const MyButton: React.FC = () => {
   );
 };
 
-export default MyButton;
+export default PaymentPage;
