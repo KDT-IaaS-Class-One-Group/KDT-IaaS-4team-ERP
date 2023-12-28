@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import AccordionItem from './components/AccordionItem';
 import classroomData from './databases/classroom.json';
 import { Classrooms } from './types/classroom';
 
@@ -8,13 +9,13 @@ const classrooms: Classrooms = classroomData;
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [searchResults, setSearchResults] = useState<Classrooms>({});
+  const [searchResults, setSearchResults] = useState<Classrooms>(classrooms);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
 
     if (!event.target.value) {
-      setSearchResults({});
+      setSearchResults(classrooms);
       return;
     }
 
@@ -41,17 +42,16 @@ export default function Home() {
         placeholder='교실 검색'
       />
       {Object.entries(searchResults).map(([roomKey, roomDetails]) => (
-        <div key={roomKey} className='mt-4'>
-          <h3 className='font-bold'>{`교실: ${roomKey}`}</h3>
+        <AccordionItem key={roomKey} title={`교실: ${roomKey}`}>
           <p>{`강사: ${roomDetails.instructor}`}</p>
           <p>{`분야: ${roomDetails.field}`}</p>
           <p>{`컴퓨터 수: ${roomDetails.computers}`}</p>
           <ul>
-            {roomDetails.students.map((student) => (
-              <li key={student}>{student}</li>
+            {roomDetails.students.map((student, index) => (
+              <li key={index}>{student}</li>
             ))}
           </ul>
-        </div>
+        </AccordionItem>
       ))}
     </div>
   );
