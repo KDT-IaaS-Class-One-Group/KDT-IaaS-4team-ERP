@@ -1,12 +1,8 @@
-export interface Student {
-  name: string;
-}
-
 export interface Classroom {
   instructor: string;
   field: string;
   computers: number;
-  students: Student[];
+  students: string[]; // Student[] 대신 string[] 사용
 }
 
 export interface Classrooms {
