@@ -6,7 +6,7 @@ export default function buyerInformation() {
   return (
     <div className="flex justify-center items-center mt-10">
       <div
-        className={`${styles.buyerInformation} flex flex-col justify-center`}
+        className={`${styles.buyerInformation} bg-red-500 flex flex-col justify-center`}
       >
         {/* tailwind와 css모듈 같이 사용하기 */}
         <div className="relative mt-2 mb-2">
