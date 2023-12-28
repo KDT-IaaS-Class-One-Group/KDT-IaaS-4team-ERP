@@ -1,64 +1,21 @@
 'use client';
 
-import AccordionItem from './components/AccordionItem';
-import classroomData from '../public/databases/classroom.json';
-import ClassroomDetails from './components/ClassroomDetails';
-import SearchInput from './components/SearchInput';
-import { Classrooms } from './types/Classroom';
-import useClassroomSearch from './hooks/useClassroomSearch';
+import { GetStaticProps } from 'next';
+import { Classroom } from './types/Classroom';
 
-const classrooms: Classrooms = classroomData;
+interface Props {
+  classroomData: Classroom;
+}
 
 export default function Home() {
-  const { searchTerms, setSearchTerms, searchResults } = useClassroomSearch(
-    classrooms,
-    {
-      room: '',
-      instructor: '',
-      field: '',
-      computers: '',
-      student: '',
-    },
-  );
-
-  function handleSearch(key: keyof typeof searchTerms) {
-    return function (e: React.ChangeEvent<HTMLInputElement>) {
-      setSearchTerms({ ...searchTerms, [key]: e.target.value });
-    };
-  }
-
   return (
-    <div className='p-8'>
-      <SearchInput
-        placeholder='교실 검색'
-        value={searchTerms.room}
-        onChange={handleSearch('room')}
-      />
-      <SearchInput
-        placeholder='강사 검색'
-        value={searchTerms.instructor}
-        onChange={handleSearch('instructor')}
-      />
-      <SearchInput
-        placeholder='분야 검색'
-        value={searchTerms.field}
-        onChange={handleSearch('field')}
-      />
-      <SearchInput
-        placeholder='컴퓨터 수 검색'
-        value={searchTerms.computers}
-        onChange={handleSearch('computers')}
-      />
-      <SearchInput
-        placeholder='학생 검색'
-        value={searchTerms.student}
-        onChange={handleSearch('student')}
-      />
-
-      {Object.entries(searchResults).map(([roomKey, roomDetails]) => (
-        <AccordionItem key={roomKey} title={`${roomKey}`}>
-          <ClassroomDetails roomDetails={roomDetails} />
-        </AccordionItem>
+    <div>
+      {Object.entries(classroomData).map(([room, details]) => (
+        <div key={room}>
+          <h1>{`Room ${room}`}</h1>
+          <p>{`Instructor: ${details.instructor}`}</p>
+          {/* 나머지 데이터도 이와 같이 UI에 표시할 수 있습니다. */}
+        </div>
       ))}
     </div>
   );
