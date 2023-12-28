@@ -9,19 +9,31 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.17",
+    "@heroicons/react": "^2.1.1",
+    "next": "14.0.4",
     "react": "^18",
+<<<<<<< HEAD
     "react-dom": "^18",
     "next": "14.0.2"
+=======
+    "react-dom": "^18"
+>>>>>>> 0963d9b (fix : npm install @headlessui/react @heroicons/react 테일윈드 종속성 설치)
   },
   "devDependencies": {
-    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
+    "eslint": "^8",
+    "eslint-config-next": "14.0.4",
     "postcss": "^8",
     "tailwindcss": "^3.3.0",
+<<<<<<< HEAD
     "eslint": "^8",
     "eslint-config-next": "14.0.2"
+=======
+    "typescript": "^5"
+>>>>>>> 0963d9b (fix : npm install @headlessui/react @heroicons/react 테일윈드 종속성 설치)
   }
 }
