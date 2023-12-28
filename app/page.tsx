@@ -1,43 +1,22 @@
 'use client';
 
-import { useState } from 'react';
 import AccordionItem from './components/AccordionItem';
 import classroomData from './databases/classroom.json';
 import { Classrooms } from './types/classroom';
+import useClassroomSearch from './hooks/useClassroomSearch';
 
 const classrooms: Classrooms = classroomData;
 
 export default function Home() {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [searchResults, setSearchResults] = useState<Classrooms>(classrooms);
-
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(event.target.value);
-
-    if (!event.target.value) {
-      setSearchResults(classrooms);
-      return;
-    }
-
-    const filteredResults = Object.entries(classrooms).reduce(
-      (acc, [key, value]) => {
-        if (key.toLowerCase().includes(event.target.value.toLowerCase())) {
-          acc[key] = value;
-        }
-        return acc;
-      },
-      {} as Classrooms,
-    );
-
-    setSearchResults(filteredResults);
-  };
+  const { searchTerm, setSearchTerm, searchResults } =
+    useClassroomSearch(classrooms);
 
   return (
     <div className='p-8'>
       <input
         type='text'
         value={searchTerm}
-        onChange={handleSearch}
+        onChange={(e) => setSearchTerm(e.target.value)}
         className='p-2 border border-gray-300 rounded'
         placeholder='교실 검색'
       />
