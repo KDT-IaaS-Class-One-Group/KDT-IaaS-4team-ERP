@@ -4,11 +4,7 @@ interface SearchInputProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const SearchInput: React.FC<SearchInputProps> = ({
-  placeholder,
-  value,
-  onChange,
-}) => {
+function SearchInput({ placeholder, value, onChange }: SearchInputProps) {
   return (
     <input
       type='text'
@@ -18,6 +14,6 @@ const SearchInput: React.FC<SearchInputProps> = ({
       placeholder={placeholder}
     />
   );
-};
+}
 
 export default SearchInput;

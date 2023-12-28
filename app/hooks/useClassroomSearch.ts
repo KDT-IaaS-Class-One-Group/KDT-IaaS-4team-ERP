@@ -1,33 +1,60 @@
 import { useState, useEffect } from 'react';
 import { Classrooms } from '../types/classroom';
 
+interface SearchTerms {
+  room: string;
+  instructor: string;
+  field: string;
+  computers: string;
+  student: string;
+}
+
 function useClassroomSearch(
   classrooms: Classrooms,
-  initialSearchTerm: string = '',
+  initialSearchTerms: SearchTerms,
 ) {
-  const [searchTerm, setSearchTerm] = useState(initialSearchTerm);
+  const [searchTerms, setSearchTerms] =
+    useState<SearchTerms>(initialSearchTerms);
   const [searchResults, setSearchResults] = useState<Classrooms>(classrooms);
 
   useEffect(() => {
-    if (!searchTerm) {
-      setSearchResults(classrooms);
-      return;
-    }
+    const filteredResults = Object.entries(classrooms)
+      .filter(([key, value]) => {
+        const roomMatch = key
+          .toLowerCase()
+          .includes(searchTerms.room.toLowerCase());
+        const instructorMatch = value.instructor
+          .toLowerCase()
+          .includes(searchTerms.instructor.toLowerCase());
+        const fieldMatch = value.field
+          .toLowerCase()
+          .includes(searchTerms.field.toLowerCase());
+        const computersMatch = searchTerms.computers
+          ? value.computers === parseInt(searchTerms.computers)
+          : true;
+        const studentMatch = searchTerms.student
+          ? value.students.some((student) =>
+              student.toLowerCase().includes(searchTerms.student.toLowerCase()),
+            )
+          : true;
 
-    const filteredResults = Object.entries(classrooms).reduce(
-      (acc, [key, value]) => {
-        if (key.toLowerCase().includes(searchTerm.toLowerCase())) {
-          acc[key] = value;
-        }
+        return (
+          roomMatch &&
+          instructorMatch &&
+          fieldMatch &&
+          computersMatch &&
+          studentMatch
+        );
+      })
+      .reduce((acc, [key, value]) => {
+        acc[key] = value;
         return acc;
-      },
-      {} as Classrooms,
-    );
+      }, {} as Classrooms);
 
     setSearchResults(filteredResults);
-  }, [searchTerm, classrooms]);
+  }, [searchTerms, classrooms]);
 
-  return { searchTerm, setSearchTerm, searchResults };
+  return { searchTerms, setSearchTerms, searchResults };
 }
 
 export default useClassroomSearch;

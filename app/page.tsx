@@ -21,11 +21,11 @@ export default function Home() {
     },
   );
 
-  const handleSearch =
-    (key: keyof typeof searchTerms) =>
-    (e: React.ChangeEvent<HTMLInputElement>) => {
+  function handleSearch(key: keyof typeof searchTerms) {
+    return function (e: React.ChangeEvent<HTMLInputElement>) {
       setSearchTerms({ ...searchTerms, [key]: e.target.value });
     };
+  }
 
   return (
     <div className='p-8'>

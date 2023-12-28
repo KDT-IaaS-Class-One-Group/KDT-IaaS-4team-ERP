@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 interface AccordionProps {
   title: string;
   children: React.ReactNode;
 }
 
-const AccordionItem: React.FC<AccordionProps> = ({ title, children }) => {
+function AccordionItem({ title, children }: AccordionProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -19,6 +19,6 @@ const AccordionItem: React.FC<AccordionProps> = ({ title, children }) => {
       {isOpen && <div className='py-2 px-5'>{children}</div>}
     </div>
   );
-};
+}
 
 export default AccordionItem;
