@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { ClassroomManager } from '../module/classroomManager';
+import { ClassroomManager } from '../utils/classroomManager';
 import data from '../databases/classroom.json'; // 데이터 파일 불러오기
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
