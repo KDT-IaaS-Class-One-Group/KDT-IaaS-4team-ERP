@@ -5,14 +5,20 @@ interface Props {
   classroomData: Classroom;
 }
 
-export default function HomePage({ classroomData }: Props) {
+export default function UseJsonData({ classroomData }: Props) {
   return (
     <div>
       {Object.entries(classroomData).map(([room, details]) => (
         <div key={room}>
           <h1>{`Room ${room}`}</h1>
-          <p>{`Instructor: ${details.instructor}`}</p>
-          {/* 나머지 데이터도 이와 같이 UI에 표시할 수 있습니다. */}
+          <p className='text-xl font-bold'>Instructor</p>
+          <p className='mb-2'>{details.instructor}</p>
+          <p className='text-xl font-bold'>field</p>
+          <p className='mb-2'>{details.field}</p>
+          <p className='text-xl font-bold'>computers</p>
+          <p className='mb-2'>{details.computers}</p>
+          <p className='text-xl font-bold'>students</p>
+          <p className='mb-2'>{details.students}</p>
         </div>
       ))}
     </div>
