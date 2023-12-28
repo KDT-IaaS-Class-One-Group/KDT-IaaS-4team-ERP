@@ -21,11 +21,15 @@ export default function Home() {
         placeholder='교실 검색'
       />
       {Object.entries(searchResults).map(([roomKey, roomDetails]) => (
-        <AccordionItem key={roomKey} title={`교실: ${roomKey}`}>
-          <p>{`강사: ${roomDetails.instructor}`}</p>
-          <p>{`분야: ${roomDetails.field}`}</p>
-          <p>{`컴퓨터 수: ${roomDetails.computers}`}</p>
+        <AccordionItem key={roomKey} title={`${roomKey}`}>
+          <p className='text-xl font-bold'>강사</p>
+          <p className='mb-2'>{roomDetails.instructor}</p>
+          <p className='text-xl font-bold'>분야</p>
+          <p className='mb-2'>{roomDetails.field}</p>
+          <p className='text-xl font-bold'>컴퓨터 수</p>
+          <p className='mb-2'>{roomDetails.computers}</p>
           <ul>
+            <p className='text-xl font-bold'>학생</p>
             {roomDetails.students.map((student, index) => (
               <li key={index}>{student}</li>
             ))}
