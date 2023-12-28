@@ -14,20 +14,21 @@ const jsonData = {
 
 let test = {};
 a("../data/roomData.json")
-  .then((data) => { JSON.parse(data); })
+  .then((data) => { test = JSON.parse(data); })
+  .then(() => { console.log(test); })
   .catch((err) => { console.log(err); }); // json 데이터를 불러옵니다.
 
 
 export default function RoomLayout () {
+  
   const extractedString = usePathname().split("/").pop();
-
-    // 컴퓨터 컴포넌트 배열 생성
-    const computerComponents = [];
-    for (let i = 0; i < jsonData.computers; i++) {
-      computerComponents.push(
-        <div key={i}>컴퓨터 {i + 1}: {jsonData.students[i] || '없음'}</div>
-      );
-    }
+  // 컴퓨터 컴포넌트 배열 생성
+  const computerComponents = [];
+  for (let i = 0; i < jsonData.computers; i++) {
+    computerComponents.push(
+      <div key={i}>컴퓨터 {i + 1}: {jsonData.students[i] || '없음'}</div>
+    );
+  }
 
   return (
     <div id='root' className='w-screen h-screen'>
