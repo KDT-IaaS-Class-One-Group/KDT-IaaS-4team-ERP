@@ -8,7 +8,7 @@ export default function Login() {
         <LoginPageForm logintitle='ID'/>
         <LoginPageForm logintitle='PASSWORD'/>
       </div>
-      <div>
+      <div className="flex mt-3">
         <LoginPageButton buttonname='sign up'/>
         <LoginPageButton buttonname='login'/>
       </div>
