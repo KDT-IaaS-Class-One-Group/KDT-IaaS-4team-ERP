@@ -8,7 +8,6 @@ export default function ProductDetailLayout({
     <>
       <h2>~반에 오신 걸 환영합니다.</h2>
       {children}
-      {/* Carousel of featured products */}
     </>
   );
 }
