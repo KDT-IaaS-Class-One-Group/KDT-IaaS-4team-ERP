@@ -1,8 +1,3 @@
-export default function B() {
-
-    return 
-    <>
-        
-    </>
+export default function A() {
 
 }
