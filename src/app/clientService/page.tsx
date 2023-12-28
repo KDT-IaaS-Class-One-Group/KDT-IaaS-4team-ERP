@@ -11,7 +11,7 @@ export default function Area(){
             <Text />
             
             <div>
-                <Btn pri = "dd" />
+                <Btn />
             </div>
         </div>
 
