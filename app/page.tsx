@@ -1,10 +1,10 @@
 'use client';
 
 import AccordionItem from './components/AccordionItem';
-import classroomData from './databases/classroom.json';
+import classroomData from '../public/databases/classroom.json';
 import ClassroomDetails from './components/ClassroomDetails';
 import SearchInput from './components/SearchInput';
-import { Classrooms } from './types/classroom';
+import { Classrooms } from './types/Classroom';
 import useClassroomSearch from './hooks/useClassroomSearch';
 
 const classrooms: Classrooms = classroomData;

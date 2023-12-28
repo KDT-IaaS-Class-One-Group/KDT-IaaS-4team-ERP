@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Classrooms } from '../types/classroom';
+import { Classrooms } from '../types/Classroom';
 
 interface SearchTerms {
   room: string;

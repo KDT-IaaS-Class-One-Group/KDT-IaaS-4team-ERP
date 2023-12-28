@@ -1,4 +1,4 @@
-import { Classroom } from '../types/classroom';
+import { Classroom } from '../types/Classroom';
 
 interface ClassroomDetailsProps {
   roomDetails: Classroom;
