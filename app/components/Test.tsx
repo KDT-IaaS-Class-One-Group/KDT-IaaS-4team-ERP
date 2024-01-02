@@ -16,7 +16,7 @@ export default function Test() {
   return (
     <div>
       {data.map((item, index) => (
-        <div key={index}>{item.yourColumnName}</div>
+        <div key={index}>{item.test}</div>
       ))}
     </div>
   );
