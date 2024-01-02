@@ -1,9 +1,7 @@
 import React from 'react';
 import List from '@/app/componunt/clientComp/list';
 
-
-
-export default function Home() {
+export default function CustomerService() {
     // 예시 데이터
     const dataForArea2 = [
         { 작성자: '사용자1', 날짜: '2024-01-02', 제목: '질문 제목1' },
@@ -12,33 +10,30 @@ export default function Home() {
     ];
 
     return (
-        
-        <div id='root' className='w-screen h-screen bg-red-800 flex justify-center items-center'>
-         <List list1={"작성자"} list2={"날짜"} list3={"제목"} list4={"ㅋㅋㅋ"}/>
-         
-            
-            <div id="area1">
-                <div>
-                    <div style={{ flex: 1 }}>작성자</div>
-                    <div style={{ flex: 1 }}>날짜</div>
-                    <div style={{ flex: 3 }}>질문 제목</div>
+        <div className='w-screen h-screen bg-black flex flex-col items-center'>
+            <List list1={"작성자"} list2={"날짜"} list3={"질문 제목"} list4={"질문 등록하기"} />
+
+            <div className="mt-4 p-4 bg-white rounded-lg shadow-md w-full max-w-2xl">
+                <div className="flex">
+                    <div className="flex-1">작성자</div>
+                    <div className="flex-1">날짜</div>
+                    <div className="flex-3">질문 제목</div>
                 </div>
             </div>
 
-            <div id="Area2">
+            <div className="mt-4 p-4 bg-white rounded-lg shadow-md w-full max-w-2xl">
                 {dataForArea2.map((item, index) => (
-                    <div key={index}>
-                        <div> {} </div>
-                        <div style={{ flex: 1 }}>{item.날짜}</div>
-                        <div style={{ flex: 3 }}>{item.제목}</div>
+                    <div key={index} className="flex items-center cursor-pointer hover:bg-gray-100 p-2">
+                        <div className="flex-1">{item.작성자}</div>
+                        <div className="flex-1">{item.날짜}</div>
+                        <div className="flex-3">{item.제목}</div>
                     </div>
                 ))}
             </div>
 
-            <button id="Area3">
+            <button className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 질문 등록하기
             </button>
-
         </div>
     );
 }
