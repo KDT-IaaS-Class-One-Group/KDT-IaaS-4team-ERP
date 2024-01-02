@@ -1,4 +1,4 @@
-import styles from "./style/buyerInformation.module.css";
+import styles from "./style/deliveryInformation.module.css";
 
 export default function buyerInformation() {
   // const buyerinformation = await fetchbuyerinformationdata()
