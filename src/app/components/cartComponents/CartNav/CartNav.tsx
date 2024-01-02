@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../styles/globals.css';
+import '../../../styles/globals.css';
 
 const CartNav: React.FC = () => {
   return (

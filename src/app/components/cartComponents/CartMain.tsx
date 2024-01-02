@@ -1,7 +1,7 @@
 import React from "react"; 
-import CartNav from "../../CartNav/CartNav";
-import Btn from "../../Btn/Btn";
-import ProductList from "../../productList/ProductList";
+import CartNav from "./CartNav/CartNav";
+import Btn from "./Btn/Btn";
+import ProductList from "./productList/ProductList";
 
 
 export default function CartComponent() {
