@@ -3,12 +3,12 @@ import Logintext from "../ui/logintext";
 
 const LoginHome = () => {
   return (
-    <div className="flex justify-center items-center flex-col border-solid border-2 h-2/5 w-2/5">
-      <div className="h-1/2 w-full">
+    <div className="flex justify-center items-center flex-col h-2/6 w-2/6">
+      <div className="h-2/5 flex flex-col justify-around items-center w-full">
         <Logintext title='ID' />
         <Logintext title='PASSWORD' />
       </div>
-      <div className="flex justify-around w-full h-1/2">
+      <div className="h-1/5 flex items-center justify-end w-full">
         <Loginbutton value='sign up' />
         <Loginbutton value='login' />
       </div>
