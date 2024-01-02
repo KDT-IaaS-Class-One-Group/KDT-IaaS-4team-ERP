@@ -1,6 +1,12 @@
 import styles from "./style/deliveryInformation.module.css";
+import { deliveryType } from "./types"
 
-export default function deliveryInformation() {
+type DeliveryInfo = {
+  deliveryinfo: deliveryType;
+};
+
+
+const DeliveryInformation: React.FC<DeliveryInfo> = ({ deliveryinfo }) => {
   // const buyerinformation = await fetchbuyerinformationdata()
 
   return (
@@ -12,23 +18,29 @@ export default function deliveryInformation() {
         <div className="relative mt-2 mb-2">
           <p>배송정보:</p>
           <p>product data</p>
+          {/* {deliveryinfo.productData} */}
         </div>
 
         <div className="relative mt-2 mb-2">
           <p>이름/연락처:</p>
           <p>buyerInfo data</p>
+          {/* {deliveryinfo.buyerInfo} */}
         </div>
 
         <div className="relative mt-2 mb-2">
           <p>주소:</p>
           <p>address data</p>
+          {/* {deliveryinfo.address} */}
         </div>
 
         <div className="relative mt-2 mb-2">
           <p>요청사항:</p>
-          <p>request data</p>
+          <p>request data </p>
+          {/* {deliveryinfo.request} */}
         </div>
       </div>
     </div>
   );
 }
+
+export default DeliveryInformation;
