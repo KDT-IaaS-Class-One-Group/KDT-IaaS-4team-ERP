@@ -8,3 +8,13 @@ export interface PList {
   pCount: number;
   className?: string;
 }
+export interface OrderListProps {
+  pUrl: string;
+  pSub: string;
+  orderDate : string;
+  orderId : string;
+  pPrice: number;
+  pCount: number;
+  orderState : Boolean;
+  className?: string;
+}

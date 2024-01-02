@@ -1,20 +1,8 @@
 // 현재 폴더 : components/cartComponents/productList
 
 import React from 'react';
-import Btn from '../../Btn/Btn';
 import Image from 'next/image';
-
-interface OrderListProps {
-  pUrl: string;
-  pSub: string;
-  orderDate : string;
-  orderId : string;
-  pPrice: number;
-  pCount: number;
-  orderState : Boolean;
-  className?: string;
-}
-
+import { OrderListProps } from '@/app/interfaces/interfaces';
 
 /**
  * 주문 목록 컴포넌트입니다.
@@ -33,14 +21,16 @@ const OrderList: React.FC<OrderListProps> = ({ pUrl, pSub, orderDate, orderId, p
 
   return (
     <li className={combinedClassName}>
-      <div className='flex w-1/3'>
-        <Image src={pUrl} alt="이미지가 들어갈 자리입니다." width="65" height = "65"/>
-        <p className='text-xs'>{pSub}</p>
+      <div className='flex w-1/3 gap-6'>
+        <div className='outline outline-1'>
+          <Image src={pUrl} alt="이미지가 들어갈 자리입니다." width="65" height = "65"/>
+        </div>
+        <p className='text-xs flex-center'>{pSub}</p>
       </div>
-      <div className='flex gap-6 w-2/3'>
-        <div className='w-1/6 flex-center'>{orderDate}</div>
-        <div className='w-1/6 flex-center'>{orderId}</div>
-        <div className='w-1/2 flex-center'>`${pPrice}(${pCount})`</div>
+      <div className='flex gap-6 w-2/3 '>
+        <div className='w-1/6 flex-center text-xs'>{orderDate}</div>
+        <div className='w-1/6 flex-center text-xs'>{orderId}</div>
+        <div className='w-1/2 flex-center'>{`${pPrice}원 (${pCount}개)`}</div>
         <div className='w-1/2 flex-center'>{orderState ? '배송 중' : '배송 전'}</div>
       </div>
     </li>
