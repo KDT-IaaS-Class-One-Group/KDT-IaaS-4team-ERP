@@ -1,14 +1,31 @@
-import Header from "../components/Header/Header";
-import Nav from "../components/Nav/Nav"
-import Footer from "../components/Footer/Footer"
+'use client'
 
-export default function paymentPage() {
+import Header from "../components/Header/Header";
+import Nav from "../components/Nav/Nav";
+import Footer from "../components/Footer/Footer";
+
+import React, { useState } from "react";
+import type { AppProps } from "next/app";
+import CartPage from "../components/cart/cart";
+import { Product } from "../components/cart/types";
+
+const MyApp = ({ Component, pageProps }) => {
+  const [cartItems, setCartItems] = useState<Product[]>([
+    { id: 1, name: "휴대폰", price: 500, image: "phone.jpg" },
+    { id: 2, name: "노트북", price: 1200, image: "laptop.jpg" },
+    { id: 3, name: "스마트워치", price: 300, image: "smartwatch.jpg" },
+    // 다른 상품들 추가
+  ]);
+
   return (
     <>
-    <Header />
-    <Nav />
-    <Footer />
+      <Header />
+      <Nav />
+      <Component {...pageProps} />
+      <CartPage cartItems={cartItems} />
+      <Footer />
     </>
   );
-}
+};
 
+export default MyApp;
