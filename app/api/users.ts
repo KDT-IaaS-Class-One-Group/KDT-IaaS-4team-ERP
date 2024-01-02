@@ -16,9 +16,9 @@ export default async function handler(
   try {
     conn = await pool.getConnection();
     if (conn) {
-      res.status(200).json({ message: "DB 연결 성공" });
+      res.status(200).json({ message: 'DB 연결 성공' });
     } else {
-      res.status(500).json({ error: "DB 연결 실패" });
+      res.status(500).json({ error: 'DB 연결 실패' });
     }
   } catch (err: any) {
     res.status(500).json({ error: err.message });
