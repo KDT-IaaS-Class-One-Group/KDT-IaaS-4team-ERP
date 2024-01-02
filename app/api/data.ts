@@ -1,5 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { pool } from '../databases';
+import mariadb from 'mariadb';
+
+const pool = mariadb.createPool({
+  host: 'localhost',
+  user: 'root',
+  password: '6892',
+  database: 'test',
+});
 
 export default async function handler(
   req: NextApiRequest,
@@ -8,8 +15,8 @@ export default async function handler(
   let conn;
   try {
     conn = await pool.getConnection();
-    const rows = await conn.query('SELECT * FROM test');
-    res.json(rows);
+    const rows = await conn.query('SELECT * FROM users');
+    res.status(200).json(rows);
   } catch (err) {
     res.status(500).json({ error: 'Internal Server Error' });
   } finally {
