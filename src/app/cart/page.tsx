@@ -6,7 +6,7 @@ import Footer from "../components/Footer/Footer";
 
 import React, { useState } from "react";
 import type { AppProps } from "next/app";
-import CartPage from "../components/cart/cart";
+import Cart from "../components/cart/cart";
 import { Product } from "../components/cart/types";
 
 const MyApp: React.FC<AppProps> = ({ pageProps }) => {
@@ -21,7 +21,7 @@ const MyApp: React.FC<AppProps> = ({ pageProps }) => {
     <>
       <Header />
       <Nav />
-      <CartPage cartItems={cartItems} />
+      <Cart cartItems={cartItems} />
       <Footer />
     </>
   );
