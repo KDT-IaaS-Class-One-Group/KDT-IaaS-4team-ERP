@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 export const metadata: Metadata = {
   title: 'form 미쳤다',
@@ -13,7 +15,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang='ko'>
-      <body>{children}</body>
+      <body className='flex flex-col justify-between h-screen'>
+        <Header />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }
