@@ -9,7 +9,7 @@ import type { AppProps } from "next/app";
 import Cart from "../components/cart/cart";
 import { Product } from "../components/cart/types";
 
-const MyApp: React.FC<AppProps> = ({ pageProps }) => {
+const MyApp = () => {
   const [cartItems, setCartItems] = useState<Product[]>([
     { id: 1, name: "휴대폰", price: 500, image: "phone.jpg" },
     { id: 2, name: "노트북", price: 1200, image: "laptop.jpg" },
