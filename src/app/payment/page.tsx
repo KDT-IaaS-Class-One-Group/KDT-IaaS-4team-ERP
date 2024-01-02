@@ -10,7 +10,7 @@ export default function PaymentPage() {
     <>
     <Header />
     <Nav />
-    <DeliveryInformation />
+    <DeliveryInformation/>
     <ProductInformation />
     <Buybutton />
     <Footer />
