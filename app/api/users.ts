@@ -15,8 +15,11 @@ export default async function handler(
   let conn;
   try {
     conn = await pool.getConnection();
-    const rows = await conn.query('SELECT * FROM users');
-    res.status(200).json(rows);
+    if (conn) {
+      res.status(200).json({ message: "DB 연결 성공" });
+    } else {
+      res.status(500).json({ error: "DB 연결 실패" });
+    }
   } catch (err: any) {
     res.status(500).json({ error: err.message });
   } finally {
