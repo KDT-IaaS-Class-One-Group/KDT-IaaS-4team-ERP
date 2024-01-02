@@ -1,9 +1,10 @@
-import styles from './Nav.module.css';
+import React from 'react';
 
-export default function Footer() {
+export default function Nav() {
   return (
-    <nav className={styles.nav}>
-      <ul>
+    // 임시 스타일링
+    <nav className='w-screen h-1/6'>
+      <ul className='flex-center gap-6'>
         <li>
           <a href='/'>홈</a>
         </li>

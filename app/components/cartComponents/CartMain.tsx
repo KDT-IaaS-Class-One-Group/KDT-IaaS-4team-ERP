@@ -1,10 +1,10 @@
 import React from "react"; 
 import CartNav from "./CartNav/CartNav";
-import Btn from "./Btn/Btn";
+import Btn from "../Btn/Btn";
 import CartList from "./cartList/CartList";
 
 
-export default function CartComponent() {
+export default function CartMain() {
   return (
     <main className="flex flex-col overflow-hidden">
       <Btn textContent='주문하기' className="h-10 w-28 outline outline-1 flex items-center justify-center ali self-end"/>

@@ -1,7 +1,7 @@
 // 현재 폴더 : components/cartComponents/productList
 
 import React from 'react';
-import Btn from '../Btn/Btn';
+import Btn from '../../Btn/Btn';
 import Image from 'next/image';
 import { PList } from '../../../interfaces/interfaces';
 
