@@ -1,6 +1,6 @@
-const Loginbutton = () => {
+const Loginbutton = ({value}) => {
   return (
-    <button type="button" ></button> 
+    <button type="button" value={value}></button> 
   )
 }
 

@@ -5,12 +5,12 @@ const LoginPage = () => {
   return (
     <div>
       <div>
-        <Logintext />
-        <Logintext />
+        <Logintext title='ID'/>
+        <Logintext title='PASSWORD'/>
       </div>
       <div>
-        <Loginbutton />
-        <Loginbutton />
+        <Loginbutton value ='sign up'/>
+        <Loginbutton value='login'/>
       </div>
     </div>
   )

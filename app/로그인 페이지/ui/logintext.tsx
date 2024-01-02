@@ -1,9 +1,9 @@
-const Logintext = () => {
+const Logintext = ({title}) => {
 
   return (
     <div>
-      <label htmlFor="Idiputtext">ID :</label>
-      <input type="text" id="Idiputtext" value={idtext} />
+      <label htmlFor="Idiputtext">{`${title} :`}</label>
+      <input type="text" id="Idiputtext" />
     </div>
   )
 }
