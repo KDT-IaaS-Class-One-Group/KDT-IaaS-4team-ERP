@@ -12,13 +12,15 @@ const ProductList: React.FC<PList> = ({ pUrl, pSub, pPrice, pCount, className })
     <li className={combinedClassName}>
       <Image src={pUrl} alt="이미지가 들어갈 자리입니다." width="65" height = "65"/>
       <p className='text-xs'>{pSub}</p>
-      <div >{pPrice}</div>
-      <div>{pCount}</div>
-      <Btn textContent='삭제'
-        className='h-10 w-28 outline outline-1 flex items-center justify-center '/>
-      <Btn textContent='옵션 변경'
-        className='h-10 w-28 outline outline-1 flex items-center justify-center '/>
-        {/* 옵션 변경에 대한 기능이 들어가야 합니다. */}
+      <div className='flex gap-3 w-2/3'>
+        <div className='flex-1 flex-center'>{pPrice}원</div>
+        <div className='flex-1 flex-center'>{pCount}</div>
+        <Btn textContent='삭제'
+          className='h-10 w-28 border border-slate-950 flex-center flex-1'/>
+        <Btn textContent='옵션 변경'
+          className='h-10 w-28 border border-slate-950 flex-center flex-1'/>
+          {/* 옵션 변경에 대한 기능이 들어가야 합니다. */}
+      </div>
     </li>
   );
 }
