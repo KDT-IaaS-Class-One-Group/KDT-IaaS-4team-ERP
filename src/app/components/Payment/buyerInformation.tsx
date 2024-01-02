@@ -1,4 +1,4 @@
-import styles from "./buyerInformation.module.css";
+import styles from "./style/buyerInformation.module.css";
 
 export default function buyerInformation() {
   // const buyerinformation = await fetchbuyerinformationdata()
@@ -11,22 +11,22 @@ export default function buyerInformation() {
         {/* tailwind와 css모듈 같이 사용하기 */}
         <div className="relative mt-2 mb-2">
           <p>배송정보:</p>
-          <p>product</p>
+          <p>product data</p>
         </div>
 
         <div className="relative mt-2 mb-2">
           <p>이름/연락처:</p>
-          <p>buyerInfo</p>
+          <p>buyerInfo data</p>
         </div>
 
         <div className="relative mt-2 mb-2">
           <p>주소:</p>
-          <p>address</p>
+          <p>address data</p>
         </div>
 
         <div className="relative mt-2 mb-2">
           <p>요청사항:</p>
-          <p>request</p>
+          <p>request data</p>
         </div>
       </div>
     </div>
