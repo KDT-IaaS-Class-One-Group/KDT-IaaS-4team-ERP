@@ -1,3 +1,5 @@
+// app/api/users.ts
+
 import type { NextApiRequest, NextApiResponse } from 'next';
 import mariadb from 'mariadb';
 

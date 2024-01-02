@@ -2,6 +2,16 @@
 
 import { useEffect, useState } from 'react';
 
+
+async function test() {
+
+  const res = await fetch('https://jsonplaceholder.typicode.com/users');
+
+  if (!res.ok) throw new Error('데이터 패치를 실패했습니다.');
+
+  return res.json();
+}
+
 export default function Home() {
   const [dbStatus, setDbStatus] = useState<string>('');
 
