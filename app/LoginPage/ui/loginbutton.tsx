@@ -1,6 +1,6 @@
 const Loginbutton = ({value}) => {
   return (
-    <button type="button" value={value}></button> 
+    <button type="button" >{value}</button> 
   )
 }
 

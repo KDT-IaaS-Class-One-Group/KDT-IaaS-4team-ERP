@@ -1,5 +1,0 @@
-const LoginPage = () => {
-  return (
-    <LoginPage />
-  )
-}
