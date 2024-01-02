@@ -1,14 +1,9 @@
+// 현재 폴더 : components/cartComponents/productList
+
 import React from 'react';
 import Btn from '../Btn/Btn';
 import Image from 'next/image';
-
-interface PList {
-  pUrl: string;
-  pSub: string;
-  pPrice: number;
-  pCount: number;
-  className?: string;
-}
+import { PList } from '../../../interfaces/interfaces';
 
 const ProductList: React.FC<PList> = ({ pUrl, pSub, pPrice, pCount, className }) => {
   const combinedClassName = `w-full flex justify-between items-center border-2 border-slate-800 p-4 ${className}`;
@@ -21,12 +16,9 @@ const ProductList: React.FC<PList> = ({ pUrl, pSub, pPrice, pCount, className })
       <div>{pCount}</div>
       <Btn textContent='삭제'
         className='h-10 w-28 outline outline-1 flex items-center justify-center '/>
-      <select name="option" id="pOption" 
-        className='border-1 border-slate-600'>
-        <option value="1">1개</option>
-        <option value="2">2개</option>
-        <option value="3">3개</option>
-      </select>
+      <Btn textContent='옵션 변경'
+        className='h-10 w-28 outline outline-1 flex items-center justify-center '/>
+        {/* 옵션 변경에 대한 기능이 들어가야 합니다. */}
     </li>
   );
 }
