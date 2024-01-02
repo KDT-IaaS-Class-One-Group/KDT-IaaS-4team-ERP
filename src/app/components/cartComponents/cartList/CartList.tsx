@@ -5,7 +5,7 @@ import Btn from '../Btn/Btn';
 import Image from 'next/image';
 import { PList } from '../../../interfaces/interfaces';
 
-const ProductList: React.FC<PList> = ({ pUrl, pSub, pPrice, pCount, className }) => {
+const CartList: React.FC<PList> = ({ pUrl, pSub, pPrice, pCount, className }) => {
   const combinedClassName = `w-full flex justify-between items-center border-2 border-slate-800 p-4 ${className}`;
 
   return (
@@ -25,4 +25,4 @@ const ProductList: React.FC<PList> = ({ pUrl, pSub, pPrice, pCount, className })
   );
 }
 
-export default ProductList;
+export default CartList;
