@@ -1,5 +1,4 @@
 import React from 'react';
-// import { Link } from 'react-router-dom'; // React Router 사용을 위한 import
 import List from '@/app/componunt/clientComp/list';
 
 export default function CustomerService() {
@@ -11,19 +10,16 @@ export default function CustomerService() {
     ];
 
     return (
-        <div className='w-screen h-screen bg-red-800 flex flex-col items-center'>
-            {/* Header */}
-            <div className="text-4xl font-bold text-white mt-4">폼 미쳤다</div>
-            
-            {/* Navigation */}
-            <nav className="mt-2 mb-4 flex space-x-4">
-                {/* <Link to="/temp-menu-1" className="text-white">임시메뉴 1</Link>
-                <Link to="/temp-menu-2" className="text-white">임시메뉴 2</Link>
-                <Link to="/temp-menu-3" className="text-white">임시메뉴 3</Link> */}
-            </nav>
-
-            {/* Customer Service Body */}
+        <div className='w-screen h-screen bg-black flex flex-col items-center relative'>
             <List list1={"작성자"} list2={"날짜"} list3={"질문 제목"} list4={"질문 등록하기"} />
+
+            <div className="mt-4 p-4 bg-white rounded-lg shadow-md w-full max-w-2xl">
+                <div className="flex">
+                    <div className="flex-1">작성자</div>
+                    <div className="flex-1">날짜</div>
+                    <div className="flex-3">질문 제목</div>
+                </div>
+            </div>
 
             <div className="mt-4 p-4 bg-white rounded-lg shadow-md w-full max-w-2xl">
                 {dataForArea2.map((item, index) => (
@@ -35,12 +31,9 @@ export default function CustomerService() {
                 ))}
             </div>
 
-            {/* Button */}
-            <Link to="/write" className="mt-4 flex justify-end">
-                <button className="bg-pink-300 hover:bg-pink-500 text-white font-bold py-3 px-6 rounded-full">
-                    글 쓰기
-                </button>
-            </Link>
+            <button className="absolute bottom-4 right-4 bg-pink-300 hover:bg-pink-500 text-white font-bold py-3 px-6 rounded-full">
+                질문 등록하기
+            </button>
         </div>
     );
 }
