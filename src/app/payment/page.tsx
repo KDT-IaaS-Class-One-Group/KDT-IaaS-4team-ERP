@@ -1,4 +1,4 @@
-import BuyerInformation from "../components/Payment/buyerInformation";
+import DeliveryInformation from "../components/Payment/deliveryInformation";
 import ProductInformation from "../components/Payment/productInformation"
 import Buybutton from "../components/Payment/buyButton"
 import Header from "../components/Header/Header";
@@ -10,7 +10,7 @@ export default function PaymentPage() {
     <>
     <Header />
     <Nav />
-    <BuyerInformation />
+    <DeliveryInformation />
     <ProductInformation />
     <Buybutton />
     <Footer />
