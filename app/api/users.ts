@@ -17,8 +17,8 @@ export default async function handler(
     conn = await pool.getConnection();
     const rows = await conn.query('SELECT * FROM users');
     res.status(200).json(rows);
-  } catch (err) {
-    res.status(500).json({ error: 'Internal Server Error' });
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
   } finally {
     if (conn) conn.end();
   }
