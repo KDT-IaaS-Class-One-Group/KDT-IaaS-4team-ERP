@@ -1,4 +1,4 @@
-// 메뉴 링크 컴포넌트 분리 (소분류)
+// 메뉴 링크 컴포넌트 분리 (소 분류)
 
 import Link from 'next/link';
 import React from 'react';

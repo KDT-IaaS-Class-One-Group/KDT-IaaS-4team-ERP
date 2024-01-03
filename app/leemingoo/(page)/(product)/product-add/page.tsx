@@ -1,4 +1,5 @@
 // 상품 등록 페이지
+// 가데이터로 작성
 
 import React from 'react';
 

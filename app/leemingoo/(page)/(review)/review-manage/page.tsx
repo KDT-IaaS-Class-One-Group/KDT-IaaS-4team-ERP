@@ -1,4 +1,5 @@
 // 상품평 관리 페이지
+// 가데이터로 작성
 
 'use client';
 import React, { useState } from 'react';
