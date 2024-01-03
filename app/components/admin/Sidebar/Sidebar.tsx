@@ -1,19 +1,22 @@
-import { IoMdHome } from 'react-icons/io';
-import { BiSolidObjectsHorizontalLeft } from 'react-icons/bi';
-import Link from 'next/link';
+import React from 'react';
 
-export default function Sidebar() {
+interface SidebarProps {
+  onMenuSelect: (menu: string) => void;
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ onMenuSelect }) => {
   return (
-    <div className='h-full w-64 bg-gray-800 text-white'>
+    <div className='h-full min-h-screen w-64 bg-gray-800 text-white'>
       <nav className='p-4'>
+        <h1 className='text-xl font-bold mb-4'>My Dashboard</h1>
         <ul>
           <li className='mb-2'>
-            <Link
-              href='/admin'
-              className='text-2xl block p-2 hover:bg-gray-700 rounded border-2'
+            <button
+              onClick={() => onMenuSelect('home')}
+              className='w-full text-left p-2 hover:bg-gray-700 rounded'
             >
-              <IoMdHome />
-            </Link>
+              홈
+            </button>
           </li>
           <li className='mb-2'>
             <p className='text-2xl block p-2 font-bold'>상품</p>
@@ -95,4 +98,4 @@ export default function Sidebar() {
       </nav>
     </div>
   );
-}
+};
