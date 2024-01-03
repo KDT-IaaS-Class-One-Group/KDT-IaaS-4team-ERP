@@ -1,28 +1,11 @@
-'use client';
+// Customer page를 렌더링하는 파일입니다.
 
-import { useEffect, useState } from 'react';
+import CustomerMain from "./components/homeComp/customerMain";
 
-export default function Home() {
-  const [dbStatus, setDbStatus] = useState<string>('');
-
-  useEffect(() => {
-    fetch('/api/users')
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.message) {
-          setDbStatus(data.message);
-        } else if (data.error) {
-          setDbStatus(data.error);
-        }
-      })
-      .catch((error) => {
-        setDbStatus('API 호출 실패: ' + error.message);
-      });
-  }, []);
-
+export default function Customer() {
   return (
-    <div>
-      <p>DB 연결 상태: {dbStatus}</p>
+    <div className="flex-center flex-col">
+      <CustomerMain />
     </div>
   );
 }

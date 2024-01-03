@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react';
-import ProductCommentList from '../../components/ProducComment/ProductCommentList';
-import ProductUploadButton from '@/app/components/ProducComment/ProductUploadButton';
+import ProductCommentList from '../../components/ProductComment/ProductCommentList';
+import ProductUploadButton from '@/app/components/ProductComment/ProductUploadButton';
 
 const CommentHome = () => {
   const [comments, setComments] = useState([]);
