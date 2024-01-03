@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
-import Sidebar from '../components/admin/Sidebar/Sidebar';
+import Sidebar from './components/Sidebar/Sidebar';
 
 export default function Admin() {
-  return <Sidebar />;
+  return <p>test</p>;
 }

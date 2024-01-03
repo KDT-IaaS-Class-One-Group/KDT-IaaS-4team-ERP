@@ -1,10 +1,11 @@
+
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import { IoMdHome } from 'react-icons/io';
 
-export default function SidebarSidebarProps() {
+export default function Sidebar() {
   return (
-    <div className='h-full min-h-screen w-64 bg-gray-800 text-white'>
+    <div className='h-full w-64 bg-gray-800 text-white'>
       <nav className='p-4'>
         <ul>
           <li>
