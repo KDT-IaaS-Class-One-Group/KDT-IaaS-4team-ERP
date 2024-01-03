@@ -1,3 +1,5 @@
+import ProductPriceCalculator from './pricecalculator'
+
 import React from "react";
 import styles from "./style/productdetail.module.css";
 import { ProductDetail } from "./types";
@@ -22,7 +24,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productdetail }) => {
           {/* {productdetail.Price} */}
           <p>상품 간략설명: </p>
           {/* {productdetail.Summary} */}
-          <div>수량 올라가는 기능넣는 컴포넌트 자리</div>
+          <ProductPriceCalculator/>
           <div className="flex justify-around">
             {/* 링크로 바꿔야되나? */}
             <button className="bg-red-300">구매</button>
@@ -32,8 +34,22 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productdetail }) => {
         </div>
       </div>
 
-      <div className="w-4/5 flex justify-center items-center">
-        상품 설명란 (오버되는 내용 스크롤)
+      <div className="w-4/5 h-1/3 mt-10 flex justify-center items-center overflow-y-scroll">
+        상품 설명란 (오버되는 내용 스크롤)<br></br>
+        상품 설명란 (오버되는 내용 스크롤)<br></br>
+        상품 설명란 (오버되는 내용 스크롤)<br></br>
+        상품 설명란 (오버되는 내용 스크롤)<br></br>
+        상품 설명란 (오버되는 내용 스크롤)<br></br>
+        상품 설명란 (오버되는 내용 스크롤)<br></br>
+        상품 설명란 (오버되는 내용 스크롤)<br></br>
+        상품 설명란 (오버되는 내용 스크롤)<br></br>
+        상품 설명란 (오버되는 내용 스크롤)<br></br>
+        상품 설명란 (오버되는 내용 스크롤)<br></br>
+        상품 설명란 (오버되는 내용 스크롤)<br></br>
+        상품 설명란 (오버되는 내용 스크롤)<br></br>
+        상품 설명란 (오버되는 내용 스크롤)<br></br>
+        상품 설명란 (오버되는 내용 스크롤)<br></br>
+        상품 설명란 (오버되는 내용 스크롤)<br></br>
         {/* {productdetail.Detail} */}
       </div>
     </div>
