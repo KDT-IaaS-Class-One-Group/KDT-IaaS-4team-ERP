@@ -1,5 +1,5 @@
 import React from 'react';
-import List from '@/app/componunt/clientComp/list';
+import List from '@/app/cus/shindonghyun/clientComp/list';
 
 export default function CustomerService() {
     // 예시 데이터
