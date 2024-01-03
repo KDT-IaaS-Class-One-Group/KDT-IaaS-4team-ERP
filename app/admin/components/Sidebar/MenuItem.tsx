@@ -1,4 +1,4 @@
-
+// 메뉴 아이템 컴포넌트 분리 (대 분류)
 import Link from 'next/link';
 import React from 'react';
 

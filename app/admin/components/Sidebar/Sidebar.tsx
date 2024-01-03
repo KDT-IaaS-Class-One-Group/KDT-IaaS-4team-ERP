@@ -23,48 +23,14 @@ export default function Sidebar() {
           </MenuItem>
 
           <MenuItem title='판매 관리'>
-            <ul>
-              <li>
-                <Link
-                  href='/admin/order-manage'
-                  className='block p-2 hover:bg-gray-700 rounded'
-                >
-                  주문 관리
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href='/admin/delivery-manage'
-                  className='block p-2 hover:bg-gray-700 rounded'
-                >
-                  배송 관리
-                </Link>
-              </li>
-            </ul>
+            <MenuLink href='/admin/order-manage'>주문 관리</MenuLink>
+            <MenuLink href='/admin/delivery-manage'>배송 관리</MenuLink>
           </MenuItem>
           <MenuItem title='매출 관리'>
-            <ul>
-              <li>
-                <Link
-                  href='/admin/revenue-view'
-                  className='block p-2 hover:bg-gray-700 rounded'
-                >
-                  매출 통계
-                </Link>
-              </li>
-            </ul>
+            <MenuLink href='/admin/revenue-view'>매출 통계 </MenuLink>
           </MenuItem>
           <MenuItem title='상품평 관리'>
-            <ul>
-              <li>
-                <Link
-                  href='/admin/review-manage'
-                  className='block p-2 hover:bg-gray-700 rounded'
-                >
-                  상품평 관리
-                </Link>
-              </li>
-            </ul>
+            <MenuLink href='/admin/review-manage'>상품평 관리</MenuLink>
           </MenuItem>
         </ul>
       </nav>
