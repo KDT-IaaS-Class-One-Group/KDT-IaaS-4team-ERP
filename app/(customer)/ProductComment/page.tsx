@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react';
 import ProductCommentList from '../../components/ProducComment/ProductCommentList';
+import ProductUploadButton from '@/app/components/ProducComment/ProductUploadButton';
 
 const CommentHome = () => {
   const [comments, setComments] = useState([]);
@@ -24,7 +25,8 @@ const CommentHome = () => {
   }, []); // useEffect의 두 번째 매개변수로 빈 배열을 전달하여 컴포넌트가 마운트될 때 한 번만 실행되도록 함
 
   return (
-    <div className='outline w-screen h-screen flex justify-start items-center flex-col gap-6
+    <>
+    <div className='w-screen h-screen flex justify-start items-center flex-col gap-6
   '>
       {comments.map((comment, index) => (
         <ProductCommentList
@@ -36,6 +38,10 @@ const CommentHome = () => {
         />
       ))}
     </div>
+    <div className='ml-auto mr-40 mb-20'>
+        <ProductUploadButton value='상품평 등록'/>
+    </div>
+    </>
   );
 };
 
