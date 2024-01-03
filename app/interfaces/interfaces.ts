@@ -18,3 +18,10 @@ export interface OrderListProps {
   orderState : Boolean;
   className?: string;
 }
+
+export interface CardProps {
+  pUrl: string;
+  pTitle: string;
+  pSub: string;
+  pPrice: number;
+}
