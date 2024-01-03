@@ -46,7 +46,7 @@ export default function Sidebar() {
             <ul>
               <li>
                 <Link
-                  href='/admin/revenue'
+                  href='/admin/revenue-view'
                   className='block p-2 hover:bg-gray-700 rounded'
                 >
                   매출 통계
