@@ -1,3 +1,4 @@
+// 관리자 페이지 메인
 'use client';
 import React from 'react';
 import Image from 'next/image';

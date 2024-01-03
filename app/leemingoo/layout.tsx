@@ -1,3 +1,4 @@
+// 관리자 페이지 레이아웃
 import React from 'react';
 import Sidebar from './components/Sidebar/Sidebar';
 
