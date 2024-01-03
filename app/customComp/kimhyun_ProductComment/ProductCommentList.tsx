@@ -1,3 +1,5 @@
+// ? 제품상품평페이지 컴포넌트 작성
+
 const ProductCommentList = ({writerid, date, starcount, commenttitle}) => {
   return (
     <div className="flex justify-around items-center w-5/6 h-28 outline">
