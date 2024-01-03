@@ -1,0 +1,15 @@
+.buyerInformation {
+  width: 80vw;
+  height: 20vh;
+  flex-shrink: 0;
+  background: #b3b3b3;
+}
+
+.buyerInformation > div {
+  display: flex;
+  /* background-color: red; */
+}
+
+.buyerInformation > div > p {
+  margin-right: 10px;
+}
