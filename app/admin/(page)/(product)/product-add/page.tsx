@@ -1,3 +1,5 @@
+// 상품 등록 페이지
+
 import React from 'react';
 
 export default function ProductAdd() {

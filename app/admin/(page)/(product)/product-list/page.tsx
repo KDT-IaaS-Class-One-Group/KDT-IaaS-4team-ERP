@@ -1,3 +1,5 @@
+// 상품 조회 페이지
+
 'use client';
 import React from 'react';
 import Image from 'next/link';
