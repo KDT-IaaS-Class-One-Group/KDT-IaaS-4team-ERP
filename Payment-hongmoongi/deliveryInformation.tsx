@@ -1,3 +1,6 @@
+// 배송정보에 대한 사용자 데이터를 입력해줘야 하는 컴포넌트.
+// 추후 필요한 작업: 데이터를 입력해줘야하는 컴포넌트인데, 데이터를 입력받는 컴포넌트라고 잘못생각하고 만들었음. 다시 만들어야함.
+
 import styles from "./style/deliveryInformation.module.css";
 import { deliveryType } from "./types"
 

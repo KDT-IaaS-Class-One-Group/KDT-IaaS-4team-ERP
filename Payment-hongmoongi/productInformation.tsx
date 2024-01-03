@@ -1,3 +1,6 @@
+// 상품에 관한 데이터를 조회해서 데이터값을 받아와서 컴포넌트의 속성값으로 넣어서 정보를 표시해주는 컴포넌트.
+// 추후 필요한 작업: 넣어줄 속성값에 대한 데이터가 필요.
+
 import styles from "./style/productInformation.module.css";
 import { productType } from "./types";
 

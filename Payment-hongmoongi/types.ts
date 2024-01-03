@@ -1,3 +1,5 @@
+// 배송정보와 상품정보의 속성값에 대한 타입 정의
+
 export type deliveryType = {
   productData: string;
   buyerInfo: string;

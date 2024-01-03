@@ -1,3 +1,6 @@
+// 선택한 상품의 주문수량을 조절하고 가격을 계산해주는 컴포넌트
+// 추후 필요한 작업: 메인페이지에서 선택한 상품의 데이터를 조회해 상품가격을 넣어줘야함.
+
 import React, { useState } from 'react';
 
 interface ProductDatabase {
