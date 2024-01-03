@@ -5,7 +5,7 @@ import CustomerMain from '../components/homeComp/customerMain';
 
 export default function Customer() {
   return (
-    <div>
+    <div className="flex-center flex-col">
       <Nav />
       <CustomerMain />
     </div>

@@ -23,7 +23,7 @@ const OrderList: React.FC<OrderListProps> = ({ pUrl, pSub, orderDate, orderId, p
   return (
     <li className={combinedClassName}>
       <div className='flex w-1/3 gap-6'>
-        <div className='outline outline-1'>
+        <div className='image-area'>
           <Image src={pUrl} alt="이미지가 들어갈 자리입니다." width="65" height = "65"/>
         </div>
         <p className='text-xs flex-center'>{pSub}</p>
