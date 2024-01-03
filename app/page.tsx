@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import React from 'react';
 
 export default function Home() {
-  return <p>hello</p>;
+  return <div>hello</div>;
 }

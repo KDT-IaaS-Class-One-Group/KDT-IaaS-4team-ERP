@@ -1,3 +1,4 @@
+import React from 'react';
 import HeaderMenu from './HeaderMenu';
 import Link from 'next/link';
 

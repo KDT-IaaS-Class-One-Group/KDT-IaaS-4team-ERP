@@ -1,29 +1,26 @@
+import Link from 'next/link';
 import React from 'react';
+import { IoMdHome } from 'react-icons/io';
 
-interface SidebarProps {
-  onMenuSelect: (menu: string) => void;
-}
-
-const Sidebar: React.FC<SidebarProps> = ({ onMenuSelect }) => {
+export default function SidebarSidebarProps() {
   return (
     <div className='h-full min-h-screen w-64 bg-gray-800 text-white'>
       <nav className='p-4'>
-        <h1 className='text-xl font-bold mb-4'>My Dashboard</h1>
         <ul>
-          <li className='mb-2'>
-            <button
-              onClick={() => onMenuSelect('home')}
-              className='w-full text-left p-2 hover:bg-gray-700 rounded'
+          <li>
+            <Link
+              href='/admin'
+              className='block p-2 hover:bg-gray-700 rounded border-2 text-3xl'
             >
-              홈
-            </button>
+              <IoMdHome />
+            </Link>
           </li>
           <li className='mb-2'>
             <p className='text-2xl block p-2 font-bold'>상품</p>
             <ul className='pl-4'>
               <li>
                 <Link
-                  href='/admin/products'
+                  href='/admin/product-list'
                   className='block p-2 hover:bg-gray-700 rounded'
                 >
                   조회
@@ -31,7 +28,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onMenuSelect }) => {
               </li>
               <li>
                 <Link
-                  href='/products/register'
+                  href='/admin/products/register'
                   className='block p-2 hover:bg-gray-700 rounded'
                 >
                   등록
@@ -98,4 +95,4 @@ const Sidebar: React.FC<SidebarProps> = ({ onMenuSelect }) => {
       </nav>
     </div>
   );
-};
+}
