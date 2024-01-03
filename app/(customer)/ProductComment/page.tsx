@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react';
-import ProductCommentList from './ui/ProductCommentList';
+import ProductCommentList from '../../components/ProducComment/ProductCommentList';
 
 const CommentHome = () => {
   const [comments, setComments] = useState([]);
