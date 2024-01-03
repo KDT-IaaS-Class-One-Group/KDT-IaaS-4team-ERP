@@ -1,6 +1,6 @@
 // import styles from "./style/buyButton.module.css";
 
-export default function buyButton() {
+export default function BuyButton() {
   // const buyerinformation = await fetchbuyerinformationdata()
 
   return (
