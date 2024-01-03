@@ -1,5 +1,5 @@
-import Loginbutton from "../ui/loginbutton";
-import Logintext from "../ui/logintext";
+import Loginbutton from "./loginbutton";
+import Logintext from "./logintext";
 
 const LoginHome = () => {
   return (

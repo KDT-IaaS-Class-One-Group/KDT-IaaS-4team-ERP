@@ -1,9 +1,9 @@
-import LoginHome from "./lib/logincomponent";
+import SignUpHome from "../../components/Signup/SignUpHome";
 
 const Home = () => {
   return (
     <div className="w-screen h-screen flex justify-center items-center">
-      <LoginHome />
+      <SignUpHome />
     </div>
   )
 }

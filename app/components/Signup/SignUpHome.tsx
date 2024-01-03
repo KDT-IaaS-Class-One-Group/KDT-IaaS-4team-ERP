@@ -1,5 +1,5 @@
-import Loginbutton from "../ui/loginbutton"
-import Logintext from "../ui/logintext"
+import Loginbutton from "../Login/loginbutton"
+import Logintext from "../Login/logintext"
 
 const SignUpHome= () => {
   return (
