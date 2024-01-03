@@ -21,7 +21,6 @@ export default function Sidebar() {
             <MenuLink href='/admin/product-list'>상품 조회</MenuLink>
             <MenuLink href='/admin/product-add'>상품 등록</MenuLink>
           </MenuItem>
-
           <MenuItem title='판매 관리'>
             <MenuLink href='/admin/order-manage'>주문 관리</MenuLink>
             <MenuLink href='/admin/delivery-manage'>배송 관리</MenuLink>
