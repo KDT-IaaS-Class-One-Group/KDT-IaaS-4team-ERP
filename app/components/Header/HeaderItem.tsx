@@ -1,9 +1,16 @@
 import React from 'react';
+import Link from 'next/link';
 import { ReactNode } from 'react';
-interface HeaderMenuProps {
+
+interface HeaderItemProps {
+  href: string;
   children: ReactNode;
 }
 
-export default function HeaderItems({ children }: HeaderMenuProps) {
-  return <li className='mr-4'>{children}</li>;
+export default function HeaderItem({ href, children }: HeaderItemProps) {
+  return (
+    <li className='mr-4'>
+      <Link href={href}>{children}</Link>
+    </li>
+  );
 }
