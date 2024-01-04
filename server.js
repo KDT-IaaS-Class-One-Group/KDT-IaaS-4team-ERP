@@ -43,7 +43,7 @@ app.prepare().then(() => {
   const server = express();
   server.use(bodyParser.json());
 
-  // 회원가입 엔드포인트
+  // * 회원가입 엔드포인트
   server.post('/api/signup', async (req, res) => {
     const { username, password, email, phoneNumber } = req.body;
 
@@ -64,13 +64,15 @@ app.prepare().then(() => {
     }
   });
 
-  // 로그인 엔드포인트
+  // * 로그인 엔드포인트
   server.post('/api/login', async (req, res) => {
     const { username, password } = req.body;
 
     try {
       // 사용자 조회
       const result = await pool.query('SELECT * FROM users WHERE username = ?', [username]);
+
+      console.log('Received data from client:', { username, password });
 
       // 사용자가 존재하는지 확인
       if (result.length === 0) {
@@ -80,6 +82,7 @@ app.prepare().then(() => {
 
       // 비밀번호 확인
       const user = result[0];
+      console.log('User data from the server:', user);
       const passwordMatch = await bcrypt.compare(password, user.password);
 
       if (passwordMatch) {
