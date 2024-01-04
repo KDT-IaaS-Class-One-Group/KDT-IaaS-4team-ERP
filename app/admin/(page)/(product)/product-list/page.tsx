@@ -46,7 +46,7 @@ export default function ProductList() {
               key={product.id}
               className='border-b border-gray-200 py-4 flex items-center'
             >
-              <img
+              <image
                 src={product.imageUrl}
                 alt={product.name}
                 className='h-16 w-16 object-cover mr-4'
