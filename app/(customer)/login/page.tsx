@@ -25,7 +25,8 @@ const LoginComponent: React.FC = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify( {username: formData.username,
+          password: formData.password}),
       });
 
       const data = await response.json();

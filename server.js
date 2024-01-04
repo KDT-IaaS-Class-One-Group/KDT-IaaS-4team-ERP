@@ -83,7 +83,7 @@ app.prepare().then(() => {
       // 비밀번호 확인
       const user = result[0];
       console.log('User data from the server:', user);
-      const passwordMatch = await bcrypt.compare(password, user.password);
+      const passwordMatch = await bcrypt.compare(formData.password, user.password);
 
       if (passwordMatch) {
         res.status(200).json({ success: true, message: '로그인 성공' });
