@@ -1,7 +1,7 @@
 import React from 'react';
-import Sidebar from '../../components/Sidebar/Sidebar';
+import Sidebar from '@components/Sidebar/Sidebar';
 
-export default function RootLayout({
+export default function Layout({
   children,
 }: {
   children: React.ReactNode;
