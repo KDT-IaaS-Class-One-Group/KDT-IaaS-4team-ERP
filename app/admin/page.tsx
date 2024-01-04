@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import Image from 'next/image';
-import Sidebar from './components/Sidebar';
+import Sidebar from '../components/(admin)/Sidebar';
 
 export default function Admin() {
   return (

@@ -3,7 +3,7 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { CardProps } from '../../../JH-interfaces/interfaces';
+import { CardProps } from '../../../../interfaces/interfaces';
 
 // interface CardProps {
 //   pUrl: string;
@@ -13,17 +13,23 @@ import { CardProps } from '../../../JH-interfaces/interfaces';
 // }
 
 /**
- * 
+ *
  * @param pUrl 상품 이미지 url : string
  * @param pTitle 상품명 : string
  * @param pSub 상품 설명 : string
  * @param pPrice 상품 가격 : number
- * @returns 
+ * @returns
  */
-const Card: React.FC<CardProps> = ({pUrl, pTitle, pSub, pPrice}) => {
+const Card: React.FC<CardProps> = ({ pUrl, pTitle, pSub, pPrice }) => {
   return (
     <div className='flex flex-col justify-between items-center w-80 h-2/5 border border-black p-4 gap-6'>
-      <Image src={pUrl} alt='homepageCardImage' width={280} height={280} className=' outline-1 outline'/>
+      <Image
+        src={pUrl}
+        alt='homepageCardImage'
+        width={280}
+        height={280}
+        className=' outline-1 outline'
+      />
       <div className='card-subArea w-full h-1/3 flex justify-between flex-col '>
         <div>
           <div className='w-1/3 h-1 border-b-2 border-slate-800 mb-1'></div>
@@ -34,6 +40,6 @@ const Card: React.FC<CardProps> = ({pUrl, pTitle, pSub, pPrice}) => {
       </div>
     </div>
   );
-}
+};
 
 export default Card;
