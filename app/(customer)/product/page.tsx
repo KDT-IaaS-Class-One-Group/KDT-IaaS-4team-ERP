@@ -1,11 +1,11 @@
 'use client'
-import Productdetail from "@/app/components/Product/productdetail";
+import ProductDetail from "@/app/customComp/Product/productdetail";
 
 export default function ProductPage() {
 
   return (
     <>
-      <Productdetail/>
+      <ProductDetail />
     </>
   );
 };

@@ -1,15 +1,20 @@
 import React from 'react';
 import Sidebar from './components/Sidebar/Sidebar';
+import '../../app/globals.css'
 
-export default function RootLayout({
+export default function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <div className='flex h-full'>
-      <Sidebar />
-      {children}
-    </div>
+    <html lang='ko'>
+      <body>
+        <div className='flex h-full'>
+          <Sidebar />
+          {children}
+        </div>
+      </body>
+    </html>
   );
 }

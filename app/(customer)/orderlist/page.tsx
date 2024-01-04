@@ -1,5 +1,5 @@
 
-import OrderListMain from "@/app/components/orderListComponent/OrderListMain";
+import OrderListMain from "@/app/customComp/orderListComponent/OrderListMain";
 
 export default function OrderList() {
   return (

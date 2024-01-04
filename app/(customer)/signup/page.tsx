@@ -1,4 +1,4 @@
-import SignUpHome from "../../components/Signup/SignUpHome";
+import SignUpHome from "@/app/customComp/Signup/SignUpHome";
 
 const Home = () => {
   return (

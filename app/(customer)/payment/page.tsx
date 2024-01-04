@@ -1,6 +1,6 @@
-import DeliveryInformation from "@/app/components/Payment/deliveryInformation";
-import ProductInformation from "@/app/components/Payment/productInformation";
-import BuyButton from "@/app/components/Payment/buyButton";
+import DeliveryInformation from "@/app/customComp/Payment/deliveryInformation";
+import ProductInformation from "@/app/customComp/Payment/productInformation";
+import BuyButton from "@/app/customComp/Payment/buyButton";
 
 export default function PaymentPage() {
   return (
