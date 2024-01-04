@@ -1,12 +1,8 @@
-// 상품 조회 페이지
-
 'use client';
-import React from 'react';
-import Image from 'next/link';
+import ProductListProps from '@interfaces/ProductListProps';
 
 export default function ProductList() {
-  // 임시 데이터
-  const products = [
+  const products: ProductListProps = [
     {
       id: 1,
       name: '상품 A',
@@ -22,15 +18,15 @@ export default function ProductList() {
     // ... 추가 상품 데이터
   ];
 
-  // 상품 삭제 함수
-  const handleDelete = (productId) => {
-    // 여기에 삭제 로직을 구현합니다.
+  // 상품 삭제 함수 - productId 파라미터의 타입을 number로 명시
+  const handleDelete = (productId: number) => {
+    // 삭제 로직 구현
     console.log('Deleting product with id:', productId);
   };
 
-  // 상품 수정 페이지로 이동
-  const handleEdit = (productId) => {
-    // 여기에 수정 페이지로 라우팅하는 로직을 구현합니다.
+  // 상품 수정 함수 - productId 파라미터의 타입을 number로 명시
+  const handleEdit = (productId: number) => {
+    // 수정 페이지로 라우팅하는 로직 구현
     console.log('Editing product with id:', productId);
   };
 
@@ -40,11 +36,12 @@ export default function ProductList() {
         <div className='mb-6'>
           <h1 className='text-xl font-semibold'>상품 목록</h1>
         </div>
-        <div className='mb-6'>
+        {/* 스크롤이 생기는 부분 */}
+        <div className='mb-6 max-h-[500px] overflow-y-auto'>
           {products.map((product) => (
             <div
               key={product.id}
-              className='border-b border-gray-200 py-4 flex items-center'
+              className='border-b border-gray-200 py-4 flex items-center justify-between'
             >
               <img
                 src={product.imageUrl}

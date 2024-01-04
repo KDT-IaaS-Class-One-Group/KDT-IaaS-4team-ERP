@@ -9,10 +9,10 @@ export default function Sidebar() {
     <div className='h-full w-64 bg-blue-700 text-white'>
       <nav className='p-4'>
         <ul>
-          <li className='pb-10'>
+          <li className='flex pb-10 items-center'>
             <Link
               href='/admin'
-              className='block p-2 hover:bg-gray-700 rounded border-2 text-3xl'
+              className='flex p-2 hover:bg-gray-700 rounded border-2 text-3xl items-center '
             >
               <IoMdHome />
             </Link>

@@ -2,6 +2,6 @@
 
 import React from 'react';
 
-export default function Customer() {
+export default function CustomerPage() {
   return <div>customer</div>;
 }
