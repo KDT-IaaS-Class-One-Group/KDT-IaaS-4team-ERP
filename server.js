@@ -1,5 +1,5 @@
 const express = require('express');
-const mysql = require("mysql2/promise");
+const mariadb = require("mysql2/promise");
 const bodyParser = require("body-parser");
 // 암호화해주는 모듈
 const bcrypt = require('bcrypt');
