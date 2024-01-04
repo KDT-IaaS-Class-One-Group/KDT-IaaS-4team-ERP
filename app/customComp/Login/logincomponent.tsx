@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Loginbutton from "./loginbutton";
 import Logintext from "./logintext";
 

@@ -12,13 +12,13 @@ export default function Header() {
         <Link href='/login'>
           <HeaderMenu>로그인</HeaderMenu>
         </Link>
-        <Link href='/login'>
+        <Link href='/orderlist'>
           <HeaderMenu>주문조회</HeaderMenu>
         </Link>
-        <Link href='/login'>
+        <Link href='/cart'>
           <HeaderMenu>장바구니</HeaderMenu>
         </Link>
-        <Link href='/login'>
+        <Link href='/cs'>
           <HeaderMenu>고객센터</HeaderMenu>
         </Link>
       </ul>
