@@ -4,7 +4,7 @@
 import React from 'react';
 import Image from 'next/link';
 
-export default function OrderManage() {
+export default function OrderManagePage() {
   return <div>주문 관리</div>;
 }
 

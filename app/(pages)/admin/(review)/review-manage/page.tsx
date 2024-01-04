@@ -28,7 +28,7 @@ const initialReviews: Review[] = [
   },
 ];
 
-export default function ReviewManage() {
+export default function ReviewManagePage() {
   const [reviews, setReviews] = useState(initialReviews);
 
   const handleReplyChange = (id: number, reply: string) => {

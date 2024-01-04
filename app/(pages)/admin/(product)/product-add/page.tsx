@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-export default function ProductAdd() {
+export default function ProductAddPage() {
   return (
     <div className='container mx-auto p-4'>
       <div className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'>
