@@ -1,4 +1,4 @@
-import LoginHome from '@/app/components/(customer)/Login/logincomponent';
+import LoginHome from '@/app/components/customer/Login/logincomponent';
 
 const Home = () => {
   return (
