@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
-import './globals.css';
-import Header from './customComp/layoutComp/Header';
-import Footer from './customComp/layoutComp/Footer';
+import Header from '../customComp/layoutComp/Header';
+import Footer from '../customComp/layoutComp/Footer';
 import React from 'react';
 
 export const metadata: Metadata = {
@@ -15,10 +14,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='ko'>
-      <body>
-        {children}
-      </body>
-    </html>
+  <div  className='flex flex-col justify-between h-screen '>
+    <Header />
+    {children}
+    <Footer />
+  </div>
   );
 }
