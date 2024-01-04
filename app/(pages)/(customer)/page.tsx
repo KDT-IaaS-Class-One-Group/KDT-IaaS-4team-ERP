@@ -2,6 +2,6 @@
 
 import React from 'react';
 
-export default function Home() {
+export default function Customer() {
   return <div>hello</div>;
 }

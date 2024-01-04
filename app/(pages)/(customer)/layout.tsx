@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import '@';
 
 import React from 'react';
 
@@ -8,7 +7,7 @@ export const metadata: Metadata = {
   description: 'shopping',
 };
 
-export default function RootLayout({
+export default function CustomerLayout({
   children,
 }: {
   children: React.ReactNode;
