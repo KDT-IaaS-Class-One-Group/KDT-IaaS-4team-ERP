@@ -9,7 +9,7 @@ export default function CustomerLayout({ children }: ChildrenProps) {
   return (
     <>
       <Header>
-        <HeaderItem href='/login'>로그인/로그아웃</HeaderItem>
+        <HeaderItem href='/login'>로그아웃</HeaderItem>
       </Header>
 
       <div className='flex h-full'>
