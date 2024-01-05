@@ -9,7 +9,7 @@ const LoginHome = () => {
         <Logintext title='ID' />
         <Logintext title='PASSWORD' />
       </div>
-      <div className="h-1/5 flex items-center justify-end w-full">
+      <div className="h-1/5 flex items-center justify-end w-full"> 
         <Loginbutton value='sign up' />
         <Loginbutton value='login' />
       </div>
