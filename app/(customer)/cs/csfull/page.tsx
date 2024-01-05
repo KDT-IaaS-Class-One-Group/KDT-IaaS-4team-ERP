@@ -38,7 +38,7 @@ export default function WritingPage() {
 
                 {/* Area4: 등록 버튼(input button) */}
                 <div className='bg-gray-400 w-1/2 flex items-end justify-end'>
-                    <input type="submit" className="bg-pink-300 w-32 h-10" value="" />
+                    <input type="submit" className="bg-pink-300 w-32 h-10" value="등록" />
                 </div>
             </div>
         </div>
