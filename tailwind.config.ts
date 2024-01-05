@@ -15,6 +15,19 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    // tailwindcss 플러그인 함수를 여기에 추가합니다.
+    function({ addUtilities }) {
+      const newUtilities = {
+        '.flex-center': {
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        },
+        // 필요에 따라 더 많은 유틸리티를 추가할 수 있습니다.
+      };
+      addUtilities(newUtilities);
+    }
+  ],
 }
 export default config
