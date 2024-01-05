@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Cart() {
   return (
-    <div>
+    <div className="h-4/5 w-full">
         <CartMain />
     </div>
   );
