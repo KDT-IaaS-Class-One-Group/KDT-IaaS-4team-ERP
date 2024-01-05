@@ -1,6 +1,7 @@
 // [고객센터 질문 등록](글 쓰기) 컴포넌트
 // 여기서 작성한 글은 이전 페이지(고객센터 페이지)에서 확인 할 수 있습니다.
 
+import Link from 'next/link';
 import Write from '@/app/customComp/writingcustomerComp/writ';
 import React from 'react';
 
@@ -38,8 +39,11 @@ export default function WritingPage() {
 
                 {/* Area4: 등록 버튼(input button) */}
                 <div className='bg-gray-400 w-1/2 flex items-end justify-end'>
+                <Link href='/cs' className='ml-auto'>
                     <input type="button" className="bg-pink-300 w-32 h-10" value="등록" />
+                </Link>
                 </div>
+
             </div>
         </div>
     );
