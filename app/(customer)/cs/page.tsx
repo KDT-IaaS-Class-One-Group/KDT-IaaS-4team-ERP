@@ -3,6 +3,7 @@
 // 현재 고객센터 페이지에서는 고객이 등록한 글을 볼 수 있습니다.
 
 import React from 'react';
+import Link from 'next/link';
 import List from '@/app/customComp/writingcustomerComp/list';
 
 export default function CustomerService() {
@@ -49,11 +50,12 @@ export default function CustomerService() {
                     </div>
                 ))}
             </div>
-
             <button
                 className="absolute bottom-4 right-4 bg-pink-300 hover:bg-pink-500 text-white font-bold py-3 px-6 rounded-full"
-            >등록
-                <a href="http://localhost:3000/cus/shindonghyun/writing"></a>
+            >
+                <Link href='/writing'>
+                    등록
+                </Link>
             </button>
         </div>
     );
