@@ -3,6 +3,7 @@
 // 현재 고객센터 페이지에서는 고객이 등록한 글을 볼 수 있습니다.
 
 import React from 'react';
+import Link from 'next/link';
 import List from '@/app/customComp/writingcustomerComp/list';
 
 export default function CustomerService() {
@@ -41,19 +42,22 @@ export default function CustomerService() {
 
             {/* 목록이 표시 */}
             <div className="mt-4 p-4 bg-white rounded-lg shadow-md w-full max-w-2xl">
+                <Link href='/csfull'>
                 {dataForArea2.map((item, index) => (
                     <div key={index} className="flex items-center cursor-pointer hover:bg-gray-100 p-2">
-                        <div className="flex-1">{item.작성자}</div>
-                        <div className="flex-1">{item.날짜}</div>
-                        <div className="flex-3">{item.제목}</div>
+                            <div className="flex-1">{item.작성자}</div>
+                            <div className="flex-1">{item.날짜}</div>
+                            <div className="flex-3">{item.제목}</div>
                     </div>
                 ))}
+                </Link>
             </div>
-
             <button
                 className="absolute bottom-4 right-4 bg-pink-300 hover:bg-pink-500 text-white font-bold py-3 px-6 rounded-full"
-            >등록
-                <a href="http://localhost:3000/cus/shindonghyun/writing"></a>
+            >
+                <Link href='/writing'>
+                    등록
+                </Link>
             </button>
         </div>
     );

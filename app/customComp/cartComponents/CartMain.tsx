@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import React from "react";
+import Link from "next/link";
+import React from "react";
 import CartNav from "./CartNav/CartNav";
 import Btn from "../Btn/Btn";
 import CartList from "./cartList/CartList";
