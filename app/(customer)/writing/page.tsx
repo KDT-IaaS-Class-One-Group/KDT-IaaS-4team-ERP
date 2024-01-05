@@ -28,7 +28,12 @@ export default function WritingPage() {
                     <button className="bg-pink-300 w-32 h-10 mb-4">
                         <div className="text-center py-2">이미지 불러오기</div>
                     </button>
-                    <div className="text-left py-2 pl-2">썸네일</div>
+                    <div className="text-left py-2 pl-2 flex">
+                        <div className="w-20 h-20 bg-black"> 사진 </div>
+                        <div className="w-20 h-20 bg-black"> 사진 </div>
+                        <div className="w-20 h-20 bg-black"> 사진 </div>
+                        <div className="w-20 h-20 bg-black"> 사진 </div>
+                    </div>
                 </div>
 
                 {/* Area4: 등록 버튼(input button) */}
