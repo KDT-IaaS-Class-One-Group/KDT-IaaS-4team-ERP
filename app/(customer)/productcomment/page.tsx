@@ -6,6 +6,7 @@
 import { useState, useEffect } from 'react';
 import ProductCommentList from '@/app/customComp/ProductComment/ProductCommentList';
 import ProductUploadButton from '@/app/customComp/ProductComment/ProductUploadButton';
+import Link from 'next/link';
 
 const CommentHome = () => {
   const [comments, setComments] = useState([]);
@@ -30,21 +31,23 @@ const CommentHome = () => {
 
   return (
     <>
-    <div className='w-screen h-screen flex justify-start items-center flex-col gap-6
+      <div className='w-screen h-screen flex justify-start items-center flex-col gap-6
   '>
-      {comments.map((comment, index) => (
-        <ProductCommentList
-          key={index}
-          writerid={comment.writerid}
-          date={comment.date}
-          starcount={comment.starcount}
-          commenttitle={comment.commenttitle}
-        />
-      ))}
-    </div>
-    <div className='ml-auto mr-40 mb-20'>
-        <ProductUploadButton value='상품평 등록'/>
-    </div>
+        {comments.map((comment, index) => (
+          <ProductCommentList
+            key={index}
+            writerid={comment.writerid}
+            date={comment.date}
+            starcount={comment.starcount}
+            commenttitle={comment.commenttitle}
+          />
+        ))}
+      </div>
+      <Link href="csitem" className='ml-auto'>
+        <div className=' mr-40 mb-20'>
+          <ProductUploadButton value='상품평 등록' />
+        </div>
+      </Link>
     </>
   );
 };
