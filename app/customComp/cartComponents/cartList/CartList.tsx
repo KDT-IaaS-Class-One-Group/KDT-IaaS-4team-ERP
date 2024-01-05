@@ -24,7 +24,7 @@ const CartList: React.FC<PList> = ({ pUrl, pSub, pPrice, pCount, className }) =>
 
   return (
     <li className={combinedClassName}>
-      <Image src={pUrl} alt="이미지가 들어갈 자리입니다." width="65" height="65" />
+      <Image src={`${pUrl}`} alt="이미지가 들어갈 자리입니다." width={65} height={65} />
       <p className='text-xs'>{pSub}</p>
       <div className='flex gap-3 w-2/3'>
         <div className='flex-1 flex-center'>{pPrice}원</div>

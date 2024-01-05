@@ -1,21 +1,24 @@
 'use client'
 
-import Link from "next/link";
-import React from "react";
+
 import Link from "next/link";
 import React from "react";
 import CartNav from "./CartNav/CartNav";
 import Btn from "../Btn/Btn";
 import CartList from "./cartList/CartList";
 import { useState, useEffect } from "react";
+import Image from 'next/image';
+
+export default function CartMain() {
 
 const [requestData, setRequestData] = useState([])
 
 useEffect(() => {
   const fetchData = async () => {
     try {
-      const response = await fetch("/path/to/productdata.json"); // 경로는 실제 파일 경로로 변경해야 합니다.
+      const response = await fetch('./productdata.json');
       const data = await response.json();
+      console.log(data)
       setRequestData(data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -25,7 +28,7 @@ useEffect(() => {
   fetchData();
 }, []);
 
-export default function CartMain() {
+
   return (
     <main className="flex flex-col overflow-hidden w-full h-full"> 
       <Link href='/payment' className="ml-auto">
