@@ -57,7 +57,7 @@ export default function ProductLisPage() {
               className='border-b border-gray-200 py-4 flex items-center justify-between'
             >
               <img
-                src={product.imageUrl}
+                src={product.imageLink}
                 alt={product.name}
                 className='h-16 w-16 object-cover mr-4'
               />
