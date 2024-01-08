@@ -87,7 +87,8 @@ app.prepare().then(() => {
       // 비밀번호 비교
       if (user.password && password === user.password.trim()) {
         // 로그인 성공 시 토큰 발급
-        const token = jwt.sign({ username: user.username }, '1234', { expiresIn: '1h' });
+        
+        const token = jwt.sign({ username: user.username, userId: user.Id }, '1234', { expiresIn: '1h' });
         res.status(200).json({ success: true, message: '로그인 성공', token });
       } else {
         res.status(401).json({ success: false, message: '비밀번호가 일치하지 않습니다.' });

@@ -26,6 +26,12 @@ const ProductList: React.FC = () => {
     fetchProducts();
   }, []);
 
+  const addToCart = (productId: number) => {
+    // 장바구니에 상품 추가 로직을 여기에 추가
+    console.log(`상품 ${productId}를 장바구니에 추가했습니다.`);
+    // 실제로는 서버로 해당 상품을 추가하는 API 호출 등이 필요합니다.
+  };
+
   return (
     <div>
       <h2>상품 목록</h2>
@@ -33,6 +39,7 @@ const ProductList: React.FC = () => {
         {products.map((product) => (
           <li key={product.product_id}>
             {product.name} - ${product.price}
+            <button onClick={() => addToCart(product.product_id)}>장바구니에 추가</button>
           </li>
         ))}
       </ul>
