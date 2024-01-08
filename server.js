@@ -119,12 +119,26 @@ app.prepare().then(() => {
         res.status(404).json({ success: false, message: '사용자를 찾을 수 없습니다.' });
         return;
       }
-      
+
       console.log(userInfo[0])
       res.status(200).json(userInfo[0]);
     } catch (error) {
       console.error('Error fetching user information:', error);
       res.status(500).json({ success: false, message: '사용자 정보를 가져오는 중 오류가 발생했습니다.' });
+    }
+  });
+
+  //* 상품 목록을 가져오는 엔드포인트
+  server.get('/api/products', async (req, res) => {
+    // console.log(req)
+    try {
+      const connection = await pool.getConnection();
+      const [rows] = await connection.query('SELECT * FROM product');
+      connection.release();
+      res.status(200).json(rows);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      res.status(500).json({ error: 'Error fetching products' });
     }
   });
 
