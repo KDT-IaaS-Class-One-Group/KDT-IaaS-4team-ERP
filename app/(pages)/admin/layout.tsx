@@ -16,7 +16,6 @@ export default function CustomerLayout({ children }: ChildrenProps) {
         <Sidebar></Sidebar>
         {children}
       </div>
-      <Footer></Footer>
     </>
   );
 }

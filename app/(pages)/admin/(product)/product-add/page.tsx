@@ -65,46 +65,49 @@ export default function ProductAdd() {
               name='description'
               required
               onChange={handleChange}
-              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700'
+              rows={18}
+              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 resize-none'
             ></textarea>
           </div>
 
-          <div className='mb-4'>
-            <label className='block text-gray-700 text-sm font-bold mb-2'>
-              가격
-            </label>
-            <input
-              type='text'
-              name='price'
-              required
-              onChange={handleChange}
-              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700'
-            />
-          </div>
+          <div className='mb-4 flex justify-between items-center'>
+            <div className='flex-grow mr-2'>
+              <label className='block text-gray-700 text-sm font-bold mb-2'>
+                가격
+              </label>
+              <input
+                type='text'
+                name='price'
+                required
+                onChange={handleChange}
+                className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700'
+              />
+            </div>
 
-          <div className='mb-4'>
-            <label className='block text-gray-700 text-sm font-bold mb-2'>
-              재고
-            </label>
-            <input
-              type='text'
-              name='stock'
-              required
-              onChange={handleChange}
-              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700'
-            />
-          </div>
+            <div className='flex-grow mr-2'>
+              <label className='block text-gray-700 text-sm font-bold mb-2'>
+                재고
+              </label>
+              <input
+                type='text'
+                name='stock'
+                required
+                onChange={handleChange}
+                className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700'
+              />
+            </div>
 
-          <div className='mb-4'>
-            <label className='block text-gray-700 text-sm font-bold mb-2'>
-              이미지 업로드
-            </label>
-            <input
-              type='file'
-              name='image'
-              onChange={handleChange}
-              className='shadow appearance-none border rounded py-2 px-3 text-gray-700'
-            />
+            <div className='flex-grow'>
+              <label className='block text-gray-700 text-sm font-bold mb-2'>
+                이미지 업로드
+              </label>
+              <input
+                type='file'
+                name='image'
+                onChange={handleChange}
+                className='shadow appearance-none border rounded py-2 px-3 text-gray-700 w-full'
+              />
+            </div>
           </div>
 
           <div className='flex items-center justify-between'>
