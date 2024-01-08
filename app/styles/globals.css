@@ -2,3 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  cursor: url('../../public/images/cursor.png'), auto;
+}

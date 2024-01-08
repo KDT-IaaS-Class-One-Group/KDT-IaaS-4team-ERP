@@ -25,7 +25,8 @@
       "@/hooks/*": ["app/hooks/*"],
       "@/styles/*": ["app/styles/*"],
       "@/components/*": ["app/components/*"],
-      "@/interfaces/*": ["app/interfaces/*"]
+      "@/interfaces/*": ["app/interfaces/*"],
+      "@/images/*": ["public/images/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
