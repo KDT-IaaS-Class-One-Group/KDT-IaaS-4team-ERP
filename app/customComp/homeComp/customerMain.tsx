@@ -3,8 +3,8 @@
 // 예시) root div에 w-screen, h-screen 등이 필요합니다.
 
 import React from "react"; 
-import Card from "./HomeCard/Card";
-import HomeCategoryNav from './HomeCategoryNav/HomeCategoryNav';
+import Card from "./HomeCard/Card"; //상품 정보
+import HomeCategoryNav from './HomeCategoryNav/HomeCategoryNav'; //상품 카테고리
 
 export default function CustomerMain(){
   return (

@@ -3,6 +3,7 @@ import ProductPriceCalculator from './pricecalculator'
 import React from "react";
 import styles from "./style/productdetail.module.css";
 import { ProductDetail } from "./types";
+import Link from 'next/link';
 
 type ProductDetailProps = {
   productdetail: ProductDetail;
@@ -26,10 +27,19 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productdetail }) => {
           {/* {productdetail.Summary} */}
           <ProductPriceCalculator/>
           <div className="flex justify-around">
-            {/* 링크로 바꿔야되나? */}
+            {/* 링크로 바꿔야되나? */}1
+
+            <Link href="/orderlist">
             <button className="bg-red-300">구매</button>
+            </Link>
+
+            <Link href="/cart"> 
             <button className="bg-red-300">장바구니</button>
+            </Link>
+
+            <Link href="/csitem"> 
             <button className="bg-red-300">상품평</button>
+            </Link>
           </div>
         </div>
       </div>
