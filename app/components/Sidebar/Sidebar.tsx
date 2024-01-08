@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { IoMdHome } from 'react-icons/io';
 import { MenuItem } from './MenuItem';
-import { MenuLink } from './MenuLink';
+import MenuLink from './MenuLink';
 
 export default function Sidebar() {
   return (

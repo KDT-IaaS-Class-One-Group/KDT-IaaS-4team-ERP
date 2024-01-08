@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useState } from 'react';
 
 // 주문 타입 정의
@@ -6,7 +7,7 @@ interface IOrder {
   id: number;
   customerName: string;
   orderDate: string;
-  deliveryStatus: '준비중' | '배송중' | '배송 완료';
+  deliveryStatus: '배송 준비' | '배송 완료';
 }
 
 // 주문 관리 컴포넌트
@@ -18,13 +19,13 @@ export default function DeliveryManage() {
       id: 1,
       customerName: '고객 A',
       orderDate: '2024-01-01',
-      deliveryStatus: '준비중',
+      deliveryStatus: '배송 준비',
     },
     {
       id: 2,
       customerName: '고객 B',
       orderDate: '2024-01-02',
-      deliveryStatus: '배송중',
+      deliveryStatus: '배송 준비',
     },
     // ... 추가 주문 데이터
   ]);
@@ -82,7 +83,9 @@ export default function DeliveryManage() {
                   </td>
                   <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm text-right'>
                     <button
-                      onClick={() => updateDeliveryStatus(order.id, '배송중')}
+                      onClick={() =>
+                        updateDeliveryStatus(order.id, '배송 완료')
+                      }
                       className='text-indigo-600 hover:text-indigo-900'
                     >
                       배송 시작

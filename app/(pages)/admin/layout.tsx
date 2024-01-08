@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
-import ChildrenProps from '@/interfaces/ChildrenProps';
+import { ChildrenProps } from '@/interfaces/ChildrenProps';
 import HeaderItem from '@/components/Header/HeaderItem';
 import Sidebar from '@/components/Sidebar/Sidebar';
 

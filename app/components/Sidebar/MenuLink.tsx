@@ -3,7 +3,12 @@
 import Link from 'next/link';
 import React from 'react';
 
-export function MenuLink({ href, children }) {
+interface MenuLinkProps {
+  href: string;
+  children: React.ReactNode;
+}
+
+export default function MenuLink({ href, children }: MenuLinkProps) {
   return (
     <li>
       <Link href={href} className='block p-2 hover:bg-gray-700 rounded'>

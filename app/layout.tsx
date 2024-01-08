@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import '@/styles/globals.css';
 import React from 'react';
 
-import ChildrenProps from '@/interfaces/ChildrenProps';
+import { ChildrenProps } from '@/interfaces/ChildrenProps';
 
 export const metadata: Metadata = {
   title: 'form 미쳤다',
