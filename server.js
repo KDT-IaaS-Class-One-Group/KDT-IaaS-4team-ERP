@@ -2,7 +2,7 @@ const express = require('express');
 const mariadb = require("mysql2/promise");
 const bodyParser = require("body-parser");
 // 암호화해주는 모듈
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 // uuidv4 함수를 호출하면 무작위로 생성된 UUID가 반환됨. 이를 활용하여 각 사용자에게 고유한 ID를 부여할 수 있다.
 const { v4: uuidv4 } = require('uuid');
 // 개발환경이 개발환경일 때: development
@@ -48,13 +48,10 @@ app.prepare().then(() => {
     const { username, password, email, phoneNumber } = req.body;
 
     try {
-      const hashedPassword = await bcrypt.hash(password, 10);
-      const userId = uuidv4(); // 사용자 식별을 위한 UUID 생성
-
-      // 사용자 데이터 삽입
+      // 사용자 데이터 삽입 (비밀번호를 평문으로 저장)
       await pool.query(
         'INSERT INTO users (id, username, password, email, phone_number) VALUES (?, ?, ?, ?, ?)',
-        [userId, username, hashedPassword, email, phoneNumber]
+        [uuidv4(), username, password, email, phoneNumber]
       );
 
       res.status(201).json({ success: true, message: '회원가입이 완료되었습니다.' });
@@ -83,9 +80,8 @@ app.prepare().then(() => {
       // 비밀번호 확인
       const user = result[0];
       console.log('User data from the server:', user);
-      const passwordMatch = await bcrypt.compare(formData.password, user.password);
 
-      if (passwordMatch) {
+      if (user.password && password === user.password.trim()) {
         res.status(200).json({ success: true, message: '로그인 성공' });
       } else {
         res.status(401).json({ success: false, message: '비밀번호가 일치하지 않습니다.' });
