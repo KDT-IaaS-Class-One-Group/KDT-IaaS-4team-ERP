@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 // const bcrypt = require('bcrypt');
 // uuidv4 함수를 호출하면 무작위로 생성된 UUID가 반환됨. 이를 활용하여 각 사용자에게 고유한 ID를 부여할 수 있다.
 const { v4: uuidv4 } = require('uuid');
+const jwt = require('jsonwebtoken');
 // 개발환경이 개발환경일 때: development
 // 개발환경이 배포단계 일 때: production
 // dev변수는 지금 애플리케이션이 실행되는 환경이 개발환경일 때를 정의해준다.
@@ -68,6 +69,10 @@ app.prepare().then(() => {
     try {
       // 사용자 조회
       const result = await pool.query('SELECT * FROM users WHERE username = ?', [username]);
+      // console.log(result[0])
+      // console.log(result[1])
+      // console.log(result[0][0])
+      // console.log(result[0][1])
 
       // 사용자가 존재하는지 확인
       if (result.length === 0 || result[0].length === 0) {
@@ -81,13 +86,43 @@ app.prepare().then(() => {
 
       // 비밀번호 비교
       if (user.password && password === user.password.trim()) {
-        res.status(200).json({ success: true, message: '로그인 성공' });
+        // 로그인 성공 시 토큰 발급
+        const token = jwt.sign({ username: user.username }, '1234', { expiresIn: '1h' });
+        res.status(200).json({ success: true, message: '로그인 성공', token });
       } else {
         res.status(401).json({ success: false, message: '비밀번호가 일치하지 않습니다.' });
       }
     } catch (error) {
       console.error('Error during login:', error);
       res.status(500).json({ success: false, message: '로그인 중 오류가 발생했습니다.' });
+    }
+  });
+
+  // * 로그인 시 일어나는 동작들
+  // * 사용자 정보 조회 엔드포인트
+  server.get('/api/user/:username', async (req, res) => {
+    const { username } = req.params;
+
+    try {
+      // 여기서는 토큰에서 사용자 정보를 추출하는 로직을 작성하셔야 합니다.
+      // 이 부분은 토큰의 디코딩 등을 통해 사용자 정보를 얻어오는 부분입니다.
+
+      // 예시로 토큰에서 username을 추출하는 부분입니다. 실제 프로젝트에서는 토큰 디코딩 등을 활용하세요.
+      // const decodedToken = jwt.verify(req.headers.authorization.split(' ')[1], 'your_secret_key');
+      // const username = decodedToken.username;
+
+      // 데이터베이스에서 사용자 정보 조회
+      const [userInfo] = await pool.query('SELECT email FROM users WHERE username = ?', [username]);
+
+      if (userInfo.length === 0) {
+        res.status(404).json({ success: false, message: '사용자를 찾을 수 없습니다.' });
+        return;
+      }
+
+      res.status(200).json(userInfo[0]);
+    } catch (error) {
+      console.error('Error fetching user information:', error);
+      res.status(500).json({ success: false, message: '사용자 정보를 가져오는 중 오류가 발생했습니다.' });
     }
   });
 
