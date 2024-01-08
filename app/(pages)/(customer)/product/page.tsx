@@ -1,5 +1,5 @@
 'use client'
-import ProductDetail from "@/app/customComp/Product/productdetail";
+import ProductDetail from "@/components/Product/productdetail";
 
 export default function ProductPage() {
 

@@ -4,7 +4,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import List from '@/app/customComp/writingcustomerComp/list';
+import List from '@/components/writingcustomerComp/list';
 
 export default function CustomerService() {
     // DB 테이블

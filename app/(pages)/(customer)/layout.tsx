@@ -1,28 +1,20 @@
-import type { Metadata } from 'next';
-import Header from '../../customComp/layoutComp/Header';
-import Footer from '../../customComp/layoutComp/Footer';
 import React from 'react';
-import '../../app/globals.css';
+import Header from '@/components/Header/Header';
+import Footer from '@/components/Footer/Footer';
+import ChildrenProps from '@/interfaces/ChildrenProps';
+import HeaderItem from '@/components/Header/HeaderItem';
 
-export const metadata: Metadata = {
-  title: 'form 미쳤다',
-  description: 'shopping',
-};
-
-export default function CustomerLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function CustomerLayout({ children }: ChildrenProps) {
   return (
-    <html lang='ko'>
-      <body>
-        <div className='flex flex-col justify-between h-screen '>
-          <Header />
-          {children}
-          <Footer />
-        </div>
-      </body>
-    </html>
+    <>
+      <Header>
+        <HeaderItem href='/login'>로그인/로그아웃</HeaderItem>
+        <HeaderItem href='/orderlist'>주문조회</HeaderItem>
+        <HeaderItem href='/cart'>장바구니</HeaderItem>
+        <HeaderItem href='/cs'>고객센터</HeaderItem>
+      </Header>
+      {children}
+      <Footer></Footer>
+    </>
   );
 }

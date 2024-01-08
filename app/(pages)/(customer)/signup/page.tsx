@@ -1,4 +1,4 @@
-import SignUpHome from "@/app/customComp/Signup/SignUpHome";
+import SignUpHome from "@/components/Signup/SignUpHome";
 
 const Home = () => {
   return (

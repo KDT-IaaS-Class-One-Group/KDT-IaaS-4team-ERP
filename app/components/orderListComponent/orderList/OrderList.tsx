@@ -3,7 +3,7 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { OrderListProps } from '@/app/JH-interfaces/interfaces';
+import { OrderListProps } from '@/JH-interfaces/interfaces';
 
 /**
  * 주문 목록 컴포넌트입니다.

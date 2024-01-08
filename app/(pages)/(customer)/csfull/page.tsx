@@ -1,7 +1,7 @@
 // [고객센터 상세보기](글 쓰기) 컴포넌트
 // 여기서 작성한 글은 이전 페이지(고객센터 페이지)에서 확인 할 수 있습니다.
 
-import Write from '@/app/customComp/writingcustomerComp/writ';
+import Write from '@/components/writingcustomerComp/writ';
 import React from 'react';
 
 // <Write title={"제목"} content={"내용"} btn={"이미지 등록"} image={"이미지 목록"} submit={'등록'} />
