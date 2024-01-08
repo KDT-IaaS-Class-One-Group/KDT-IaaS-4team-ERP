@@ -36,6 +36,7 @@ const LoginComponent: React.FC = () => {
       if (data.success) {
         // 로그인 성공 시 토큰 저장
         localStorage.setItem("token", data.token);
+        // console.dir(localStorage)
         console.log(data.message, "토큰이 localstorage에 저장");
         // 사용자 정보 가져오기
         const userResponse = await fetch(`/api/user/${formData.username}`, {

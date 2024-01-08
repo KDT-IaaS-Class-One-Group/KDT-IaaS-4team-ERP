@@ -109,7 +109,8 @@ app.prepare().then(() => {
 
       // 예시로 토큰에서 username을 추출하는 부분입니다. 실제 프로젝트에서는 토큰 디코딩 등을 활용하세요.
       // const decodedToken = jwt.verify(req.headers.authorization.split(' ')[1], 'your_secret_key');
-      // const username = decodedToken.username;
+      // const usernames = decodedToken.username;
+      // console.log(usernames)
 
       // 데이터베이스에서 사용자 정보 조회
       const [userInfo] = await pool.query('SELECT username FROM users WHERE username = ?', [username]);
