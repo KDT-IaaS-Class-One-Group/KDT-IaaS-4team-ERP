@@ -24,7 +24,7 @@ const LoginHome = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch(`http://localhost:3560/login`, {
+      const response = await fetch(`http://192.168.100.76:3560/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
