@@ -118,7 +118,8 @@ app.prepare().then(() => {
         res.status(404).json({ success: false, message: '사용자를 찾을 수 없습니다.' });
         return;
       }
-
+      
+      console.log(userInfo[0])
       res.status(200).json(userInfo[0]);
     } catch (error) {
       console.error('Error fetching user information:', error);

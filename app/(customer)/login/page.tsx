@@ -50,6 +50,8 @@ const LoginComponent: React.FC = () => {
         if (userResponse.ok) {
           console.log("User data:", userData);
           // 여기서 userData를 활용하여 상태를 업데이트하거나 다른 동작을 수행할 수 있습니다.
+          // 상태 변경
+          setWelcomeMessage(`${userData.username}님 환영합니다.`);
         } else {
           console.error("Error fetching user data:", userData.message);
         }
