@@ -18,16 +18,16 @@ app.use(express.json());
 app.use(cors());
 
 // 로그인 요청을 처리하는 라우터
-app.post('/login', async (req, res) => {
+app.post('/signup', async (req, res) => {
   try {
-    const { user_id, password } = req.body;
-    console.log(user_id, password)
+    const { user_id, password, email, phone } = req.body;
+    console.log(user_id, password, email, phone )
 
     // MariaDB 연결 획득
     const conn = await pool.getConnection();
 
     // 사용자 정보 조회
-    const result = await conn.query('SELECT * FROM user WHERE user_id = ? AND password = ?', [user_id, password]);
+    const result = await conn.query('SELECT user FROM user WHERE user_id = ? AND password = ?', [user_id, password]);
 
     // 연결 반환
     conn.release();
