@@ -1,21 +1,24 @@
-'use clinet'
+'use clinet';
 import React, { FC, ChangeEventHandler } from 'react';
 
-interface LogintextProps {
+interface LoginTextProps {
   title: string;
   inputchange: (value: string) => void;
 }
 
-const Logintext: FC<LogintextProps> = ({ title, inputchange }) => {
+const LoginText: FC<LoginTextProps> = ({ title, inputchange }) => {
   return (
-    <div className="flex h-20 m-2 w-full justify-between">
-      <label htmlFor="Idiputtext" className="w-32 text-center flex justify-center items-center ">
+    <div className='flex h-20 m-2 w-full justify-between'>
+      <label
+        htmlFor='Idiputtext'
+        className='w-32 text-center flex justify-center items-center '
+      >
         {`${title} :`}
       </label>
       <input
-        type="text"
-        id="Idiputtext"
-        className="w-3/5 border-solid border-2"
+        type='text'
+        id='Idiputtext'
+        className='w-3/5 border-solid border-2'
         onChange={(e) => {
           inputchange(e.target.value);
         }}
@@ -24,4 +27,4 @@ const Logintext: FC<LogintextProps> = ({ title, inputchange }) => {
   );
 };
 
-export default Logintext;
+export default LoginText;
