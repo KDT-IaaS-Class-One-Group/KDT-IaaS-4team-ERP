@@ -1,4 +1,4 @@
-'use clinet';
+'use client';
 import React, { FC, ChangeEventHandler } from 'react';
 
 interface LoginTextProps {
