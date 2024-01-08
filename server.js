@@ -69,18 +69,17 @@ app.prepare().then(() => {
       // 사용자 조회
       const result = await pool.query('SELECT * FROM users WHERE username = ?', [username]);
 
-      console.log('Received data from client:', { username, password });
-
       // 사용자가 존재하는지 확인
-      if (result.length === 0) {
+      if (result.length === 0 || result[0].length === 0) {
         res.status(401).json({ success: false, message: '사용자가 존재하지 않습니다.' });
         return;
       }
 
       // 비밀번호 확인
-      const user = result[0];
+      const user = result[0][0];
       console.log('User data from the server:', user);
 
+      // 비밀번호 비교
       if (user.password && password === user.password.trim()) {
         res.status(200).json({ success: true, message: '로그인 성공' });
       } else {
