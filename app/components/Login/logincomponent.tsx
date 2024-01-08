@@ -41,7 +41,7 @@ const LoginHome = () => {
       const data = await response.json();
       console.log(data);
       if (data.success) {
-        sessionStorage.setItem('userid', 'qjqmfgus')
+        sessionStorage.setItem('userid', `${data.userid}`)
         console.log(sessionStorage)
         router.push('/');
         alert('로그인 성공');
