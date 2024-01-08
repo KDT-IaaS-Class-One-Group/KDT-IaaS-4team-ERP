@@ -22,6 +22,7 @@
     "paths": {
       "@/admin/*": ["app/(pages)/admin/*"],
       "@/customer/*": ["app/(pages)/main/*"],
+      "@/databases/*": ["public/databases/*"],
       "@/hooks/*": ["app/hooks/*"],
       "@/styles/*": ["app/styles/*"],
       "@/components/*": ["app/components/*"],
@@ -29,6 +30,12 @@
       "@/images/*": ["public/images/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "server/server2.js"
+  ],
   "exclude": ["node_modules"]
 }

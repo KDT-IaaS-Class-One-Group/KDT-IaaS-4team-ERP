@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "name": "상품 A",
+    "price": "10,000원",
+    "imageLink": "images/product-a.jpg",
+    "stock": 20
+  },
+  {
+    "id": 2,
+    "name": "상품 B",
+    "price": "20,000원",
+    "imageLink": "images/product-b.jpg",
+    "stock": 15
+  },
+  {
+    "id": 3,
+    "name": "상품 C",
+    "price": "15,000원",
+    "imageLink": "images/product-c.jpg",
+    "stock": 10
+  },
+  {
+    "id": 4,
+    "name": "상품 D",
+    "price": "22,000원",
+    "imageLink": "images/product-d.jpg",
+    "stock": 8
+  },
+  {
+    "id": 5,
+    "name": "상품 E",
+    "price": "18,000원",
+    "imageLink": "images/product-e.jpg",
+    "stock": 12
+  }
+]

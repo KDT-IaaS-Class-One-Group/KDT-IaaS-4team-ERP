@@ -2,41 +2,72 @@
 
 'use client';
 import React, { useState } from 'react';
+import { ProductNameProps } from '@/interfaces/Product/ProductNameProps';
+import { ProductDescriptionProps } from '@/interfaces/Product/ProductDescriptionProps';
+import { ProductPriceProps } from '../../../../interfaces/Product/ProductPriceProps';
+import { ProductStockProps } from '@/interfaces/Product/ProductStockProps';
+import { ProductImageFileProps } from '@/interfaces/Product/ProductImageFileProps';
 
-// 상품 등록을 위한 인터페이스
-interface IProductForm {
-  name: string;
-  description: string;
-  price: string;
-  stock: string;
-  image: File | null;
-}
+interface ProductProps
+  extends ProductNameProps,
+    ProductDescriptionProps,
+    ProductPriceProps,
+    ProductStockProps,
+    ProductImageFileProps {}
 
 export default function ProductAdd() {
-  const [productForm, setProductForm] = useState<IProductForm>({
+  const [productForm, setProductForm] = useState<ProductProps>({
     name: '',
     description: '',
     price: '',
-    stock: '',
-    image: null,
+    stock: 0,
+    imageFile: null,
   });
 
   // 입력 필드의 변경을 처리하는 함수
   const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    const { name, value, files } = event.target;
+    const target = event.target as HTMLInputElement; // 타입 단언을 사용하여 HTMLInputElement로 처리
+    const { name, value } = target;
+    const files = target.files; // 이제 안전하게 접근 가능
+  
     setProductForm((prevForm) => ({
       ...prevForm,
-      [name]: files ? files[0] : value,
+      [name]: files && files.length > 0 ? files[0] : value,
     }));
   };
 
   // 폼 제출을 처리하는 함수
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    // 여기에 상품 추가를 위한 API 호출 등의 로직을 구현할 수 있습니다.
-    console.log('Product form data:', productForm);
+
+    const formData = new FormData();
+
+    formData.append('name', productForm.name);
+    formData.append('description', productForm.description);
+    formData.append('price', productForm.price);
+    formData.append('stock', productForm.stock.toString());
+    if (productForm.imageFile) {
+      formData.append('image', productForm.imageFile);
+    }
+
+    try {
+      const response = await fetch('/api/products', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (response.ok) {
+        console.log('Product registered successfully');
+        // 여기에 성공 시의 로직을 추가하세요
+      } else {
+        console.error('Failed to register the product');
+        // 여기에 실패 시의 로직을 추가하세요
+      }
+    } catch (error) {
+      console.error('There was an error submitting the form:', error);
+    }
   };
 
   return (
