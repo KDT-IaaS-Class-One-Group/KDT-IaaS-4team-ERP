@@ -87,7 +87,7 @@ app.prepare().then(() => {
       // 비밀번호 비교
       if (user.password && password === user.password.trim()) {
         // 로그인 성공 시 토큰 발급
-        
+
         const token = jwt.sign({ username: user.username, userId: user.Id }, '1234', { expiresIn: '1h' });
         res.status(200).json({ success: true, message: '로그인 성공', token });
       } else {
@@ -140,6 +140,27 @@ app.prepare().then(() => {
     } catch (error) {
       console.error('Error fetching products:', error);
       res.status(500).json({ error: 'Error fetching products' });
+    }
+  });
+
+  // * 장바구니에 상품 추가 엔드포인트
+  server.post('/api/add-to-cart', async (req, res) => {
+    const { token, productId, quantity } = req.body;
+
+    try {
+      // 토큰 검증
+      const { userId } = jwt.verify(token, '1234');
+
+      // 장바구니에 상품 추가
+      const result = await pool.query(
+        'INSERT INTO cart (user_id, product_id, quantity) VALUES (?, ?, ?)',
+        [userId, productId, quantity]
+      );
+
+      res.status(200).json({ success: true, message: '장바구니에 상품이 추가되었습니다.' });
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+      res.status(500).json({ success: false, message: '장바구니에 상품을 추가하는 중 오류가 발생했습니다.' });
     }
   });
 

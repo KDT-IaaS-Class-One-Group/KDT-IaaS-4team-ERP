@@ -1,15 +1,21 @@
-// 예시: 클라이언트 측 (React 컴포넌트)
-
 import React, { useEffect, useState } from 'react';
 
 interface Product {
   product_id: number;
   name: string;
   price: number;
+  quantity: number;
+}
+
+interface CartItem {
+  productId: number;
+  quantity: number;
 }
 
 const ProductList: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
+  const [cart, setCart] = useState<CartItem[]>([]);
+  const [token, setToken] = useState<string | null>(localStorage.getItem('token'));
 
   useEffect(() => {
     // 상품 목록을 가져오는 API 호출
@@ -26,10 +32,39 @@ const ProductList: React.FC = () => {
     fetchProducts();
   }, []);
 
-  const addToCart = (productId: number) => {
-    // 장바구니에 상품 추가 로직을 여기에 추가
-    console.log(`상품 ${productId}를 장바구니에 추가했습니다.`);
-    // 실제로는 서버로 해당 상품을 추가하는 API 호출 등이 필요합니다.
+  const addToCart = async (productId: number, quantity: number) => {
+    // 이미 장바구니에 해당 상품이 있는지 확인
+    const existingItem = cart.find((item) => item.productId === productId);
+
+    if (existingItem) {
+      // 이미 있는 경우 수량 업데이트
+      setCart((prevCart) =>
+        prevCart.map((item) =>
+          item.productId === productId ? { ...item, quantity } : item
+        )
+      );
+    } else {
+      // 없는 경우 새로 추가
+      setCart((prevCart) => [...prevCart, { productId, quantity }]);
+    }
+
+    // 서버로 데이터 전송
+    try {
+      const response = await fetch('/api/add-to-cart', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`, // 토큰 데이터 추가
+        },
+        body: JSON.stringify({ productId, quantity, token }),
+      });
+
+      if (!response.ok) {
+        console.error('Error adding to cart:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+    }
   };
 
   return (
@@ -39,7 +74,13 @@ const ProductList: React.FC = () => {
         {products.map((product) => (
           <li key={product.product_id}>
             {product.name} - ${product.price}
-            <button onClick={() => addToCart(product.product_id)}>장바구니에 추가</button>
+            <button onClick={() => addToCart(product.product_id, 1)}>장바구니에 추가</button>
+            {/* 수량 조절 UI */}
+            <div>
+              <button onClick={() => addToCart(product.product_id, Math.max(1, product.quantity - 1))}>-</button>
+              <span>수량: {cart.find((item) => item.productId === product.product_id)?.quantity || 0}</span>
+              <button onClick={() => addToCart(product.product_id, (cart.find((item) => item.productId === product.product_id)?.quantity || 0) + 1)}>+</button>
+            </div>
           </li>
         ))}
       </ul>
