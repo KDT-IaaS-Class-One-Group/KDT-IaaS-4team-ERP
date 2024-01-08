@@ -112,7 +112,7 @@ app.prepare().then(() => {
       // const username = decodedToken.username;
 
       // 데이터베이스에서 사용자 정보 조회
-      const [userInfo] = await pool.query('SELECT email FROM users WHERE username = ?', [username]);
+      const [userInfo] = await pool.query('SELECT username FROM users WHERE username = ?', [username]);
 
       if (userInfo.length === 0) {
         res.status(404).json({ success: false, message: '사용자를 찾을 수 없습니다.' });
