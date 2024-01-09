@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React from 'react';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
@@ -8,11 +8,14 @@ import { useState, useEffect } from 'react';
 
 export default function CustomerLayout({ children }: ChildrenProps) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  console.log(isLoggedIn)
 
   useEffect(() => {
-    const userId = sessionStorage.getItem('user_id');
-    setIsLoggedIn(!!userId);
+    const storedToken = sessionStorage.getItem('jwt_token');
+    setIsLoggedIn(!!storedToken);
   }, [isLoggedIn]);
+
+
   return (
     <>
       <Header>
@@ -20,11 +23,10 @@ export default function CustomerLayout({ children }: ChildrenProps) {
           <>
             <HeaderItem href='/orderlist'>주문조회</HeaderItem>
             <HeaderItem href='/cart'>장바구니</HeaderItem>
-            <HeaderItem href='/cs'>고객센터</HeaderItem>
             <HeaderItem href='/logout'>로그아웃</HeaderItem>
           </>
         ) : (
-          <HeaderItem href='/login'>로그인</HeaderItem>
+          <HeaderItem href='/login' >로그인</HeaderItem>
         )}
       </Header>
       {children}
