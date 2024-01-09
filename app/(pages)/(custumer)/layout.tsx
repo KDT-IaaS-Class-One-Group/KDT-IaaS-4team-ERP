@@ -4,33 +4,16 @@ import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 import { ChildrenProps } from '@/interfaces/ChildrenProps';
 import HeaderItem from '@/components/Header/HeaderItem';
-import { useState, useEffect } from 'react';
+import { AuthProvider} from '@/components/AuthContext';
 
-export default function CustomerLayout({ children }: ChildrenProps) {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  console.log(isLoggedIn)
-
-  useEffect(() => {
-    const storedToken = sessionStorage.getItem('jwt_token');
-    setIsLoggedIn(!!storedToken);
-  }, [isLoggedIn]);
+export default function CustomerLayout({ children }: ChildrenProps) { 
 
 
   return (
     <>
-      <Header>
-        {isLoggedIn ? (
-          <>
-            <HeaderItem href='/orderlist'>주문조회</HeaderItem>
-            <HeaderItem href='/cart'>장바구니</HeaderItem>
-            <HeaderItem href='/logout'>로그아웃</HeaderItem>
-          </>
-        ) : (
-          <HeaderItem href='/login' >로그인</HeaderItem>
-        )}
-      </Header>
+    <AuthProvider>
       {children}
-      <Footer />
+      </AuthProvider>
     </>
   );
 }

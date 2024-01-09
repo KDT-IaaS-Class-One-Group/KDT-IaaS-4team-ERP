@@ -4,13 +4,18 @@ import LoginButton from './LoginButton';
 import LoginText from './LoginText';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '@/components/AuthContext';
 
 const LoginHome = () => {
   const router = useRouter();
+  const {login} = useAuth();
+  // const { isLoggedIn } = useAuth();
+  
   const [loginUser, setLoginUser] = useState({
     user_id: '',
     password: '',
   });
+
 
   const handleInputChange = (field: string, value: string) => {
     setLoginUser({
@@ -22,8 +27,9 @@ const LoginHome = () => {
   const handleSignup = () => {};
 
   const handleLogin = async () => {
+    
     try {
-      const response = await fetch(`http://192.168.100.76:3560/login`, {
+      const response = await fetch(`http://192.168.100.76:3580/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -45,7 +51,7 @@ const LoginHome = () => {
       if (data.success) {
         sessionStorage.setItem('jwt_token', token);
         sessionStorage.setItem('user_id', user_id);
-        router.refresh();
+        login();
         router.push('/')
         alert('로그인 성공');
       } else {
@@ -80,3 +86,5 @@ const LoginHome = () => {
 };
 
 export default LoginHome;
+// 레이아웃 컴포넌트 감지를 못한다.
+// 다시 리렌더를 찾아보는 것 ISR
