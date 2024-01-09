@@ -9,10 +9,20 @@
     "lint": "next lint"
   },
   "dependencies": {
+<<<<<<< HEAD
     "express": "^4.18.2",
     "next": "14.0.2",
     "react": "^18",
     "react-dom": "^18"
+=======
+    "clsx": "^2.1.0",
+    "mariadb": "^3.2.3",
+    "next": "14.0.2",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-icons": "^4.12.0",
+    "ts-node": "^10.9.2"
+>>>>>>> 6c215cd70fc68ddea09c54a3c8e51865c7989c84
   },
   "devDependencies": {
     "@types/node": "^20",

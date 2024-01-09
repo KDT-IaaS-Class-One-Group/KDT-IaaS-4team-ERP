@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
+    "baseUrl": ".",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -19,7 +20,13 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/admin/*": ["app/(pages)/admin/*"],
+      "@/customer/*": ["app/(pages)/main/*"],
+      "@/hooks/*": ["app/hooks/*"],
+      "@/styles/*": ["app/styles/*"],
+      "@/components/*": ["app/components/*"],
+      "@/interfaces/*": ["app/interfaces/*"],
+      "@/images/*": ["public/images/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
