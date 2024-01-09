@@ -39,11 +39,14 @@ const LoginHome = () => {
       }
 
       const data = await response.json();
+      const { success, message, token, user_id } = data;
+      console.log(success, message, token, user_id)
       console.log(data);
       if (data.success) {
-        sessionStorage.setItem('userid', `${data.userid}`)
-        console.log(sessionStorage)
-        router.push('/');
+        sessionStorage.setItem('jwt_token', token);
+        sessionStorage.setItem('user_id', user_id);
+        router.refresh();
+        router.push('/')
         alert('로그인 성공');
       } else {
         alert('로그인 실패');
