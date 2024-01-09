@@ -10,7 +10,6 @@ adminLogin.use(cors());
 adminLogin.use(bodyParser.json());
 
 adminLogin.post('/admin/login', async (req, res) => {
-  console.log('test');
   let conn;
   try {
     conn = await pool.getConnection();
