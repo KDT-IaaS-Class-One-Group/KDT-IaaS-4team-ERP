@@ -1,15 +1,14 @@
 'use client';
-
 import React, { useState } from 'react';
-const LoginPage = () => {
+
+export default function AdminLoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-
     try {
-      const response = await fetch('/api/login', {
+      const response = await fetch('http://localhost:3001/admin/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -17,32 +16,37 @@ const LoginPage = () => {
         body: JSON.stringify({ username, password }),
       });
 
-      if (!response.ok) {
-        throw new Error('네트워크 응답이 올바르지 않습니다.');
-      }
-
       const data = await response.json();
-      // 로그인 성공 후 처리
+      if (data.success) {
+        // 로그인 성공 처리
+        console.log('로그인 성공:', data);
+      } else {
+        // 로그인 실패 처리
+        console.log('로그인 실패:', data.message);
+      }
     } catch (error) {
-      console.error('로그인 요청 중 에러가 발생했습니다:', error);
+      console.error('로그인 오류:', error);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type='text'
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <input
-        type='password'
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button type='submit'>로그인</button>
-    </form>
+    <div>
+      <h1>관리자 로그인</h1>
+      <form onSubmit={handleLogin}>
+        <input
+          type='text'
+          placeholder='사용자 이름'
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <input
+          type='password'
+          placeholder='비밀번호'
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button type='submit'>로그인</button>
+      </form>
+    </div>
   );
-};
-
-export default LoginPage;
+}
