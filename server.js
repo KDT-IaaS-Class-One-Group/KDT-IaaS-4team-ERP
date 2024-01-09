@@ -1,5 +1,5 @@
 const express = require('express');
-const mariadb = require("mysql2/promise");
+const mariadb = require("mariadb");
 const bodyParser = require("body-parser");
 // 암호화해주는 모듈
 // const bcrypt = require('bcrypt');
@@ -69,10 +69,6 @@ app.prepare().then(() => {
     try {
       // 사용자 조회
       const result = await pool.query('SELECT * FROM users WHERE username = ?', [username]);
-      // console.log(result[0])
-      // console.log(result[1])
-      // console.log(result[0][0])
-      // console.log(result[0][1])
 
       // 사용자가 존재하는지 확인
       if (result.length === 0 || result[0].length === 0) {
@@ -131,7 +127,7 @@ app.prepare().then(() => {
 
   //* 상품 목록을 가져오는 엔드포인트
   server.get('/api/products', async (req, res) => {
-    // console.log(req)
+    console.log(req)
     try {
       const connection = await pool.getConnection();
       const [rows] = await connection.query('SELECT * FROM product');
