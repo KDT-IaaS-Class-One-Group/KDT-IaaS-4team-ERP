@@ -1,13 +1,8 @@
 import express from 'express';
+import session from 'express-session';
 import pool from '../database';
-import bodyParser from 'body-parser';
-import cors from 'cors';
 
 const adminLogin = express();
-const port = 3001;
-
-adminLogin.use(cors());
-adminLogin.use(bodyParser.json());
 
 adminLogin.post('/admin/login', async (req, res) => {
   let conn;
@@ -20,6 +15,7 @@ adminLogin.post('/admin/login', async (req, res) => {
     );
 
     if (rows.length > 0) {
+      // req.session.userId = userid;
       res.json({ success: true });
     } else {
       res.json({ success: false });
