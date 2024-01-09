@@ -7,7 +7,7 @@ import React from 'react';
 
 
 
-// <Write title={"제목"} content={"내용"} btn={"이미지 등록"} image={"이미지 목록"} submit={'등록'} />
+<Write title={"제목"} content={"내용"} btn={"이미지 등록"} image={"이미지 목록"} submit={'등록'} />
 
 
 export default function WritingPage() {
