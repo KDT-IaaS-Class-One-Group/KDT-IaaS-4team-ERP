@@ -69,10 +69,11 @@ app.prepare().then(() => {
     try {
       // 사용자 조회
       const result = await pool.query('SELECT * FROM users WHERE username = ?', [username]);
-      // console.log(result[0])
-      // console.log(result[1])
-      // console.log(result[0][0])
-      // console.log(result[0][1])
+      console.log(result)
+      console.log(result[0])
+      console.log(result[1])
+      console.log(result[0][0])
+      console.log(result[0][1])
 
       // 사용자가 존재하는지 확인
       if (result.length === 0 || result[0].length === 0) {
