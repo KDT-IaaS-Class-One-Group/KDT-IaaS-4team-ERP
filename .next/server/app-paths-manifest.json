@@ -1,4 +1,0 @@
-{
-  "/(pages)/(custumer)/page": "app/(pages)/(custumer)/page.js",
-  "/(pages)/(custumer)/login/page": "app/(pages)/(custumer)/login/page.js"
-}
