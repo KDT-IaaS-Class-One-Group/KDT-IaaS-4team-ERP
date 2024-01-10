@@ -4,54 +4,46 @@
 // ? 제품상품평페이지 상세보기 페이지 작성
 // ? 상태관리 및 데이터 전달가능확인
 // ? 추후 MariaDB와 EXPRESS로 수정 예정
-import Write from '@/components/writingcustomerComp/writ';
 import { useState, useEffect } from 'react';
-import ProductCommentFull from '@/components/ProductComment/ProductCommentList';
-import ProductUploadButton from '@/components/ProductComment/ProductUploadButton';
+import ProductCommentFull from '@/components/ProductCommentListfull/ProductCommentList';
+import Write from 'public/writingcustomerComp/writ';
+import ProductUploadFullButton from '@/components/ProductCommentListfull/ProductUploadButton';
 import Link from 'next/link';
-
-const data = 
-[
-    { title: '오늘 배송 받았는데 꽝', contents: '이거 제품이 너무 에바세바꽁치넙치뭉치면살고 흩어지는죽는급 입니다.'},
-]
-
+import { comment } from 'postcss';
 
 const CommentFullHome = () => {
     const [commentsfull, setCommentsfull] = useState([]);
 
     useEffect(() => {
-        // MariaDB와 통신해서 가져올 부분
         const fetchCommentsfull = async () => {
             try {
-                // MariaDB에 있는 테이블에 접근하여 값 불러오기
-                // const response = await fetch('http://192.168.100.76:3560/csitemfull');
-
-                const response = await fetch("../productcommentfull/data.json")
+                
+                const response = await fetch('csdata.json');
                 const data = await response.json();
                 console.log(data); // 확인용
-                setCommentsfull(data);
+                setCommentsfull(data); //가져온 데이터를 상태에 저장
             } catch (error) {
                 console.error("에러 발생 :", error);
             }
         };
-
+        //데이터 조회 함수 호출
         fetchCommentsfull();
     }, []);
 
-    // useEffect의 두번째 매개변수로 빈 배열을 전달하여 컴포넌트 마운트될 때 한 번만 실행
-
     return (
-
-
         <div className="flex flex-col items-center bg-black text-white w-full h-full justify-center">
+
+
+
+
             {/* Area1: 글 쓰기 제목 */}
             <div className="bg-gray-400 w-4/5 h-50 mb-4">
-                <div className="w-full h-full bg-white text-black text-left py-4 pl-2"> {} </div>
+                <div className="w-full h-full bg-white text-black text-left py-4 pl-2">{commentsfull.cs_title}</div>
             </div>
 
             {/* Area2: 글 쓰기 내용 */}
             <div className="bg-gray-400 w-4/5 h-96 mb-4">
-                <div className="w-full h-full  bg-white text-black text-left py-4 pl-2">여기에 내용 드감</div>
+                <div className="w-full h-full bg-white text-black text-left py-4 pl-2">{commentsfull.cs_contents}</div>
             </div>
 
             {/* Area3: 사진 업로드 영역 */}
@@ -75,7 +67,7 @@ const CommentFullHome = () => {
                     <input type="button" className="bg-pink-300 w-32 h-10" value="등록" />
                 </div>
             </div>
-        </div >
+        </div>
     );
 };
 
