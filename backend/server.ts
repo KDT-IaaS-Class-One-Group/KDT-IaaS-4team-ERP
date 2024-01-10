@@ -8,8 +8,8 @@ import test from './routes/test';
 import adminLogin from './routes/adminLogin';
 
 // 고객페이지
-import customerLogin from './routes/customerLogin';
-import customerSignup from './routes/customerSignup';
+import customerLogin from './routes/customer/customerLogin';
+import customerSignup from './routes/customer/customerSignup';
 
 const app = express();
 const port = 3560;

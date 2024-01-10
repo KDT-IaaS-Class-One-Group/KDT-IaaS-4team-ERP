@@ -1,6 +1,6 @@
 import express from "express";
 import jwt from "jsonwebtoken";
-import pool from "../database";
+import pool from "../../database";
 
 const customerLogin = express();
 
@@ -8,10 +8,10 @@ customerLogin.post("/login", async (req, res) => {
   let conn;
   try {
     conn = await pool.getConnection();
-    const { userid, userpassword } = req.body;
+    const { userId, userPassword } = req.body;
     const result = await conn.query(
       "SELECT * FROM user WHERE userId = ? AND userPassword = ?",
-      [userid, userpassword]
+      [userId, userPassword]
     );
 
     if (result.length === 0 || result[0].length === 0) {
@@ -26,7 +26,7 @@ customerLogin.post("/login", async (req, res) => {
     console.log("User data from the server:", user);
 
     // 비밀번호 비교
-    if (user.userPassword && userpassword === user.userPassword.trim()) {
+    if (user.userPassword && userPassword === user.userPassword.trim()) {
       // 로그인 성공 시 토큰 발급
 
       const token = jwt.sign(

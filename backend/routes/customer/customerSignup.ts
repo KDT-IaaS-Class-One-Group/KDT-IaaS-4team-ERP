@@ -1,5 +1,5 @@
 import express from "express";
-import pool from "../database";
+import pool from "../../database";
 
 const customerSignup = express();
 
