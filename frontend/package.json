@@ -9,12 +9,24 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "clsx": "^2.1.0",
+<<<<<<< HEAD:frontend/package.json
+=======
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "mariadb": "^3.2.3",
+    "mysql2": "^3.7.0",
+>>>>>>> fc03e1148d1de3414117ddaee6c6af28c06d3a4c:package.json
     "next": "14.0.2",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^4.12.0",
+<<<<<<< HEAD:frontend/package.json
     "ts-node": "^10.9.2"
+=======
+    "uuid": "^9.0.1"
+>>>>>>> fc03e1148d1de3414117ddaee6c6af28c06d3a4c:package.json
   },
   "devDependencies": {
     "@types/node": "^20",
