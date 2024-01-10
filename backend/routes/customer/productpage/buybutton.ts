@@ -30,10 +30,13 @@ buybutton.post("/product-buybutton", async (req, res) => {
   try {
     conn = await pool.getConnection();
 
+    // 현재 시간 생성
+    const orderDate = new Date();
+
     // 여기에서 userIndex를 사용하여 데이터베이스에 쓰는 로직을 작성
     await conn.query(
       "INSERT INTO orders (userIndex, prodIndex, orderDatetime, orderPaymentCount, orderPaymentPriceAtOrder) VALUES (?, ?, ?, ?, ?)",
-      [userIndex /* Add other values here */]
+      [userIndex, , orderDate /* Add other values here */]
     );
 
     res.json({

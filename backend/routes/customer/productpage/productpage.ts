@@ -6,7 +6,7 @@ import pool from "../../../database";
 
 const product = express();
 
-product.get("/", async (req, res) => {
+product.get("/product", async (req, res) => {
   let conn;
   try {
     conn = await pool.getConnection();
