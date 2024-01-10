@@ -1,5 +1,5 @@
-// * 상품페이지에서 필요한 데이터 보내주는 라우팅 모듈
-// * 보내주는 데이터: 상품 데이터
+// * 상품페이지에서 구매 버튼 클릭시 받아야되는 데이터
+// * 입력받는 데이터: userIndex, prodIndex, quantity
 
 import express from "express";
 import pool from "../../../database";
@@ -7,8 +7,14 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 
 const buybutton = express();
 
-buybutton.post("/product-buybutton", async (req, res) => {
+buybutton.post("/product/buy", async (req, res) => {
   let conn;
+
+  //* prodIndex, 수량
+  const { prodIndex, quantity } = req.body;
+  
+  //* 현재 시간 생성
+  const orderDate = new Date();
 
   // 클라이언트에서 보낸 토큰을 검증하고 데이터 뽑기(userId, userIndex)
   const tokenHeader = req.headers.authorization;
@@ -18,7 +24,7 @@ buybutton.post("/product-buybutton", async (req, res) => {
 
   const token = tokenHeader.split(" ")[1];
 
-  // 토큰을 검증하여 userIndex 정보를 가져옴
+  //* 토큰을 검증하여 userIndex 정보를 가져옴
   let userIndex: string | JwtPayload;
   try {
     const decoded: JwtPayload = jwt.verify(token, "1234") as JwtPayload;
@@ -30,13 +36,13 @@ buybutton.post("/product-buybutton", async (req, res) => {
   try {
     conn = await pool.getConnection();
 
-    // 현재 시간 생성
-    const orderDate = new Date();
+    const orderPaymentPriceAtOrder = await conn.query("SELECT orderPaymentPriceAtOrder from products WHERE prodIndex=?", [prodIndex])*quantity
+
 
     // 여기에서 userIndex를 사용하여 데이터베이스에 쓰는 로직을 작성
     await conn.query(
       "INSERT INTO orders (userIndex, prodIndex, orderDatetime, orderPaymentCount, orderPaymentPriceAtOrder) VALUES (?, ?, ?, ?, ?)",
-      [userIndex, , orderDate /* Add other values here */]
+      [userIndex, prodIndex, orderDate, quantity, orderPaymentPriceAtOrder]
     );
 
     res.json({
