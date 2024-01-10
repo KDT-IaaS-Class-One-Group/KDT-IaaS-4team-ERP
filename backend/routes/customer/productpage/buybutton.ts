@@ -41,7 +41,7 @@ buybutton.post("/product-buybutton", async (req, res) => {
 
     res.json({
       success: true,
-      message: "주문이 완료되었습니다.",
+      message: "주문이 완료되었습니다.(주문데이터가 데이터베이스에 저장됨)",
     });
   } catch (error) {
     console.error("Error during order creation:", error);

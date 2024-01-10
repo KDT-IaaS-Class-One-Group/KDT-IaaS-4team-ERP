@@ -6,12 +6,12 @@ import pool from "../../database";
 
 const mainPage = express();
 
-mainPage.get("/", async (req, res) => {
+mainPage.get("/main-productdata", async (req, res) => {
   let conn;
   try {
     conn = await pool.getConnection();
     const result = await conn.query(
-      "SELECT prodIndex,  prodImgUrl,  prodName,  prodDescription,  prodPrice  FROM products"
+      "SELECT prodIndex, prodImgUrl, prodName, prodDescription, prodPrice FROM products"
     );
     res.status(200).json(result);
   } catch (error) {
