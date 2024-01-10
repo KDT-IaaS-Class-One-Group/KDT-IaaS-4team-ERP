@@ -32,7 +32,7 @@ customerLogin.post("/login", async (req, res) => {
       // 로그인 성공 시 토큰 발급
 
       const token = jwt.sign(
-        { userID: user.userID, userIdex: user.userIndex },
+        { userID: user.userID, userIndex: user.userIndex },
         "1234",
         { expiresIn: "1h" }
       );
