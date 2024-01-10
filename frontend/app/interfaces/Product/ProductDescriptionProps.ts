@@ -1,3 +1,3 @@
 export interface ProductDescriptionProps {
-  description: string;
+  prodDescription: string;
 }

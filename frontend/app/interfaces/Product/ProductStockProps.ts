@@ -1,3 +1,3 @@
 export interface ProductStockProps {
-  stock: number;
+  prodStock: number;
 }

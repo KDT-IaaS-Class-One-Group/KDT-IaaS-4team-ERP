@@ -1,3 +1,3 @@
 export interface ProductPriceProps {
-  price: string;
+  prodPrice: number;
 }

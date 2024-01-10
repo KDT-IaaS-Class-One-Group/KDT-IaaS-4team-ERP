@@ -1,8 +1,8 @@
 import express from 'express';
 import session from 'express-session';
-import pool from '../database';
+import pool from '../../../database';
 
-const adminLogin = express();
+export const adminLogin = express();
 
 adminLogin.post('/admin/login', async (req, res) => {
   let conn;
@@ -26,5 +26,3 @@ adminLogin.post('/admin/login', async (req, res) => {
     if (conn) conn.release();
   }
 });
-
-export default adminLogin;

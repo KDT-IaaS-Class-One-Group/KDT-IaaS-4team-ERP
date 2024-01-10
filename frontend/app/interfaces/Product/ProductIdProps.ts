@@ -1,3 +1,3 @@
-export interface ProductIdProps {
-  id: number;
+export interface ProductIndexProps {
+  prodIndex: number;
 }

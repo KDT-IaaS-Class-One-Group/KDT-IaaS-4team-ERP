@@ -1,3 +1,3 @@
-export interface ProductImageLinkProps {
-  imageLink: string;
+export interface ProductImageUrlProps {
+  prodImgUrl: string;
 }

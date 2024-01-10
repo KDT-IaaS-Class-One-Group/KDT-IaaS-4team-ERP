@@ -1,3 +1,3 @@
 export interface ProductNameProps {
-  name: string;
+  prodName: string;
 }
