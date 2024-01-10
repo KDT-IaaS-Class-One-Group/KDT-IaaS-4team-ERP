@@ -18,6 +18,7 @@ const LoginHome = () => {
       [field]: value,
     });
   };
+  console.log(loginUser)
 
   const handleSignup = () => {};
 
@@ -57,11 +58,11 @@ const LoginHome = () => {
       <div className='h-2/5 flex flex-col justify-around items-center w-full'>
         <LoginText
           title='ID'
-          inputchange={(value: string) => handleInputChange('userid', value)}
+          inputchange={(value: string) => handleInputChange('userId', value)}
         />
         <LoginText
           title='PASSWORD'
-          inputchange={(value: string) => handleInputChange('password', value)}
+          inputchange={(value: string) => handleInputChange('userPassword', value)}
         />
       </div>
       <div className='h-1/5 flex items-center justify-end w-full'>

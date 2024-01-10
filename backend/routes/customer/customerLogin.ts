@@ -6,6 +6,7 @@ const customerLogin = express();
 
 customerLogin.post("/login", async (req, res) => {
   let conn;
+  console.log(req.body)
   try {
     conn = await pool.getConnection();
     const { userId, userPassword } = req.body;
@@ -22,7 +23,7 @@ customerLogin.post("/login", async (req, res) => {
     }
 
     // 비밀번호 확인
-    const user = result[0][0];
+    const user = result[0];
     console.log("User data from the server:", user);
 
     // 비밀번호 비교
