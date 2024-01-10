@@ -11,7 +11,7 @@ import adminLogin from './routes/adminLogin';
 import customerLogin from './routes/customer/customerLogin';
 import customerSignup from './routes/customer/customerSignup';
 import mainPage from './routes/customer/mainpage';
-import productPage from './routes/customer/productpage';
+import product from './routes/customer/productpage/productpage';
 
 const app = express();
 const port = 3560;
@@ -34,10 +34,13 @@ app.get('/post', test);
 app.post('/admin/login', adminLogin);
 
 //* customer
+// 메인페이지
 app.get('/', mainPage)
+// 로그인, 회원가입 페이지
 app.post('/login', customerLogin)
 app.post('/signup', customerSignup)
-app.get('/product', productPage)
+// 상품 페이지
+app.get('/product', product)
 
 
 app.listen(port, () => {

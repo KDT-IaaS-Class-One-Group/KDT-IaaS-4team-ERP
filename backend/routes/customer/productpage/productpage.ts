@@ -2,11 +2,11 @@
 // * 보내주는 데이터: 상품 데이터
 
 import express from "express";
-import pool from "../../database";
+import pool from "../../../database";
 
-const productPage = express();
+const product = express();
 
-productPage.get("/", async (req, res) => {
+product.get("/", async (req, res) => {
   let conn;
   try {
     conn = await pool.getConnection();
@@ -20,4 +20,4 @@ productPage.get("/", async (req, res) => {
   }
 });
 
-export default productPage
+export default product
