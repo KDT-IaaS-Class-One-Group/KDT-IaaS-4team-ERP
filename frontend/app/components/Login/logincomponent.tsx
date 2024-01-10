@@ -43,6 +43,7 @@ const LoginHome = () => {
       console.log(data);
       if (data.success) {
         router.push('/');
+        localStorage.setItem('token', data.token)
         alert('로그인 성공');
       } else {
         alert('로그인 실패');
