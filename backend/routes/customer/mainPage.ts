@@ -4,9 +4,9 @@
 import express from "express";
 import pool from "../../database";
 
-const mainpage = express();
+const mainPage = express();
 
-mainpage.get("/", async (req, res) => {
+mainPage.get("/", async (req, res) => {
   let conn;
   try {
     conn = await pool.getConnection();
@@ -20,4 +20,4 @@ mainpage.get("/", async (req, res) => {
   }
 });
 
-export default mainpage
+export default mainPage

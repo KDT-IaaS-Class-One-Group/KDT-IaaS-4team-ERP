@@ -10,7 +10,8 @@ import adminLogin from './routes/adminLogin';
 // 고객페이지
 import customerLogin from './routes/customer/customerLogin';
 import customerSignup from './routes/customer/customerSignup';
-import mainpage from './routes/customer/mainPage';
+import mainPage from './routes/customer/mainpage';
+import productPage from './routes/customer/productpage';
 
 const app = express();
 const port = 3560;
@@ -33,9 +34,10 @@ app.get('/post', test);
 app.post('/admin/login', adminLogin);
 
 //* customer
-app.get('/', mainpage)
+app.get('/', mainPage)
 app.post('/login', customerLogin)
 app.post('/signup', customerSignup)
+app.get('/product', productPage)
 
 
 app.listen(port, () => {
