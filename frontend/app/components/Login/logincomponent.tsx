@@ -1,15 +1,15 @@
 'use client';
 import Link from 'next/link';
-import LoginButton from './LoginButton';
-import LoginText from './LoginText';
+import LoginButton from './loginbutton';
+import LoginText from './logintext';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 const LoginHome = () => {
   const router = useRouter();
   const [loginUser, setLoginUser] = useState({
-    user_id: '',
-    password: '',
+    userId: '',
+    userPassword: '',
   });
 
   const handleInputChange = (field: string, value: string) => {
@@ -23,14 +23,14 @@ const LoginHome = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch(`http://localhost:3560/login`, {
+      const response = await fetch(`http://192.168.100.83:3560/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          user_id: loginUser.user_id,
-          password: loginUser.password,
+          userId: loginUser.userId,
+          userPassword: loginUser.userPassword,
         }),
       });
 
@@ -57,7 +57,7 @@ const LoginHome = () => {
       <div className='h-2/5 flex flex-col justify-around items-center w-full'>
         <LoginText
           title='ID'
-          inputchange={(value: string) => handleInputChange('user_id', value)}
+          inputchange={(value: string) => handleInputChange('userid', value)}
         />
         <LoginText
           title='PASSWORD'
