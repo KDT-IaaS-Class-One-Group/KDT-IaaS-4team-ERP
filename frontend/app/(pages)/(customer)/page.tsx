@@ -4,7 +4,7 @@ import CustomerMain from '../../components/homeComp/customerMain';
 
 export default function Customer() {
   return (
-    <div className='flex-center flex-col '>
+    <div className='flex justify-center items-center flex-col w-screen h-screen overflow-hidden '>
       <CustomerMain />
     </div>
   );

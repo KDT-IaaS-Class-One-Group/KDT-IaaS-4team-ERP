@@ -9,11 +9,13 @@ interface HomeCategoryNavProps {
 }
 
 const HomeCategoryNav: React.FC<HomeCategoryNavProps> = ({ categories }) => {
+
+  const categoryList = categories || [];
   return (
     // 임시 스타일링: 호버시 밑줄
     <nav className='w-screen h-1/6'>
       <ul className='flex-center gap-6'>
-        {categories.map((category, index) => (
+        {categoryList.map((category, index) => (
           <li key={index}>
               <div className='transition-all hover:underline'>
                 {category}
