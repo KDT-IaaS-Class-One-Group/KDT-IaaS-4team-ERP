@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import { adminLogin } from './routes/admin/login/adminLogin';
 import { adminProducts } from './routes/admin/product/adminProducts';
+import pool from './database';
 
 const app = express();
 const port = 3560;
