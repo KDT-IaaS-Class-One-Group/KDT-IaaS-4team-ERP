@@ -14,6 +14,7 @@ import mainPage from "./routes/customer/mainPage";
 import product from "./routes/customer/productpage/productpage";
 import buybutton from "./routes/customer/productpage/buybutton";
 import paymentDataForProductPage from "./routes/customer/paymentpage/productTopaymentpage";
+import paymentDataForCart from "./routes/customer/paymentpage/cartTopaymentPage";
 
 const app = express();
 const port = 3560;
@@ -46,6 +47,7 @@ app.get("/product", product);
 app.post("/product/buy", buybutton);
 // 구매 페이지
 app.get('/product/:prodIndex/payment', paymentDataForProductPage)
+app.post('/cartToPayment', paymentDataForCart)
 
 
 app.listen(port, () => {
