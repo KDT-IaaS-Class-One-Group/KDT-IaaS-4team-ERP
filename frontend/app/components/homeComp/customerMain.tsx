@@ -20,31 +20,31 @@ interface HomeProps {
 }
 
 export default function CustomerMain(){
-  const [categorylist, setcategorylist] = useState([])
   const [productwhole, setProductWhole] = useState([])
-  console.log(categorylist)
+  const [categorylist, setCategoryList] = useState<string[]>([]);
   useEffect(() => {
-    const fetchReviews = async () => {
+    const fetchProduct = async () => {
       try {
         const response = await fetch('http://localhost:3560/');  // 서버 주소에 맞게 변경해주세요
         const data = await response.json();
-        const prodCategory = data.prodCategory
         console.log(data)
         const extractedData = data.map(list => ({
+          prodCategory : list.prodCategory,
           prodImgUrl: list.prodImgUrl,
           prodName: list.prodName,
           prodDescription: list.prodDescription,
           prodPrice: list.prodPrice,
         }));
+        const uniqueCategories: string[] = Array.from(new Set(extractedData.map(item => item.prodCategory)));
+        setCategoryList(uniqueCategories);
 
-        setcategorylist(prodCategory);
         setProductWhole(extractedData)
       } catch (error) {
         console.error('데이터를 불러오는 동안 에러 발생:', error);
       }
     };
 
-    fetchReviews();
+    fetchProduct();
   }, []);
 
 
@@ -56,9 +56,9 @@ export default function CustomerMain(){
         <Card
         key={index}
         prodImgUrl={list.prodImgUrl}
-        pTitle={list.prodName}
-        pSub={list.prodDescription}
-        pPrice={list.prodPrice}
+        prodName={list.prodName}
+        prodDescription={list.prodDescription}
+        prodPrice={list.prodPrice}
       />
       ))}
     </main>
