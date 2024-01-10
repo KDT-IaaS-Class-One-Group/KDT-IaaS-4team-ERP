@@ -13,9 +13,8 @@ const SignUpHome: React.FC = () => {
     userPassword: '',
     userPassword1: '',
     userEmail: '',
-    userPhoneNumber: '',
+    userPhoneNum: '',
   });
-
   const handleInputChange = (field: string, value: string) => {
     setSignup({
       ...Signup,
@@ -25,7 +24,7 @@ const SignUpHome: React.FC = () => {
 
   const handleButtonClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
     try {
-      const response = await fetch(`http://localhost:3560/signup`, {
+      const response = await fetch(`http://192.168.100.83:3560/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -35,10 +34,10 @@ const SignUpHome: React.FC = () => {
           userPassword: Signup.userPassword,
           userPassword1: Signup.userPassword1,
           userEmail: Signup.userEmail,
-          userPhoneNumber: Signup.userPhoneNumber
+          userPhoneNum: Signup.userPhoneNum
         }),
       });
-
+      console.log(response)
       if (!response.ok) {
         throw new Error('회원가입 실패');
       }
@@ -53,7 +52,7 @@ const SignUpHome: React.FC = () => {
       }
     } catch (error) {
       console.error(error);
-      alert('로그인 실패');
+      alert('회원가입 실패');
     }
   }
 

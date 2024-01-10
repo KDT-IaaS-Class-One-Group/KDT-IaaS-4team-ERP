@@ -18,7 +18,6 @@ const LoginHome = () => {
       [field]: value,
     });
   };
-  console.log(loginUser)
 
   const handleSignup = () => {};
 
