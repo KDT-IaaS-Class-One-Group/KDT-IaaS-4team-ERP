@@ -1,9 +1,12 @@
+// * 메인페이지에서 필요한 데이터 보내주는 라우팅 모듈
+// * 보내주는 데이터: 상품 데이터
+
 import express from "express";
 import pool from "../../database";
 
-const mainPageProduct = express();
+const mainpage = express();
 
-mainPageProduct.get("/", async (req, res) => {
+mainpage.get("/", async (req, res) => {
   let conn;
   try {
     conn = await pool.getConnection();
@@ -17,4 +20,4 @@ mainPageProduct.get("/", async (req, res) => {
   }
 });
 
-export default mainPageProduct
+export default mainpage
