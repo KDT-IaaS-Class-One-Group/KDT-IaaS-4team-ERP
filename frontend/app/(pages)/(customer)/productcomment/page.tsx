@@ -52,7 +52,7 @@ const CommentHome = () => {
           />
         ))}
       </div>
-      <Link href="/writing">
+      <Link href="/productcommentwriting">
         <div className='mr-40 mb-20'>
           <ProductUploadButton value='상품평 등록' />
         </div>
