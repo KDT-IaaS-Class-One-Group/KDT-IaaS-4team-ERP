@@ -15,7 +15,7 @@ adminLogin.post('/admin/login', async (req, res) => {
     );
 
     if (rows.length > 0) {
-      // req.session.userId = userid;
+      req.session. = userid;
       res.json({ success: true });
     } else {
       res.json({ success: false });

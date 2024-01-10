@@ -1,4 +1,9 @@
-app.get('/admin/logout', (req, res) => {
+import express from 'express';
+import session from 'express-session';
+
+const adminLogout = express();
+
+adminLogout.get('/admin/logout', (req, res) => {
   req.session.destroy((err) => {
     if (err) {
       res.status(500).send('로그아웃 실패');
@@ -8,3 +13,5 @@ app.get('/admin/logout', (req, res) => {
     }
   });
 });
+
+export default adminLogout;
