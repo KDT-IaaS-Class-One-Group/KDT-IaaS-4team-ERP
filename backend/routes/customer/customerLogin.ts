@@ -6,9 +6,10 @@ const customerLogin = express();
 
 customerLogin.post("/login", async (req, res) => {
   let conn;
+  const { userId, userPassword } = req.body;
+  
   try {
     conn = await pool.getConnection();
-    const { userId, userPassword } = req.body;
     const result = await conn.query(
       "SELECT * FROM user WHERE userId = ? AND userPassword = ?",
       [userId, userPassword]
