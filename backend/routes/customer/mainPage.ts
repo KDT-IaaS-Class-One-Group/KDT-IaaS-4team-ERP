@@ -10,7 +10,9 @@ mainPage.get("/", async (req, res) => {
   let conn;
   try {
     conn = await pool.getConnection();
-    const result = await conn.query("SELECT * FROM products");
+    const result = await conn.query(
+      "SELECT prodIndex,  prodImgUrl,  prodName,  prodDescription,  prodPrice  FROM products"
+    );
     res.status(200).json(result);
   } catch (error) {
     console.error("Error fetching products:", error);
@@ -20,4 +22,4 @@ mainPage.get("/", async (req, res) => {
   }
 });
 
-export default mainPage
+export default mainPage;

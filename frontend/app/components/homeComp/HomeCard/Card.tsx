@@ -1,45 +1,46 @@
-// card.tsx 는 홈페이지의 카드 컴포넌트 입니다.
-// card.tsx 는 Image태그를 사용하였기 때문에 Image태그의 속성에 width={}과 height={}를 활용하여 이미지의 크기를 조절해야 합니다.
+// 'use client'
 
-import React from 'react';
-import Image from 'next/image';
-import { CardProps } from '../../../interfaces/interfaces';
+import React from "react";
+import { Link } from "react-router-dom";
 
-// interface CardProps {
-//   pUrl: string;
-//   pTitle: string;
-//   pSub: string;
-//   pPrice: number;
-// }
+interface Product {
+  prodIndex: number;
+  prodImgUrl: string;
+  prodName: string;
+  prodDescription: string;
+  prodPrice: number;
+}
 
 /**
  *
- * @param pUrl 상품 이미지 url : string
- * @param pTitle 상품명 : string
- * @param pSub 상품 설명 : string
- * @param pPrice 상품 가격 : number
+ * @param prodIndex 상품인덱스(primary key)
+ * @param prodImgUrl 상품 이미지 url : string
+ * @param prodName 상품명 : string
+ * @param prodDescription 상품 설명 : string
+ * @param prodPrice 상품 가격 : number
  * @returns
  */
-const Card: React.FC<CardProps> = ({ pUrl, pTitle, pSub, pPrice }) => {
+
+const ProductList: React.FC<{ products: Product[] }> = ({ products }) => {
   return (
-    <div className='flex flex-col justify-between items-center w-80 h-2/5 border border-black p-4 gap-6'>
-      <Image
-        src={pUrl}
-        alt='homepageCardImage'
-        width={280}
-        height={280}
-        className=' outline-1 outline'
-      />
-      <div className='card-subArea w-full h-1/3 flex justify-between flex-col '>
-        <div>
-          <div className='w-1/3 h-1 border-b-2 border-slate-800 mb-1'></div>
-          <h3 className='text-base font-bold mb-1'>{pTitle}</h3>
-          <p className='text-xs'>{pSub}</p>
-        </div>
-        <p className='text-xs'>{pPrice}원</p>
-      </div>
+    <div>
+      <h1>Product List</h1>
+      <ul>
+        {products.map((product) => (
+          <li key={product.prodIndex}>
+            <Link to={`/product/${product.prodIndex}`}>
+              <img src={product.prodImgUrl} alt={product.prodName} />
+              <div>
+                <h2>{product.prodName}</h2>
+                <p>{product.prodDescription}</p>
+                <p>Price: {product.prodPrice}원</p>
+              </div>
+            </Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
 
-export default Card;
+export default ProductList;
