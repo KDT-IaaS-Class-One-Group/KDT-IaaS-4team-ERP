@@ -1,8 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
-import {ChildrenProp} from '@/interfaces/ChildrenProp';
+import { ChildrenProp } from '@/interfaces/ChildrenProp';
 
-export default function Header({ children }: ChildrenProps) {
+export default function Header({ children }: ChildrenProp) {
   return (
     <header className='flex bg-blue-500 text-white p-4 justify-between'>
       <Link href='/'>
