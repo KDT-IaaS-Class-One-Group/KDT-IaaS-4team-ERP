@@ -74,42 +74,101 @@ export default function ProductListPage() {
   };
 
   return (
-    <div className='container min-h-full mx-auto p-4 overflow-auto'>
-      {products.map((product) => (
-        <div
-          key={product.prodIndex}
-          className='flex items-center justify-between bg-white p-4 mb-2 rounded shadow'
-        >
-          <div className='flex items-center'>
-            <img
-              src={product.prodImgUrl}
-              alt={product.prodName}
-              className='w-20 h-20 object-cover mr-4'
-            />
-            <div>
-              <h3 className='text-lg font-bold'>{product.prodName}</h3>
-              <p>{product.prodDescription}</p>
-              <p>가격: {product.prodPrice}원</p>
-              <p>재고: {product.prodStock}</p>
-              <p>카테고리: {product.prodCategory}</p> {/* 카테고리 표시 */}
-            </div>
-          </div>
-          <div>
-            <button
-              onClick={() => editProduct(product.prodIndex)}
-              className='bg-blue-500 text-white px-3 py-1 rounded mr-2'
-            >
-              수정
-            </button>
-            <button
-              onClick={() => deleteProduct(product.prodIndex)}
-              className='bg-red-500 text-white px-3 py-1 rounded'
-            >
-              삭제
-            </button>
-          </div>
+    <div className='flex container mx-auto p-4 items-center'>
+      <div className='overflow-x-auto w-full'>
+        <div className='max-h-[800px] overflow-y-auto'>
+          <table className='min-w-full leading-normal'>
+            <thead className='sticky top-0 bg-gray-100'>
+              <tr>
+                <th className='px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider'>
+                  상품 번호
+                </th>
+                <th className='px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider'>
+                  상품 이미지
+                </th>
+                <th className='px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider'>
+                  상품명
+                </th>
+                <th className='px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider'>
+                  설명
+                </th>
+                <th className='px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider'>
+                  가격
+                </th>
+                <th className='px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider'>
+                  재고
+                </th>
+                <th className='px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider'>
+                  카테고리
+                </th>
+                <th className='px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider'>
+                  작업
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {products.map((product) => (
+                <tr key={product.prodIndex}>
+                  <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                    <p className='text-gray-900 whitespace-no-wrap'>
+                      {product.prodIndex}
+                    </p>
+                  </td>
+                  <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                    <div className='flex-shrink-0 w-10 h-10'>
+                      <img
+                        className='w-full h-full rounded-full'
+                        src={product.prodImgUrl}
+                        alt={product.prodName}
+                      />
+                    </div>
+                  </td>
+
+                  <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                    <p className='text-gray-900 whitespace-no-wrap'>
+                      {product.prodName}
+                    </p>
+                  </td>
+                  <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                    <p className='text-gray-900 whitespace-no-wrap'>
+                      {product.prodDescription}
+                    </p>
+                  </td>
+                  <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                    <p className='text-gray-900 whitespace-no-wrap'>
+                      {product.prodPrice}원
+                    </p>
+                  </td>
+                  <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                    <p className='text-gray-900 whitespace-no-wrap'>
+                      {product.prodStock}개
+                    </p>
+                  </td>
+                  <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                    <p className='text-gray-900 whitespace-no-wrap'>
+                      {product.prodCategory}
+                    </p>
+                  </td>
+                  <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                    <button
+                      onClick={() => editProduct(product.prodIndex)}
+                      className='text-blue-500 hover:text-blue-800'
+                    >
+                      수정
+                    </button>
+                    <button
+                      onClick={() => deleteProduct(product.prodIndex)}
+                      className='text-red-500 hover:text-red-800 ml-4'
+                    >
+                      삭제
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-      ))}
+      </div>
     </div>
   );
 }
