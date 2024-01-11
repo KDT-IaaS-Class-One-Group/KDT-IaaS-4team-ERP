@@ -6,7 +6,7 @@ import pool from "../../database";
 
 const mainPage = express();
 
-mainPage.get("/main-productdata", async (req, res) => {
+mainPage.get("/", async (req, res) => {
   let conn;
   try {
     conn = await pool.getConnection();
@@ -17,7 +17,7 @@ mainPage.get("/main-productdata", async (req, res) => {
   } catch (error) {
     console.error("Error fetching products:", error);
     res.status(500).json({ error: "Error fetching products" });
-  } finally {
+  } finally {  
     if (conn) conn.release();
   }
 });

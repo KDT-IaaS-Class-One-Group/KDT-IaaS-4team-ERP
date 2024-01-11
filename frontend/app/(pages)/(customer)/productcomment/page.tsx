@@ -12,11 +12,15 @@ const CommentHome = () => {
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
-    // 가상의 데이터 조회 함수 (실제로는 MariaDB와 통신해야 함)
     const fetchComments = async () => {
       try {
-        // /public/data.json에 위치한 파일을 가져오는 비동기 작업
-        const response = await fetch('/data.json');
+        // http://192.168.100.83:3560/login에서 데이터를 가져오도록 수정
+        const response = await fetch('http://192.168.100.83:3560/reviews');
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
         const data = await response.json();
         console.log(data);
         setComments(data); // 가져온 데이터를 상태에 저장
@@ -31,20 +35,19 @@ const CommentHome = () => {
 
   return (
     <>
-      <div className='w-screen h-screen flex justify-start items-center flex-col gap-6
-  '>
+      <div className='w-screen h-screen flex justify-start items-center flex-col gap-6'>
         {comments.map((comment, index) => (
           <ProductCommentList
             key={index}
-            writerid={comment.writerid}
-            date={comment.date}
-            starcount={comment.starcount}
-            commenttitle={comment.commenttitle}
+            writerid={comments.userId}
+            date={comments.reviewContent}
+            starcount={comments.reviewRating}
+            commenttitle={comments.reviewTitle}
           />
         ))}
       </div>
-      <Link href="csitem" className='ml-auto'>
-        <div className=' mr-40 mb-20'>
+      <Link href="/productcommentwriting">
+        <div className='mr-40 mb-20'>
           <ProductUploadButton value='상품평 등록' />
         </div>
       </Link>

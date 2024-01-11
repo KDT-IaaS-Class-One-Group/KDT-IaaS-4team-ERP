@@ -6,6 +6,7 @@ const customerLogin = express();
 
 customerLogin.post("/login", async (req, res) => {
   let conn;
+  console.log(req.body)
   const { userId, userPassword } = req.body;
   
   try {

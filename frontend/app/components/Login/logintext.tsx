@@ -1,9 +1,9 @@
 'use clinet';
-import React, { FC, ChangeEventHandler } from 'react';
+import React, { ChangeEvent } from 'react';
 
 interface LoginTextProps {
   title: string;
-  inputchange: (value: string) => void;
+  inputchange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const LoginText: FC<LoginTextProps> = ({ title, inputchange }) => {
