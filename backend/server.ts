@@ -44,7 +44,7 @@ app.get("/", mainPage);
 app.post("/login", customerLogin);
 app.post("/signup", customerSignup);
 // 상품 페이지
-app.get("/product", product);
+app.get("/product/:prodIndex", product);
 app.post("/product/buy", buybutton);
 // 구매 페이지
 app.get('/product/:prodIndex/payment', paymentDataForProductPage)
