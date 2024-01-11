@@ -19,13 +19,6 @@ adminAddProduct.post('/api/addproduct', async (req, res) => {
     const query =
       'INSERT INTO products (prodName, prodDescription, prodCategory, prodImgUrl, prodPrice, prodStock) VALUES (?, ?, ?, ?, ?, ?)';
 
-    const test = Number(prodPrice);
-    console.log(test);
-    console.log(typeof test);
-
-    const rows = await conn.query('SELECT * FROM products');
-    console.log(rows);
-
     const result = await conn.query(query, [
       prodName,
       prodDescription,
