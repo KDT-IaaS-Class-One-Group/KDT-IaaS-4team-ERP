@@ -1,15 +1,28 @@
 'use client';
 import React, { useState, useEffect } from 'react';
+import { orderIndexProp } from '@/app/types/Order/OrderIndexProp';
+import { OrderRequestProp } from '@/app/types/Order/OrderRequestProp';
+import { OrderDeliveryAddressProp } from '@/app/types/Order/OrderDeliveryAddressProp';
+import { OrderPaymentCountProp } from '@/app/types/Order/OrderPaymentCountProp';
+import { OrderPaymentDatetimeProps } from '@/app/types/Order/OrderPaymentDatetimeProp';
+import { OrderPaymentPriceAtOrderProp } from '@/app/types/Order/OrderPaymentPriceAtOrderProp';
+import { OrderDeliveryDoneProp } from '@/app/types/Order/OrderDeliveryDoneProp';
+import { UserIndexProp } from '@/app/types/Order/UserIndexProp';
+import { ProdIndexProp } from '@/app/types/Order/ProdIndexProp';
 
-interface Order {
-  orderId: number;
-  userId: number;
-  orderDate: string;
-  orderItems: string[];
-}
+interface OrderProps
+  extends orderIndexProp,
+    OrderRequestProp,
+    OrderDeliveryAddressProp,
+    OrderPaymentCountProp,
+    OrderPaymentDatetimeProps,
+    OrderPaymentPriceAtOrderProp,
+    OrderDeliveryDoneProp,
+    UserIndexProp,
+    ProdIndexProp {}
 
 const OrderManagement: React.FC = () => {
-  const [orders, setOrders] = useState<Order[]>([]);
+  const [orders, setOrders] = useState<OrderProps[]>([]);
 
   useEffect(() => {
     // 주문 목록을 불러오는 함수

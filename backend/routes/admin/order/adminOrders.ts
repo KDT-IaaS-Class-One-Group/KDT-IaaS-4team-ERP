@@ -7,7 +7,7 @@ adminOrders.get('/api/orders', async (req, res) => {
   try {
     const conn = await pool.getConnection();
     const query =
-      'SELECT orderIndex, orderRequest, orderDelivery, orderPaymentCount, orderPaymentDatetime, orderPaymentPriceAtOrd, orderDeliveryDone userIndex prodIndex FROM orders';
+      'SELECT orderIndex, orderRequest, orderDeliveryAddress, orderPaymentCount, orderPaymentDatetime, orderPaymentPriceAtOrd, orderDeliveryDone, userIndex, prodIndex FROM orders';
     const rows = await conn.query(query);
     conn.release();
 
