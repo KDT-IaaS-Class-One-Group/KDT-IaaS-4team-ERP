@@ -10,14 +10,16 @@ mainPage.get("/", async (req, res) => {
   let conn;
   try {
     conn = await pool.getConnection();
-    const result = await conn.query("SELECT * FROM products");
+    const result = await conn.query(
+      "SELECT * FROM products"
+    );
     res.status(200).json(result);
   } catch (error) {
     console.error("Error fetching products:", error);
     res.status(500).json({ error: "Error fetching products" });
-  } finally {
+  } finally {  
     if (conn) conn.release();
   }
 });
 
-export default mainPage
+export default mainPage;

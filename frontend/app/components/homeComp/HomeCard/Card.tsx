@@ -21,7 +21,7 @@ interface CardProps {
  */
 const Card: React.FC<CardProps> = ({ prodImgUrl, prodName, prodDescription, prodPrice }) => {
   return (
-    <div className='flex flex-col justify-between items-center w-80 h-2/5 border border-black p-4 gap-6'>
+    <div className='flex flex-col justify-between items-center w-80 h-3/5 border border-black p-4 gap-6'>
       <Image
         src={prodImgUrl}
         alt='homepageCardImage'

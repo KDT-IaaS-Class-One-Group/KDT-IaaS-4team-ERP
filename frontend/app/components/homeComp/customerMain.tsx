@@ -6,6 +6,7 @@ import React, { useEffect } from "react";
 import Card from "./HomeCard/Card"; //상품 정보
 import HomeCategoryNav from './HomeCategoryNav/HomeCategoryNav'; //상품 카테고리
 import { useState } from "react";
+import Link from "next/link";
 
 interface Product {
   prodImgUrl: string;
@@ -25,7 +26,7 @@ export default function CustomerMain(){
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch('http://192.168.100.83:3560/');  // 서버 주소에 맞게 변경해주세요
+        const response = await fetch('http://localhost:3560/');  // 서버 주소에 맞게 변경해주세요
         const data = await response.json();
         console.log(data)
         const extractedData = data.map(list => ({
@@ -34,6 +35,7 @@ export default function CustomerMain(){
           prodName: list.prodName,
           prodDescription: list.prodDescription,
           prodPrice: list.prodPrice,
+          prodIndex : list.prodIndex
         }));
         const uniqueCategories: string[] = Array.from(new Set(extractedData.map(item => item.prodCategory)));
         setCategoryList(uniqueCategories);
@@ -53,13 +55,14 @@ export default function CustomerMain(){
     <main className="flex overflow-hidden outline flex-wrap justify-center w-4/5 h-4/5 gap-6">
       <HomeCategoryNav categories={categorylist} />
       {productwhole.map((list, index) => (
+      <Link href={`/product/${list.prodIndex}`} key={index}>
         <Card
-        key={index}
         prodImgUrl={list.prodImgUrl}
         prodName={list.prodName}
         prodDescription={list.prodDescription}
         prodPrice={list.prodPrice}
-      />
+        />
+        </Link>
       ))}
     </main>
   );
