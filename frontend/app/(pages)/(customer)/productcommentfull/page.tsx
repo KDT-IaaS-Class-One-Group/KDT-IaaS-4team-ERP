@@ -1,23 +1,49 @@
 // [상품평 상세보기] 컴포넌트
 // 여기서 작성한 글은 이전 페이지(고객센터 페이지)에서 확인 할 수 있습니다.
+'use client'
+// ? 제품상품평페이지 상세보기 페이지 작성
+// ? 상태관리 및 데이터 전달가능확인
+// ? 추후 MariaDB와 EXPRESS로 수정 예정
+import { useState, useEffect } from 'react';
+import ProductCommentFull from '@/components/ProductCommentListfull/ProductCommentList';
+import Write from 'public/writingcustomerComp/writ';
+import ProductUploadFullButton from '@/components/ProductCommentListfull/ProductUploadButton';
+import Link from 'next/link';
+import { comment } from 'postcss';
 
-import Write from '@/components/writingcustomerComp/writ';
-import React from 'react';
+const CommentFullHome = () => {
+    const [commentsfull, setCommentsfull] = useState([]);
 
-// <Write title={"제목"} content={"내용"} btn={"이미지 등록"} image={"이미지 목록"} submit={'등록'} />
+    useEffect(() => {
+        const fetchCommentsfull = async () => {
+            try {
+                
+                const response = await fetch('csdata.json');
+                const data = await response.json();
+                console.log(data); // 확인용
+                setCommentsfull(data); //가져온 데이터를 상태에 저장
+            } catch (error) {
+                console.error("에러 발생 :", error);
+            }
+        };
+        //데이터 조회 함수 호출
+        fetchCommentsfull();
+    }, []);
 
-
-export default function WritingPage() {
     return (
         <div className="flex flex-col items-center bg-black text-white w-full h-full justify-center">
+
+
+
+
             {/* Area1: 글 쓰기 제목 */}
             <div className="bg-gray-400 w-4/5 h-50 mb-4">
-                <input type="submit" className="w-full h-full bg-white text-black text-left py-4 pl-2" placeholder="제목" />
+                <div className="w-full h-full bg-white text-black text-left py-4 pl-2">{commentsfull.cs_title}</div>
             </div>
 
             {/* Area2: 글 쓰기 내용 */}
             <div className="bg-gray-400 w-4/5 h-96 mb-4">
-                <textarea className="w-full h-full  bg-white text-black text-left py-4 pl-2" placeholder="내용" />
+                <div className="w-full h-full bg-white text-black text-left py-4 pl-2">{commentsfull.cs_contents}</div>
             </div>
 
             {/* Area3: 사진 업로드 영역 */}
@@ -43,4 +69,6 @@ export default function WritingPage() {
             </div>
         </div>
     );
-}
+};
+
+export default CommentFullHome;

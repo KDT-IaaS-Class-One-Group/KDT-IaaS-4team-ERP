@@ -29,7 +29,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productdetail }) => {
           <div className="flex justify-around">
             {/* 링크로 바꿔야되나? */}1
 
-            <Link href="/orderlist">
+            <Link href="/payment">
             <button className="bg-red-300">구매</button>
             </Link>
 
