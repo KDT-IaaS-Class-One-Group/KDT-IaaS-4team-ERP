@@ -10,9 +10,10 @@ const product = express();
 product.get("/product/:prodIndex", async (req, res) => {
   let conn;
 
+  // *동적 라우팅 매개변수로 prodIndex값 가져오기
   const prodIndex = parseInt(req.params.prodIndex, 10);
   console.log(prodIndex)
-  const test = 'test'
+
   try {
     conn = await pool.getConnection();
 
