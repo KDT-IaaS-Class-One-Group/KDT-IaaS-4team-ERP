@@ -6,7 +6,8 @@ import { adminLogin } from './routes/admin/login/adminLogin';
 import { adminProducts } from './routes/admin/products/adminProducts';
 import { adminOrders } from './routes/admin/order/adminOrders';
 import { adminAddProduct } from './routes/admin/products/adminAddProduct';
-
+import { adminUpdateProduct } from './routes/admin/products/adminUpdateProduct';
+import { adminDeleteProduct } from './routes/admin/products/adminDeleteProduct';
 
 const app = express();
 const port = 3560;
@@ -25,8 +26,9 @@ app.use(bodyParser.json());
 app.post('/admin/login', adminLogin);
 
 app.get('/api/products', adminProducts);
-
 app.post('/api/addproduct', adminAddProduct);
+app.get('/api/deleteproduct', adminDeleteProduct);
+app.put('/api/product/:id', adminUpdateProduct);
 
 app.get('/api/orders', adminOrders);
 
