@@ -2,12 +2,11 @@ import ProductPriceCalculator from './pricecalculator'
 
 import React from "react";
 import styles from "./style/productdetail.module.css";
-import { ProductDetail } from "./types";
+import { ProductDetailProps } from "../../interfaces/Product/ProductDetailProps";
 import Link from 'next/link';
 
-type ProductDetailProps = {
-  productdetail: ProductDetail;
-};
+// 윤준현 : interface 정렬
+
 
 const ProductDetail: React.FC<ProductDetailProps> = ({ productdetail }) => {
   return (
