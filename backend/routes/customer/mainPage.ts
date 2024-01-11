@@ -11,7 +11,7 @@ mainPage.get("/main-productdata", async (req, res) => {
   try {
     conn = await pool.getConnection();
     const result = await conn.query(
-      "SELECT prodIndex, prodImgUrl, prodName, prodDescription, prodPrice FROM products"
+      "SELECT * FROM products"
     );
     res.status(200).json(result);
   } catch (error) {
