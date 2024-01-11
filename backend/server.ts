@@ -27,7 +27,7 @@ app.post('/api/adminlogin', adminLogin);
 
 app.get('/api/products', adminProducts);
 app.post('/api/addproduct', adminAddProduct);
-app.get('/api/deleteproduct', adminDeleteProduct);
+app.delete('/api/deleteproduct/:prodIndex', adminDeleteProduct);
 app.put('/api/product/:id', adminUpdateProduct);
 
 app.get('/api/orders', adminOrders);
