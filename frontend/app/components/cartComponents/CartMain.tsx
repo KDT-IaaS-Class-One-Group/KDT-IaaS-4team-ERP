@@ -16,7 +16,7 @@ const [requestData, setRequestData] = useState([])
 useEffect(() => {
   const fetchData = async () => {
     try {
-      const response = await fetch('./productdata.json');
+      const response = await fetch('http://192.168.100.83:3560/cart');
       const data = await response.json();
       console.log(data)
       setRequestData(data);

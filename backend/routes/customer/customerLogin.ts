@@ -30,7 +30,6 @@ customerLogin.post("/login", async (req, res) => {
     // 비밀번호 비교
     if (user.userPassword && userPassword === user.userPassword.trim()) {
       // 로그인 성공 시 토큰 발급
-
       const token = jwt.sign(
         { userID: user.userID, userIndex: user.userIndex },
         "1234",

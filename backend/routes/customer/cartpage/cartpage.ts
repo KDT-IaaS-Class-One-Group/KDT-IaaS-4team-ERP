@@ -7,6 +7,7 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 const cartpage = express();
 
 cartpage.get("/cart", async (req, res) => {
+  console.log("cartpage");
   let conn;
 
   // * 클라이언트 측에서 header로 tokken을 보내준 것을 갖고옴.
@@ -63,3 +64,5 @@ cartpage.get("/cart", async (req, res) => {
     if (conn) conn.release();
   }
 });
+
+export default cartpage;

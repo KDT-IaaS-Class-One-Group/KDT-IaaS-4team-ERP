@@ -16,6 +16,8 @@ import buybutton from "./routes/customer/productpage/buybutton";
 import paymentDataForProductPage from "./routes/customer/paymentpage/productTopaymentpage";
 import paymentDataForCart from "./routes/customer/paymentpage/cartTopaymentPage";
 import productcomment from "./routes/customer/review/productcomment";
+import cartpage from "./routes/customer/cartpage/cartpage";
+import test2 from "./routes/test2";
 
 const app = express();
 const port = 3560;
@@ -32,7 +34,9 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // 테스트
-app.get("/post", test);
+app.get("/post", test); 
+app.get("/test2", test2);
+
 
 // * admin
 app.post("/admin/login", adminLogin);
@@ -51,7 +55,8 @@ app.get('/product/:prodIndex/payment', paymentDataForProductPage)
 app.post('/cartToPayment', paymentDataForCart)
 // 리뷰 페이지
 app.get('/productcomment', productcomment)
-
+// 카트 페이지
+app.get('/cart', cartpage)
 
 app.listen(port, () => {
   console.log(`Express 서버가 ${port}번 포트에서 실행중입니다.`);
