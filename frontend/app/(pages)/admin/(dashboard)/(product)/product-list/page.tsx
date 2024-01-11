@@ -1,19 +1,21 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { ProductIndexProps } from '@/interfaces/Product/ProductIdProps';
-import { ProductNameProps } from '@/interfaces/Product/ProductNameProps';
-import { ProductPriceProps } from '@/interfaces/Product/ProductPriceProps';
-import { ProductImageUrlProps } from '@/interfaces/Product/ProductImageLinkProps';
-import { ProductStockProps } from '@/interfaces/Product/ProductStockProps';
-import { ProductDescriptionProps } from '@/interfaces/Product/ProductDescriptionProps';
+import { ProductIndexProp } from '@/app/types/Product/ProductIndexProp';
+import { ProductNameProp } from '@/app/types/Product/ProductNameProp';
+import { ProductPriceProp } from '@/app/types/Product/ProductPriceProp';
+import { ProductCategoryProp } from '@/app/types/Product/ProductCategoryProp';
+import { ProductStockProp } from '@/app/types/Product/ProductStockProp';
+import { ProductDescriptionProp } from '@/app/types/Product/ProductDescriptionProp';
+import { ProductImageUrlProp } from '@/app/types/Product/ProductImageUrlProp';
 
 interface ProductListProps
-  extends ProductIndexProps,
-    ProductNameProps,
-    ProductDescriptionProps,
-    ProductPriceProps,
-    ProductImageUrlProps,
-    ProductStockProps {}
+  extends ProductIndexProp,
+    ProductNameProp,
+    ProductDescriptionProp,
+    ProductPriceProp,
+    ProductCategoryProp,
+    ProductImageUrlProp,
+    ProductStockProp {}
 
 // 상품 목록을 가져오는 함수 (API 호출)
 const fetchProducts = async (): Promise<ProductListProps[]> => {
@@ -80,6 +82,7 @@ export default function ProductListPage() {
               <p>{product.prodDescription}</p>
               <p>가격: {product.prodPrice}원</p>
               <p>재고: {product.prodStock}</p>
+              <p>카테고리: {product.prodCategory}</p> {/* 카테고리 표시 */}
             </div>
           </div>
           <div>

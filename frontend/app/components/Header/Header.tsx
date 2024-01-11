@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { ChildrenProp } from '@/interfaces/ChildrenProp';
+import { ChildrenProp } from '@/app/types/ChildrenProp';
 
 export default function Header({ children }: ChildrenProp) {
   return (

@@ -2,7 +2,7 @@
 // 여기서 작성한 글은 이전 페이지(고객센터 페이지)에서 확인 할 수 있습니다.
 
 import Link from 'next/link';
-import Write from '@/components/writingcustomerComp/writ';
+import Write from '@/app/components/writingcustomerComp/writ';
 import React from 'react';
 
 // <Write title={"제목"} content={"내용"} btn={"이미지 등록"} image={"이미지 목록"} submit={'등록'} />

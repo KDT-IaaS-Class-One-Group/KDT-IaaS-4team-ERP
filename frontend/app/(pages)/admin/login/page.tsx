@@ -2,24 +2,24 @@
 import React, { useState } from 'react';
 
 export default function AdminLoginPage() {
-  const [userid, setUserid] = useState('');
-  const [password, setPassword] = useState('');
+  const [adminId, setAdminId] = useState('');
+  const [adminPassword, setAdminPassword] = useState('');
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://192.168.100.83:3001/admin/login', {
+      const response = await fetch('http://localhost:3560/admin/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ userid, password }),
+        body: JSON.stringify({ adminId, adminPassword }),
       });
 
       const data = await response.json();
       if (data.success) {
         // 로그인 성공 처리
-        alert('로그인 성공');
+        alert(`${data.adminName}님 환영합니다.`);
       } else {
         // 로그인 실패 처리
         alert('로그인 실패');
@@ -41,8 +41,8 @@ export default function AdminLoginPage() {
             <input
               type='text'
               placeholder='아이디'
-              value={userid}
-              onChange={(e) => setUserid(e.target.value)}
+              value={adminId}
+              onChange={(e) => setAdminId(e.target.value)}
               className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
             />
           </div>
@@ -50,15 +50,15 @@ export default function AdminLoginPage() {
             <input
               type='password'
               placeholder='비밀번호'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={adminPassword}
+              onChange={(e) => setAdminPassword(e.target.value)}
               className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline'
             />
           </div>
-          <div className='flex items-center justify-between'>
+          <div className='flex'>
             <button
               type='submit'
-              className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+              className='w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
             >
               로그인
             </button>

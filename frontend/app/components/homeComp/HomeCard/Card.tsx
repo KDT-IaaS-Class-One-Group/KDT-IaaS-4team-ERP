@@ -3,7 +3,7 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { CardProps } from '../../../interfaces/interfaces';
+import { CardProps } from '@/app/types/interfaces';
 
 // interface CardProps {
 //   pUrl: string;

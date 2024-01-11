@@ -2,18 +2,18 @@
 
 'use client';
 import React, { useState } from 'react';
-import { ProductNameProps } from '@/interfaces/Product/ProductNameProps';
-import { ProductDescriptionProps } from '@/interfaces/Product/ProductDescriptionProps';
-import { ProductPriceProps } from '../../../../interfaces/Product/ProductPriceProps';
-import { ProductStockProps } from '@/interfaces/Product/ProductStockProps';
-import { ProductImageFileProps } from '@/interfaces/Product/ProductImageFileProps';
+import { ProductNameProp } from '@/app/types/Product/ProductNameProp';
+import { ProductDescriptionProp } from '@/app/types/Product/ProductDescriptionProp';
+import { ProductPriceProp } from '@/app/types/Product/ProductPriceProp';
+import { ProductStockProp } from '@/app/types/Product/ProductStockProp';
+import { ProductImageUrlProp } from '@/app/types/Product/ProductImageUrlProp';
 
 interface ProductProps
-  extends ProductNameProps,
-    ProductDescriptionProps,
-    ProductPriceProps,
-    ProductStockProps,
-    ProductImageFileProps {}
+  extends ProductNameProp,
+    ProductDescriptionProp,
+    ProductPriceProp,
+    ProductStockProp,
+    ProductImageUrlProp {}
 
 export default function ProductAdd() {
   const [productForm, setProductForm] = useState<ProductProps>({
@@ -21,17 +21,17 @@ export default function ProductAdd() {
     description: '',
     price: '',
     stock: 0,
-    imageFile: null,
+    imageUrl: null,
   });
 
   // 입력 필드의 변경을 처리하는 함수
   const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const target = event.target as HTMLInputElement; // 타입 단언을 사용하여 HTMLInputElement로 처리
     const { name, value } = target;
     const files = target.files; // 이제 안전하게 접근 가능
-  
+
     setProductForm((prevForm) => ({
       ...prevForm,
       [name]: files && files.length > 0 ? files[0] : value,

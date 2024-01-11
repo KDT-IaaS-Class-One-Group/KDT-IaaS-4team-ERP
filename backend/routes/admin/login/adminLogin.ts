@@ -8,15 +8,16 @@ adminLogin.post('/admin/login', async (req, res) => {
   let conn;
   try {
     conn = await pool.getConnection();
-    const { userid, password } = req.body;
-    const rows = await conn.query(
-      'SELECT * FROM administrators WHERE userid = ? AND password = ?',
-      [userid, password],
-    );
+    const { adminId, adminPassword } = req.body;
+
+    // 관리자 이름도 함께 검색
+    const query = 'SELECT adminName FROM administrators WHERE adminId = ? AND adminPassword = ?';
+    const rows = await conn.query(query, [adminId, adminPassword]);
 
     if (rows.length > 0) {
-      // req.session.userId = userid;
-      res.json({ success: true });
+      // 관리자 이름을 응답에 포함
+      const adminName = rows[0].adminName;
+      res.json({ success: true, adminName });
     } else {
       res.json({ success: false });
     }

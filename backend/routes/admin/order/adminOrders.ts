@@ -1,14 +1,13 @@
 import express from 'express';
-import session from 'express-session';
 import pool from '../../../database';
 
-export const adminProducts = express();
+export const adminOrders = express();
 
-adminProducts.get('/api/products', async (req, res) => {
+adminOrders.get('/api/orders', async (req, res) => {
   try {
     const conn = await pool.getConnection();
     const query =
-      'SELECT prodIndex, prodName, prodDescription, prodPrice, prodStock, prodImgUrl FROM products';
+      'SELECT orderIndex, orderRequest, orderDelivery, orderPaymentCount, orderPaymentDatetime, orderPaymentPriceAtOrd, orderDeliveryDone userIndex prodIndex FROM orders';
     const rows = await conn.query(query);
     conn.release();
 
