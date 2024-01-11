@@ -6,7 +6,7 @@ import { ProductPriceProp } from '@/app/types/Product/ProductPriceProp';
 import { ProductCategoryProp } from '@/app/types/Product/ProductCategoryProp';
 import { ProductStockProp } from '@/app/types/Product/ProductStockProp';
 import { ProductDescriptionProp } from '@/app/types/Product/ProductDescriptionProp';
-import { ProductImageUrlProp } from '@/app/types/Product/ProductImgUrlProp';
+import { ProductImgUrlProp } from '@/app/types/Product/ProductImgUrlProp';
 
 interface ProductListProps
   extends ProductIndexProp,
@@ -14,7 +14,7 @@ interface ProductListProps
     ProductDescriptionProp,
     ProductPriceProp,
     ProductCategoryProp,
-    ProductImageUrlProp,
+    ProductImgUrlProp,
     ProductStockProp {}
 
 // 상품 목록을 가져오는 함수 (API 호출)
