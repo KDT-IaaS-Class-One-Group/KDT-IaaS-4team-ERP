@@ -45,7 +45,7 @@ export default function Productcomment() {
       <div className='w-screen h-screen flex justify-start items-center flex-col gap-6'>
         {productcomment.map((list, index) => (
           <ProductCommentList
-            key={list.index}
+            key={index}
             writerid={list.userId}
             date={list.reviewUpdatedAt}
             starcount={list.reviewRating}

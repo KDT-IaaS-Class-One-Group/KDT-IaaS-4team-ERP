@@ -48,7 +48,7 @@ const CommentFullHome = () => {
         <>
                 <div className='w-screen h-screen flex justify-start items-center flex-col gap-6'>
                     <ProductCommentFull
-                        key={commentsfull.index}
+                        key={index}
                         reviewTitle={commentsfull.reviewTitle}
                         reviewContent={commentsfull.reviewContent}
                         reviewImgUrl={commentsfull.reviewImgUrl}

@@ -6,6 +6,7 @@ import { useParams } from "next/navigation";
 
 export default function ProductPage() {
   const {productdetail} = useParams();
+  console.log(useParams())
   const [productdata, setproductdata] =useState([])
 
   useEffect(()=> {
