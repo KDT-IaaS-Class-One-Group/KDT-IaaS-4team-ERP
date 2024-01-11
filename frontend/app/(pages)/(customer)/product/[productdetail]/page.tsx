@@ -11,7 +11,7 @@ export default function ProductPage() {
   useEffect(()=> {
     const fetchCommentsfull = async () => {
     try {
-      const response = await fetch(`/product/${productdetail}`);
+      const response = await fetch(`lo/product/${productdetail}`);
       const data = await response.json();
       console.log(data); // 확인용
       setproductdata(data)
@@ -20,10 +20,10 @@ export default function ProductPage() {
       console.error("에러 발생 :", error);
   }
 }})
-  console.log(productdetail)
+
   return (
     <>
-      <ProductDetail  />
+      <ProductDetail productdetail={productdata} />
     </>
   );
 };
