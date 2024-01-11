@@ -7,11 +7,14 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 
 const buybutton = express();
 
-buybutton.post("/product/buy", async (req, res) => {
+buybutton.post("/product/:prodIndex/:quantity/buy", async (req, res) => {
   let conn;
 
-  //* prodIndex, 수량
-  const { prodIndex, quantity } = req.body;
+  //* prodIndex
+  const prodIndex = parseInt(req.params.prodIndex, 10);
+
+  //* 수량
+  const quantity = parseInt(req.params.quantity, 10);
   
   //* 현재 시간 생성
   const orderDate = new Date();
