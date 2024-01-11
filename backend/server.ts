@@ -15,7 +15,10 @@ import product from "./routes/customer/productpage/productpage";
 import buybutton from "./routes/customer/productpage/buybutton";
 import paymentDataForProductPage from "./routes/customer/paymentpage/productTopaymentpage";
 import paymentDataForCart from "./routes/customer/paymentpage/cartTopaymentPage";
+import orderpage from "./routes/customer/orderpage/orderpage";
 import productcomment from "./routes/customer/review/productcomment";
+import productcommentfull from "./routes/customer/review/productcommentfull";
+import productcommentwrite from "./routes/customer/review/productcommentwrite";
 
 const app = express();
 const port = 3560;
@@ -45,12 +48,16 @@ app.post("/login", customerLogin);
 app.post("/signup", customerSignup);
 // 상품 페이지
 app.get("/product/:prodIndex", product);
-app.post("/product/buy", buybutton);
+app.post("/product/:prodIndex/:quantity/buy", buybutton);
 // 구매 페이지
 app.get('/product/:prodIndex/payment', paymentDataForProductPage)
 app.post('/cartToPayment', paymentDataForCart)
+// 주몬조회 페이지
+app.get('/orderpage', orderpage)
 // 리뷰 페이지
 app.get('/productcomment', productcomment)
+app.get('/productcommentfull/:reviewIndex', productcommentfull)
+app.post('/productcommentwrite', productcommentwrite)
 
 
 app.listen(port, () => {
