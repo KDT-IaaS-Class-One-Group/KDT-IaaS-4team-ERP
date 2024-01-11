@@ -8,11 +8,11 @@ import Image from 'next/image';
 import { ProductDescriptionProps } from '../../interfaces/Product/ProductDescriptionProps';
 
 type ProductDetailProps = {
-  productdetail: ProductDetail;
+  productdetails: ProductDetail;
 };
 
-const ProductDetail: React.FC<ProductDetailProps> = ({ productdetail }) => {
-  console.log(productdetail)
+const ProductDetail: React.FC<ProductDetailProps> = ({productdetails}) => {
+  console.log(productdetails)
   return (
     <div className="product-detail w-full h-screen flex flex-col items-center">
       <div className="w-4/5 h-2/5 flex justify-around">
@@ -23,12 +23,12 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productdetail }) => {
 
         <div className="mr-40">
           <p>상품 제목: </p>
-          {productdetail.prodName}
+          {productdetails.prodName}
           <p>가격: </p>
-          {productdetail.prodPrice}
+          {productdetails.prodPrice}
           <p>상품 간략설명: </p>
-          {productdetail.prodDescription}
-          <ProductPriceCalculator/>
+          {productdetails.prodDescription}
+          <ProductPriceCalculator productdetails={productdetails}/>
           <div className="flex justify-around">
             {/* 링크로 바꿔야되나? */}
 
@@ -48,15 +48,14 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productdetail }) => {
       </div>
 
       <div className="w-4/5 h-1/3 mt-10 flex justify-center items-center overflow-y-scroll">
-      {productdetail.prodDescription}
-      {productdetail.prodDescription}
-      {productdetail.prodDescription}
-      {productdetail.prodDescription}
-      {productdetail.prodDescription}
-      {productdetail.prodDescription}
-      {productdetail.prodDescription}
-      {productdetail.prodDescription}
-
+      {productdetails.prodDescription}
+      {productdetails.prodDescription}
+      {productdetails.prodDescription}
+      {productdetails.prodDescription}
+      {productdetails.prodDescription}
+      {productdetails.prodDescription}
+      {productdetails.prodDescription}
+      {productdetails.prodDescription}
       </div>
     </div>
   );
