@@ -2,9 +2,9 @@ import express from 'express';
 import session from 'express-session';
 import pool from '../../../database';
 
-export const adminDeleteProducts = express();
+export const adminDeleteProduct = express();
 
-adminDeleteProducts.delete('/api/products/:prodIndex', async (req, res) => {
+adminDeleteProduct.delete('/api/deleteproduct/:prodIndex', async (req, res) => {
   try {
     const prodIndex = req.params.prodIndex;
     const conn = await pool.getConnection();

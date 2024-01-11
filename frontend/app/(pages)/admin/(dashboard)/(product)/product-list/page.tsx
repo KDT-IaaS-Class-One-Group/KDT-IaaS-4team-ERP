@@ -1,5 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { ProductIndexProp } from '@/app/types/Product/ProductIndexProp';
 import { ProductNameProp } from '@/app/types/Product/ProductNameProp';
 import { ProductPriceProp } from '@/app/types/Product/ProductPriceProp';
@@ -33,6 +34,7 @@ const fetchProducts = async (): Promise<ProductListProps[]> => {
 
 export default function ProductListPage() {
   const [products, setProducts] = useState<ProductListProps[]>([]);
+  const router = useRouter(); // Next.js의 라우터 사용
 
   useEffect(() => {
     const fetchAndSetProducts = async () => {
@@ -44,24 +46,31 @@ export default function ProductListPage() {
   }, []);
 
   const deleteProduct = async (prodIndex: number) => {
-    try {
-      const response = await fetch(
-        `http://localhost:3560/api/products/${prodIndex}`,
-        {
-          method: 'DELETE',
-        },
-      );
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
+    if (window.confirm('해당 상품을 삭제하시겠습니까?')) {
+      try {
+        const response = await fetch(
+          `http://localhost:3560/api/deleteproduct/${prodIndex}`,
+          {
+            method: 'DELETE',
+          },
+        );
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        // 상품 목록에서 삭제된 상품 제거
+        setProducts(
+          products.filter((product) => product.prodIndex !== prodIndex),
+        );
+        alert('상품이 성공적으로 삭제되었습니다.');
+      } catch (error) {
+        console.error('Error deleting product:', error);
+        alert('상품 삭제에 실패했습니다.');
       }
-
-      // 상품 목록에서 삭제된 상품 제거
-      setProducts(
-        products.filter((product) => product.prodIndex !== prodIndex),
-      );
-    } catch (error) {
-      console.error('Error deleting product:', error);
     }
+  };
+
+  const editProduct = (prodIndex: number) => {
+    router.push(`/admin/product-edit/${prodIndex}`); // 상품 수정 페이지로 라우팅
   };
 
   return (
@@ -86,12 +95,15 @@ export default function ProductListPage() {
             </div>
           </div>
           <div>
-            <button className='bg-blue-500 text-white px-3 py-1 rounded mr-2'>
+            <button
+              onClick={() => editProduct(product.prodIndex)}
+              className='bg-blue-500 text-white px-3 py-1 rounded mr-2'
+            >
               수정
             </button>
             <button
-              className='bg-red-500 text-white px-3 py-1 rounded'
               onClick={() => deleteProduct(product.prodIndex)}
+              className='bg-red-500 text-white px-3 py-1 rounded'
             >
               삭제
             </button>
