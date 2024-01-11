@@ -73,3 +73,5 @@ productcommentwrite.post("/productcommentwrite", async (req, res) => {
     if (conn) conn.release();
   }
 });
+
+export default productcommentwrite;
