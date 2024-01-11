@@ -37,6 +37,7 @@ export default function CustomerMain(){
           prodPrice: list.prodPrice,
           prodIndex : list.prodIndex
         }));
+        console.log(extractedData);
         const uniqueCategories: string[] = Array.from(new Set(extractedData.map(item => item.prodCategory)));
         setCategoryList(uniqueCategories);
 

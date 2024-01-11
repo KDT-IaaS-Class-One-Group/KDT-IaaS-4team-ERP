@@ -63,3 +63,5 @@ cartpage.get("/cart", async (req, res) => {
     if (conn) conn.release();
   }
 });
+
+export default cartpage;

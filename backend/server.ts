@@ -19,6 +19,7 @@ import orderpage from "./routes/customer/orderpage/orderpage";
 import productcomment from "./routes/customer/review/productcomment";
 import productcommentfull from "./routes/customer/review/productcommentfull";
 import productcommentwrite from "./routes/customer/review/productcommentwrite";
+import cartpage from "./routes/customer/cartpage/cartpage";
 
 const app = express();
 const port = 3560;
@@ -58,6 +59,8 @@ app.get('/orderpage', orderpage)
 app.get('/productcomment', productcomment)
 app.get('/productcommentfull/:reviewIndex', productcommentfull)
 app.post('/productcommentwrite', productcommentwrite)
+// 카트 페이지
+app.get('/cart', cartpage);
 
 
 app.listen(port, () => {
