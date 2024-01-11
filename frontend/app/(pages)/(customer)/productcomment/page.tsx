@@ -8,15 +8,16 @@ import ProductCommentList from '@/components/ProductComment/ProductCommentList';
 import ProductUploadButton from '@/components/ProductComment/ProductUploadButton';
 import Link from 'next/link';
 
-interface productcommentfull {
+interface productcomment {
   userId: string;
   reviewUpdatedAt: Date;
   reviewRating: string;
   reviewTitle: string;
 }
 
-export default function Productcommentfull() {
+export default function Productcomment() {
   const [productcomment, setProductComment] = useState([]);
+  
   useEffect(() => {
     const fetchProductcomment = async () => {
       try {
@@ -25,10 +26,11 @@ export default function Productcommentfull() {
         console.log(data) //콘솔에서 넘어온 데이터 확인
         const commentData = data.map(list => ({
           userId : list.userId,
-          reviewUpdatedAt : list.reviewCreateAt,
+          reviewUpdatedAt : list.reviewUpdatedAt,
           reviewRating : list.reviewRating,
           reviewTitle : list.reviewTitle
-        }))
+        }));
+        setProductComment(commentData); // 데이터 업데이트
         console.log(commentData);
       } catch (error) {
         console.error('데이터를 불러오는 동안 에러 발생:', error);
@@ -38,20 +40,21 @@ export default function Productcommentfull() {
     fetchProductcomment(); //호출이 없으면DB 데이터가 안들어옴
   },[])
 
-
   return (
     <>
+      <Link href="/productcommentfull">
       <div className='w-screen h-screen flex justify-start items-center flex-col gap-6'>
         {productcomment.map((list, index) => (
           <ProductCommentList
-            key={index}
+            key={list.index}
             writerid={list.userId}
-            date={list.reviewContent}
+            date={list.reviewUpdatedAt}
             starcount={list.reviewRating}
             commenttitle={list.reviewTitle}
           />
         ))}
       </div>
+      </Link>
       <Link href="/productcommentwriting">
         <div className='mr-40 mb-20'>
           <ProductUploadButton value='상품평 등록' />
