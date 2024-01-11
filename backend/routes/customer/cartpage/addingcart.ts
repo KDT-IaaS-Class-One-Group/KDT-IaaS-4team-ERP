@@ -14,6 +14,8 @@ addingcart.post("/addingcart/:prodIndex/:quantity", async (req, res) => {
 
   // * prodIndex를 라우팅 매개변수를 사용해서 가져옴.
   const prodIndex = parseInt(req.params.prodIndex, 10);
+
+  // * 클라이언트 측에서 header로 tokken을 보내준 것을 갖고옴.
   const tokenHeader = req.headers.authorization;
   if (!tokenHeader) {
     return res.status(401).json({ error: "토큰이 제공되지 않았습니다." });
@@ -42,7 +44,7 @@ addingcart.post("/addingcart/:prodIndex/:quantity", async (req, res) => {
       .status(201)
       .json({ success: true, message: "장바구니에 상품이 추가되었습니다." });
   } catch (error) {
-    console.error("Error during signup:", error);
+    console.error("Error during addingcart:", error);
     res
       .status(500)
       .json({ success: false, message: "장바구니가 상품에 추가되는데 오류가 있습니다." });

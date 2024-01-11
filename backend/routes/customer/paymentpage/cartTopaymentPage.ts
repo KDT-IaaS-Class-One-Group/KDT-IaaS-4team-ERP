@@ -9,7 +9,7 @@ const paymentDataForCart = express();
 paymentDataForCart.post("/cartToPayment", async (req, res) => {
   let conn;
 
-  // 클라이언트에서 보낸 토큰을 검증하고 데이터 뽑기(userId, userIndex)
+  // * 클라이언트 측에서 header로 tokken을 보내준 것을 갖고옴.
   const tokenHeader = req.headers.authorization;
   if (!tokenHeader) {
     return res.status(401).json({ error: "토큰이 제공되지 않았습니다." });
