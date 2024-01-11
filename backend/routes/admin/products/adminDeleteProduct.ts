@@ -4,18 +4,27 @@ import pool from '../../../database';
 
 export const adminDeleteProduct = express();
 
-adminDeleteProduct.delete('/api/deleteproduct/:prodIndex', async (req, res) => {
-  try {
-    const prodIndex = req.params.prodIndex;
-    const conn = await pool.getConnection();
-    const query = 'DELETE FROM products WHERE prodIndex = ?';
-    await conn.query(query, [prodIndex]);
-    conn.release();
+adminDeleteProduct.delete(
+  'http://localhost:3560/api/deleteproduct/:prodIndex',
+  async (req, res) => {
+    try {
+      const { prodIndex } = req.params;
+      const conn = await pool.getConnection();
 
-    res
-      .status(200)
-      .send(`Product with index ${prodIndex} deleted successfully.`);
-  } catch (err) {
-    res.status(500).send();
-  }
-});
+      const query = 'DELETE FROM products WHERE prodIndex = ?';
+      const result = await conn.query(query, [prodIndex]);
+
+      conn.release();
+
+      if (result.affectedRows === 0) {
+        // prodIndex에 해당하는 상품이 없는 경우
+        return res.status(404).send({ error: 'Product not found' });
+      }
+
+      res.status(200).send({ message: 'Product deleted successfully' });
+    } catch (err) {
+      console.error(err);
+      res.status(500).send({ error: 'Internal server error' });
+    }
+  },
+);

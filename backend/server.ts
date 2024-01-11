@@ -23,7 +23,7 @@ app.use(
 app.use(cors());
 app.use(bodyParser.json());
 
-app.post('/admin/login', adminLogin);
+app.post('/api/adminlogin', adminLogin);
 
 app.get('/api/products', adminProducts);
 app.post('/api/addproduct', adminAddProduct);

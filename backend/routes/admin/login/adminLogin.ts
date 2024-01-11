@@ -4,14 +4,15 @@ import pool from '../../../database';
 
 export const adminLogin = express();
 
-adminLogin.post('/admin/login', async (req, res) => {
+adminLogin.post('http://localhost:3560/api/adminlogin', async (req, res) => {
   let conn;
   try {
     conn = await pool.getConnection();
     const { adminId, adminPassword } = req.body;
 
     // 관리자 이름도 함께 검색
-    const query = 'SELECT adminName FROM administrators WHERE adminId = ? AND adminPassword = ?';
+    const query =
+      'SELECT adminName FROM administrators WHERE adminId = ? AND adminPassword = ?';
     const rows = await conn.query(query, [adminId, adminPassword]);
 
     if (rows.length > 0) {
