@@ -13,19 +13,25 @@ export default function CartMain() {
 
 const [requestData, setRequestData] = useState([])
 
-useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const response = await fetch('http://192.168.100.83:3560/cart');
-      const data = await response.json();
-      console.log(data)
-      setRequestData(data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
 
-  fetchData();
+const fetchData = async (endpoint: string, setRequestData: React.Dispatch<React.SetStateAction<any[]>>) => {
+  try {
+    const token = localStorage.getItem('token');
+    const response = await fetch(endpoint, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    const data = await response.json();
+    console.log(data);
+    setRequestData(data);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+};
+
+useEffect(() => {
+  fetchData('http://192.168.100.83:3560/cart', setRequestData);
 }, []);
 
 
@@ -36,7 +42,7 @@ useEffect(() => {
       </Link>
       <CartNav />
       <ul id="productUl" className="flex flex-col gap-6 overflow-scroll">
-      {requestData.map((item, index) => (
+      {/* {requestData.map((item, index) => (
         <CartList
           key={index} // 반드시 고유한 key를 제공해야 함
           pUrl={item.image_url}
@@ -44,7 +50,7 @@ useEffect(() => {
           pPrice={item.paymentpriceatorder}
           pSub={item.description}
         />
-      ))}
+      ))} */}
       </ul>
     </main> 
   );
