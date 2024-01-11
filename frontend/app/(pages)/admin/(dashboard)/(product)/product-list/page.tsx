@@ -6,7 +6,7 @@ import { ProductPriceProp } from '@/app/types/Product/ProductPriceProp';
 import { ProductCategoryProp } from '@/app/types/Product/ProductCategoryProp';
 import { ProductStockProp } from '@/app/types/Product/ProductStockProp';
 import { ProductDescriptionProp } from '@/app/types/Product/ProductDescriptionProp';
-import { ProductImageUrlProp } from '@/app/types/Product/ProductImageUrlProp';
+import { ProductImageUrlProp } from '@/app/types/Product/ProductImgUrlProp';
 
 interface ProductListProps
   extends ProductIndexProp,

@@ -6,22 +6,26 @@ import { ProductNameProp } from '@/app/types/Product/ProductNameProp';
 import { ProductDescriptionProp } from '@/app/types/Product/ProductDescriptionProp';
 import { ProductPriceProp } from '@/app/types/Product/ProductPriceProp';
 import { ProductStockProp } from '@/app/types/Product/ProductStockProp';
-import { ProductImageUrlProp } from '@/app/types/Product/ProductImageUrlProp';
+import { ProductImgUrlProp } from '@/app/types/Product/ProductImgUrlProp';
+import { ProductIndexProp } from '@/app/types/Product/ProductIndexProp';
+import { ProductCategoryProp } from '@/app/types/Product/ProductCategoryProp';
 
 interface ProductProps
-  extends ProductNameProp,
-    ProductDescriptionProp,
+  extends ProductIndexProp,
+    ProductNameProp,
     ProductPriceProp,
+    ProductImgUrlProp,
+    ProductDescriptionProp,
     ProductStockProp,
-    ProductImageUrlProp {}
+    ProductCategoryProp {}
 
-export default async function ProductAdd() {
+export default function ProductAdd() {
   const [productForm, setProductForm] = useState<ProductProps>({
-    name: '',
-    description: '',
-    price: '',
-    stock: 0,
-    imageUrl: null,
+    prodName: '',
+    prodDescription: '',
+    prodPrice: 0,
+    prodStock: 0,
+    prodImgUrl: '',
   });
 
   // 입력 필드의 변경을 처리하는 함수
