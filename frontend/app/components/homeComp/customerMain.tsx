@@ -25,7 +25,7 @@ export default function CustomerMain(){
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch('http://localhost:3560/');  // 서버 주소에 맞게 변경해주세요
+        const response = await fetch('http://192.168.100.83:3560/');  // 서버 주소에 맞게 변경해주세요
         const data = await response.json();
         console.log(data)
         const extractedData = data.map(list => ({

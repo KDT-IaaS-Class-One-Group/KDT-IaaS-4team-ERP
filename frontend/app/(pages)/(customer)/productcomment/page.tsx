@@ -15,13 +15,7 @@ const CommentHome = () => {
     const fetchComments = async () => {
       try {
         // http://192.168.100.83:3560/login에서 데이터를 가져오도록 수정
-        const response = await fetch('http://192.168.100.83:3309/reviews', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            // 필요하다면 인증 토큰 등의 헤더를 추가할 수 있습니다.
-          },
-        });
+        const response = await fetch('http://192.168.100.83:3560/reviews');
 
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
