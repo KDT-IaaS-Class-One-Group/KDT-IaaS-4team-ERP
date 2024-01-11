@@ -28,19 +28,16 @@ export default function ProductAdd() {
       alert('상품 이미지 URL을 입력해주세요.');
       return;
     }
-    if (!prodPrice.trim()) {
+    if (!prodPrice.trim() || prodPrice === '0') {
       alert('상품 가격을 올바르게 입력해주세요.');
       return;
     }
-    if (!prodStock.trim()) {
+    if (!prodStock.trim() || prodPrice === '0') {
       alert('상품 재고를 올바르게 입력해주세요.');
       return;
     }
 
     try {
-      const numericPrice = Number(prodPrice);
-      const numericStock = Number(prodStock);
-
       const response = await fetch('http://localhost:3560/api/addproduct', {
         method: 'POST',
         headers: {
@@ -51,8 +48,8 @@ export default function ProductAdd() {
           prodDescription,
           prodCategory,
           prodImgUrl,
-          prodPrice: numericPrice, // 숫자로 변환된 값으로 사용
-          prodStock: numericStock, // 숫자로 변환된 값으로 사용
+          prodPrice,
+          prodStock,
         }),
       });
       if (!response.ok) {
