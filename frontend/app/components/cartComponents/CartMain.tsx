@@ -14,24 +14,24 @@ export default function CartMain() {
 const [requestData, setRequestData] = useState([])
 
 
-const fetchData = async (endpoint: string, setRequestData: React.Dispatch<React.SetStateAction<any[]>>) => {
-  try {
-    const token = localStorage.getItem('token');
-    const response = await fetch(endpoint, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
-    const data = await response.json();
-    console.log(data);
-    setRequestData(data);
-  } catch (error) {
-    console.error("Error fetching data:", error);
-  }
-};
 
 useEffect(() => {
-  fetchData('http://192.168.100.83:3560/cart', setRequestData);
+  const fetchData = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch('http://192.168.100.83:3560/cart', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      const data = await response.json();
+      console.log(data);
+      setRequestData(data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+  fetchData();
 }, []);
 
 
