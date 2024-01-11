@@ -15,7 +15,7 @@ interface ProductProps
     ProductStockProp,
     ProductImageUrlProp {}
 
-export default function ProductAdd() {
+export default async function ProductAdd() {
   const [productForm, setProductForm] = useState<ProductProps>({
     name: '',
     description: '',

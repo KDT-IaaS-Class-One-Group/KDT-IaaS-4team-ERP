@@ -1,3 +1,3 @@
 export interface OrderDeliveryDoneProp {
-  orderDeliveryDone: boolean;
+  orderDeliveryDone: number;
 }
