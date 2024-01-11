@@ -5,27 +5,29 @@ import styles from "./style/productdetail.module.css";
 import { ProductDetail } from "./types";
 import Link from 'next/link';
 import Image from 'next/image';
+import { ProductDescriptionProps } from '../../interfaces/Product/ProductDescriptionProps';
 
 type ProductDetailProps = {
   productdetail: ProductDetail;
 };
 
-const ProductDetail: React.FC<ProductDetailProps> = ({ productdetail }) => {
+const ProductDetail: React.FC<ProductDetailProps> = ({ productdetailss }) => {
+  console.log(productdetailss)
   return (
     <div className="product-detail w-full h-screen flex flex-col items-center">
       <div className="w-4/5 h-2/5 flex justify-around">
         <div className="w-1/2 h-full bg-slate-300 flex items-center justify-center ">
           이미지 자리
         </div>
-        <Image src={productdetail.Img} alt={productdetail.Img} />
+        {/* <Image src={productdetail.Img} alt={productdetail.Img} /> */}
 
         <div className="mr-40">
           <p>상품 제목: </p>
-          {/* {productdetail.Title} */}
+          {productdetailss.prodName}
           <p>가격: </p>
-          {/* {productdetail.Price} */}
+          {productdetailss.prodPrice}
           <p>상품 간략설명: </p>
-          {/* {productdetail.Summary} */}
+          {productdetailss.ProductDescription}
           <ProductPriceCalculator/>
           <div className="flex justify-around">
             {/* 링크로 바꿔야되나? */}1

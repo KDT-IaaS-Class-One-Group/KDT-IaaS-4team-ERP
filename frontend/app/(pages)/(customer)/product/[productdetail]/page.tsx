@@ -2,30 +2,42 @@
 import ProductDetail from "@/components/Product/productdetail";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-// import { useRouter } from "next/router";
+
 
 export default function ProductPage() {
-  const [productdata, setproductdata] =useState([])
   const {productdetail} = useParams();
+  const [productdata, setproductdata] =useState([])
+  // const [params, setparams] =useState([])
 
+  
+  
   useEffect(()=> {
-    const fetchCommentsfull = async () => {
+  const fetchProduct = async () => {
     try {
-      const response = await fetch(`lo/product/${productdetail}`);
+      const response = await fetch(`http://localhost:3560/product/${productdetail}`);
+      console.log(productdetail)
       const data = await response.json();
-      console.log(data); // 확인용
+      console.log(data[1]); // 확인용
       setproductdata(data)
-
-  } catch (error) {
+    } catch (error) {
       console.error("에러 발생 :", error);
+    }
   }
-}})
 
-  return (
-    <>
-      <ProductDetail productdetail={productdata} />
-    </>
-  );
-};
+    fetchProduct();
+    },[productdetail])
+
+    return (
+      <>
+        <ProductDetail productdetailss={productdata} />
+      </>
+    );
+
+  }
+
+
+
+  
+
 
 
