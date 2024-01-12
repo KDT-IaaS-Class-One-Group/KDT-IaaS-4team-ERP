@@ -22,8 +22,11 @@ buybutton.post("/product/:prodIndex/payment", async (req, res) => {
 
 
   const {  orderReceiver,  orderReceiverPhone, orderDeliveryAddress, orderRequest, prodIndex, orderPaymentCount } =
-  req.body;
+  req.body.paymentcompleteinfo;
+
+  console.log(prodIndex)
   let conn;
+  console.log(orderReceiver)
 
   //* prodIndex
   // const prodIndex = parseInt(req.params.prodIndex, 10);
@@ -52,13 +55,16 @@ buybutton.post("/product/:prodIndex/payment", async (req, res) => {
   try {
     conn = await pool.getConnection();
 
-    const orderPaymentPriceAtOrder = await conn.query("SELECT orderPaymentPriceAtOrder from products WHERE prodIndex=?", [prodIndex])
+    const orderPaymentPriceAtOrder = await conn.query("SELECT prodPrice from products WHERE prodIndex=?", [prodIndex])
 
+    const orderPayment = orderPaymentPriceAtOrder[0].prodPrice
+    console.log(orderPayment)
+    console.log(orderPayment*orderPaymentCount)
 
     // 여기에서 userIndex를 사용하여 데이터베이스에 쓰는 로직을 작성
     await conn.query(
-      "INSERT INTO orders (userIndex, prodIndex, orderDatetime, orderRequest, orderReceiverPhone, orderPaymentCount, orderPaymentPriceAtOrder) VALUES (?, ?, ?, ?, ?, ?, ?)",
-      [userIndex, prodIndex, orderDate, orderRequest, orderReceiverPhone,orderPaymentCount, orderPaymentPriceAtOrder]
+      "INSERT INTO orders (userIndex, prodIndex, orderPaymentDatetime, orderRequest, orderReceiverPhone, orderDeliveryAddress, orderPaymentCount, orderPaymentPriceAtOrder, orderPaymentTotalPrice) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      [userIndex, prodIndex, orderDate, orderRequest, orderReceiverPhone, orderDeliveryAddress, orderPaymentCount, orderPayment, orderPayment*orderPaymentCount]
     );
 
     res.json({
