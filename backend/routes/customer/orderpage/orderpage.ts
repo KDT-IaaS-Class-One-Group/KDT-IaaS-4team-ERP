@@ -6,7 +6,7 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 
 const orderpage = express();
 
-orderpage.post("/orderpage", async (req, res) => {
+orderpage.get("/orderpage/getdata", async (req, res) => {
   let conn;
 
   // * 클라이언트 측에서 header로 tokken을 보내준 것을 갖고옴.

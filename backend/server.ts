@@ -8,14 +8,19 @@ import test from "./routes/test";
 import adminLogin from "./routes/adminLogin";
 
 // 고객페이지
+import mainPage from "./routes/customer/mainPage";
+
 import customerLogin from "./routes/customer/customerLogin";
 import customerSignup from "./routes/customer/customerSignup";
-import mainPage from "./routes/customer/mainPage";
+
 import product from "./routes/customer/productpage/productpage";
-import buybutton from "./routes/customer/paymentpage/buybutton";
+
 import paymentDataForProductPage from "./routes/customer/paymentpage/productTopaymentpage";
 import paymentDataForCart from "./routes/customer/paymentpage/cartTopaymentPage";
+import buybutton from "./routes/customer/paymentpage/buybutton";
+
 import orderpage from "./routes/customer/orderpage/orderpage";
+
 import productcomment from "./routes/customer/review/productcomment";
 import productcommentfull from "./routes/customer/review/productcommentfull";
 import productcommentwrite from "./routes/customer/review/productcommentwrite";
@@ -53,7 +58,7 @@ app.post('/product/:prodIndex/payment', paymentDataForProductPage)
 app.post('/cartToPayment', paymentDataForCart)
 app.post("/product/:prodIndex/payment", buybutton);
 // 주몬조회 페이지
-app.get('/orderpage', orderpage)
+app.get('/orderpage/getdata', orderpage)
 // 리뷰 페이지
 app.get('/productcomment', productcomment)
 app.get('/productcommentfull/:reviewIndex', productcommentfull)

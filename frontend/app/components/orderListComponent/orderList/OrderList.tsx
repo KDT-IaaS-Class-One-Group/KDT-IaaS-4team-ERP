@@ -25,13 +25,18 @@ const OrderList: React.FC<OrderListProps> = ({ pUrl, pSub, orderDate, orderId, p
       <div className='flex w-1/3 gap-6'>
         <div className='image-area'>
           <Image src={pUrl} alt="이미지가 들어갈 자리입니다." width="65" height = "65"/>
+          {/* products테이블에서 prodImgUrl을 가져와야함 */}
         </div>
         <p className='text-xs flex-center'>{pSub}</p>
+        {/* *products테이블에서 prodDescription을 가져와야함 */}
       </div>
       <div className='flex gap-6 w-2/3 '>
         <div className='w-1/6 flex-center text-xs'>{orderDate}</div>
+        {/* order테이블에 있는 orderPaymentDatetime */}
         <div className='w-1/6 flex-center text-xs'>{orderId}</div>
+        {/* orderIndex */}
         <div className='w-1/2 flex-center'>{`${pPrice}원 (${pCount}개)`}</div>
+        {/*  */}
         <div className='w-1/2 flex-center'>{orderState ? '배송 중' : '배송 전'}</div>
       </div>
     </li>
