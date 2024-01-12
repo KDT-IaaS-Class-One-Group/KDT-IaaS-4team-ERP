@@ -4,7 +4,7 @@ interface productdetails {
   [key: string]: any;
 }
 
-const ProductPriceCalculator: React.FC = ({productdetails}) => {
+const ProductPriceCalculator: React.FC = ({productdetails, setPaymentInfo}) => {
 
   const [quantity, setQuantity] = useState<number>(1);
   const [totalPrice, setTotalPrice] = useState<number | string>(0);
@@ -27,6 +27,13 @@ const ProductPriceCalculator: React.FC = ({productdetails}) => {
       // 가격과 수량을 곱하여 새로운 가격을 계산
       const newTotalPrice = productPrice * quantity;
       setTotalPrice(newTotalPrice);
+
+
+      setPaymentInfo({
+        quantity,
+        totalPrice: newTotalPrice,
+        // 다른 필요한 결제 정보들을 추가할 수 있습니다.
+      });
     } 
   };
 
