@@ -20,7 +20,7 @@ export default function Productcomment() {
   useEffect(() => {
     const fetchProductcomment = async () => {
       try {
-        const response = await fetch('http://localhost:3560/product/${pam}/productcomment'); //로컬환경 테스트 실행 () http://192.168.100.83:3560/productcomment)
+        const response = await fetch('http://localhost:3560/productcomment'); //로컬환경 테스트 실행 () http://192.168.100.83:3560/productcomment)
         const data = await response.json();//DB에서 가져온 데이터를 json으로 변환
         console.log(data) //콘솔에서 넘어온 데이터 확인
         const commentData = data.map(list => ({
