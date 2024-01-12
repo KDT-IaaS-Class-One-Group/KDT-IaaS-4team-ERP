@@ -47,13 +47,13 @@ buybutton.post("/product/:prodIndex/payment", async (req, res) => {
   try {
     conn = await pool.getConnection();
 
-    const orderPaymentPriceAtOrder = await conn.query("SELECT orderPaymentPriceAtOrder from products WHERE prodIndex=?", [prodIndex])*quantity
+    const orderPaymentPriceAtOrder = await conn.query("SELECT orderPaymentPriceAtOrder from products WHERE prodIndex=?", [prodIndex])
 
 
     // 여기에서 userIndex를 사용하여 데이터베이스에 쓰는 로직을 작성
     await conn.query(
-      "INSERT INTO orders (userIndex, prodIndex, orderDatetime, orderPaymentCount, orderPaymentPriceAtOrder) VALUES (?, ?, ?, ?, ?)",
-      [userIndex, prodIndex, orderDate, quantity, orderPaymentPriceAtOrder]
+      "INSERT INTO orders (userIndex, prodIndex, orderDatetime, orderPaymentCount, orderPaymentPriceAtOrder) VALUES (?, ?, ?, ?)",
+      [userIndex, prodIndex, orderDate, orderPaymentPriceAtOrder]
     );
 
     res.json({
