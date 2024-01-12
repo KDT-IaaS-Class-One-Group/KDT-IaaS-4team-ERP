@@ -8,13 +8,13 @@ import CartList from "./cartList/CartList";
 // import Image from 'next/image';
 
 export default function CartMain() {
-  const [requestData, setRequestData] = useState([]);
+  const [requestData, setRequestData] = useState<any[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch('http://localhost:3560/cartTest', {
+        const response = await fetch('http://localhost:3560/cart', {
           headers: {
             Authorization: `Bearer ${token}`
           }
