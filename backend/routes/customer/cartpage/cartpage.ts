@@ -2,32 +2,31 @@
 
 import express from "express";
 import pool from "../../../database";
-import jwt, { JwtPayload } from "jsonwebtoken";
+// import jwt, { JwtPayload } from "jsonwebtoken";
 
 const cartpage = express();
 
 cartpage.get("/cart", async (req, res) => {
   let conn;
-  // * 클라이언트 측에서 header로 tokken을 보내준 것을 갖고옴.
-  const tokenHeader = req.headers.authorization;
-  if (!tokenHeader) {
-    return res.status(401).json({ error: "토큰이 제공되지 않았습니다." });
-  }
+  // // * 클라이언트 측에서 header로 tokken을 보내준 것을 갖고옴.
+  // const tokenHeader = req.headers.authorization;
+  // if (!tokenHeader) {
+  //   return res.status(401).json({ error: "토큰이 제공되지 않았습니다." });
+  // }
 
-  const token = tokenHeader.split(" ")[1];
+  // const token = tokenHeader.split(" ")[1];
 
-  //* 토큰을 검증하여 userIndex 정보를 가져옴.
-  let userIndex: string | JwtPayload;
+  // //* 토큰을 검증하여 userIndex 정보를 가져옴.
+  // let userIndex: string | JwtPayload;
+  // try {
+  //   const decoded: JwtPayload = jwt.verify(token, "1234") as JwtPayload;
+  //   userIndex = decoded.userIndex as string;
+  // } catch (err) {
+  //   return res.status(401).json({ error: "토큰이 유효하지 않습니다." });
+  // }
+
   try {
-    const decoded: JwtPayload = jwt.verify(token, "1234") as JwtPayload;
-    userIndex = decoded.userIndex as string;
-  } catch (err) {
-    return res.status(401).json({ error: "토큰이 유효하지 않습니다." });
-  }
-
-  try {
-    conn = await pool.getConnection();
-
+    let userIndex = 1;
     //* userIndex를 사용해서 cartIndex 추출 후 product테이블의 정보가져오기
     conn = await pool.getConnection();
     const cartResult = await conn.query(
@@ -48,7 +47,8 @@ cartpage.get("/cart", async (req, res) => {
     const cartProductCountResult = await conn.query('SELECT cartProductCount FROM cart WHERE userIndex = ?',[userIndex])
     
     // * 객체로 묶어서 상품데이터, 상품개수 값을 보내줌.
-    res.json({productResult, cartProductCountResult});
+    // res.json({productResult, cartProductCountResult});
+    res.json('1');
 
   } catch (error) {
     console.error("Error during fetching cartpage:", error);

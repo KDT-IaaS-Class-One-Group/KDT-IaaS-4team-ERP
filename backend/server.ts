@@ -54,10 +54,7 @@ app.post('/cartToPayment', paymentDataForCart)
 // 리뷰 페이지
 app.get('/productcomment', productcomment)
 // 카트 페이지
-app.get('/cart', (req, res) => {
-  console.dir(req);
-  res.status(200).json({ message: "Cart data retrieved successfully" });
-});
+app.get('/cart', cartpage);
 
 app.listen(port, () => {
   console.log(`Express 서버가 ${port}번 포트에서 실행중입니다.`);
