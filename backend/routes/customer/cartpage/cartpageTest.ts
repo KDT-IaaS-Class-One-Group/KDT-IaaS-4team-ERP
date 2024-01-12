@@ -26,6 +26,7 @@ cartpageTest.get("/cartTest", async (req: Request, res: Response) => {
 
   // ! 위의 과정으로 로컬스토리지에서 토큰을 분해하여 userIndex를 추출하였습니다.
 
+
   // ! /cartPage 라우팅
   // * 토큰을 통해 얻어낸 userIndex를 통해 cart테이블을 참조하여 cartList를 완성한다.
   // 필수적으로 필요한 정보 : 해당 userIndex의 cartProductCount, prodIndex ( join을 통해 얻을 필수적 정보 : prodName, prodPrice, prodImgUrl)
@@ -72,6 +73,37 @@ cartpageTest.get("/cartTest", async (req: Request, res: Response) => {
   try {
     // 데이터베이스 연결: getConnection()
     conn = await pool.getConnection();
+    interface CartItemProps {
+      userIndex: number;
+      cartIndex: number;
+      cartProductCount: number;
+      prodIndex: number;
+      prodName: string;
+      prodPrice: number;
+      prodImgUrl: string;
+      productDescription : string;
+      prodStock : number;
+      prodCategory : string;
+    }
+    interface ProductsTableProps {
+      prodIndex: number;
+      prodName: string;
+      prodPrice: number;
+      prodImgUrl: string;
+      productDescription : string;
+      prodStock : number;
+      prodCategory : string;
+    }
+    interface CartTableProps {
+      cartIndex: number;
+      cartProductCount: number;
+      userIndex: number;
+      prodIndex: number;
+    }
+
+    const userIndexQueryResult: CartTableProps[] = [];
+    const productQueryResult: ProductsTableProps[] = [];
+    const finalResult: CartItemProps[] = [];
 
     // 로그 추가: SQL 쿼리 실행 확인
     console.log("Executing cart query for userIndex:", userIndex);
@@ -93,7 +125,7 @@ cartpageTest.get("/cartTest", async (req: Request, res: Response) => {
     res.json(cartResult);
 
 
-
+    res.status(200).json(finalResult);
   } catch (error) {
     // 오류 로깅
     console.error("Error during fetching cartpage:", error);
