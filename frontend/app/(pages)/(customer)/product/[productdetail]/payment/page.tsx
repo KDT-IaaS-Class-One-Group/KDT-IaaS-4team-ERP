@@ -11,14 +11,19 @@ type ProductType = {
 };
 
 export default function PaymentPage() {
+  const searchparams = useSearchParams()
+  const quantity = searchparams.get('quantity')
+  const totalPrice = searchparams.get('totalPrice')
+  const prodIndex = searchparams.get('prodIndex')
+  console.log(prodIndex)
+
   const [paymentcompleteinfo, setpaymentcompleteinfo] =useState(
     {orderReceiver : '',
     orderReceiverPhone : '',
     orderDeliveryAddress : '',
     orderRequest : '',
-    prodIndex : '',
-    orderPaymentCount : '',
-    orderPaymentTotalPrice : '',
+    prodIndex : prodIndex,
+    orderPaymentCount : quantity,
   })
 
 
@@ -28,6 +33,7 @@ export default function PaymentPage() {
       [field]: value,
     }));
   }
+
   console.log(paymentcompleteinfo)
 
 

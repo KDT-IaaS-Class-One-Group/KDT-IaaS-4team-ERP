@@ -1,6 +1,15 @@
 // * 상품페이지에서 구매 버튼 클릭시 받아야되는 데이터
 // * 입력받는 데이터: userIndex, prodIndex, quantity
 
+//   const [paymentcompleteinfo, setpaymentcompleteinfo] =useState(
+//   {orderReceiver : '',
+//   orderReceiverPhone : '',
+//   orderDeliveryAddress : '',
+//   orderRequest : '',
+//   prodIndex : prodIndex,
+//   orderPaymentCount : quantity,
+// })
+
 import express from "express";
 import pool from "../../../database";
 import jwt, { JwtPayload } from "jsonwebtoken";

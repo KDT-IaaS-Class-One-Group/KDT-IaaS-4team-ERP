@@ -16,6 +16,7 @@ const ProductInformation: React.FC<ProductType> = ({ setpaymentcompleteinfo }) =
   const quantity = searchparams.get('quantity')
   const totalPrice = searchparams.get('totalPrice')
   const prodIndex = searchparams.get('prodIndex')
+
   
 
   useEffect(()=> {
@@ -46,11 +47,15 @@ const ProductInformation: React.FC<ProductType> = ({ setpaymentcompleteinfo }) =
 
   }, [])
 
-  setpaymentcompleteinfo({
-    orderPaymentCount: quantity,
-    orderPaymentTotalPrice: totalPrice,
-    prodIndex: prodIndex
-  });
+  
+  useEffect(()=> {
+
+    setpaymentcompleteinfo({
+      orderPaymentCount: quantity,
+      orderPaymentTotalPrice: totalPrice,
+      prodIndex: prodIndex
+    });
+  },[productinfo])
 
 
   // useEffect(() => {
