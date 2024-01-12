@@ -8,11 +8,12 @@ export default function ProductPage() {
   const {productdetail} = useParams();
   console.log(useParams())
   const [productdata, setproductdata] =useState([])
+  const [productdata, setproductdata] =useState('1')
 
   useEffect(()=> {
   const fetchProduct = async () => {
     try {
-      const response = await fetch(`http://192.168.100.83:3560/product/${productdetail}`);
+      const response = await fetch(`http://localhost:3560/product/${productdetail}`);
       console.log(productdetail)
       const data = await response.json();
       console.log(data[1]); // 확인용
@@ -24,10 +25,10 @@ export default function ProductPage() {
 
     fetchProduct();
     },[productdetail])
-
+console.log(productdata)
     return (
       <>
-        <ProductDetail productdetail={productdata} />
+        <ProductDetail productdetails={productdata} />
       </>
     );
 

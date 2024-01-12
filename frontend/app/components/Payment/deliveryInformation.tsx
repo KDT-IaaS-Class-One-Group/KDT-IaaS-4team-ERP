@@ -12,34 +12,34 @@ const DeliveryInformation: React.FC<DeliveryInfo> = ({ deliveryinfo }) => {
   return (
     <div className="flex justify-center items-center mt-5">
       <div
-        className={`${styles.buyerInformation} flex flex-col justify-center`}
+        className={`${styles.buyerInformation} flex flex-col justify-center h-3/5`}
       >
         {/* tailwind와 css모듈 같이 사용하기 */}
-        <div className="relative mt-2 mb-2">
-          <p>배송정보:</p>
-          <p>product data</p>
+        <div className="flex w-full justify-around mt-2 mb-2 ">
+          <label htmlFor="deliveryname">이름:</label>
+          <input className='w-3/5' id ='deliveryname' />
           {/* {deliveryinfo.productData} */}
         </div>
 
-        <div className="relative mt-2 mb-2">
-          <p>이름/연락처:</p>
-          <p>buyerInfo data</p>
-          {/* {deliveryinfo.buyerInfo} */}
+        <div className="flex w-full justify-around mt-2 mb-2 ">
+        <label htmlFor="deliveryname">연락처:</label>
+          <input className='w-3/5' id ='deliveryname' />
+
         </div>
 
-        <div className="relative mt-2 mb-2">
-          <p>주소:</p>
-          <p>address data</p>
-          {/* {deliveryinfo.address} */}
+        <div className="flex w-full justify-around mt-2 mb-2 ">
+        <label htmlFor="deliveryaddress">주소:</label>
+          <input className='w-3/5' id ='deliveryaddress' />
         </div>
 
-        <div className="relative mt-2 mb-2">
-          <p>요청사항:</p>
-          <p>request data </p>
-          {/* {deliveryinfo.request} */}
+        <div className="flex w-full justify-around mt-2 mb-2 ">
+        <label htmlFor="deliveryrequest">요청사항:</label>
+          <input className='w-3/5 ' id ='deliveryrequest' />
+
         </div>
       </div>
     </div>
+    
   );
 }
 

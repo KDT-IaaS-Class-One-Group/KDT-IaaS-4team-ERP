@@ -6,13 +6,31 @@ import { ProductDetail } from "./types";
 import Link from 'next/link';
 import Image from 'next/image';
 import { ProductDescriptionProps } from '../../interfaces/Product/ProductDescriptionProps';
+import { useState } from 'react';
+import { useParams } from 'next/navigation';
+
 
 type ProductDetailProps = {
-  productdetail: ProductDetail;
+  productdetails: ProductDetail;
 };
 
-const ProductDetail: React.FC<ProductDetailProps> = ({ productdetail }) => {
-  console.log(productdetail)
+
+
+const ProductDetail: React.FC<ProductDetailProps> = ({ productdetails }) => {
+  const productdetailsprodIndex = productdetails.prodIndex
+  const [paymentInfo, setPaymentInfo] = useState({
+    quantity: 1,
+    totalPrice: 0,
+    // 다른 필요한 결제 정보들을 추가할 수 있습니다.
+  });
+
+  const handlePayment = () => {
+    // 여기에서 결제 정보를 서버에 전송하거나 다른 필요한 동작을 수행합니다.
+    console.log("결제 정보:", paymentInfo);
+  };
+
+
+
   return (
     <div className="product-detail w-full h-screen flex flex-col items-center">
       <div className="w-4/5 h-2/5 flex justify-around">
@@ -23,40 +41,46 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productdetail }) => {
 
         <div className="mr-40">
           <p>상품 제목: </p>
-          {productdetail.prodName}
+          {productdetails.prodName}
           <p>가격: </p>
-          {productdetail.prodPrice}
+          {productdetails.prodPrice}
           <p>상품 간략설명: </p>
-          {productdetail.prodDescription}
-          <ProductPriceCalculator/>
+          {productdetails.prodDescription}
+          <ProductPriceCalculator productdetails={productdetails} setPaymentInfo={setPaymentInfo} />
           <div className="flex justify-around">
             {/* 링크로 바꿔야되나? */}
 
-            <Link href="/payment">
-            <button className="bg-red-300">구매</button>
+            <Link href={{
+              pathname: `/product/${productdetailsprodIndex}/payment`, query: {
+                quantity: paymentInfo.quantity,
+                totalPrice: paymentInfo.totalPrice,
+                prodIndex: productdetails.prodIndex,
+              }
+            }} onClick={handlePayment}>
+
+              <button className="bg-red-300">구매</button>
             </Link>
 
-            <Link href="/cart"> 
-            <button className="bg-red-300">장바구니</button>
+            <Link href="/cart">
+              <button className="bg-red-300">장바구니</button>
             </Link>
 
-            <Link href="/csitem"> 
-            <button className="bg-red-300">상품평</button>
+            <Link href="/csitem">
+              <button className="bg-red-300">상품평</button>
             </Link>
           </div>
         </div>
       </div>
 
       <div className="w-4/5 h-1/3 mt-10 flex justify-center items-center overflow-y-scroll">
-      {productdetail.prodDescription}
-      {productdetail.prodDescription}
-      {productdetail.prodDescription}
-      {productdetail.prodDescription}
-      {productdetail.prodDescription}
-      {productdetail.prodDescription}
-      {productdetail.prodDescription}
-      {productdetail.prodDescription}
-
+        {productdetails.prodDescription}
+        {productdetails.prodDescription}
+        {productdetails.prodDescription}
+        {productdetails.prodDescription}
+        {productdetails.prodDescription}
+        {productdetails.prodDescription}
+        {productdetails.prodDescription}
+        {productdetails.prodDescription}
       </div>
     </div>
   );
