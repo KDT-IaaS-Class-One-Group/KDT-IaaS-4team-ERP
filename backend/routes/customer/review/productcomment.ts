@@ -8,7 +8,7 @@ productcomment.get("/productcomment", async (req, res) => {
   try {
     conn = await pool.getConnection();
     const result = await conn.query(
-      "SELECT * FROM reviews"
+      "SELECT * FROM reviews" 
     );
     res.status(200).json(result);
   } catch (error) {
