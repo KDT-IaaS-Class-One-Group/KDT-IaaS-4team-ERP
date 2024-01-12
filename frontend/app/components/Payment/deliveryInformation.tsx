@@ -3,10 +3,21 @@ import { deliveryType } from "./types"
 
 type DeliveryInfo = {
   deliveryinfo: deliveryType;
+  setpaymentcompleteinfo: (field: string, value: string) => void;
 };
 
 
-const DeliveryInformation: React.FC<DeliveryInfo> = ({ deliveryinfo }) => {
+const DeliveryInformation: React.FC<DeliveryInfo> = ({
+  deliveryinfo,
+  setpaymentcompleteinfo
+}) => { 
+  const handleInputChange = (field: string) => (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setpaymentcompleteinfo(field, event.target.value);
+  };
+
+
   // const buyerinformation = await fetchbuyerinformationdata()
 
   return (
@@ -17,24 +28,24 @@ const DeliveryInformation: React.FC<DeliveryInfo> = ({ deliveryinfo }) => {
         {/* tailwind와 css모듈 같이 사용하기 */}
         <div className="flex w-full justify-around mt-2 mb-2 ">
           <label htmlFor="deliveryname">이름:</label>
-          <input className='w-3/5' id ='deliveryname' />
+          <input type ='text' className='w-3/5' id ='deliveryname'  onChange={handleInputChange("orderReceiver")} />
           {/* {deliveryinfo.productData} */}
         </div>
 
         <div className="flex w-full justify-around mt-2 mb-2 ">
-        <label htmlFor="deliveryname">연락처:</label>
-          <input className='w-3/5' id ='deliveryname' />
+        <label htmlFor="deliveryphone">연락처:</label>
+          <input type ='text' className='w-3/5' id ='deliveryphone' onChange={handleInputChange("orderReceiverPhone")} />
 
         </div>
 
         <div className="flex w-full justify-around mt-2 mb-2 ">
         <label htmlFor="deliveryaddress">주소:</label>
-          <input className='w-3/5' id ='deliveryaddress' />
+          <input  type ='text' className='w-3/5' id ='deliveryaddress' onChange={handleInputChange("orderDeliveryAddress")} />
         </div>
 
         <div className="flex w-full justify-around mt-2 mb-2 ">
         <label htmlFor="deliveryrequest">요청사항:</label>
-          <input className='w-3/5 ' id ='deliveryrequest' />
+          <input type ='text' className='w-3/5 ' id ='deliveryrequest' onChange={handleInputChange("orderRequest")} />
 
         </div>
       </div>
