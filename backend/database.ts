@@ -8,6 +8,8 @@ const pool = mariadb.createPool({
   password: 'root',
   database: 'form',
   connectionLimit: 5,
+  supportBigNumbers: true,
+  bigNumberStrings: true,
 });
 
 export default pool;
