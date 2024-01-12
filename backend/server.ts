@@ -50,7 +50,7 @@ app.post("/signup", customerSignup);
 app.get("/product/:prodIndex", product);
 app.post("/product/:prodIndex/:quantity/buy", buybutton);
 // 구매 페이지
-app.get('/product/:prodIndex/payment', paymentDataForProductPage)
+app.post('/product/:prodIndex/payment', paymentDataForProductPage)
 app.post('/cartToPayment', paymentDataForCart)
 // 주몬조회 페이지
 app.get('/orderpage', orderpage)

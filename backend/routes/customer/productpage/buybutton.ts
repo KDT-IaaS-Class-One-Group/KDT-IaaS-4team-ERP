@@ -18,10 +18,15 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 const buybutton = express();
 
 buybutton.post("/product/:prodIndex/payment", async (req, res) => {
+  console.log(req.body)
+
+
+  const {  orderReceiver,  orderReceiverPhone, orderDeliveryAddress, orderRequest, prodIndex, orderPaymentCount } =
+  req.body;
   let conn;
 
   //* prodIndex
-  const prodIndex = parseInt(req.params.prodIndex, 10);
+  // const prodIndex = parseInt(req.params.prodIndex, 10);
 
   //
   //* 현재 시간 생성
@@ -52,8 +57,8 @@ buybutton.post("/product/:prodIndex/payment", async (req, res) => {
 
     // 여기에서 userIndex를 사용하여 데이터베이스에 쓰는 로직을 작성
     await conn.query(
-      "INSERT INTO orders (userIndex, prodIndex, orderDatetime, orderPaymentCount, orderPaymentPriceAtOrder) VALUES (?, ?, ?, ?)",
-      [userIndex, prodIndex, orderDate, orderPaymentPriceAtOrder]
+      "INSERT INTO orders (userIndex, prodIndex, orderDatetime, orderRequest, orderReceiverPhone, orderPaymentCount, orderPaymentPriceAtOrder) VALUES (?, ?, ?, ?, ?, ?, ?)",
+      [userIndex, prodIndex, orderDate, orderRequest, orderReceiverPhone,orderPaymentCount, orderPaymentPriceAtOrder]
     );
 
     res.json({

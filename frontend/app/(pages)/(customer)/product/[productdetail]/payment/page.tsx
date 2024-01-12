@@ -16,7 +16,7 @@ export default function PaymentPage() {
   const searchparams = useSearchParams()
   const quantity = searchparams.get('quantity')
   const prodIndex = searchparams.get('prodIndex')
-  console.log(prodIndex)
+  // console.log(prodIndex)
 
   const [paymentcompleteinfo, setpaymentcompleteinfo] = useState(
     {
@@ -36,11 +36,11 @@ export default function PaymentPage() {
     }));
   }
 
-  console.log(paymentcompleteinfo)
+  // console.log(paymentcompleteinfo)
   const handleButtonClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:3560/product/${prodIndex}/payment`, {
+      const response1 = await fetch(`http://localhost:3560/product/${prodIndex}/payment`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -49,21 +49,22 @@ export default function PaymentPage() {
         },
         body: JSON.stringify({paymentcompleteinfo}),
       });
-      if (!response.ok) {
-        throw new Error('결제 실패');
+      if (!response1.ok) {
+        const errorMessage = await response1.text();
+        throw new Error(`데이터 응답 못받음${response1.status} - ${errorMessage}`);
       }
 
-      const data = await response.json();
+      const data = await response1.json();
       console.log(data);
       if (data.success) {
         alert('결제 성공');
         router.push('/');
       } else {
-        alert('결제 실패');
+        alert('결제 실패1');
       }
     } catch (error) {
       console.error(error);
-      alert('회원가입 실패');
+      alert(`결제 실패2 ${error.message}`);
     }
   }
 
