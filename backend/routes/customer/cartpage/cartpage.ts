@@ -11,7 +11,6 @@ const cartpage = express();
 cartpage.get("/cartTest", async (req: Request, res: Response) => {
   let conn;
   const tokenHeader = req.headers.authorization;
-  console.log("tokenHeader--------  ", tokenHeader);
   if (!tokenHeader) {
     return res.status(401).json({ error: "토큰이 제공되지 않았습니다." });
   }
@@ -141,9 +140,6 @@ cartpage.get("/cartTest", async (req: Request, res: Response) => {
     `;
 
     finalResult = await pool.query(query, [Number(userIndex)]);
-    console.log("finalResult의 결과값", finalResult);
-    console.log("finalResult의 타입 ----------", typeof(finalResult));
-
 
     res.status(200).json(finalResult);
   } catch (error) {
