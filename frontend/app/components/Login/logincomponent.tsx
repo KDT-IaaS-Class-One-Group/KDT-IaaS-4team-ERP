@@ -1,4 +1,6 @@
 'use client';
+import React, { ChangeEvent } from 'react';
+
 import Link from 'next/link';
 import LoginButton from './loginbutton';
 import LoginText from './logintext';
