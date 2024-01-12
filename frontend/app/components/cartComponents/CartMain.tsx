@@ -14,12 +14,14 @@ export default function CartMain() {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch('http://localhost:3560/cart', {
+        const response = await fetch('http://localhost:3560/cartTest', {
           headers: {
-            Authorization: `${token}`
+            Authorization: `Bearer ${token}`
           }
         });
         if (!response.ok) {
+          const errorBody = await response.text(); // 서버로부터 받은 응답 본문을 가져옵니다.
+          console.error(`Server responded with ${response.status}: ${errorBody}`);
           throw new Error("Error fetching data");
         }
         const data = await response.json();

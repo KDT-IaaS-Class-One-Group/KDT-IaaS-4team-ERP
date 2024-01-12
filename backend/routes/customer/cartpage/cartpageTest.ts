@@ -2,9 +2,9 @@ import express, { Request, Response } from "express";
 import pool from "../../../database";
 import jwt, { JwtPayload } from "jsonwebtoken";
 
-const cartpage = express();
+const cartpageTest = express();
 
-cartpage.get("/cart", async (req: Request, res: Response) => {
+cartpageTest.get("/cartTest", async (req: Request, res: Response) => {
   let conn;
   // 로그 추가: 토큰 수신 확인
   console.log("Request received with headers:", req.headers);
@@ -80,4 +80,5 @@ cartpage.get("/cart", async (req: Request, res: Response) => {
   }
 });
 
-export default cartpage;
+export default cartpageTest;
+

@@ -17,6 +17,7 @@ import paymentDataForProductPage from "./routes/customer/paymentpage/productTopa
 import paymentDataForCart from "./routes/customer/paymentpage/cartTopaymentPage";
 import productcomment from "./routes/customer/review/productcomment";
 import cartpage from "./routes/customer/cartpage/cartpage";
+import cartpageTest from "./routes/customer/cartpage/cartpageTest";
 
 const app = express();
 const port = 3560;
@@ -54,7 +55,8 @@ app.post('/cartToPayment', paymentDataForCart)
 // 리뷰 페이지
 app.get('/productcomment', productcomment)
 // 카트 페이지
-app.get('/cart', cartpage);
+
+app.get('/cartTest', cartpageTest);
 
 app.listen(port, () => {
   console.log(`Express 서버가 ${port}번 포트에서 실행중입니다.`);
