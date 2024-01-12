@@ -42,16 +42,15 @@ export default function CartMain() {
       </Link>
       <CartNav />
       <ul id="productUl" className="flex flex-col gap-6 overflow-scroll">
-        {/* {requestData} */}
-        {/* {requestData.map((item, index) => (
+        {requestData.map((item, index) => (
           <CartList
-            key={index} // 반드시 고유한 key를 제공해야 함
-            pUrl={item.image_url}
-            pCount={item.cart_quantity}
-            pPrice={item.paymentpriceatorder}
-            pSub={item.description}
+            key={item.cartIndex} // 반드시 고유한 key를 제공해야 함
+            pUrl={item.prodImgUrl}
+            pCount={item.cartProductCount}
+            pPrice={item.prodPrice}
+            pSub={item.prodDescription}
           />
-        ))} */}
+        ))}
       </ul>
     </main>
   );

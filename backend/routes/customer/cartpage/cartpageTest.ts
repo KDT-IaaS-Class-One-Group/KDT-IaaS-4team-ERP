@@ -101,28 +101,69 @@ cartpageTest.get("/cartTest", async (req: Request, res: Response) => {
       prodIndex: number;
     }
 
-    const userIndexQueryResult: CartTableProps[] = [];
-    const productQueryResult: ProductsTableProps[] = [];
-    const finalResult: CartItemProps[] = [];
+    let userIndexQueryResult: CartTableProps[] = [];
+    let productQueryResult: ProductsTableProps[] = [];
+    let finalResult: CartItemProps[] = [];
 
-    // 로그 추가: SQL 쿼리 실행 확인
-    console.log("Executing cart query for userIndex:", userIndex);
-    const cartQueryResult = await conn.query(
-      "SELECT cartIndex FROM cart WHERE userIndex = ?",
-      [userIndex]
+    // todo 1. userIndex를 참조하여 해당 행의 정보를 가져온다.
+    userIndexQueryResult = await pool.query(
+      `SELECT cartIndex, cartProductCount, userIndex, prodIndex FROM cart WHERE userIndex = ?`,
+      [Number(userIndex)]
     );
+    console.log("userIndexQueryResult의 결과값", userIndexQueryResult);
+    console.log("userIndexQueryResult의 타입 ----------", typeof(userIndexQueryResult));
 
-     // 반환 결과의 타입을 확인하기 위한 로그
-    console.log("cartQueryResult:", cartQueryResult);
-    console.log("cartQueryResult의 타입:", typeof(cartQueryResult));
+    // todo 2. userIndexQueryResult의 prodIndex를 참조하여 products테이블에서 해당 prodIndex의 정보를 가져온다.
+    // * prodIndexes.join(",")은 문자열이지만 sql엔진이 해석할 때는 열 타입에 맞추기 때문에 int타입으로 활용하게 된다.
+    const prodIndexes = userIndexQueryResult.map((item) => item.prodIndex);
+    productQueryResult = await pool.query(
+      `SELECT * FROM products WHERE prodIndex IN (${prodIndexes.join(",")})`
+    );
+    console.log("productQueryResult의 결과값", productQueryResult);
+    console.log("productQueryResult의 타입 ----------", typeof(productQueryResult));
 
-    // 결과가 배열이 아니라면 적절히 처리 
-    //(예를 들어, 결과가 객체 내의 배열로 감싸져 있는 경우)
-    const cartResult = Array.isArray(cartQueryResult) ? cartQueryResult : cartQueryResult.cartIndex;
-    console.log("cartResult의 결과:", cartResult);
+    // todo 3. userIndexQueryResult와 productQueryResult를 join하여 최종 결과물을 완성한다.
+    // * 애플리케이션 레벨에서 데이터 핸들링하는 방안1
+    // finalResult = userIndexQueryResult.map((userItem) => {
+    //   const productItem = productQueryResult.find((prodItem) => prodItem.prodIndex === userItem.prodIndex);
+    //   return {
+    //     userIndex: userItem.userIndex,
+    //     cartIndex: userItem.cartIndex,
+    //     cartProductCount: userItem.cartProductCount,
+    //     prodIndex: userItem.prodIndex,
+    //     prodName: productItem.prodName,
+    //     prodPrice: productItem.prodPrice,
+    //     prodImgUrl: productItem.prodImgUrl,
+    //     prodDescription: productItem.productDescription,
+    //     prodStock: productItem.prodStock,
+    //     prodCategory: productItem.prodCategory,
+    //   };
+    // });
 
-    console.log("Sending response with cartResult data");
-    res.json(cartResult);
+    // * 애플리케이션 레벨에서 데이터 핸들링하는 방안2
+    const query = `
+    SELECT 
+      c.cartIndex, 
+      c.cartProductCount, 
+      c.userIndex, 
+      c.prodIndex, 
+      p.prodName, 
+      p.prodPrice, 
+      p.prodImgUrl, 
+      p.prodDescription, 
+      p.prodStock, 
+      p.prodCategory
+    FROM 
+      cart c
+    JOIN 
+      products p ON c.prodIndex = p.prodIndex
+    WHERE 
+      c.userIndex = ?
+    `;
+
+    finalResult = await pool.query(query, [Number(userIndex)]);
+    console.log("finalResult의 결과값", finalResult);
+    console.log("finalResult의 타입 ----------", typeof(finalResult));
 
 
     res.status(200).json(finalResult);
