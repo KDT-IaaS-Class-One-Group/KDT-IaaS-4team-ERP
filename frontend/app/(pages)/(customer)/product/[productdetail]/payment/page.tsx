@@ -6,6 +6,10 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 
+type ProductType = {
+  setpaymentcompleteinfo: (info: any) => void; // 적절한 타입으로 변경
+};
+
 export default function PaymentPage() {
   const [paymentcompleteinfo, setpaymentcompleteinfo] =useState(
     {orderReceiver : '',
@@ -17,20 +21,22 @@ export default function PaymentPage() {
     orderPaymentTotalPrice : '',
   })
 
-  const paymentcomp = (field: string, value: string) => {
-    setpaymentcompleteinfo({
-      ...paymentcompleteinfo,
+
+  const updateDeliveryInfo = (field: string, value: string) => {
+    setpaymentcompleteinfo((prevInfo) => ({
+      ...prevInfo,
       [field]: value,
-    });
+    }));
   }
+  console.log(paymentcompleteinfo)
 
 
 
 
   return (
     <>
-    <DeliveryInformation/>
-    <ProductInformation />
+    <DeliveryInformation setpaymentcompleteinfo={updateDeliveryInfo}/>
+    <ProductInformation setpaymentcompleteinfo={updateDeliveryInfo}/>
     <BuyButton />
     </>
   );
