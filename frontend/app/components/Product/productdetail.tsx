@@ -65,7 +65,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productdetails }) => {
               <button className="bg-red-300">장바구니</button>
             </Link>
 
-            <Link href="/csitem">
+            <Link href="/productcomment">
               <button className="bg-red-300">상품평</button>
             </Link>
           </div>
