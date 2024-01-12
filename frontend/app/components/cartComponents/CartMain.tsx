@@ -8,30 +8,49 @@ import CartList from "./cartList/CartList";
 // import Image from 'next/image';
 
 export default function CartMain() {
-  const [requestData, setRequestData] = useState([]);
+  // const [requestData, setRequestData] = useState([]);
 
-  const fetchData = async () => {
-    try {
-      const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:3560/cart', {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-      if (!response.ok) {
-        throw new Error("Error fetching data");
-      }
-      const data = await response.json();
-      console.log(data);
-      setRequestData(data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
+  // const fetchData = async () => {
+  //   try {
+  //     const token = localStorage.getItem('token');
+  //     const response = await fetch('http://localhost:3560/cart', {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`
+  //       }
+  //     });
+  //     if (!response.ok) {
+  //       throw new Error("Error fetching data");
+  //     }
+  //     const data = await response.json();
+  //     console.log(data);
+  //     setRequestData(data);
+  //   } catch (error) {
+  //     console.error("Error fetching data:", error);
+  //   }
+  // };
   
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
+
+  const [requestData, setRequestData] = useState([]);
   useEffect(() => {
-    fetchData();
+    const token = localStorage.getItem('token');
+    fetch("http://localhost:3560/cart", {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    .then((res) => res.json())
+    .then((data) => {
+      setRequestData(data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   }, []);
+
+
 
 
   return (
@@ -41,7 +60,7 @@ export default function CartMain() {
       </Link>
       <CartNav />
       <ul id="productUl" className="flex flex-col gap-6 overflow-scroll">
-        {/* {requestData.map((item, index) => (
+        {requestData.map((item, index) => (
           <CartList
             key={index} // 반드시 고유한 key를 제공해야 함
             pUrl={item.image_url}
@@ -49,7 +68,7 @@ export default function CartMain() {
             pPrice={item.paymentpriceatorder}
             pSub={item.description}
           />
-        ))} */}
+        ))}
       </ul>
     </main>
   );
