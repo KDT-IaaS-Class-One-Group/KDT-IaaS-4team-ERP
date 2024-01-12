@@ -47,16 +47,6 @@ const ProductInformation: React.FC<ProductType> = ({ setpaymentcompleteinfo }) =
 
   }, [])
 
-  
-  useEffect(()=> {
-
-    setpaymentcompleteinfo({
-      orderPaymentCount: quantity,
-      orderPaymentTotalPrice: totalPrice,
-      prodIndex: prodIndex
-    });
-  },[productinfo])
-
 
   // useEffect(() => {
   //   // setproductinfo 함수가 완료된 후에 setpaymentcompleteinfo 함수를 호출

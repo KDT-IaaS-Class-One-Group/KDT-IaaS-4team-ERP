@@ -9,6 +9,7 @@
 //   prodIndex : prodIndex,
 //   orderPaymentCount : quantity,
 // })
+// 리퀘스트 포스트 데이터 사용예정
 
 import express from "express";
 import pool from "../../../database";
@@ -16,15 +17,13 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 
 const buybutton = express();
 
-buybutton.post("/product/:prodIndex/:quantity/buy", async (req, res) => {
+buybutton.post("/product/:prodIndex/payment", async (req, res) => {
   let conn;
 
   //* prodIndex
   const prodIndex = parseInt(req.params.prodIndex, 10);
 
-  //* 수량
-  const quantity = parseInt(req.params.quantity, 10);
-  
+  //
   //* 현재 시간 생성
   const orderDate = new Date();
 
