@@ -24,10 +24,6 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productdetails }) => {
     // 다른 필요한 결제 정보들을 추가할 수 있습니다.
   });
 
-  const handlePayment = () => {
-    // 여기에서 결제 정보를 서버에 전송하거나 다른 필요한 동작을 수행합니다.
-    console.log("결제 정보:", paymentInfo);
-  };
 
 
 
@@ -56,7 +52,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productdetails }) => {
                 totalPrice: paymentInfo.totalPrice,
                 prodIndex: productdetails.prodIndex,
               }
-            }} onClick={handlePayment}>
+            }}>
 
               <button className="bg-red-300">구매</button>
             </Link>
