@@ -61,7 +61,11 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productdetails }) => {
               <button className="bg-red-300">장바구니</button>
             </Link>
 
-            <Link href="/productcomment">
+            <Link href={{
+              pathname: `/product/${productdetailsprodIndex}/reviews`, query: {
+                prodIndex: productdetails.prodIndex,
+              }
+            }}>
               <button className="bg-red-300">상품평</button>
             </Link>
           </div>

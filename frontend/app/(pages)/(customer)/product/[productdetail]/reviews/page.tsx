@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import ProductCommentList from '@/components/ProductComment/ProductCommentList';
 import ProductUploadButton from '@/components/ProductComment/ProductUploadButton';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 
 interface productcomment {
   userId: string;
@@ -14,46 +15,50 @@ interface productcomment {
   reviewTitle: string;
 }
 
-export default function Productcomment() {
-  const [productcomment, setProductComment] = useState([]);
+export default function ProductReviews() {
+
+
+
+  const [reviews, setReviews] = useState([]);
+  const searchparams = useSearchParams()
+  const prodIndex = searchparams.get('prodIndex')
+  console.log(prodIndex)
   
   useEffect(() => {
-    const fetchProductcomment = async () => {
+    const fetchreviews = async () => {
       try {
-        const response = await fetch('http://localhost:3560/productcomment'); //로컬환경 테스트 실행 () http://192.168.100.83:3560/productcomment)
+        const response = await fetch(`http://localhost:3570/product/${prodIndex}/reviews`); //로컬환경 테스트 실행 () http://192.168.100.83:3560/productcomment)
         const data = await response.json();//DB에서 가져온 데이터를 json으로 변환
         console.log(data) //콘솔에서 넘어온 데이터 확인
-        const commentData = data.map(list => ({
-          userId : list.userId,
-          reviewUpdatedAt : list.reviewUpdatedAt,
-          reviewRating : list.reviewRating,
-          reviewTitle : list.reviewTitle
-        }));
-        setProductComment(commentData); // 데이터 업데이트
-        console.log(commentData);
+        // const commentData = data.map(list => ({
+        //   userId : list.userId,
+        //   reviewUpdatedAt : list.reviewUpdatedAt,
+        //   reviewRating : list.reviewRating,
+        //   reviewTitle : list.reviewTitle
+        // }));
+        setReviews(data); // 데이터 업데이트
+        // console.log(commentData);
       } catch (error) {
         console.error('데이터를 불러오는 동안 에러 발생:', error);
       }
     }
     // 함수를 호출하여 데이터 가져오기
-    fetchProductcomment(); //호출이 없으면DB 데이터가 안들어옴
+    fetchreviews(); //호출이 없으면DB 데이터가 안들어옴
   },[])
 
   return (
     <>
-      <Link href="/productcommentfull">
       <div className='w-screen h-screen flex justify-start items-center flex-col gap-6'>
-        {productcomment.map((list, index) => (
+        {/* {reviews.map((list, index) => (
           <ProductCommentList
             key={index}
             writerid={list.userId}
             date={list.reviewUpdatedAt}
             starcount={list.reviewRating}
             commenttitle={list.reviewTitle}
-          />
-        ))}
+          />{}
+        ))} */}
       </div>
-      </Link>
       <Link href="/productcommentwriting">
         <div className='mr-40 mb-20'>
           <ProductUploadButton value='상품평 등록' />

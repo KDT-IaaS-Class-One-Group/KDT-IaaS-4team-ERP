@@ -21,7 +21,7 @@ import productcommentfull from "./routes/customer/review/productcommentfull";
 import productcommentwrite from "./routes/customer/review/productcommentwrite";
 
 const app = express();
-const port = 3560;
+const port = 3570;
 
 app.use(
   session({
@@ -55,7 +55,7 @@ app.post("/product/:prodIndex/payment", buybutton);
 // 주몬조회 페이지
 app.get('/orderpage', orderpage)
 // 리뷰 페이지
-app.get('/productcomment', productcomment)
+app.get("/product/:prodIndex/reviews", productcomment)
 app.get('/productcommentfull/:reviewIndex', productcommentfull)
 app.post('/productcommentwrite', productcommentwrite)
 
