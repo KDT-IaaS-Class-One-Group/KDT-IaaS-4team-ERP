@@ -9,7 +9,7 @@ productcomment.get("/product/:prodIndex/reviews", async (req, res) => {
   try {
     conn = await pool.getConnection();
 
-    const [result] = await conn.query('SELECT * FROM reviews WHERE prodIndex = ?', [prodIndex]);
+    const result = await conn.query('SELECT * FROM reviews WHERE prodIndex = ?', [prodIndex]);
     res.status(200).json(result);
     console.log(result)
 

@@ -49,15 +49,15 @@ export default function ProductReviews() {
   return (
     <>
       <div className='w-screen h-screen flex justify-start items-center flex-col gap-6'>
-        {/* {reviews.map((list, index) => (
+        {reviews.map((list, index) => (
           <ProductCommentList
             key={index}
             writerid={list.userId}
             date={list.reviewUpdatedAt}
             starcount={list.reviewRating}
             commenttitle={list.reviewTitle}
-          />{}
-        ))} */}
+          />
+        ))}
       </div>
       <Link href="/productcommentwriting">
         <div className='mr-40 mb-20'>
