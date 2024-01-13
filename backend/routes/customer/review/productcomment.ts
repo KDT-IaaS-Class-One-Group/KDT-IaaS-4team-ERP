@@ -11,7 +11,6 @@ productcomment.get("/product/:prodIndex/reviews", async (req, res) => {
 
     const result = await conn.query('SELECT * FROM reviews WHERE prodIndex = ?', [prodIndex]);
     res.status(200).json(result);
-    console.log(result)
 
   } catch (error) {
     console.error("Error fetching reviews:", error);

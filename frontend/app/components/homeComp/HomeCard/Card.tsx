@@ -3,9 +3,10 @@
 
 import React from 'react';
 import Image from 'next/image';
+import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 
 interface CardProps {
-  prodImgUrl: string;
+  prodImgUrl: StaticImport
   prodName: string;
   prodDescription: string;
   prodPrice: number;

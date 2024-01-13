@@ -57,7 +57,7 @@ export default function CustomerMain(){
       {productwhole.map((list, index) => (
       <Link href={`/product/${list.prodIndex}`} key={index}>
         <Card
-        // prodImgUrl={list.prodImgUrl}
+        prodImgUrl={list.prodImgUrl}
         prodName={list.prodName}
         prodDescription={list.prodDescription}
         prodPrice={list.prodPrice}
