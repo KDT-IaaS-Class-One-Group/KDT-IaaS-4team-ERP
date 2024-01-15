@@ -7,7 +7,7 @@ module.exports = {
       {
         protocol: 'http',
         hostname: 'localhost',
-        port: '3570',
+        port: '3000',
         pathname: '/images**',
       },
     ],

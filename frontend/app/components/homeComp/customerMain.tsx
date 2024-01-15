@@ -52,7 +52,7 @@ export default function CustomerMain(){
 
   return (
     // 병합 후 크기에 대한 스타일링 필요.
-    <main className="flex overflow-hidden outline flex-wrap justify-center w-4/5 h-4/5 gap-6">
+    <main className="flex overflow-scroll outline flex-wrap justify-center w-4/5 h-4/5 gap-6">
       <HomeCategoryNav categories={categorylist} />
       {productwhole.map((list, index) => (
       <Link href={`/product/${list.prodIndex}`} key={index}>

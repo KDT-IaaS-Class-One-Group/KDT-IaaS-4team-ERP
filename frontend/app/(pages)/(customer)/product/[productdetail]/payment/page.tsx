@@ -40,7 +40,7 @@ export default function PaymentPage() {
   const handleButtonClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:3560/product/${prodIndex}/payment`, {
+      const response = await fetch(`http://localhost:3570/product/${prodIndex}/payment`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

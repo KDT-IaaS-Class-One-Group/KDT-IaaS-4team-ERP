@@ -17,6 +17,7 @@ type ProductDetailProps = {
 
 
 const ProductDetail: React.FC<ProductDetailProps> = ({ productdetails }) => {
+  console.log(productdetails)
   const productdetailsprodIndex = productdetails.prodIndex
   const [paymentInfo, setPaymentInfo] = useState({
     quantity: 1,
@@ -30,12 +31,14 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productdetails }) => {
   return (
     <div className="product-detail w-full h-screen flex flex-col items-center">
       <div className="w-4/5 h-2/5 flex justify-around">
-        <div className="w-1/2 h-full bg-slate-300 flex items-center justify-center ">
-          이미지 자리
-        </div>
-        {/* <Image src={productdetail.Img} alt={productdetail.Img} /> */}
+        <div>
 
-        <div className="mr-40">
+          <Image src={`/images${productdetails.prodImgUrl}`}
+            width={500}
+            height={500} alt={productdetails.ImgUrl} />
+        </div>
+
+        <div className="mr-40 mb-20">
           <p>상품 제목: </p>
           {productdetails.prodName}
           <p>가격: </p>
