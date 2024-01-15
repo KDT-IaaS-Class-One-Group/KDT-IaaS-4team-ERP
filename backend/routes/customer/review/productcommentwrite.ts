@@ -6,9 +6,9 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 
 const productcommentwrite = express();
 
-productcommentwrite.post("/productcommentwrite", async (req, res) => {
+productcommentwrite.post("/:prodIndex/reviews", async (req, res) => {
   let conn;
-
+  // const prodIndex = req.params.prodIndex;
   // * 클라이언트 측에서 header로 tokken을 보내준 것을 갖고옴.
   const tokenHeader = req.headers.authorization;
   if (!tokenHeader) {
@@ -18,38 +18,42 @@ productcommentwrite.post("/productcommentwrite", async (req, res) => {
   const token = tokenHeader.split(" ")[1];
 
   //* 토큰을 검증하여 userIndex 정보를 가져옴.
-  let userIndex: string | JwtPayload;
+  let userId: string | JwtPayload;
   try {
     const decoded: JwtPayload = jwt.verify(token, "1234") as JwtPayload;
-    userIndex = decoded.userIndex as string;
+    console.log(decoded)
+    userId = decoded.userId as string;
+    console.log(userId)
   } catch (err) {
     return res.status(401).json({ error: "토큰이 유효하지 않습니다." });
   }
 
   // * 상품이 무엇인지, 상품평 제목, 상품별점, 상품평 내용, 상품평 이미지url
   const {
-    WhichProduct,
     reviewTitle,
     reviewRating,
     reviewContent,
-    reviewImgUrl,
+    prodIndex,
   } = req.body;
+  console.log(reviewRating)
+  console.log(userId)
 
-  let prodIndex;
-  // * WhichProduct = prodName임. 쿼리문으로 prodIndex를 찾아서 review테이블에 넣어줌.
-  try {
-    conn = await pool.getConnection();
-    prodIndex = await conn.query(
-      "SELECT prodIndex FROM reviews WHERE prodName = ?",
-      [WhichProduct]
-    );
-    res.status(200).json(prodIndex);
-  } catch (error) {
-    console.error("Error cannot Found prodIndex:", error);
-    res.status(500).json({ error: "Error cannot Found prodIndex" });
-  } finally {
-    if (conn) conn.release();
-  }
+
+
+  // // * WhichProduct = prodName임. 쿼리문으로 prodIndex를 찾아서 review테이블에 넣어줌.
+  // try {
+  //   conn = await pool.getConnection();
+  //   prodIndex ?= await conn.query(
+  //     "SELECT prodIndex FROM reviews WHERE prodName = ?",
+  //     [WhichProduct]
+  //   );
+  //   res.status(200).json(prodIndex);
+  // } catch (error) {
+  //   console.error("Error cannot Found prodIndex:", error);
+  //   res.status(500).json({ error: "Error cannot Found prodIndex" });
+  // } finally {
+  //   if (conn) conn.release();
+  // }
 
   // * 리뷰등록 시간
   const reviewCreateDate = new Date();
@@ -58,8 +62,8 @@ productcommentwrite.post("/productcommentwrite", async (req, res) => {
   try {
     conn = await pool.getConnection();
     await conn.query(
-      "INSERT INTO reviews (userIndex, prodIndex, reviewTitle, reviewRating, reviewContent, reviewImgUrl) VALUES (?, ?, ?, ?, ?, ?)",
-      [userIndex, prodIndex, reviewTitle, reviewRating, reviewContent, reviewImgUrl]
+      "INSERT INTO reviews (userId, prodIndex, reviewTitle, reviewRating, reviewContent, reviewCreatedAt) VALUES (?, ?, ?, ?, ?, ?)",
+      [userId, prodIndex, reviewTitle, reviewRating, reviewContent, reviewCreateDate]
     );
     res
       .status(201)

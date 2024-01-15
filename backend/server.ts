@@ -56,9 +56,10 @@ app.post("/product/:prodIndex/payment", buybutton);
 // 주몬조회 페이지
 app.get('/orderpage', orderpage)
 // 리뷰 페이지
+
 app.get("/product/:prodIndex/reviews", productcomment)
 app.get('/productcommentfull/:reviewIndex', productcommentfull)
-app.post('/productcommentwrite', productcommentwrite)
+app.post('/:prodIndex/reviews', productcommentwrite)
 
 
 app.listen(port, () => {

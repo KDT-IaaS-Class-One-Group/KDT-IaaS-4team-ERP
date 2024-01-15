@@ -22,7 +22,7 @@ export default function ProductReviews() {
   const [reviews, setReviews] = useState([]);
   const searchparams = useSearchParams()
   const prodIndex = searchparams.get('prodIndex')
-  console.log(prodIndex)
+  // console.log(prodIndex)
 
   useEffect(() => {
     const fetchreviews = async () => {

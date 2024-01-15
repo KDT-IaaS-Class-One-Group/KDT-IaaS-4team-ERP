@@ -5,38 +5,53 @@ import { useState, useEffect } from 'react';
 import ProductText from '@/components/ProductCommentListWriting/ProductText';
 import Link from 'next/link';
 import ProductUploadButton from '../ProductComment/ProductUploadButton';
+import ProductRating from './productrating';
+import { useSearchParams } from 'next/navigation';
+import { useParams } from 'next/navigation';
+import ProductDetail from '@/components/Product/productdetail';
+import ProdWritingButton from './ProductUploadButton';
 
 const ProductWritingHome = () => {
-  const [ProductWrit, setLoginUser] = useState({
+  const prodIndex = useParams().productdetail
+  console.log(prodIndex)
+  
+
+  const [productWrite, setProductWrite] = useState({
     reviewTitle: '',
     reviewContent: '',
     reviewRating: '',
   });
 
   const handleInputChange = (field: string, value: string) => {
-    setLoginUser({
-      ...ProductWrit,
+    setProductWrite({
+      ...productWrite,
       [field]: value,
     });
   };
 
-  const handleSubmit = () => { }; // 등록 Btn
+  const handleRatingChange = (rating: string) => {
+    setProductWrite({
+      ...productWrite,
+      reviewRating: rating,
+    });
+  };
 
-  const titletext = 'flex w-4/5 m-2 h-20 items-start justify-center'
-  const contenttext ='flex w-4/5 m-2 h-4/5 items-start justify-center'
- 
 
-  const handleProductCommentListWriting = async () => {
+  const handleSubmit = async () => {
     try {
-      const response = await fetch('http://localhost:3560/reviews', {
+      const token = localStorage.getItem('token')
+      // console.log(token)
+      const response = await fetch(`http://localhost:3570/${prodIndex}/reviews`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json", // 다른 필요한 헤더들도 추가할 수 있습니다.
+          "Authorization": `Bearer ${token}`,
         },
         body: JSON.stringify({
-          reviewTitle: ProductWrit.reviewTitle,
-          reviewContent: ProductWrit.reviewContent,
-          reviewRating: ProductWrit.reviewRating,
+          prodIndex : prodIndex,
+          reviewTitle: productWrite.reviewTitle,
+          reviewContent: productWrite.reviewContent,
+          reviewRating: productWrite.reviewRating,
         }),
       });
 
@@ -49,15 +64,19 @@ const ProductWritingHome = () => {
 
       if (data.success) {
         // router.push('/');//내가 원하는 페이지로 이동시 사용
-        alert('글 작성 성공');
+        alert('글 등록 성공');
       } else {
-        alert('글 작성 실패');
+        alert('글 등록 실패');
       }
     } catch (error) {
       console.error(error);
       alert('글 작성 실패');
     }
   };
+  const titletext = 'flex w-4/5 m-2 h-20 items-start justify-center'
+  const contenttext ='flex w-4/5 m-2 h-4/5 items-start justify-center'
+  
+
 
   return (
     <div className='flex flex-col items-center bg-blue-400 text-white w-full h-full justify-center'>
@@ -70,9 +89,10 @@ const ProductWritingHome = () => {
         title='CONTENT' textheight ={contenttext}
         inputchange={(value) => handleInputChange('reviewContent', value)}
       />
+      <ProductRating onRatingChange={handleRatingChange} />
       </div>
       <div className='w-4/5 mb-4 flex justify-end h-1/5'>
-        <ProductUploadButton value ='글등록' onClick = {handleSubmit} />
+        <ProdWritingButton value ='글등록' onClick = {handleSubmit} />
       </div>
     </div>
   );

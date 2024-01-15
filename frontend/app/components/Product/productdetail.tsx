@@ -17,7 +17,6 @@ type ProductDetailProps = {
 
 
 const ProductDetail: React.FC<ProductDetailProps> = ({ productdetails }) => {
-  console.log(productdetails)
   const productdetailsprodIndex = productdetails.prodIndex
   const [paymentInfo, setPaymentInfo] = useState({
     quantity: 1,
