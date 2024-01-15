@@ -13,14 +13,14 @@ const ProductText: React.FC<ProductTextProps> = ({ title, inputchange, textheigh
     <div className={textheight}>
       <label
         htmlFor={`inputText-${title}`} // id 속성을 동적으로 생성하여 고유성 보장
-        className='w-32 flex justify-center mt-3'
+        className='w-32 flex justify-center mt-8'
       >
         {`${title} :`}
       </label>
       <input
         type='text'
         id={`inputText-${title}`}
-        className='w-full h-full'
+        className='w-full h-full text-black flex'
         onChange={(e) => {
           inputchange(e.target.value);
         }}
