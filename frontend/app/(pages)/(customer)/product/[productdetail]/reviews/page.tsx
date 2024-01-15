@@ -45,7 +45,7 @@ export default function ProductReviews() {
   return (
     <div className='w-screen h-screen flex flex-col'>
       <div className='w-screen flex justify-end'>
-        <Link href="/productcommentwriting">
+        <Link href={`/product/${prodIndex}/reviews/productwriting`}>
           <ProductUploadButton value='상품평 등록' />
         </Link>
       </div>

@@ -4,13 +4,13 @@
 import { useState, useEffect } from 'react';
 import ProductText from '@/components/ProductCommentListWriting/ProductText';
 import Link from 'next/link';
+import ProductUploadButton from '../ProductComment/ProductUploadButton';
 
 const ProductWritingHome = () => {
   const [ProductWrit, setLoginUser] = useState({
     reviewTitle: '',
     reviewContent: '',
     reviewRating: '',
-    reviewCreatedAt: '',
   });
 
   const handleInputChange = (field: string, value: string) => {
@@ -20,7 +20,11 @@ const ProductWritingHome = () => {
     });
   };
 
-  const handleSubmit = () => {}; // 등록 Btn
+  const handleSubmit = () => { }; // 등록 Btn
+
+  const titletext = 'flex w-4/5 m-2 h-20 items-start justify-center'
+  const contenttext ='flex w-4/5 m-2 h-4/5 items-start justify-center'
+ 
 
   const handleProductCommentListWriting = async () => {
     try {
@@ -33,7 +37,6 @@ const ProductWritingHome = () => {
           reviewTitle: ProductWrit.reviewTitle,
           reviewContent: ProductWrit.reviewContent,
           reviewRating: ProductWrit.reviewRating,
-          reviewCreatedAt: ProductWrit.reviewCreatedAt,
         }),
       });
 
@@ -57,44 +60,19 @@ const ProductWritingHome = () => {
   };
 
   return (
-    <div className='flex flex-col items-center bg-black text-white w-full h-full justify-center'>
-      {/* Area1: 글 쓰기 제목 */}
+    <div className='flex flex-col items-center bg-blue-400 text-white w-full h-full justify-center'>
+      <div className='w-4/5 h-4/5 flex flex-col justify-center items-center'>
       <ProductText
-        title='TITLE'
+        title='TITLE' textheight = {titletext}
         inputchange={(value) => handleInputChange('reviewTitle', value)}
       />
-
-      {/* Area2: 글 쓰기 내용 */}
       <ProductText
-        title='CONTENT'
+        title='CONTENT' textheight ={contenttext}
         inputchange={(value) => handleInputChange('reviewContent', value)}
       />
-
-      {/* Area3: 사진 업로드 영역 */}
-      <div className='bg-gray-400 w-4/5 h-5000 mb-4 flex justify-between'>
-        {/* Area3-div 2: 불러온 사진 썸네일 */}
-        <div className='bg-gray-400 h-450 mb-4'>
-          {/* Area3-div 1: 이미지 썸네일 */}
-          <button className='bg-pink-300 w-32 h-10 mb-4'>
-            <div className='text-center py-2'>이미지 불러오기</div>
-          </button>
-          <div className='text-left py-2 pl-2 flex'>
-            <div className='w-20 h-20 bg-black'> 사진 </div>
-            <div className='w-20 h-20 bg-black'> 사진 </div>
-            <div className='w-20 h-20 bg-black'> 사진 </div>
-            <div className='w-20 h-20 bg-black'> 사진 </div>
-          </div>
-        </div>
-
-        {/* Area4: 등록 버튼(input button) */}
-        <div className='bg-gray-400 w-1/2 flex items-end justify-end'>
-          <input
-            type='button'
-            className='bg-pink-300 w-32 h-10'
-            value='등록'
-            onClick={handleSubmit} // 등록 버튼 클릭 시 handleSubmit 호출
-          />
-        </div>
+      </div>
+      <div className='w-4/5 mb-4 flex justify-end h-1/5'>
+        <ProductUploadButton value ='글등록' onClick = {handleSubmit} />
       </div>
     </div>
   );
