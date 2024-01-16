@@ -12,6 +12,8 @@ product.get("/product/:prodIndex", async (req, res) => {
 
   // *동적 라우팅 매개변수로 prodIndex값 가져오기
   const prodIndex = parseInt(req.params.prodIndex, 10);
+  // console.log(prodIndex)
+
   try {
     conn = await pool.getConnection();
 
@@ -23,7 +25,8 @@ product.get("/product/:prodIndex", async (req, res) => {
       res.status(404).json({ error: 'Product not found' });
     } else {
       // 결과를 클라이언트로 전송
-      res.json(result[0]); // 첫 번째 결과만 전송
+      res.json(result); // 첫 번째 결과만 전송
+      // console.log(result)
     }
   } catch (error) {
     console.error("Error fetching product:", error);

@@ -6,7 +6,7 @@ import { useParams } from "next/navigation";
 
 export default function ProductPage() {
   const {productdetail} = useParams();
-  console.log(useParams())
+  // console.log(useParams())
   const [productdata, setproductdata] =useState([])
 
 
@@ -16,21 +16,19 @@ export default function ProductPage() {
         const response = await fetch(`http://localhost:3560/product/${productdetail}`);
         console.log("productdetail",productdetail);
         const data = await response.json();
-        // console.log(data[1]); // 확인용
+        console.log("data : ",data);
         setproductdata(data)
-        console.log("data",data);
       } catch (error) {
         console.error("에러 발생 :", error);
       }
     }
   fetchProduct();
   },[productdetail])
-  // console.log(productdetail);
-  return (
-    <>
-      <ProductDetail />
-    </>
-  );
-};
+    return (
+      <>
+        <ProductDetail productdetails={productdata} />
+      </>
+    );
+  };
 
 

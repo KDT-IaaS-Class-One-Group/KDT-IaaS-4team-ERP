@@ -6,19 +6,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
 import { useParams } from 'next/navigation';
-
+import { ProductsTableProps } from '@/interfaces/Product/ProductsTableProps';
 
 interface ProductDetailProps {
-  Img: string;
-  Title: string;
-  Price: number;
-  Summary: string;
-  Count: number;
-  Detail: string
-  productdetails: any;
-};
-
-
+  productdetails: ProductsTableProps;
+}
 
 const ProductDetail: React.FC<ProductDetailProps> = ({ productdetails }) => {
   const productdetailsprodIndex = productdetails.prodIndex;
@@ -27,8 +19,6 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productdetails }) => {
     totalPrice: 0
     // 다른 필요한 결제 정보들을 추가할 수 있습니다.
   });
-
-
 
   return (
     <div className="product-detail w-full h-screen flex flex-col items-center ">
@@ -72,13 +62,6 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productdetails }) => {
       </div>
 
       <div className="w-4/5 h-1/3 mt-10 flex justify-center items-center overflow-y-scroll">
-        {productdetails.prodDescription}
-        {productdetails.prodDescription}
-        {productdetails.prodDescription}
-        {productdetails.prodDescription}
-        {productdetails.prodDescription}
-        {productdetails.prodDescription}
-        {productdetails.prodDescription}
         {productdetails.prodDescription}
       </div>
     </div>
