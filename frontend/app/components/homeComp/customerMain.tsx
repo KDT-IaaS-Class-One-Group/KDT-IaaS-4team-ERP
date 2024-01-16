@@ -26,7 +26,7 @@ export default function CustomerMain(){
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch('http://localhost:3560/');  // 서버 주소에 맞게 변경해주세요
+        const response = await fetch('http://localhost:3570/');  // 서버 주소에 맞게 변경해주세요
         const data = await response.json();
         console.log(data)
         const extractedData = data.map(list => ({
@@ -52,12 +52,12 @@ export default function CustomerMain(){
 
   return (
     // 병합 후 크기에 대한 스타일링 필요.
-    <main className="flex overflow-hidden outline flex-wrap justify-center w-4/5 h-4/5 gap-6">
+    <main className="flex overflow-scroll outline flex-wrap justify-center w-4/5 h-4/5 gap-6">
       <HomeCategoryNav categories={categorylist} />
       {productwhole.map((list, index) => (
       <Link href={`/product/${list.prodIndex}`} key={index}>
         <Card
-        // prodImgUrl={list.prodImgUrl}
+        prodImgUrl={list.prodImgUrl}
         prodName={list.prodName}
         prodDescription={list.prodDescription}
         prodPrice={list.prodPrice}

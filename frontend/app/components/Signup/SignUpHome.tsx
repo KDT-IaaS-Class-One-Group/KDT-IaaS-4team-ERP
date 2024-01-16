@@ -24,7 +24,7 @@ const SignUpHome: React.FC = () => {
 
   const handleButtonClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
     try {
-      const response = await fetch(`http://localhost:3560/signup`, {
+      const response = await fetch(`http://localhost:3570/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
