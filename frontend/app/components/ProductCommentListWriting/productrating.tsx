@@ -17,7 +17,7 @@ const ProductRating: React.FC<ProductRatingProps> = ({ onRatingChange }) => {
   return (
     <div className='w-4/5 flex justify-start items-center h-20'>
       <div className='w-32 text-center'>
-        RATING :
+        RATING(필수) :
       </div>
 
       <div className="flex justify-center items-center h-10">

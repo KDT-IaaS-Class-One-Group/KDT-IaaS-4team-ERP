@@ -17,14 +17,14 @@ const ProductText: React.FC<ProductTextProps> = ({ title, inputchange, textheigh
       >
         {`${title} :`}
       </label>
-      <input
-        type='text'
+      <textarea
         id={`inputText-${title}`}
-        className='w-full h-full text-black flex justify-start'
+        
+        className='w-full h-full text-black flex-wrap'
         onChange={(e) => {
           inputchange(e.target.value);
         }}
-      />
+      ></textarea>
     </div>
   );
 };
