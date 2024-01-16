@@ -74,7 +74,7 @@ const ProductWritingHome = () => {
     }
   };
   const titletext = 'flex w-4/5 m-2 h-20 items-start justify-center'
-  const contenttext ='flex w-4/5 m-2 h-4/5 items-start justify-center'
+  const contenttext ='flex w-4/5 m-2 h-4/5 items-start justify-start'
   
 
 

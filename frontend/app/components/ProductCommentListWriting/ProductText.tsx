@@ -20,7 +20,7 @@ const ProductText: React.FC<ProductTextProps> = ({ title, inputchange, textheigh
       <input
         type='text'
         id={`inputText-${title}`}
-        className='w-full h-full text-black flex'
+        className='w-full h-full text-black flex justify-start'
         onChange={(e) => {
           inputchange(e.target.value);
         }}
