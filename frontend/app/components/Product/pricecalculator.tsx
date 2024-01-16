@@ -39,12 +39,11 @@ const ProductPriceCalculator: React.FC = ({productdetails, setPaymentInfo}) => {
 
   return (
     <div>
-      <h1>상품 가격 계산기</h1>
       <br></br>
       <label htmlFor="quantity">수량(개):  </label>
       <input inputMode="numeric" className= 'ml-2 w-20 text-left'type='number' id="quantity" value={quantity} min={1} onChange={handleQuantityChange} />
 
-      <p>총 가격: ${totalPrice}</p>
+      <p>총 가격 :  {totalPrice}원</p>
     </div>
   );
 };
