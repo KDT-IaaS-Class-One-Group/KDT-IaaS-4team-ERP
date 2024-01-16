@@ -48,19 +48,6 @@ const ProductInformation: React.FC<ProductType> = ({ setpaymentcompleteinfo }) =
 
   }, [])
 
-
-  // useEffect(() => {
-  //   // setproductinfo 함수가 완료된 후에 setpaymentcompleteinfo 함수를 호출
-  //   setpaymentcompleteinfo({
-  //     orderPaymentCount: quantity,
-  //     orderPaymentTotalPrice: totalPrice,
-  //     prodIndex: prodIndex
-  //   });
-  // }, []);
-
-  // const [date, setdate] =useState(todaydate)
-  // const buyerinformation = await fetchbuyerinformationdata()
-  // console.log(productinfo)
   return (
     <div className="flex justify-center items-center mt-5">
       <div className={`${styles.productInformation}`}>
