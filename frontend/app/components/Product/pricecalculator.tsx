@@ -4,8 +4,8 @@ interface ProductDatabase {
   [key: string]: number;
 }
 
-const ProductPriceCalculator: React.FC = () => {
-  const [productName, setProductName] = useState<string>('product1');
+const ProductPriceCalculator: React.FC = ({productdetails, setPaymentInfo}) => {
+
   const [quantity, setQuantity] = useState<number>(1);
   const [totalPrice, setTotalPrice] = useState<number | string>(0);
 
@@ -40,10 +40,14 @@ const ProductPriceCalculator: React.FC = () => {
       // 가격과 수량을 곱하여 새로운 가격을 계산
       const newTotalPrice = productPrice * quantity;
       setTotalPrice(newTotalPrice);
-    } else {
-      // 상품이 존재하지 않거나 수량이 유효하지 않을 경우 에러 메시지 출력
-      setTotalPrice('유효하지 않은 입력입니다.');
-    }
+
+
+      setPaymentInfo({
+        quantity : quantity,
+        totalPrice: newTotalPrice,
+        // 다른 필요한 결제 정보들을 추가할 수 있습니다.
+      });
+    } 
   };
 
   return (
@@ -57,8 +61,8 @@ const ProductPriceCalculator: React.FC = () => {
       </select>
         {/* 다른 상품들... */}
       <br></br>
-      <label htmlFor="quantity">수량:</label>
-      <input type="number" id="quantity" value={quantity} min={1} onChange={handleQuantityChange} />
+      <label htmlFor="quantity">수량(개):  </label>
+      <input inputMode="numeric" className= 'ml-2 w-20 text-left'type='number' id="quantity" value={quantity} min={1} onChange={handleQuantityChange} />
 
       <p>총 가격: ${totalPrice}</p>
     </div>

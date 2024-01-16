@@ -3,9 +3,10 @@
 
 import React from 'react';
 import Image from 'next/image';
+import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 
 interface CardProps {
-  prodImgUrl: string;
+  prodImgUrl: StaticImport
   prodName: string;
   prodDescription: string;
   prodPrice: number;
@@ -20,15 +21,16 @@ interface CardProps {
  * @returns
  */
 const Card: React.FC<CardProps> = ({ prodImgUrl, prodName, prodDescription, prodPrice }) => {
+  // console.log(prodImgUrl)
   return (
     <div className='flex flex-col justify-between items-center w-80 h-4/5 border border-black p-4 gap-6'>
       <Image
-        src={prodImgUrl}
+        src={`/images${prodImgUrl}`}
         alt='homepageCardImage'
         width={280}
         height={280}
         className=' outline-1 outline'
-      />
+      priority />
       <div className='card-subArea w-full h-1/3 flex justify-between flex-col '>
         <div>
           <div className='w-1/3 h-1 border-b-2 border-slate-800 mb-1'></div>

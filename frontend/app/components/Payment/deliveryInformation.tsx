@@ -3,43 +3,54 @@ import { deliveryType } from "./types"
 
 type DeliveryInfo = {
   deliveryinfo: deliveryType;
+  setpaymentcompleteinfo: (field: string, value: string) => void;
 };
 
 
-const DeliveryInformation: React.FC<DeliveryInfo> = ({ deliveryinfo }) => {
+const DeliveryInformation: React.FC<DeliveryInfo> = ({
+  deliveryinfo,
+  setpaymentcompleteinfo
+}) => { 
+  const handleInputChange = (field: string) => (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setpaymentcompleteinfo(field, event.target.value);
+  };
+
+
   // const buyerinformation = await fetchbuyerinformationdata()
 
   return (
     <div className="flex justify-center items-center mt-5">
       <div
-        className={`${styles.buyerInformation} flex flex-col justify-center`}
+        className={`${styles.buyerInformation} flex flex-col justify-center h-3/5`}
       >
         {/* tailwind와 css모듈 같이 사용하기 */}
-        <div className="relative mt-2 mb-2">
-          <p>배송정보:</p>
-          <p>product data</p>
+        <div className="flex w-full justify-around mt-2 mb-2 ">
+          <label htmlFor="deliveryname">이름:</label>
+          <input type ='text' className='w-3/5' id ='deliveryname'  onChange={handleInputChange("orderReceiver")} />
           {/* {deliveryinfo.productData} */}
         </div>
 
-        <div className="relative mt-2 mb-2">
-          <p>이름/연락처:</p>
-          <p>buyerInfo data</p>
-          {/* {deliveryinfo.buyerInfo} */}
+        <div className="flex w-full justify-around mt-2 mb-2 ">
+        <label htmlFor="deliveryphone">연락처:</label>
+          <input type ='text' className='w-3/5' id ='deliveryphone' onChange={handleInputChange("orderReceiverPhone")} />
+
         </div>
 
-        <div className="relative mt-2 mb-2">
-          <p>주소:</p>
-          <p>address data</p>
-          {/* {deliveryinfo.address} */}
+        <div className="flex w-full justify-around mt-2 mb-2 ">
+        <label htmlFor="deliveryaddress">주소:</label>
+          <input  type ='text' className='w-3/5' id ='deliveryaddress' onChange={handleInputChange("orderDeliveryAddress")} />
         </div>
 
-        <div className="relative mt-2 mb-2">
-          <p>요청사항:</p>
-          <p>request data </p>
-          {/* {deliveryinfo.request} */}
+        <div className="flex w-full justify-around mt-2 mb-2 ">
+        <label htmlFor="deliveryrequest">요청사항:</label>
+          <input type ='text' className='w-3/5 ' id ='deliveryrequest' onChange={handleInputChange("orderRequest")} />
+
         </div>
       </div>
     </div>
+    
   );
 }
 

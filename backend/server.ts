@@ -12,14 +12,17 @@ import customerLogin from "./routes/customer/customerLogin";
 import customerSignup from "./routes/customer/customerSignup";
 import mainPage from "./routes/customer/mainPage";
 import product from "./routes/customer/productpage/productpage";
-import buybutton from "./routes/customer/productpage/buybutton";
+import buybutton from "./routes/customer/paymentpage/buybutton";
 import paymentDataForProductPage from "./routes/customer/paymentpage/productTopaymentpage";
 import paymentDataForCart from "./routes/customer/paymentpage/cartTopaymentPage";
+import orderpage from "./routes/customer/orderpage/orderpage";
 import productcomment from "./routes/customer/review/productcomment";
+import productcommentfull from "./routes/customer/review/productcommentfull";
+import productcommentwrite from "./routes/customer/review/productcommentwrite";
 import cartpage from "./routes/customer/cartpage/cartpage";
 
 const app = express();
-const port = 3560;
+const port = 3570;
 
 app.use(
   session({
@@ -31,6 +34,7 @@ app.use(
 );
 app.use(cors());
 app.use(bodyParser.json());
+app.use(express.static('public'));
 
 // 테스트
 app.get("/post", test); 
@@ -43,16 +47,21 @@ app.post("/admin/login", adminLogin);
 // 메인페이지
 app.get("/", mainPage);
 // 로그인, 회원가입 페이지
-app.post("/login", customerLogin);
+app.post("/login", customerLogin); 
 app.post("/signup", customerSignup);
 // 상품 페이지
 app.get("/product", product);
-app.post("/product/buy", buybutton);
 // 구매 페이지
-app.get('/product/:prodIndex/payment', paymentDataForProductPage)
-app.post('/cartToPayment', paymentDataForCart)
+app.get('/product/:prodIndex/payment', paymentDataForProductPage) // 구매페이지 초기 useeffect로 인한 상품정보 요청
+app.post('/cartToPayment', paymentDataForCart) 
+app.post("/product/:prodIndex/payment", buybutton); // 구매페이지 구매완료 버튼 클릭시 오는 포스트 요청
+// 주몬조회 페이지
+app.get('/orderpage', orderpage)
 // 리뷰 페이지
-app.get('/productcomment', productcomment)
+
+app.get("/product/:prodIndex/reviews", productcomment)
+app.get('/productcommentfull/:reviewIndex', productcommentfull)
+app.post('/:prodIndex/reviews', productcommentwrite)
 // 카트 페이지
 app.get('/cart', cartpage);
 

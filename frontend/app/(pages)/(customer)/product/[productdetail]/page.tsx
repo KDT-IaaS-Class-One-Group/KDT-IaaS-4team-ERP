@@ -5,15 +5,18 @@ import { useParams } from "next/navigation";
 // import { useRouter } from "next/router";
 
 export default function ProductPage() {
-  const [productdata, setproductdata] =useState([])
   const {productdetail} = useParams();
+  console.log(useParams())
+  const [productdata, setproductdata] =useState([])
+
 
   useEffect(()=> {
     const fetchCommentsfull = async () => {
     try {
-      const response = await fetch(`/product/${productdetail}`);
+      const response = await fetch(`http://localhost:3570/product/${productdetail}`);
+      console.log(productdetail)
       const data = await response.json();
-      console.log(data); // 확인용
+      // console.log(data[1]); // 확인용
       setproductdata(data)
 
   } catch (error) {

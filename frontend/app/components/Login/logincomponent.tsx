@@ -1,4 +1,6 @@
 'use client';
+import React, { ChangeEvent } from 'react';
+
 import Link from 'next/link';
 import LoginButton from './loginbutton';
 import LoginText from './logintext';
@@ -41,7 +43,7 @@ const LoginHome = () => {
       const data = await response.json();
       console.log(data);
       if (data.success) {
-        router.push('/');
+        location.href='/'
         localStorage.setItem('token', data.token)
         alert('로그인 성공');
       } else {

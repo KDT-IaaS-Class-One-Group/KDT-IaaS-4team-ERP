@@ -1,21 +1,37 @@
 // * 상품페이지에서 구매 버튼 클릭시 받아야되는 데이터
 // * 입력받는 데이터: userIndex, prodIndex, quantity
 
+//   const [paymentcompleteinfo, setpaymentcompleteinfo] =useState(
+//   {orderReceiver : '',
+//   orderReceiverPhone : '',
+//   orderDeliveryAddress : '',
+//   orderRequest : '',
+//   prodIndex : prodIndex,
+//   orderPaymentCount : quantity,
+// })
+// 리퀘스트 포스트 데이터 사용예정
+
 import express from "express";
 import pool from "../../../database";
 import jwt, { JwtPayload } from "jsonwebtoken";
 
 const buybutton = express();
 
-buybutton.post("/product/:prodIndex/:quantity/buy", async (req, res) => {
+buybutton.post("/product/:prodIndex/payment", async (req, res) => {
+  console.log(req.body)
+
+
+  const {  orderReceiver,  orderReceiverPhone, orderDeliveryAddress, orderRequest, prodIndex, orderPaymentCount } =
+  req.body.paymentcompleteinfo;
+
+  console.log(prodIndex)
   let conn;
+  console.log(orderReceiver)
 
   //* prodIndex
-  const prodIndex = parseInt(req.params.prodIndex, 10);
+  // const prodIndex = parseInt(req.params.prodIndex, 10);
 
-  //* 수량
-  const quantity = parseInt(req.params.quantity, 10);
-  
+  //
   //* 현재 시간 생성
   const orderDate = new Date();
 
@@ -39,13 +55,16 @@ buybutton.post("/product/:prodIndex/:quantity/buy", async (req, res) => {
   try {
     conn = await pool.getConnection();
 
-    const orderPaymentPriceAtOrder = await conn.query("SELECT orderPaymentPriceAtOrder from products WHERE prodIndex=?", [prodIndex])*quantity
+    const orderPaymentPriceAtOrder = await conn.query("SELECT prodPrice from products WHERE prodIndex=?", [prodIndex])
 
+    const orderPayment = orderPaymentPriceAtOrder[0].prodPrice
+    console.log(orderPayment)
+    console.log(orderPayment*orderPaymentCount)
 
     // 여기에서 userIndex를 사용하여 데이터베이스에 쓰는 로직을 작성
     await conn.query(
-      "INSERT INTO orders (userIndex, prodIndex, orderDatetime, orderPaymentCount, orderPaymentPriceAtOrder) VALUES (?, ?, ?, ?, ?)",
-      [userIndex, prodIndex, orderDate, quantity, orderPaymentPriceAtOrder]
+      "INSERT INTO orders (userIndex, orderReceiver, prodIndex, orderPaymentDatetime, orderRequest, orderReceiverPhone, orderDeliveryAddress, orderPaymentCount, orderPaymentPriceAtOrder, orderPaymentTotalPrice) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      [userIndex, orderReceiver, prodIndex, orderDate, orderRequest, orderReceiverPhone, orderDeliveryAddress, orderPaymentCount, orderPayment, orderPayment*orderPaymentCount]
     );
 
     res.json({
