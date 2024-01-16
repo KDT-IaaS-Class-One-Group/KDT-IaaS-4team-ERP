@@ -30,7 +30,7 @@ const ProductPriceCalculator: React.FC = ({productdetails, setPaymentInfo}) => {
 
 
       setPaymentInfo({
-        quantity,
+        quantity : quantity,
         totalPrice: newTotalPrice,
         // 다른 필요한 결제 정보들을 추가할 수 있습니다.
       });
@@ -41,8 +41,8 @@ const ProductPriceCalculator: React.FC = ({productdetails, setPaymentInfo}) => {
     <div>
       <h1>상품 가격 계산기</h1>
       <br></br>
-      <label htmlFor="quantity">수량:</label>
-      <input type="number" id="quantity" value={quantity} min={1} onChange={handleQuantityChange} />
+      <label htmlFor="quantity">수량(개):  </label>
+      <input inputMode="numeric" className= 'ml-2 w-20 text-left'type='number' id="quantity" value={quantity} min={1} onChange={handleQuantityChange} />
 
       <p>총 가격: ${totalPrice}</p>
     </div>

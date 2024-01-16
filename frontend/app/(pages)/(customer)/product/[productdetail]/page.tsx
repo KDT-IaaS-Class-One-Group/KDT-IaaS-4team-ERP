@@ -13,10 +13,10 @@ export default function ProductPage() {
   useEffect(()=> {
   const fetchProduct = async () => {
     try {
-      const response = await fetch(`http://localhost:3560/product/${productdetail}`);
+      const response = await fetch(`http://localhost:3570/product/${productdetail}`);
       console.log(productdetail)
       const data = await response.json();
-      console.log(data[1]); // 확인용
+      // console.log(data[1]); // 확인용
       setproductdata(data)
     } catch (error) {
       console.error("에러 발생 :", error);

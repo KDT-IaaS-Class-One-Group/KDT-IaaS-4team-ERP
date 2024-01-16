@@ -4,36 +4,54 @@
 import { useState, useEffect } from 'react';
 import ProductText from '@/components/ProductCommentListWriting/ProductText';
 import Link from 'next/link';
+import ProductUploadButton from '../ProductComment/ProductUploadButton';
+import ProductRating from './productrating';
+import { useSearchParams } from 'next/navigation';
+import { useParams } from 'next/navigation';
+import ProductDetail from '@/components/Product/productdetail';
+import ProdWritingButton from './ProductUploadButton';
 
 const ProductWritingHome = () => {
-  const [ProductWrit, setLoginUser] = useState({
+  const prodIndex = useParams().productdetail
+  console.log(prodIndex)
+  
+
+  const [productWrite, setProductWrite] = useState({
     reviewTitle: '',
     reviewContent: '',
     reviewRating: '',
-    reviewCreatedAt: '',
   });
 
   const handleInputChange = (field: string, value: string) => {
-    setLoginUser({
-      ...ProductWrit,
+    setProductWrite({
+      ...productWrite,
       [field]: value,
     });
   };
 
-  const handleSubmit = () => {}; // 등록 Btn
+  const handleRatingChange = (rating: string) => {
+    setProductWrite({
+      ...productWrite,
+      reviewRating: rating,
+    });
+  };
 
-  const handleProductCommentListWriting = async () => {
+
+  const handleSubmit = async () => {
     try {
-      const response = await fetch('http://localhost:3560/reviews', {
+      const token = localStorage.getItem('token')
+      // console.log(token)
+      const response = await fetch(`http://localhost:3570/${prodIndex}/reviews`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json", // 다른 필요한 헤더들도 추가할 수 있습니다.
+          "Authorization": `Bearer ${token}`,
         },
         body: JSON.stringify({
-          reviewTitle: ProductWrit.reviewTitle,
-          reviewContent: ProductWrit.reviewContent,
-          reviewRating: ProductWrit.reviewRating,
-          reviewCreatedAt: ProductWrit.reviewCreatedAt,
+          prodIndex : prodIndex,
+          reviewTitle: productWrite.reviewTitle,
+          reviewContent: productWrite.reviewContent,
+          reviewRating: productWrite.reviewRating,
         }),
       });
 
@@ -46,55 +64,35 @@ const ProductWritingHome = () => {
 
       if (data.success) {
         // router.push('/');//내가 원하는 페이지로 이동시 사용
-        alert('글 작성 성공');
+        alert('글 등록 성공');
       } else {
-        alert('글 작성 실패');
+        alert('글 등록 실패');
       }
     } catch (error) {
       console.error(error);
       alert('글 작성 실패');
     }
   };
+  const titletext = 'flex w-4/5 m-2 h-20 items-start justify-center'
+  const contenttext ='flex w-4/5 m-2 h-4/5 items-start justify-start'
+  
+
 
   return (
-    <div className='flex flex-col items-center bg-black text-white w-full h-full justify-center'>
-      {/* Area1: 글 쓰기 제목 */}
+    <div className='flex flex-col items-center bg-blue-400 text-white w-full h-full justify-center'>
+      <div className='w-4/5 h-4/5 flex flex-col justify-center items-center'>
       <ProductText
-        title='TITLE'
+        title='TITLE' textheight = {titletext}
         inputchange={(value) => handleInputChange('reviewTitle', value)}
       />
-
-      {/* Area2: 글 쓰기 내용 */}
       <ProductText
-        title='CONTENT'
+        title='CONTENT' textheight ={contenttext}
         inputchange={(value) => handleInputChange('reviewContent', value)}
       />
-
-      {/* Area3: 사진 업로드 영역 */}
-      <div className='bg-gray-400 w-4/5 h-5000 mb-4 flex justify-between'>
-        {/* Area3-div 2: 불러온 사진 썸네일 */}
-        <div className='bg-gray-400 h-450 mb-4'>
-          {/* Area3-div 1: 이미지 썸네일 */}
-          <button className='bg-pink-300 w-32 h-10 mb-4'>
-            <div className='text-center py-2'>이미지 불러오기</div>
-          </button>
-          <div className='text-left py-2 pl-2 flex'>
-            <div className='w-20 h-20 bg-black'> 사진 </div>
-            <div className='w-20 h-20 bg-black'> 사진 </div>
-            <div className='w-20 h-20 bg-black'> 사진 </div>
-            <div className='w-20 h-20 bg-black'> 사진 </div>
-          </div>
-        </div>
-
-        {/* Area4: 등록 버튼(input button) */}
-        <div className='bg-gray-400 w-1/2 flex items-end justify-end'>
-          <input
-            type='button'
-            className='bg-pink-300 w-32 h-10'
-            value='등록'
-            onClick={handleSubmit} // 등록 버튼 클릭 시 handleSubmit 호출
-          />
-        </div>
+      <ProductRating onRatingChange={handleRatingChange} />
+      </div>
+      <div className='w-4/5 mb-4 flex justify-end h-1/5'>
+        <ProdWritingButton value ='글등록' onClick = {handleSubmit} />
       </div>
     </div>
   );

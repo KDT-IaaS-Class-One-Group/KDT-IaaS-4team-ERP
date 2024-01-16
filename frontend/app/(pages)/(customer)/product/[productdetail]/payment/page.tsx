@@ -40,7 +40,7 @@ export default function PaymentPage() {
   const handleButtonClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:3560/product/${prodIndex}/payment`, {
+      const response = await fetch(`http://localhost:3570/product/${prodIndex}/payment`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -51,7 +51,7 @@ export default function PaymentPage() {
       });
       if (!response.ok) {
         const errorMessage = await response.text();
-        throw new Error(`데이터 응답 못받음${response1.status} - ${errorMessage}`);
+        throw new Error(`데이터 응답 못받음${response.status} - ${errorMessage}`);
       }
 
       const data = await response.json();

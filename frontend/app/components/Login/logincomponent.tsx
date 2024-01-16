@@ -25,7 +25,7 @@ const LoginHome = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch(`http://localhost:3560/login`, {
+      const response = await fetch(`http://localhost:3570/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ const LoginHome = () => {
       const data = await response.json();
       console.log(data);
       if (data.success) {
-        router.push('/');
+        location.href='/'
         localStorage.setItem('token', data.token)
         alert('로그인 성공');
       } else {

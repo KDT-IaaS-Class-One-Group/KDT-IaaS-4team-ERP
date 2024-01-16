@@ -20,53 +20,50 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productdetails }) => {
   const productdetailsprodIndex = productdetails.prodIndex
   const [paymentInfo, setPaymentInfo] = useState({
     quantity: 1,
-    totalPrice: 0,
+    totalPrice: 0
     // 다른 필요한 결제 정보들을 추가할 수 있습니다.
   });
+  console.log(productdetails)
 
-  const handlePayment = () => {
-    // 여기에서 결제 정보를 서버에 전송하거나 다른 필요한 동작을 수행합니다.
-    console.log("결제 정보:", paymentInfo);
-  };
 
 
 
   return (
-    <div className="product-detail w-full h-screen flex flex-col items-center">
-      <div className="w-4/5 h-2/5 flex justify-around">
-        <div className="w-1/2 h-full bg-slate-300 flex items-center justify-center ">
-          이미지 자리
+    <div className="product-detail w-full h-screen flex flex-col items-center ">
+      <div className="w-4/5 h-2/5 flex justify-center">
+        <div className='mt-10'>
+          <Image src={`/images${productdetails.prodImgUrl}`}
+            width={300}
+            height={300} alt='제품 사진 ' />
         </div>
-        {/* <Image src={productdetail.Img} alt={productdetail.Img} /> */}
 
-        <div className="mr-40">
-          <p>상품 제목: </p>
-          {productdetails.prodName}
-          <p>가격: </p>
-          {productdetails.prodPrice}
-          <p>상품 간략설명: </p>
-          {productdetails.prodDescription}
+        <div className="ml-20 mt-10 font-sans text-2xl">
+          <p>{`상품제목 : ${productdetails.prodName}`}</p>
+          <p>{`상품가격 : ${productdetails.prodPrice}`}</p>
+          <p>{`상품설명 : ${productdetails.prodDescription}`}</p>
           <ProductPriceCalculator productdetails={productdetails} setPaymentInfo={setPaymentInfo} />
-          <div className="flex justify-around">
-            {/* 링크로 바꿔야되나? */}
 
+          <div className="flex justify-around mt-10">
             <Link href={{
               pathname: `/product/${productdetailsprodIndex}/payment`, query: {
                 quantity: paymentInfo.quantity,
                 totalPrice: paymentInfo.totalPrice,
                 prodIndex: productdetails.prodIndex,
               }
-            }} onClick={handlePayment}>
-
-              <button className="bg-red-300">구매</button>
+            }}>
+              <button className="bg-blue-400 w-28 h-16">구매</button>
             </Link>
 
             <Link href="/cart">
-              <button className="bg-red-300">장바구니</button>
+              <button className="bg-blue-400 w-28 h-16">장바구니</button>
             </Link>
 
-            <Link href="/productcomment">
-              <button className="bg-red-300">상품평</button>
+            <Link href={{
+              pathname: `/product/${productdetailsprodIndex}/reviews`, query: {
+                prodIndex: productdetails.prodIndex,
+              }
+            }}>
+              <button className="bg-blue-400 w-28 h-16">상품평</button>
             </Link>
           </div>
         </div>

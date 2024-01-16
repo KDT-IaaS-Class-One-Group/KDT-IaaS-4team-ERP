@@ -8,23 +8,23 @@ interface ProductTextProps {
   inputchange: (value: string) => void; // ChangeEvent<HTMLInputElement> 대신 value를 직접 전달
 }
 
-const ProductText: React.FC<ProductTextProps> = ({ title, inputchange }) => {
+const ProductText: React.FC<ProductTextProps> = ({ title, inputchange, textheight }) => {
   return (
-    <div className='flex h-20 m-2 w-full justify-between'>
+    <div className={textheight}>
       <label
         htmlFor={`inputText-${title}`} // id 속성을 동적으로 생성하여 고유성 보장
-        className='w-32 text-center flex justify-center items-center'
+        className='w-32 flex justify-center mt-8'
       >
         {`${title} :`}
       </label>
-      <input
-        type='text'
+      <textarea
         id={`inputText-${title}`}
-        className='w-3/5 border-solid border-2'
+        
+        className='w-full h-full text-black flex-wrap'
         onChange={(e) => {
           inputchange(e.target.value);
         }}
-      />
+      ></textarea>
     </div>
   );
 };
