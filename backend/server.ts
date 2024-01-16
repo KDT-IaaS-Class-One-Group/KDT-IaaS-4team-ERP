@@ -26,7 +26,7 @@ import productcommentfull from "./routes/customer/review/productcommentfull";
 import productcommentwrite from "./routes/customer/review/productcommentwrite";
 
 const app = express();
-const port = 3570;
+const port = 3560;
 
 app.use(
   session({

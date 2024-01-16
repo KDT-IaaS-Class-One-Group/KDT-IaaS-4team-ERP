@@ -13,7 +13,7 @@ export default function ProductPage() {
   useEffect(()=> {
   const fetchProduct = async () => {
     try {
-      const response = await fetch(`http://localhost:3570/product/${productdetail}`);
+      const response = await fetch(`http://localhost:3560/product/${productdetail}`);
       console.log(productdetail)
       const data = await response.json();
       // console.log(data[1]); // 확인용
