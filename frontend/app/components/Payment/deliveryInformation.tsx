@@ -1,14 +1,14 @@
 import styles from "./style/deliveryInformation.module.css";
-import { deliveryType } from "./types"
+import { productType } from "./types";
+import { Productpaymentprops } from "@/interfaces/Product/ProductpaymentProps";
 
-type DeliveryInfo = {
-  deliveryinfo: deliveryType;
-  setpaymentcompleteinfo: (field: string, value: string) => void;
-};
+// type DeliveryInfo = {
+//   deliveryinfo: deliveryType;
+//   setpaymentcompleteinfo: (field: string, value: string) => void;
+// };
 
 
-const DeliveryInformation: React.FC<DeliveryInfo> = ({
-  deliveryinfo,
+const DeliveryInformation: React.FC<Productpaymentprops> = ({
   setpaymentcompleteinfo
 }) => { 
   const handleInputChange = (field: string) => (
