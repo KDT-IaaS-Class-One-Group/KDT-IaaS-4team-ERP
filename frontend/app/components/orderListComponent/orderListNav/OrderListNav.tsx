@@ -11,7 +11,7 @@ const OrderListNav: React.FC = () => {
         <li className='w-1/6 flex justify-center items-center border border-black h-full'>주문 일자</li>
         <li className='w-1/6 flex justify-center items-center border border-black h-full'>주문 번호</li>
         <li className='w-1/2 flex justify-center items-center border border-black h-full'>주문 금액(수량)</li>
-        <li className='w-1/2 flex justify-center items-center border border-black h-full'>주문 상태</li>
+        <li className='w-1/2 flex justify-center items-center border border-black h-full'>배송 상태</li>
       </ul>
     </ul>
   );

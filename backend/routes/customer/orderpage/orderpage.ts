@@ -6,7 +6,7 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 
 const orderpage = express();
 
-orderpage.post("/orderpage", async (req, res) => {
+orderpage.get("/orderpage/getdata", async (req, res) => {
   let conn;
 
   // * 클라이언트 측에서 header로 tokken을 보내준 것을 갖고옴.
@@ -30,7 +30,7 @@ orderpage.post("/orderpage", async (req, res) => {
     conn = await pool.getConnection();
 
     const orderResult = await conn.query(
-      "SELECT * from orders WHERE userIndex = ?",
+      "SELECT orders.orderIndex, orders.orderPaymentCount, orders.orderDeliveryDone, orders.orderPaymentDatetime, products.prodPrice, products.prodImgUrl, products.prodDescription FROM orders JOIN products ON orders.prodIndex = products.prodIndex WHERE orders.userIndex = ?",
       [userIndex]
     );
     if (orderResult.length === 0) {
