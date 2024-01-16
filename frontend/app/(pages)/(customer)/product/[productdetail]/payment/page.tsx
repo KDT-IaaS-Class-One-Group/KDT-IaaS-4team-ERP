@@ -51,7 +51,7 @@ export default function PaymentPage() {
       });
       if (!response.ok) {
         const errorMessage = await response.text();
-        throw new Error(`데이터 응답 못받음${response1.status} - ${errorMessage}`);
+        throw new Error(`데이터 응답 못받음${response.status} - ${errorMessage}`);
       }
 
       const data = await response.json();

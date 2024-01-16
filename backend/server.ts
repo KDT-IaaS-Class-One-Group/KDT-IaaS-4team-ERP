@@ -45,14 +45,14 @@ app.post("/admin/login", adminLogin);
 // 메인페이지
 app.get("/", mainPage);
 // 로그인, 회원가입 페이지
-app.post("/login", customerLogin);
+app.post("/login", customerLogin); 
 app.post("/signup", customerSignup);
 // 상품 페이지
 app.get("/product/:prodIndex", product);
 // 구매 페이지
-app.post('/product/:prodIndex/payment', paymentDataForProductPage)
-app.post('/cartToPayment', paymentDataForCart)
-app.post("/product/:prodIndex/payment", buybutton);
+app.get('/product/:prodIndex/payment', paymentDataForProductPage) // 구매페이지 초기 useeffect로 인한 상품정보 요청
+app.post('/cartToPayment', paymentDataForCart) 
+app.post("/product/:prodIndex/payment", buybutton); // 구매페이지 구매완료 버튼 클릭시 오는 포스트 요청
 // 주몬조회 페이지
 app.get('/orderpage', orderpage)
 // 리뷰 페이지

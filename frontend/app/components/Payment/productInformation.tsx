@@ -33,6 +33,7 @@ const ProductInformation: React.FC<ProductType> = ({ setpaymentcompleteinfo }) =
         console.log(data);
      
         setproductinfo(data[0]); 
+        console.log(data[0])
         // setpaymentcompleteinfo({orderPaymentCount : quantity,
         //   orderPaymentTotalPrice : totalPrice, prodIndex : prodIndex })       
         

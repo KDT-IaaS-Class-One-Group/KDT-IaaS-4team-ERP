@@ -63,8 +63,8 @@ buybutton.post("/product/:prodIndex/payment", async (req, res) => {
 
     // 여기에서 userIndex를 사용하여 데이터베이스에 쓰는 로직을 작성
     await conn.query(
-      "INSERT INTO orders (userIndex, prodIndex, orderPaymentDatetime, orderRequest, orderReceiverPhone, orderDeliveryAddress, orderPaymentCount, orderPaymentPriceAtOrder, orderPaymentTotalPrice) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
-      [userIndex, prodIndex, orderDate, orderRequest, orderReceiverPhone, orderDeliveryAddress, orderPaymentCount, orderPayment, orderPayment*orderPaymentCount]
+      "INSERT INTO orders (userIndex, orderReceiver, prodIndex, orderPaymentDatetime, orderRequest, orderReceiverPhone, orderDeliveryAddress, orderPaymentCount, orderPaymentPriceAtOrder, orderPaymentTotalPrice) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      [userIndex, orderReceiver, prodIndex, orderDate, orderRequest, orderReceiverPhone, orderDeliveryAddress, orderPaymentCount, orderPayment, orderPayment*orderPaymentCount]
     );
 
     res.json({
