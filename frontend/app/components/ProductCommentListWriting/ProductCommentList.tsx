@@ -1,20 +1,17 @@
 'use client'
-// 'use client' 대신 'use strict'으로 가정하고 수정했습니다.
 
 import { useState, useEffect } from 'react';
 import ProductText from '@/components/ProductCommentListWriting/ProductText';
-import Link from 'next/link';
-import ProductUploadButton from '../ProductComment/ProductUploadButton';
+// import Link from 'next/link';
 import ProductRating from './productrating';
-import { useSearchParams } from 'next/navigation';
+// import { useSearchParams } from 'next/navigation';
 import { useParams } from 'next/navigation';
-import ProductDetail from '@/components/Product/productdetail';
-import ProdWritingButton from './ProductUploadButton';
+import ProdWritingButton from './ProdWritingButton';
 
 const ProductWritingHome = () => {
   const prodIndex = useParams().productdetail
   console.log(prodIndex)
-  
+
 
   const [productWrite, setProductWrite] = useState({
     reviewTitle: '',
@@ -48,7 +45,7 @@ const ProductWritingHome = () => {
           "Authorization": `Bearer ${token}`,
         },
         body: JSON.stringify({
-          prodIndex : prodIndex,
+          prodIndex: prodIndex,
           reviewTitle: productWrite.reviewTitle,
           reviewContent: productWrite.reviewContent,
           reviewRating: productWrite.reviewRating,
@@ -74,25 +71,25 @@ const ProductWritingHome = () => {
     }
   };
   const titletext = 'flex w-4/5 m-2 h-20 items-start justify-center'
-  const contenttext ='flex w-4/5 m-2 h-4/5 items-start justify-start'
-  
+  const contenttext = 'flex w-4/5 m-2 h-4/5 items-start justify-start'
+
 
 
   return (
     <div className='flex flex-col items-center bg-blue-400 text-white w-full h-full justify-center'>
       <div className='w-4/5 h-4/5 flex flex-col justify-center items-center'>
-      <ProductText
-        title='TITLE' textheight = {titletext}
-        inputchange={(value) => handleInputChange('reviewTitle', value)}
-      />
-      <ProductText
-        title='CONTENT' textheight ={contenttext}
-        inputchange={(value) => handleInputChange('reviewContent', value)}
-      />
-      <ProductRating onRatingChange={handleRatingChange} />
+        <ProductText
+          title='TITLE' textheight={titletext}
+          inputchange={(value) => handleInputChange('reviewTitle', value)}
+        />
+        <ProductText
+          title='CONTENT' textheight={contenttext}
+          inputchange={(value) => handleInputChange('reviewContent', value)}
+        />
+        <ProductRating onRatingChange={handleRatingChange} />
       </div>
       <div className='w-4/5 mb-4 flex justify-end h-1/5'>
-        <ProdWritingButton value ='글등록' onClick = {handleSubmit} />
+        <ProdWritingButton value='글등록' onClick={handleSubmit} />
       </div>
     </div>
   );

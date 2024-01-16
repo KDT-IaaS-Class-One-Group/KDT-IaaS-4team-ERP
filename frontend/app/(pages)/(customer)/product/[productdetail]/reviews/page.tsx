@@ -45,16 +45,18 @@ export default function ProductReviews() {
   console.log(reviews)
 
   return (
-    <div className='w-screen h-screen flex flex-col'>
-      <div className='w-screen flex justify-end'>
-        <Link href={`/product/${prodIndex}/reviews/productwriting`}>
+    <div className='w-screen h-screen flex flex-col overflow-y-scroll'>
+      <div className='w-full flex justify-end h-1/5'>
+        <Link className='w-full flex justify-end h-1/5' href={`/product/${prodIndex}/reviews/productwriting`}>
           <ProductUploadButton value='상품평 등록' />
         </Link>
       </div>
-      <div className='w-full h-4/5 flex justify-start items-center flex-col gap-6 mt-10'>
+      <div className='w-full flex justify-start items-center flex-col gap-6 mt-10'>
         {reviews.map((list, index) => (
+          <div className='w-4/5' key={index}>
           <Link
-            key={index}
+            className='flex justify-center items-center h-full'
+            
             href={{
               pathname: `/product/${prodIndex}/reviews/${list.reviewIndex}`, // 리뷰 인덱스를 동적으로 추가합니다.
               query: {
@@ -73,6 +75,7 @@ export default function ProductReviews() {
               commenttitle={list.reviewTitle}
             />
           </Link>
+          </div>
         ))}
       </div>
     </div>

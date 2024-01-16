@@ -2,9 +2,9 @@
 
 const ProductCommentList = ({writerid, date, starcount, commenttitle}) => {
   return (
-    <div className="flex justify-around items-center w- h-28 outline">
+    <div className="flex justify-around items-center h-28 outline w-full">
         <div className="w-16 h-8 flex justify-around items-center">{writerid}</div>
-        <div className="w-32 h-8 flex justify-around items-center">{date}</div>
+        <div className="w-52 h-8 flex justify-around items-center">{date}</div>
         <div className='flex items-center'>
         {Array.from({ length: parseInt(starcount, 10) }).map((_, i) => (
           <span key={i}>👍</span>
