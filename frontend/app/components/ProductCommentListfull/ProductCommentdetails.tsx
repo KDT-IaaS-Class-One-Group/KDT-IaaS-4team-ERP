@@ -1,8 +1,8 @@
 // ? 제품상품평페이지 컴포넌트 작성
 
-const ProductCommentListfull = ({ reviewTitle, reviewContent, reviewImgUrl, reviewUpdatedAt, reviewRating,  userId})=> {
+const ProductCommentdetails = ({ reviewTitle, reviewContent, reviewRating})=> {
   return (
-    <div className="flex flex-col items-center bg-black text-white w-full h-full justify-center">
+    <div className="flex flex-col items-center bg-blue-200 text-white w-full h-full justify-center">
       {/* Area1: 글 쓰기 제목 */}
       <div className="bg-gray-400 w-4/5 h-50 mb-4">
         <div className="w-full h-full bg-white text-black text-left py-4 pl-2">
@@ -26,7 +26,7 @@ const ProductCommentListfull = ({ reviewTitle, reviewContent, reviewImgUrl, revi
             <div className="text-center py-2">{reviewRating}평점 점수</div>
           </button>
           <div className="text-left py-2 pl-2 flex">
-            <div className="w-20 h-20 bg-black"> {reviewImgUrl} 상품 이미지</div>
+            {/* <div className="w-20 h-20 bg-black"> {reviewImgUrl} 상품 이미지</div> */}
 
           </div>
         </div>
@@ -40,4 +40,4 @@ const ProductCommentListfull = ({ reviewTitle, reviewContent, reviewImgUrl, revi
   )
 }
 
-export default ProductCommentListfull;
+export default ProductCommentdetails;

@@ -23,6 +23,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productdetails }) => {
     totalPrice: 0
     // 다른 필요한 결제 정보들을 추가할 수 있습니다.
   });
+  console.log(productdetails)
 
 
 

@@ -29,18 +29,20 @@ export default function ProductReviews() {
       try {
         const response = await fetch(`http://localhost:3570/product/${prodIndex}/reviews`); //로컬환경 테스트 실행 () http://192.168.100.83:3560/productcomment)
         const data = await response.json();//DB에서 가져온 
- 
+
 
         // }));
         setReviews(data); // 데이터 업데이트
+
 
       } catch (error) {
         console.error('데이터를 불러오는 동안 에러 발생:', error);
       }
     }
     // 함수를 호출하여 데이터 가져오기
-    fetchreviews(); 
+    fetchreviews();
   }, [])
+  console.log(reviews)
 
   return (
     <div className='w-screen h-screen flex flex-col'>
@@ -51,13 +53,26 @@ export default function ProductReviews() {
       </div>
       <div className='w-full h-4/5 flex justify-start items-center flex-col gap-6 mt-10'>
         {reviews.map((list, index) => (
-          <ProductCommentList
+          <Link
             key={index}
-            writerid={list.userId}
-            date={list.reviewUpdatedAt}
-            starcount={list.reviewRating}
-            commenttitle={list.reviewTitle}
-          />
+            href={{
+              pathname: `/product/${prodIndex}/reviews/${list.reviewIndex}`, // 리뷰 인덱스를 동적으로 추가합니다.
+              query: {
+                title: list.reviewTitle,
+                rating: list.reviewRating,
+                content: list.reviewContent,
+                // 필요한 다른 데이터들도 여기에 추가합니다.
+              },
+            }}
+          // as={`/product/${prodIndex}/reviews/${list.reviewIndex}`} // as 속성을 사용하여 링크 URL을 생성합니다.
+          >
+            <ProductCommentList
+              writerid={list.userId}
+              date={list.reviewUpdatedAt}
+              starcount={list.reviewRating}
+              commenttitle={list.reviewTitle}
+            />
+          </Link>
         ))}
       </div>
     </div>
