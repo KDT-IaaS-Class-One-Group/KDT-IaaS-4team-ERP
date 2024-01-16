@@ -22,7 +22,7 @@ import productcommentwrite from "./routes/customer/review/productcommentwrite";
 import cartpage from "./routes/customer/cartpage/cartpage";
 
 const app = express();
-const port = 3570;
+const port = 3560;
 
 app.use(
   session({

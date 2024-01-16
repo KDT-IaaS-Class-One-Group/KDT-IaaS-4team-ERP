@@ -2,11 +2,11 @@ import mariadb from 'mariadb';
 
 // MariaDB 연결 풀 설정
 const pool = mariadb.createPool({
-  host: 'localhost',
-  port: 3306,
+  host: '192.168.100.83',
+  port: 3309,
   user: 'root',
-  password: 'rlagus1212!',
-  database: 'forms',
+  password: 'root',
+  database: 'form',
   connectionLimit: 5,
   supportBigNumbers: true,
   bigNumberStrings: true,

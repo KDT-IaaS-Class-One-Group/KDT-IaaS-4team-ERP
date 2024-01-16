@@ -27,7 +27,7 @@ export default function ProductReviews() {
   useEffect(() => {
     const fetchreviews = async () => {
       try {
-        const response = await fetch(`http://localhost:3570/product/${prodIndex}/reviews`); //로컬환경 테스트 실행 () http://192.168.100.83:3560/productcomment)
+        const response = await fetch(`http://localhost:3560/product/${prodIndex}/reviews`); //로컬환경 테스트 실행 () http://192.168.100.83:3560/productcomment)
         const data = await response.json();//DB에서 가져온 
  
 
