@@ -1,8 +1,7 @@
 // import styles from "./style/buyButton.module.css";
 
-export default function BuyButton({onclick}) {
+export default function BuyButton({onclick}: {onclick: () => void}) {
 
-  // const payment
   // const buyerinformation = await fetchbuyerinformationdata()
 
   return (
