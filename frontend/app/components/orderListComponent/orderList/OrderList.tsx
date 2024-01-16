@@ -12,8 +12,7 @@ interface OrderListProps {
     orderPaymentDatetime: string; // order 테이블의 orderPaymentDatetime 필드와 관련된 데이터 타입
     orderIndex: number; // order 테이블의 orderIndex 필드와 관련된 데이터 타입
     orderPaymentCount: number; // order 테이블의 orderPaymentCount 필드와 관련된 데이터 타입
-    orderDeliveryDone: number;
-    // orderState: boolean; // 만약 orderState를 사용한다면 해당 필드와 관련된 데이터 타입 추가
+    orderDeliveryDone: number; // order테이블의 배송전, 후를 구별하는 데이터 타입
   };
 }
 
