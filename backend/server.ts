@@ -51,19 +51,20 @@ app.post("/login", customerLogin);
 app.post("/signup", customerSignup);
 // 상품 페이지
 app.get("/product/:prodIndex", product);
-// app.get("/product", product);
 app.post("/product/buy", buybutton);
 // 구매 페이지
 app.get('/product/:prodIndex/payment', paymentDataForProductPage) // 구매페이지 초기 useeffect로 인한 상품정보 요청
 app.post('/cartToPayment', paymentDataForCart) 
 app.post("/product/:prodIndex/payment", buybutton); // 구매페이지 구매완료 버튼 클릭시 오는 포스트 요청
-// 주몬조회 페이지
+// 주문조회 페이지
 app.get('/orderpage', orderpage)
 // 리뷰 페이지
 
 app.get("/product/:prodIndex/reviews", productcomment)
 app.get('/productcommentfull/:reviewIndex', productcommentfull)
 app.post('/:prodIndex/reviews', productcommentwrite)
+
+
 // 카트 페이지
 app.get('/cart', cartpage);
 

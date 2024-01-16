@@ -37,7 +37,7 @@ export default function CartMain() {
 
   return (
     <main className="flex flex-col overflow-hidden w-full h-full">
-      <Link href='/payment' className="ml-auto">
+      <Link href='/cartToPayment' className="ml-auto">
         <Btn textContent='주문하기' className="h-10 w-28 border border-black flex items-center justify-center" />
       </Link>
       <CartNav />
