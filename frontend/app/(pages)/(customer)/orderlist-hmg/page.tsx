@@ -34,7 +34,6 @@ const OrderListComponent: React.FC = () => {
         }
 
         const data = await response.json();
-        console.log(data[0]);
         console.log(data);
         setOrderList(data);
       } catch (error) {
@@ -48,13 +47,24 @@ const OrderListComponent: React.FC = () => {
   return (
     <>
       <OrderListNav />
-      <ul>
-      {orderList.map((order) => (
-        <OrderList key={order.orderIndex} orderdate={order.orderPaymentDatetime}/>
-      ))}
-
-        <OrderList />
-      </ul>
+      <div>
+        <h2>주문 조회 페이지</h2>
+        {orderList.length === 0 ? (
+          <p>주문 목록이 비어 있습니다.</p>
+        ) : (
+          <ul>
+            {orderList.map((order) => (
+              <li key={order.id}>
+                <div>
+                  <strong>{order.productName}</strong>
+                </div>
+                <div>수량: {order.quantity}</div>
+                {/* 다른 주문 정보들을 추가하여 표시 */}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </>
   );
 };

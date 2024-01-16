@@ -30,7 +30,7 @@ orderpage.get("/orderpage/getdata", async (req, res) => {
     conn = await pool.getConnection();
 
     const orderResult = await conn.query(
-      "SELECT * from orders WHERE userIndex = ?",
+      "SELECT orders.*, products.prodPrice, products.prodImgUrl, products.prodName, products.prodDescription FROM orders JOIN products ON orders.prodIndex = products.prodIndex WHERE orders.userIndex = ?",
       [userIndex]
     );
     if (orderResult.length === 0) {
