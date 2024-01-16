@@ -24,6 +24,7 @@ import orderpage from "./routes/customer/orderpage/orderpage";
 import productcomment from "./routes/customer/review/productcomment";
 import productcommentfull from "./routes/customer/review/productcommentfull";
 import productcommentwrite from "./routes/customer/review/productcommentwrite";
+import cartpage from "./routes/customer/cartpage/cartpage";
 
 const app = express();
 const port = 3560;
@@ -41,7 +42,8 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 
 // 테스트
-app.get("/post", test);
+app.get("/post", test); 
+
 
 // * admin
 app.post("/admin/login", adminLogin);
@@ -54,6 +56,7 @@ app.post("/login", customerLogin);
 app.post("/signup", customerSignup);
 // 상품 페이지
 app.get("/product/:prodIndex", product);
+app.post("/product/buy", buybutton);
 // 구매 페이지
 app.get('/product/:prodIndex/payment', paymentDataForProductPage) // 구매페이지 초기 useeffect로 인한 상품정보 요청
 app.post('/cartToPayment', paymentDataForCart) 
@@ -66,6 +69,9 @@ app.get("/product/:prodIndex/reviews", productcomment)
 app.get('/productcommentfull/:reviewIndex', productcommentfull)
 app.post('/:prodIndex/reviews', productcommentwrite)
 
+
+// 카트 페이지
+app.get('/cart', cartpage);
 
 app.listen(port, () => {
   console.log(`Express 서버가 ${port}번 포트에서 실행중입니다.`);
