@@ -2,25 +2,31 @@ import ProductPriceCalculator from './pricecalculator'
 
 import React from "react";
 import styles from "./style/productdetail.module.css";
-import { ProductDetailProps } from "../../interfaces/Product/ProductDetailProps";
 import Link from 'next/link';
 import Image from 'next/image';
-import { ProductDescriptionProps } from '../../interfaces/Product/ProductDescriptionProps';
 import { useState } from 'react';
 import { useParams } from 'next/navigation';
 
 
+interface ProductDetailProps {
+  Img: string;
+  Title: string;
+  Price: number;
+  Summary: string;
+  Count: number;
+  Detail: string
+  productdetails: any;
+};
 
 
 
 const ProductDetail: React.FC<ProductDetailProps> = ({ productdetails }) => {
-  const productdetailsprodIndex = productdetails.prodIndex
+  const productdetailsprodIndex = productdetails.prodIndex;
   const [paymentInfo, setPaymentInfo] = useState({
     quantity: 1,
     totalPrice: 0
     // 다른 필요한 결제 정보들을 추가할 수 있습니다.
   });
-
 
 
 
