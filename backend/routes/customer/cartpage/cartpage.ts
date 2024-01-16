@@ -8,13 +8,14 @@ import { CartItemProps } from '../../../../frontend/app/interfaces/Cart/CartItem
 
 const cartpage = express();
 
-cartpage.get("/cartTest", async (req: Request, res: Response) => {
+cartpage.get("/cart", async (req: Request, res: Response) => {
   let conn;
   const tokenHeader = req.headers.authorization;
+  console.log("tokenHeader--------  ", tokenHeader);
   if (!tokenHeader) {
     return res.status(401).json({ error: "토큰이 제공되지 않았습니다." });
   }
-  const token = tokenHeader.split( " ")[1];
+  const token = tokenHeader.split(" ")[1];
   let userIndex: string | JwtPayload;
   try {
     // 디코딩된 데이터를 나타내는 변수입니다.
@@ -27,7 +28,6 @@ cartpage.get("/cartTest", async (req: Request, res: Response) => {
     return res.status(401).json({ error: "토큰이 유효하지 않습니다." });
   }
 
-  // * token 
 
 
   // ! 위의 과정으로 로컬스토리지에서 토큰을 분해하여 userIndex를 추출하였습니다.
@@ -78,7 +78,6 @@ cartpage.get("/cartTest", async (req: Request, res: Response) => {
 
   try {
     conn = await pool.getConnection();
-
     let userIndexQueryResult: CartTableProps[] = [];
     let productQueryResult: ProductsTableProps[] = [];
     let finalResult: CartItemProps[] = [];
@@ -88,8 +87,8 @@ cartpage.get("/cartTest", async (req: Request, res: Response) => {
       `SELECT cartIndex, cartProductCount, userIndex, prodIndex FROM cart WHERE userIndex = ?`,
       [Number(userIndex)]
     );
-    // console.log("userIndexQueryResult의 결과값", userIndexQueryResult);
-    // console.log("userIndexQueryResult의 타입 ----------", typeof(userIndexQueryResult));
+    console.log("userIndexQueryResult의 결과값", userIndexQueryResult);
+    console.log("userIndexQueryResult의 타입 ----------", typeof(userIndexQueryResult));
 
     // todo 2. userIndexQueryResult의 prodIndex를 참조하여 products테이블에서 해당 prodIndex의 정보를 가져온다.
     // * prodIndexes.join(",")은 문자열이지만 sql엔진이 해석할 때는 열 타입에 맞추기 때문에 int타입으로 활용하게 된다.
@@ -97,8 +96,8 @@ cartpage.get("/cartTest", async (req: Request, res: Response) => {
     productQueryResult = await pool.query(
       `SELECT * FROM products WHERE prodIndex IN (${prodIndexes.join(",")})`
     );
-    // console.log("productQueryResult의 결과값", productQueryResult);
-    // console.log("productQueryResult의 타입 ----------", typeof(productQueryResult));
+    console.log("productQueryResult의 결과값", productQueryResult);
+    console.log("productQueryResult의 타입 ----------", typeof(productQueryResult));
 
     // todo 3. userIndexQueryResult와 productQueryResult를 join하여 최종 결과물을 완성한다.
     // * 애플리케이션 레벨에서 데이터 핸들링하는 방안1
@@ -140,6 +139,9 @@ cartpage.get("/cartTest", async (req: Request, res: Response) => {
     `;
 
     finalResult = await pool.query(query, [Number(userIndex)]);
+    console.log("finalResult의 결과값", finalResult);
+    console.log("finalResult의 타입 ----------", typeof(finalResult));
+
 
     res.status(200).json(finalResult);
   } catch (error) {
