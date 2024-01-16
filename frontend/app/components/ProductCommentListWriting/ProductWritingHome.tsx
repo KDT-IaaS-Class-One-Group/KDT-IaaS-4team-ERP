@@ -38,7 +38,7 @@ const ProductWritingHome = () => {
     try {
       const token = localStorage.getItem('token')
       // console.log(token)
-      const response = await fetch(`http://localhost:3570/${prodIndex}/reviews`, {
+      const response = await fetch(`http://localhost:3560/${prodIndex}/reviews`, {
         method: 'POST',
         headers: {
           "Content-Type": "application/json", // 다른 필요한 헤더들도 추가할 수 있습니다.

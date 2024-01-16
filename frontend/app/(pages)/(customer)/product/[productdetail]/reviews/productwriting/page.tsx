@@ -1,5 +1,5 @@
 'use client'
-import ProductWritingHome from "@/components/ProductCommentListWriting/ProductCommentList"
+import ProductWritingHome from "@/components/ProductCommentListWriting/ProductWritingHome"
 
 
 

@@ -23,7 +23,7 @@ const ProductInformation: React.FC<ProductType> = ({ setpaymentcompleteinfo }) =
 
     const prodinfo = async () => {
       try {
-        const response = await fetch(`http://localhost:3570/product/${prodIndex}/payment`);
+        const response = await fetch(`http://localhost:3560/product/${prodIndex}/payment`);
 
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
