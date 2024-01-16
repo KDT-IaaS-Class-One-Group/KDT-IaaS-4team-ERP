@@ -4,5 +4,6 @@ export type ProductDetail = {
   Price: number;
   Summary: string;
   Count: number;
-  Detail: string
+  Detail: string;
+  prodIndex: number;
 };
