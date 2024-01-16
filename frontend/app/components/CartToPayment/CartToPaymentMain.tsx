@@ -1,7 +1,12 @@
+import DeliveryInformation from '@/components/Payment/deliveryInformation';
+import ProductInformation from '@/components/Payment/productInformation';
+import BuyButton from '../Payment/buyButton';
 export default function CartToPaymentMain() {
   return(
     <main>
-      카트투 페이먼트 메인
+      {/* <DeliveryInformation/> */}
+      {/* <ProductInformation/> */}
+      {/* <BuyButton/> */}
     </main>
   );
 }
