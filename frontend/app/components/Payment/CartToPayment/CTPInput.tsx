@@ -11,10 +11,11 @@ import { CTPInputProps } from "@/interfaces/CartToPayment/CTPInputProps";
  * @returns {JSX.Element} 렌더링된 입력 필드입니다.
  */
 export default function CTPInput({ InputName, inputPlaceholder, listName, liClassName }: CTPInputProps) {
+  const liClassNameDefault = `flex justify-between items-center gap-6 w-full ${liClassName}`;
   return (
-    <li className={liClassName}>
+    <li className={liClassNameDefault}>
       <p className="w-1/4 text-right">{`${listName} : `}</p>
-      <input className="w-3/4 h-full outline outline-1" type="text" name={InputName} placeholder={inputPlaceholder} id={InputName} />
+      <input className="w-3/4 h-3/5 outline outline-1" type="text" name={InputName} placeholder={inputPlaceholder} id={InputName} />
     </li>
   );
 }

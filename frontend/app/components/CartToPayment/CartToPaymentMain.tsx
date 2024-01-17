@@ -23,7 +23,7 @@ export default function CartToPaymentMain() {
 
   return (
     <main className="w-full h-full flex justify-center items-center flex-col">
-      <CTPDeliveryinfo />
+      <CTPDeliveryinfo className="w-4/5 h-2/5 overflow-hidden border border-slate-900 flex flex-col justify-center items-center gap-3 p-3"/>
       <ul className="CTPPaymentUl w-full flex flex-col justify-center items-center">
         <CTPPaymentList />
         <CTPPaymentList />
