@@ -45,7 +45,7 @@ const OrderList: React.FC<OrderListProps> = ({ data }) => {
         <div className="w-1/2 flex justify-center items-center">
           {data.orderDeliveryDone ? "배송 중" : "배송 전"}
         </div>
-        {/* 배송중, 배송전 orderDeliveryDone 0,1로 구분? 일단 보류 */}
+        {/* todo : 배송중, 배송전 orderDeliveryDone 0,1로 구분?  */}
       </div>
     </li>
   );
