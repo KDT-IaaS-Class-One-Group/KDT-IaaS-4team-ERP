@@ -47,11 +47,11 @@ const OrderListComponent: React.FC = () => {
   return (
     <>
       <OrderListNav />
-      <div>
+      <div className="h-full w-full flex flex-col">
         {orderList.length === 0 ? (
           <p>주문 목록이 비어 있습니다.</p>
         ) : (
-          <ul>
+          <ul className="flex flex-col justify-start h-full w-full">
             {orderList.map((order) => (
               <OrderList key={order.id} data={order} />
             ))}
