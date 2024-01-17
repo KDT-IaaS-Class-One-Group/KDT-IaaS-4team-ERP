@@ -78,13 +78,7 @@ export default function ProductListPage() {
   };
 
   return (
-    <div className='flex container mx-auto p-4 items-center'>
-      <button
-        onClick={navigateToAddProductPage}
-        className='mb-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
-      >
-        상품 등록
-      </button>
+    <div className='flex container mx-auto p-4 items-center flex-col'>
       <div className='overflow-x-auto w-full'>
         <div className='max-h-[800px] overflow-y-auto'>
           <table className='min-w-full leading-normal'>
@@ -179,6 +173,12 @@ export default function ProductListPage() {
           </table>
         </div>
       </div>
+      <button
+        onClick={navigateToAddProductPage}
+        className='mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded self-end'
+      >
+        상품 등록
+      </button>
     </div>
   );
 }
