@@ -4,12 +4,13 @@ import pool from '../../../database';
 
 export const adminLogin = express();
 
-adminLogin.post('http://localhost:3560/api/adminlogin', async (req, res) => {
+adminLogin.post('/api/adminlogin', async (req, res) => {
   let conn;
+  console.log('test');
   try {
     conn = await pool.getConnection();
     const { adminId, adminPassword } = req.body;
-
+    console.log('test');
     // 관리자 이름도 함께 검색
     const query =
       'SELECT adminName FROM administrators WHERE adminId = ? AND adminPassword = ?';
