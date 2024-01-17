@@ -9,8 +9,8 @@ interface HeaderItemProps {
 
 export default function HeaderItem({ href, children }: HeaderItemProps) {
   return (
-    <li className='mr-4'>
-      <Link href={href}>{children}</Link>
+    <li className='mr-4 '>
+      <Link  className='hover:cursor-pointer' href={href}>{children}</Link>
     </li>
   );
 }

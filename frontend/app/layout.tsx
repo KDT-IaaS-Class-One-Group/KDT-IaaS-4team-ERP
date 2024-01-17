@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: ChildrenProp) {
   return (
     <html lang='ko'>
-      <body className='flex flex-col justify-between h-screen max-h-screen'>
+      <body className='flex flex-col justify-between h-screen max-h-screen '>
         {children}
       </body>
     </html>

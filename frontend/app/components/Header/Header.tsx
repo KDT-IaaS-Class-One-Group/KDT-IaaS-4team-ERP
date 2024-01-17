@@ -29,11 +29,11 @@ export default function Header({ children }: HeaderProps) {
   };
 
   return (
-    <header className='flex bg-blue-500 text-white p-4 justify-between'>
+    <header className='flex bg-blue-500 text-white p-4 justify-between '>
       <Link href='/'>
-        <h1 className='text-xl'>form 미쳤다.</h1>
+        <h1 className='text-xl hover:cursor-pointer'>form 미쳤다.</h1>
       </Link>
-      <ul className='flex ml-auto'>
+      <ul className='flex ml-auto '>
         {isToken ? (
           <>
             <HeaderItem href='/orderlist'>주문조회</HeaderItem>
