@@ -18,9 +18,6 @@ const ProductDetail: React.FC<> = ({ productdetails }) => {
   });
   console.log("productdetails", productdetails);
 
-
-
-
   return (
     <div className="product-detail w-full h-screen flex flex-col items-center ">
       <div className="w-4/5 h-2/5 flex justify-center">

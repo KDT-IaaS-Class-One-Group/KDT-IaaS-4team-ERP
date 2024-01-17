@@ -6,17 +6,19 @@ import React from 'react';
 interface BtnProps {
   textContent: string;
   className : string;
+  onClick?: () => void; // Add onClick prop
 }
 
 /**
  * 
  * @param textContent : string - 버튼 내용 텍스트
  * @param className : string - 버튼 클래스 이름
+ * @param onClick : () => void - 클릭 이벤트 핸들러 함수
  * @returns btn : JSX.Element - 버튼 컴포넌트
  */
-const Btn: React.FC<BtnProps> = ({ textContent, className}) => {
+const Btn: React.FC<BtnProps> = ({ textContent, className, onClick }) => {
   return (
-    <button className={className}>{textContent}</button>
+    <button className={className} onClick={onClick}>{textContent}</button>
   );
 }
 
