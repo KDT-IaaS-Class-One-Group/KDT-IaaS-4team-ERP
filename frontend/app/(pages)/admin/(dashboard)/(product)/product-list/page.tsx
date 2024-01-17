@@ -73,8 +73,12 @@ export default function ProductListPage() {
     router.push(`/admin/product-edit/${prodIndex}`); // 상품 수정 페이지로 라우팅
   };
 
+  const navigateToAddProductPage = () => {
+    router.push('/admin/product-add');
+  };
+
   return (
-    <div className='flex container mx-auto p-4 items-center'>
+    <div className='flex container mx-auto p-4 items-center flex-col'>
       <div className='overflow-x-auto w-full'>
         <div className='max-h-[800px] overflow-y-auto'>
           <table className='min-w-full leading-normal'>
@@ -169,6 +173,12 @@ export default function ProductListPage() {
           </table>
         </div>
       </div>
+      <button
+        onClick={navigateToAddProductPage}
+        className='mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded self-end'
+      >
+        상품 등록
+      </button>
     </div>
   );
 }

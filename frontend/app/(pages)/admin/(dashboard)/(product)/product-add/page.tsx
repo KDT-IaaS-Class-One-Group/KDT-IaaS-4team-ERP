@@ -2,14 +2,17 @@
 
 'use client';
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
-export default function ProductAdd() {
+export default function ProductAddPage() {
   const [prodName, setProdName] = useState('');
   const [prodDescription, setProdDescription] = useState('');
   const [prodCategory, setProdCategory] = useState('');
   const [prodImgUrl, setProdImgUrl] = useState('');
   const [prodPrice, setProdPrice] = useState('');
   const [prodStock, setProdStock] = useState('');
+
+  const router = useRouter();
 
   const submitProduct = async () => {
     if (!prodName.trim()) {
@@ -56,6 +59,7 @@ export default function ProductAdd() {
         throw new Error('Network response was not ok');
       }
       alert('상품이 성공적으로 추가되었습니다!');
+      router.push('/admin/product-list');
     } catch (error) {
       console.error('Error adding product:', error);
       alert('상품 추가에 실패했습니다.');
