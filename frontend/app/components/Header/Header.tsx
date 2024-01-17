@@ -1,16 +1,11 @@
-'use client'
-import React, { useEffect, useState } from 'react';
+'use client';
+import React, { ReactNode, useEffect, useState } from 'react';
 import Link from 'next/link';
-import ChildrenProps from '@/interfaces/ChildrenProps';
+import { ChildrenProp } from '@/app/types/ChildrenProp';
 import HeaderItem from './HeaderItem';
 import Logout from './logoutitem';
 
-interface HeaderProps extends ChildrenProps {
-  children?: ReactNode;
-}
-
-
-export default function Header({ children }: HeaderProps) {
+export default function Header({ children }: ChildrenProp) {
   const [isToken, setIsToken] = useState(false);
 
   useEffect(() => {
@@ -18,14 +13,13 @@ export default function Header({ children }: HeaderProps) {
     setIsToken(!!token); // token이 있으면 true, 없으면 false로 설정
   }, []);
 
-
   const logout = () => {
     // 토큰 삭제
     localStorage.removeItem('token');
     // 상태 업데이트로 화면 다시 로딩
     setIsToken(false);
     // 다시 로딩
-    location.href='/'
+    location.href = '/';
   };
 
   return (
@@ -38,12 +32,11 @@ export default function Header({ children }: HeaderProps) {
           <>
             <HeaderItem href='/orderlist'>주문조회</HeaderItem>
             <HeaderItem href='/cart'>장바구니</HeaderItem>
-            <Logout onClick={logout}></ Logout>
+            <Logout onClick={logout}></Logout>
           </>
         ) : (
           <>
-          <HeaderItem href='/login'>로그인</HeaderItem>
-          <HeaderItem href='/admin'>관리자로그인</HeaderItem>
+            <HeaderItem href='/login'>로그인</HeaderItem>
           </>
         )}
       </ul>
