@@ -37,6 +37,7 @@ export default function Header({ children }: ChildrenProp) {
         ) : (
           <>
             <HeaderItem href='/login'>로그인</HeaderItem>
+            <HeaderItem href='/admin/login'>관리자페이지</HeaderItem>
           </>
         )}
       </ul>
