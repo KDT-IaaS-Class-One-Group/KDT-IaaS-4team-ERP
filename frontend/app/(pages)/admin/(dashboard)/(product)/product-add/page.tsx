@@ -3,6 +3,7 @@
 'use client';
 import React, { useState } from 'react';
 
+
 export default function ProductAdd() {
   const [prodName, setProdName] = useState('');
   const [prodDescription, setProdDescription] = useState('');
