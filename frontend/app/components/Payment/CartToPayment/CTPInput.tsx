@@ -15,7 +15,7 @@ export default function CTPInput({ InputName, inputPlaceholder, listName, liClas
   return (
     <li className={liClassNameDefault}>
       <p className="w-1/4 text-right">{`${listName} : `}</p>
-      <input className="w-3/4 h-3/5 outline outline-1" type="text" name={InputName} placeholder={inputPlaceholder} id={InputName} />
+      <input className="w-3/4 h-4/5 " type="text" name={InputName} placeholder={inputPlaceholder} id={InputName} />
     </li>
   );
 }

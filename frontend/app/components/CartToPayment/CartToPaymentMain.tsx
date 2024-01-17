@@ -22,19 +22,19 @@ export default function CartToPaymentMain() {
   }
 
   return (
-    <main className="w-full h-full flex justify-center items-center flex-col">
-      <CTPDeliveryinfo className="w-4/5 h-2/5 overflow-hidden border border-slate-900 flex flex-col justify-center items-center gap-3 p-3"/>
-      <ul className="CTPPaymentUl w-full flex flex-col justify-center items-center">
-        <CTPPaymentList />
-        <CTPPaymentList />
+    <main className="w-full h-full flex justify-start items-center flex-col p-3 gap-5">
+      <CTPDeliveryinfo className="w-4/5 h-1/5 overflow-hidden border border-slate-900 flex flex-col justify-center items-center gap-3 p-3 mt-5"/>
+      <ul className="CTPPaymentUl w-4/5 flex flex-col justify-center items-center h-3/5 border border-slate-950 gap-3">
         <CTPPaymentList />
         <CTPPaymentList />
       </ul>
-      <Btn 
-        className="h-10 w-28 border border-slate-950 flex-center flex-1 cursor-pointer "  
-        textContent="구매하기"
-        onClick={test}
-      />
+      <div className="CTPPaymentMainBottomArea w-4/5 h-1/5 flex justify-end">
+        <Btn 
+          className="CTPPaymentButton h-12 w-28 border border-slate-950 cursor-pointer" 
+          textContent="구매하기"
+          onClick={test}
+        />
+      </div>
     </main>
   );
 }
