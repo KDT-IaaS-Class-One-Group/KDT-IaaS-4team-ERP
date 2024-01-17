@@ -1,11 +1,11 @@
 'use client'
-import DeliveryInformation from "@/components/Payment/deliveryInformation";
-import ProductInformation from "@/components/Payment/productInformation";
-import BuyButton from "@/components/Payment/buyButton";
+import DeliveryInformation from "@/app/components/Payment/deliveryInformation";
+import ProductInformation from "@/app/components/Payment/productInformation";
+import BuyButton from "@/app/components/Payment/buyButton";
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { Productpaymentprops } from "@/interfaces/Product/ProductpaymentProps";
+import { Productpaymentprops } from "@/app/interfaces/Product/ProductpaymentProps";
 
 export default function PaymentPage() {
   const router = useRouter();

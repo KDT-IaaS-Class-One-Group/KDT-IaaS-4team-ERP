@@ -3,9 +3,9 @@
 
 import Link from 'next/link';
 import React from 'react';
-import Btn from '@/components/Btn/Btn';
+import Btn from '@/app/components/Btn/Btn';
 import Image from 'next/image';
-import { PList } from '@/interfaces/interfaces';
+import { PList } from '@/app/types/interfaces';
 
 /**
  * 장바구니 목록 컴포넌트입니다.

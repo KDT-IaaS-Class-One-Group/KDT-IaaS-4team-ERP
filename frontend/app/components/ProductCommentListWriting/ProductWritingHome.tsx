@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react';
-import ProductText from '@/components/ProductCommentListWriting/ProductText';
+import ProductText from '@/app/components/ProductCommentListWriting/ProductText';
 // import Link from 'next/link';
 import ProductRating from './productrating';
 // import { useSearchParams } from 'next/navigation';

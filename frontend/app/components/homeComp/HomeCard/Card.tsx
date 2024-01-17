@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 
 interface CardProps {
-  prodImgUrl: StaticImport
+  prodImgUrl: any;
   prodName: string;
   prodDescription: string;
   prodPrice: number;

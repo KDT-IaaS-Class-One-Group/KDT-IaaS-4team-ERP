@@ -1,6 +1,6 @@
 'use client'
 
-import ProductDetail from "@/components/Product/productdetail";
+import ProductDetail from "@/app/components/Product/productdetail";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 

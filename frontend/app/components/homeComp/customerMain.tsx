@@ -20,27 +20,32 @@ interface HomeProps {
   productwhole: Product[];
 }
 
-export default function CustomerMain(){
-  const [productwhole, setProductWhole] = useState([])
+export default function CustomerMain() {
+  const [productwhole, setProductWhole] = useState<Product[]>([]);
   const [categorylist, setCategoryList] = useState<string[]>([]);
+
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch('http://localhost:3560/');  // 서버 주소에 맞게 변경해주세요
+        const response = await fetch('http://localhost:3560/');
         const data = await response.json();
-        console.log(data)
-        const extractedData = data.map(list => ({
-          prodCategory : list.prodCategory,
+
+        if (!Array.isArray(data)) {
+          throw new Error('데이터 형식 오류: 배열이 아닙니다.');
+        }
+
+        const extractedData: Product[] = data.map((list: any) => ({
+          prodCategory: list.prodCategory,
           prodImgUrl: list.prodImgUrl,
           prodName: list.prodName,
           prodDescription: list.prodDescription,
           prodPrice: list.prodPrice,
-          prodIndex : list.prodIndex
+          prodIndex: list.prodIndex
         }));
+
         const uniqueCategories: string[] = Array.from(new Set(extractedData.map(item => item.prodCategory)));
         setCategoryList(uniqueCategories);
-
-        setProductWhole(extractedData)
+        setProductWhole(extractedData);
       } catch (error) {
         console.error('데이터를 불러오는 동안 에러 발생:', error);
       }
@@ -49,21 +54,19 @@ export default function CustomerMain(){
     fetchProduct();
   }, []);
 
-
   return (
-    // 병합 후 크기에 대한 스타일링 필요.
     <main className="flex overflow-scroll outline flex-wrap justify-center w-4/5 h-4/5 gap-6">
       <HomeCategoryNav categories={categorylist} />
       {productwhole.map((list, index) => (
-      <Link href={`/product/${list.prodIndex}`} key={index}>
-        <Card
-        prodImgUrl={list.prodImgUrl}
-        prodName={list.prodName}
-        prodDescription={list.prodDescription}
-        prodPrice={list.prodPrice}
-        />
+        <Link href={`/product/${list.prodIndex}`} key={index}>
+          <Card
+            prodImgUrl={list.prodImgUrl}
+            prodName={list.prodName}
+            prodDescription={list.prodDescription}
+            prodPrice={list.prodPrice}
+          />
         </Link>
       ))}
     </main>
   );
-};
+}

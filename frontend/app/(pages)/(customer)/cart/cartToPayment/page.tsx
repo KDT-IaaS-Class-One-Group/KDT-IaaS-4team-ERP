@@ -1,4 +1,4 @@
-import CartToPaymentMain from "@/components/CartToPayment/CartToPaymentMain";
+import CartToPaymentMain from "@/app/components/CartToPayment/CartToPaymentMain";
 
 export default function CartToPayment() {
   return (
