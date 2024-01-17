@@ -7,6 +7,7 @@ import Link from "next/link";
 
 interface OrderListProps {
   data: {
+    prodIndex: number; // products 테이블의 prodIndex 필드와 관련된 데이터 타입
     prodImgUrl: string; // products 테이블의 prodImgUrl 필드와 관련된 데이터 타입
     prodDescription: string; // products 테이블의 prodDescription 필드와 관련된 데이터 타입
     prodPrice: number; // products 테이블의 prodPrice 필드와 관련된 데이터 타입
@@ -18,9 +19,13 @@ interface OrderListProps {
 }
 
 const OrderList: React.FC<OrderListProps> = ({ data }) => {
+  const linkHref = `/product/${data.prodIndex}`;
   return (
     <li className="w-full flex justify-between items-center border-2 border-slate-800 p-4">
-      <Link href="/" className="flex w-1/3 gap-6 justify-center items-center">
+      <Link
+        href={linkHref}
+        className="flex w-1/3 gap-6 justify-center items-center"
+      >
         <Image
           src={data.prodImgUrl}
           alt="이미지가 들어갈 자리입니다."
