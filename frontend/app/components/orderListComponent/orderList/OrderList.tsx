@@ -40,6 +40,6 @@ const OrderList: React.FC<OrderListProps> = ({ data }) => {
       </div>
     </li>
   );
-}
+};
 
 export default OrderList;

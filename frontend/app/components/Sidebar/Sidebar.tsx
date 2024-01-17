@@ -18,12 +18,10 @@ export default function Sidebar() {
             </Link>
           </li>
           <MenuItem title='상품 관리'>
-            <MenuLink href='/admin/product-list'>상품 조회</MenuLink>
-            <MenuLink href='/admin/product-add'>상품 등록</MenuLink>
+            <MenuLink href='/admin/product-list'>상품 관리</MenuLink>
           </MenuItem>
           <MenuItem title='판매 관리'>
             <MenuLink href='/admin/order-manage'>주문 관리</MenuLink>
-            <MenuLink href='/admin/delivery-manage'>배송 관리</MenuLink>
           </MenuItem>
           <MenuItem title='매출 관리'>
             <MenuLink href='/admin/revenue-view'>매출 통계 </MenuLink>

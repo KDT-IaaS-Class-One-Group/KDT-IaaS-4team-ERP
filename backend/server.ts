@@ -5,7 +5,7 @@ import cors from "cors";
 import test from "./routes/test";
 
 // 관리자
-import adminLogin from "./routes/adminLogin";
+import { adminLogin } from "./routes/admin/login/adminLogin";
 
 // 고객페이지
 import mainPage from "./routes/customer/mainPage";
@@ -25,6 +25,11 @@ import productcomment from "./routes/customer/review/productcomment";
 import productcommentfull from "./routes/customer/review/productcommentfull";
 import productcommentwrite from "./routes/customer/review/productcommentwrite";
 import cartpage from "./routes/customer/cartpage/cartpage";
+import { adminProducts } from './routes/admin/products/adminProducts';
+import { adminOrders } from './routes/admin/order/adminOrders';
+import { adminAddProduct } from './routes/admin/products/adminAddProduct';
+import { adminUpdateProduct } from './routes/admin/products/adminUpdateProduct';
+import { adminDeleteProduct } from './routes/admin/products/adminDeleteProduct';
 
 const app = express();
 const port = 3560;
@@ -46,7 +51,7 @@ app.get("/post", test);
 
 
 // * admin
-app.post("/admin/login", adminLogin);
+app.post("/api/adminlogin", adminLogin);
 
 //* customer
 // 메인페이지
@@ -72,6 +77,13 @@ app.post('/:prodIndex/reviews', productcommentwrite)
 
 // 카트 페이지
 app.get('/cart', cartpage);
+
+app.get('/api/products', adminProducts);
+app.post('/api/addproduct', adminAddProduct);
+app.delete('/api/deleteproduct/:prodIndex', adminDeleteProduct);
+app.put('/api/product/:id', adminUpdateProduct);
+
+app.get('/api/orders', adminOrders);
 
 app.listen(port, () => {
   console.log(`Express 서버가 ${port}번 포트에서 실행중입니다.`);
