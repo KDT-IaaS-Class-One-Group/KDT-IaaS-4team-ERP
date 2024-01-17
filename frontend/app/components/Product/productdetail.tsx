@@ -31,7 +31,7 @@ const ProductDetail: React.FC<> = ({ productdetails }) => {
           <p>{`상품제목 : ${productdetails.prodName}`}</p>
           <p>{`상품가격 : ${productdetails.prodPrice}`}</p>
           <p>{`상품설명 : ${productdetails.prodDescription}`}</p>
-          {/* <ProductPriceCalculator productdetails={productdetails} setPaymentInfo={setPaymentInfo} /> */}
+          <ProductPriceCalculator productdetails={productdetails} setPaymentInfo={setPaymentInfo} />
 
           <div className="flex justify-around mt-10">
             <Link href={{

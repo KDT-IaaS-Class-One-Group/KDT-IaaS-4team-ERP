@@ -1,3 +1,5 @@
+// 백단 업데이트 24/01/12/오후8시
+
 import express from 'express';
 import pool from '../database';
 
