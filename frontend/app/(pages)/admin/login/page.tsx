@@ -8,7 +8,7 @@ export default function AdminLoginPage() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/adminlogin', {
+      const response = await fetch('http://localhost:3560/api/adminlogin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
