@@ -4,11 +4,12 @@
 
 // ProductList에 쓰이는 인터페이스
 export interface PList {
-  pIndex: number;
-  pUrl: string;
-  pSub: string;
-  pPrice: number;
-  pCount: number;
+  prodIndex: number;
+  prodImgUrl: string;
+  prodDescription: string;
+  prodPrice: number;
+  cartIndex: number;
+  cartProductCount: number;
   className?: string;
 }
 export interface OrderListProps {
