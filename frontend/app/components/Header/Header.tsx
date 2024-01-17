@@ -41,7 +41,10 @@ export default function Header({ children }: HeaderProps) {
             <Logout onClick={logout}></ Logout>
           </>
         ) : (
+          <>
           <HeaderItem href='/login'>로그인</HeaderItem>
+          <HeaderItem href='/admin'>관리자로그인</HeaderItem>
+          </>
         )}
       </ul>
     </header>
