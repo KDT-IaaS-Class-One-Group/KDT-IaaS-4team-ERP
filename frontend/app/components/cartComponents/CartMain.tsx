@@ -35,13 +35,6 @@ export default function CartMain() {
       [cartIndex]: newQuantity,
     }));
   };
-  // 디버깅 용 useEffect
-  useEffect(() => {
-    console.log("deliveryInfo", deliveryInfo);
-  }, [deliveryInfo]);
-  useEffect(() => {
-    console.log("quantities", quantities);
-  }, [quantities]);
 
   const handleDeliveryInfoChange = (name, value) => {
     setDeliveryInfo((prev) => ({
@@ -56,12 +49,23 @@ export default function CartMain() {
     const processedData = requestData.map((item) => ({
       ...item,
       cartProductCount: quantities[item.cartIndex] || item.cartProductCount,
-      deliveryInfo: deliveryInfo,
+      orderReceiver: deliveryInfo.orderReceiver,
+      orderReceiverPhone: deliveryInfo.orderReceiverPhone,
+      orderDeliveryAddress: deliveryInfo.orderDeliveryAddress,
+      orderRequest: deliveryInfo.orderRequest,
     }));
 
     // processedData를 사용하여 결제 요청 전송
     // 예: fetch('/api/payment', { method: 'POST', body: JSON.stringify(processedData) })
+    console.log("processedData", processedData);
   };
+
+  // 디버깅용 useEffects
+  useEffect(() => {
+    console.log("deliveryInfo", deliveryInfo);
+    console.log("quantities", quantities);
+    console.log("requestData", requestData);
+  }, [deliveryInfo, quantities, requestData]);
 
   // * 업데이트용 useEffect
   useEffect(() => {
