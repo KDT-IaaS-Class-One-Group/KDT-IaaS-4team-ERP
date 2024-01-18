@@ -10,8 +10,8 @@ interface SendPaymentRequestOptions {
  *
  * 사용예시)
  * const handleCartToPayment = async () => {
- * const processedData = dataProcessing(); // 데이터 가공이 필요
- * const token = localStorage.getItem("token"); // 사용자 토큰 가져오기, 선언 필요
+ * const processedData = dataProcessing(); // 데이터 가공 로직이 필수로 필요
+ * const token = localStorage.getItem("token"); // 사용자 토큰 가져오기, 선언 필수로 필요
  * try {
  *  const result = await sendRequest(processedData, token);
  *  console.log('Payment Success:', result);

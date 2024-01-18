@@ -63,7 +63,7 @@ export default function CTPPaymentList({
       <Btn
         className="w-1/6 h-10 border border-slate-950 text-sm "
         textContent="리스트 삭제"
-        onClick={() => handleDelete(idToString)}
+        onClick={() => handleDelete(cartIndex)}
       />
       {/* todo : 리스트 삭제 기능 추가해야함
         1. 해당 리스트 컴포넌트를 식별한다.(연구과제)

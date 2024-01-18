@@ -64,7 +64,7 @@ export default function CartMain() {
     // 결제 요청 전송
     try {
       const token = localStorage.getItem("token"); // 사용자 토큰 가져오기
-      const response = await fetch("/cart/cartToPayment", {
+      const response = await fetch("http://localhost:3560/cart/cartToPayment", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

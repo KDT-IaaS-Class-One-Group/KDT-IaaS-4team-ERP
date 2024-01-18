@@ -70,7 +70,7 @@ app.post("/:prodIndex/reviews", productcommentwrite);
 
 // 카트 페이지
 app.get("/cart", cartpage); // cartpage 조회 로직
-// todo 수정 필요 둘중 무얼 쓸까?
+// todo 수정 필요 지금도 테스팅 중
 app.post("/cartToPayment", paymentDataForCart);
 app.post("/cart/cartToPayment", cartTest);
 

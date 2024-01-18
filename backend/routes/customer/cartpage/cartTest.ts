@@ -1,36 +1,22 @@
 import express, { Request, Response } from "express";
 import pool from "../../../database";
 import jwt, { JwtPayload } from "jsonwebtoken";
+import { tokenChecker } from "../utils/tokenChecker";
 
 const cartTest = express();
 
-// token을 조회하는 함수 (토큰이 없을 경우 에러를 반환한다.)
-const tokenChecker = (req: Request, res: Response) => {};
-
 cartTest.post("/cart/cartToPayment", async (req: Request, res: Response) => {
-  let conn;
-
-  const tokenHeader = req.headers.authorization;
-  if (!tokenHeader) {
-    return res.status(401).json({ error: "토큰이 제공되지 않았습니다." });
-  }
-  const token = tokenHeader.split(" ")[1];
-  let userIndex: string | JwtPayload;
-  try {
-    // 디코딩된 데이터를 나타내는 변수입니다.
-    const decoded = jwt.verify(token, "1234") as JwtPayload;
-    userIndex = decoded.userIndex as string;
-    // 로그 추가: 토큰 검증 및 userIndex 추출
-    console.log("Token verified, userIndex:", userIndex);
-  } catch (err) {
-    console.error("Token verification error:", err);
-    return res.status(401).json({ error: "토큰이 유효하지 않습니다." });
-  }
-
-  // ! 위의 과정으로 로컬스토리지에서 토큰을 분해하여 userIndex를 추출하였습니다.
+  // 토큰 있는지 확인하는 로직
+  const userIndex = tokenChecker(req, res);
+  if (!userIndex) return console.error("토큰이 없습니다.");
 
   try {
-    res.status(200).json();
+    console.log("cartTest 정상 작동 예정");
+    // todo 장바구니에서 구매버튼 누를 때 나오는 행동들
+    // todo 1. 받은 데이터를 ordersTable에 추가한다.
+    // 필요한 데이터들(넣을 ordersTable 필드명) : orderReceiver(orderReceiver),orderReceiverPhone(orderReceiverPhone : numberType), orderDeliveryAddress(orderDeliveryAddress),orderRequest(orderRequest),cartProductCount(orderPaymentCount), userIndex(userIndex), prodIndex(prodIndex)
+    // todo 2. 모든 cartList가 올바르게 ordersTable에 추가되면 해당 userIndex의 cart Table의 레코드들을 모두 삭제한다.
+    // 단, 위의 작업들이 모두 성공적으로 이루어져야 한다. 중간에 실패할 때는 모두 롤백되어야 한다.
   } catch (error) {
     // 오류 로깅
     console.error("Error during fetching cartTest:", error);
@@ -38,12 +24,13 @@ cartTest.post("/cart/cartToPayment", async (req: Request, res: Response) => {
       success: false,
       message: "cartTest 오류",
     });
-  } finally {
-    if (conn) {
-      console.log("Releasing database connection");
-      // conn.release();
-    }
   }
+  // finally {
+  //   if (conn) {
+  //     console.log("Releasing database connection");
+  //     // conn.release();
+  //   }
+  // }
 });
 
 export default cartTest;
