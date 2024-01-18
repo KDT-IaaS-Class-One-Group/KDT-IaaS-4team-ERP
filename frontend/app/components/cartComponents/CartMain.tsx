@@ -151,15 +151,15 @@ export default function CartMain() {
           />
         ))}
       </ul>
-      {/* <Link href="/orderlist" className="ml-auto"> */}
-      <Btn
-        textContent="결제 하기"
-        className="h-10 w-28 border border-black flex items-center justify-center"
-        onClick={() => {
-          handleCartToPayment(requestData);
-        }}
-      />
-      {/* </Link> */}
+      <Link href="/orderlist" className="ml-auto">
+        <Btn
+          textContent="결제 하기"
+          className="h-10 w-28 border border-black flex items-center justify-center"
+          onClick={() => {
+            handleCartToPayment(requestData);
+          }}
+        />
+      </Link>
     </main>
   );
 }

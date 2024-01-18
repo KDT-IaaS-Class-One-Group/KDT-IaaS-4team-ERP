@@ -27,7 +27,7 @@ const OrderList: React.FC<OrderListProps> = ({ data }) => {
         className="flex w-1/3 gap-6 justify-center items-center"
       >
         <Image
-          src={data.prodImgUrl}
+          src={`/images${data.prodImgUrl}`}
           alt="이미지가 들어갈 자리입니다."
           width={70}
           height={70}

@@ -25,7 +25,7 @@ import productcomment from "./routes/customer/review/productcomment";
 import productcommentfull from "./routes/customer/review/productcommentfull";
 import productcommentwrite from "./routes/customer/review/productcommentwrite";
 import cartpage from "./routes/customer/cartpage/cartpage";
-import cartTest from "./routes/customer/cartpage/cartTest";
+import cartToPaymentTransition from "./routes/customer/cartpage/cartTest";
 
 const app = express();
 const port = 3560;
@@ -71,8 +71,8 @@ app.post("/:prodIndex/reviews", productcommentwrite);
 // 카트 페이지
 app.get("/cart", cartpage); // cartpage 조회 로직
 // todo 수정 필요 지금도 테스팅 중
+app.post("/cart/cartToPayment", cartToPaymentTransition); // cartpage에서 결제하기
 app.post("/cartToPayment", paymentDataForCart);
-app.post("/cart/cartToPayment", cartTest);
 
 app.listen(port, () => {
   console.log(`Express 서버가 ${port}번 포트에서 실행중입니다.`);
