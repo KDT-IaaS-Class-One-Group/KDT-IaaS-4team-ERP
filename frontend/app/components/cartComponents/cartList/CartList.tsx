@@ -59,7 +59,7 @@ const CartList: React.FC<
         className="flex justify-between items-center gap-4 cursor-pointer"
       >
         <Image
-          src={`${prodImgUrl}`}
+          src={`/images${prodImgUrl}`}
           alt="이미지가 들어갈 자리입니다."
           width={70}
           height={70}

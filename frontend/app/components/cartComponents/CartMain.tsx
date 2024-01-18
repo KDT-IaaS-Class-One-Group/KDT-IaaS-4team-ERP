@@ -44,7 +44,7 @@ export default function CartMain() {
   };
 
   // 결제 버튼 데이터 가공 로직
-  const handleCartToPayment = () => {
+  const handleCartToPayment = (requestData: object) => {
     // requestData에 수량 변경사항과 배송 정보 통합
     const processedData = requestData.map((item) => ({
       ...item,
@@ -57,7 +57,34 @@ export default function CartMain() {
 
     // processedData를 사용하여 결제 요청 전송
     // 예: fetch('/api/payment', { method: 'POST', body: JSON.stringify(processedData) })
+
+    // 디버깅용
     console.log("processedData", processedData);
+
+    // 결제 요청 전송
+    try {
+      const token = localStorage.getItem("token"); // 사용자 토큰 가져오기
+      const response = await fetch("/api/payment", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(processedData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Payment request failed");
+      }
+
+      // 요청 성공 처리
+      const result = await response.json();
+      console.log("Payment Success:", result);
+      // 추가적인 성공 처리 로직 (예: 사용자를 주문 확인 페이지로 리디렉션)
+    } catch (error) {
+      console.error("Payment Error:", error);
+      // 에러 처리 로직
+    }
   };
 
   // 디버깅용 useEffects
@@ -128,7 +155,9 @@ export default function CartMain() {
         <Btn
           textContent="결제 하기"
           className="h-10 w-28 border border-black flex items-center justify-center"
-          onClick={handleCartToPayment}
+          onClick={() => {
+            handleCartToPayment(requestData);
+          }}
         />
       </Link>
     </main>
