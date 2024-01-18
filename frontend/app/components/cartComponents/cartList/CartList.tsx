@@ -29,8 +29,8 @@ const CartList: React.FC<PList> = ({
 }) => {
   const combinedClassName = `w-full flex justify-between items-center border-2 border-slate-800 p-4 ${className}`;
   const linkHref = `/product/${prodIndex}`;
-  console.log("cartIndex : ", cartIndex);
   const idToString = cartIndex.toString();
+  // console.log("idToString", idToString);
 
   const [quantity, setQuantity] = useState(cartProductCount);
 
@@ -46,7 +46,7 @@ const CartList: React.FC<PList> = ({
   };
 
   return (
-    <li className={combinedClassName}>
+    <li className={combinedClassName} id={idToString}>
       <Link
         href={linkHref}
         className="flex justify-between items-center gap-4 cursor-pointer"
@@ -59,22 +59,15 @@ const CartList: React.FC<PList> = ({
         />
         <p className="text-xs">{prodDescription}</p>
       </Link>
-      <div className="flex gap-3 w-2/3">
+      <div className="flex items-center gap-3 w-2/3">
         <div className="flex-1 flex justify-center items-center">
           {prodPrice}원
         </div>
         <div className="ctpButton flex justify-center items-center gap-2">
-          <span className="cartProductCount text-xl font-medium">
+          <span className="cartProductCount text-xl font-medium block">
             {quantity}
           </span>
           <div className="flex flex-col justify-center items-center gap-0 w-7">
-            <button
-              type="button"
-              className="w-full flex justify-center items-center text-center"
-              onClick={handleDecrease}
-            >
-              -
-            </button>
             <button
               type="button"
               className="w-full flex justify-center items-center text-center"
@@ -82,13 +75,20 @@ const CartList: React.FC<PList> = ({
             >
               +
             </button>
+            <button
+              type="button"
+              className="w-full flex justify-center items-center text-center"
+              onClick={handleDecrease}
+            >
+              -
+            </button>
           </div>
           {/* 버튼 세로 묶음 */}
         </div>
         {/* 버튼 컴포넌트 */}
         <Btn
           textContent="리스트 삭제"
-          className="h-10 w-28 border border-slate-950 flex justify-center items-center flex-1 text-sm"
+          className="h-10 w-28 border border-slate-950 flex justify-center items-center marker:text-sm"
           onClick={() => handleDelete(idToString)}
         />
       </div>
