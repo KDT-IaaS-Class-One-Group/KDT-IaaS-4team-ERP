@@ -18,7 +18,9 @@ import handleDelete from "app/utils/custom/handleDelete";
  * @param cartProductCount - 장바구니 상품 수량
  * @param className - 컴포넌트 클래스 이름
  */
-const CartList: React.FC<PList> = ({
+const CartList: React.FC<
+  PList & { onQuantityChange: (quantity: number) => void }
+> = ({
   prodIndex,
   prodImgUrl,
   prodDescription,
@@ -26,6 +28,7 @@ const CartList: React.FC<PList> = ({
   cartIndex,
   cartProductCount,
   className,
+  onQuantityChange,
 }) => {
   const combinedClassName = `w-full flex justify-between items-center border-2 border-slate-800 p-4 ${className}`;
   const linkHref = `/product/${prodIndex}`;
@@ -36,12 +39,16 @@ const CartList: React.FC<PList> = ({
 
   const handleIncrease = () => {
     if (quantity < 50) {
-      setQuantity(quantity + 1);
+      const newQuantity = quantity + 1;
+      setQuantity(newQuantity);
+      onQuantityChange(newQuantity);
     }
   };
   const handleDecrease = () => {
     if (quantity > 1) {
-      setQuantity(quantity - 1);
+      const newQuantity = quantity - 1;
+      setQuantity(newQuantity);
+      onQuantityChange(newQuantity);
     }
   };
 
