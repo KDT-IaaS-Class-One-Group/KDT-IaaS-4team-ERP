@@ -29,6 +29,7 @@ const CartList: React.FC<PList> = ({
 }) => {
   const combinedClassName = `w-full flex justify-between items-center border-2 border-slate-800 p-4 ${className}`;
   const linkHref = `/product/${prodIndex}`;
+  console.log("cartIndex : ", cartIndex);
   const idToString = cartIndex.toString();
 
   const [quantity, setQuantity] = useState(cartProductCount);

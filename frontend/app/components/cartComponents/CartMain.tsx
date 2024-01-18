@@ -53,11 +53,12 @@ export default function CartMain() {
         {requestData.map((item, index) => (
           <CartList
             key={item.cartIndex} // 반드시 고유한 key를 제공해야 함
-            pIndex={item.prodIndex}
-            pUrl={item.prodImgUrl}
-            pCount={item.cartProductCount}
-            pPrice={item.prodPrice}
-            pSub={item.prodDescription}
+            cartIndex={item.cartIndex}
+            prodIndex={item.prodIndex}
+            prodImgUrl={item.prodImgUrl}
+            cartProductCount={item.cartProductCount}
+            prodPrice={item.prodPrice}
+            prodDescription={item.prodDescription}
           />
         ))}
       </ul>
