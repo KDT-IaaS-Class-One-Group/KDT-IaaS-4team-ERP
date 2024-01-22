@@ -24,6 +24,32 @@ const SignUpHome: React.FC = () => {
 
   const handleButtonClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
     try {
+      // Check if any required field is empty
+      if (!Signup.userId.trim()) {
+        alert('아이디를 입력해주세요.');
+        return;
+      }
+
+      if (!Signup.userPassword.trim()) {
+        alert('비밀번호를 입력해주세요.');
+        return;
+      }
+
+      if (!Signup.userPassword1.trim()) {
+        alert('비밀번호 확인을 입력해주세요.');
+        return;
+      }
+
+      if (!Signup.userEmail.trim()) {
+        alert('이메일을 입력해주세요.');
+        return;
+      }
+
+      if (!Signup.userPhoneNum.trim()) {
+        alert('휴대폰 번호를 입력해주세요.');
+        return;
+      }
+
       const response = await fetch(`http://localhost:3560/signup`, {
         method: 'POST',
         headers: {
