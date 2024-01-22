@@ -6,7 +6,7 @@ interface productdetails {
 
 const ProductPriceCalculator: React.FC = ({productdetails, setPaymentInfo}) => {
 
-  const [quantity, setQuantity] = useState<number>(1);
+  const [quantity, setQuantity] = useState<number>(0);
   const [totalPrice, setTotalPrice] = useState<number | string>(0);
 
 

@@ -1,8 +1,9 @@
 export interface ProductDetailProps {
-  Img: string;
-  Title: string;
-  Price: number;
-  Summary: string;
-  Count: number;
-  Detail: string;
-};
+  productdetails: {
+    prodIndex: number;
+    prodName: string;
+    prodPrice: number;
+    prodDescription: string;
+    prodImgUrl: string;
+  };
+}

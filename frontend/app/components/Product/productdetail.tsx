@@ -5,15 +5,16 @@ import styles from "./style/productdetail.module.css";
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
-import { useParams } from 'next/navigation';
-import { ProductsTableProps } from '@/interfaces/Product/ProductsTableProps';
+// import { useParams } from 'next/navigation';
+import {ProductDetailProps} from '../../interfaces/Product/ProductDetailProps'
 
 
-const ProductDetail: React.FC<> = ({ productdetails }) => {
+
+const ProductDetail: React.FC<ProductDetailProps> = ({ productdetails }) => {
   const productdetailsprodIndex = productdetails.prodIndex;
   const [paymentInfo, setPaymentInfo] = useState({
     quantity: 1,
-    totalPrice: 0
+    totalPrice: productdetails.prodPrice
     // 다른 필요한 결제 정보들을 추가할 수 있습니다.
   });
   console.log("productdetails", productdetails);
