@@ -28,7 +28,7 @@ const ProductCommentdetails = ({ reviewTitle, reviewContent, reviewRating }) => 
         <ul className="text-2xl text-black">평점 : </ul>
           <div className='flex items-center justify-start text-4xl'>
             {Array.from({ length: parseInt(reviewRating, 10) }).map((_, i) => (
-              <span key={i}>💛</span>
+              <span className="text-yellow-500"key={i}>★</span>
             ))}
           </div>
           <button type="button" onClick={goback}>뒤로가기</button>
