@@ -4,7 +4,7 @@ import React from "react";
 import styles from "./style/productdetail.module.css";
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // import { useParams } from 'next/navigation';
 import { ProductDetailProps } from "../../interfaces/Product/ProductDetailProps";
 
@@ -16,6 +16,14 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productdetails }) => {
     // 다른 필요한 결제 정보들을 추가할 수 있습니다.
   });
   // console.log("productdetails", productdetails);
+
+  // productdetails.prodPrice가 변경될 때마다 paymentInfo.totalPrice 업데이트
+  useEffect(() => {
+    setPaymentInfo((prevPaymentInfo) => ({
+      ...prevPaymentInfo,
+      totalPrice: productdetails.prodPrice,
+    }));
+  }, [productdetails.prodPrice]);
 
   const handlePurchase = async () => {
     try {
