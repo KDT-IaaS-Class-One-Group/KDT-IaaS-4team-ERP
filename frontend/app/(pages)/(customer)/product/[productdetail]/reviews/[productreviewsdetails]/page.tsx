@@ -7,6 +7,7 @@ import { useSearchParams } from "next/navigation";
 import ProductCommentdetails from "@/app/components/ProductCommentListfull/ProductCommentdetails";
 import { urlLastIndexPop } from "@/app/utils/urlLastIndexPop";
 import { useEffect } from "react";
+import AdminCommentList from "../../../../../../components/reviewsAdminComment/AdminCommentList";
 
 interface Productcommentdetails {
   reviewTitle: string; //제목
@@ -43,23 +44,31 @@ const CommentFullHome = () => {
   }, []);
 
   return (
-    <>
-      <div className="w-screen h-screen flex justify-start items-center flex-col gap-6">
-        <ProductCommentdetails
-          reviewTitle={title}
-          reviewContent={content}
-          // reviewImgUrl={commentsfull.reviewImgUrl}
-          // reviewUpdatedAt={commentsfull.reviewUpdatedAt}
-          reviewRating={rating}
-          // userId={commentsfull.userId}
-        />
-      </div>
+    <div className="w-screen h-screen flex justify-start items-center flex-col pt-4 pb-4 bg-blue-200 text-white ">
+      <ProductCommentdetails
+        reviewTitle={title}
+        reviewContent={content}
+        // reviewImgUrl={commentsfull.reviewImgUrl}
+        // reviewUpdatedAt={commentsfull.reviewUpdatedAt}
+        reviewRating={rating}
+        // userId={commentsfull.userId}
+      />
       {/* <Link href="/productcommentwriting">
-                <div className='mr-40 mb-20'>
-                    <ProductUploadFullButton value='상품평 등록' />
-                </div>
-            </Link> */}
-    </>
+        <div className='mr-40 mb-20'>
+        <ProductUploadFullButton value='상품평 등록' />
+        </div>
+      </Link> */}
+
+      {/* 댓글 컴포넌트 들어갈 자리 */}
+      <ul className="AdminArea w-4/5 h-1/4 outline-1 outline flex flex-col items-start justify-center">
+        <AdminCommentList
+          author="관리자"
+          className="border border-slate-50 w-full h-full bg-black"
+          adminContent="
+        안녕하세요. 관리자입니다."
+        />
+      </ul>
+    </div>
   );
 };
 
