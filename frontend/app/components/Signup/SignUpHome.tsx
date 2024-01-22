@@ -24,6 +24,34 @@ const SignUpHome: React.FC = () => {
 
   const handleButtonClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
     try {
+      // Check if any required field is empty
+      if (!Signup.userId.trim()) {
+        alert('아이디를 입력해주세요.');
+        return;
+      }
+
+      if (!Signup.userPassword.trim()) {
+        alert('비밀번호를 입력해주세요.');
+        return;
+      }
+
+      if (Signup.userPassword !== Signup.userPassword1) {// 기존에 입력한 userPassword와 userPassword1이 같지 않을 경우 경고창 출력
+        alert('비밀번호가 서로 같지 않습니다.');
+        return;
+      }
+
+      //이메일 형식에 '@'가 포함 되어있는지 검사
+      const isValidEmailFormat = (email: string): boolean => {
+        const hasAtSymbol = email.includes('@'); //includes : 배열에 특정 값('@')이 포함되어 있는지를 확인
+        return hasAtSymbol;
+      }
+
+      if (!isValidEmailFormat(Signup.userEmail)) {
+        alert('올바른 이메일 형식으로 입력해주세요');
+        return;
+      }
+
+
       const response = await fetch(`http://localhost:3560/signup`, {
         method: 'POST',
         headers: {

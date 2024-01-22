@@ -36,7 +36,7 @@ const ProductWritingHome = () => {
   };
 
 
-  const handleSubmit = async () => {
+  const handleSubmit = async () => { //글 등록 버튼
     try {
       const token = localStorage.getItem('token')
       // console.log(token)
@@ -54,22 +54,33 @@ const ProductWritingHome = () => {
         }),
       });
 
+      // 제목이 비어있을 경우
+      if (!productWrite.reviewTitle.trim()) { //trim으로 앞뒤 공백 제거
+        alert('제목을 입력해주세요.');
+        return;
+      }
+      // 내용이 비어있을 경우
+      if (!productWrite.reviewContent.trim()) {
+        alert('내용을 입력해주세요.');
+        return;
+      }
+
       if (!response.ok) {
         throw new Error('글 쓰기 실패');
       }
-
       const data = await response.json();
       console.log(data);
 
       if (data.success) {
         alert('글 등록 성공');
         router.push(`/product/${prodIndex}`);//내가 원하는 페이지로 이동시 사용
-      } else {
+      }
+      else {
         alert('글 등록 실패');
       }
     } catch (error) {
       console.error(error);
-      alert('글 작성 실패');
+      alert('글 작성 실패(error)');
     }
   };
   const titletext = 'flex w-4/5 m-2 h-20 items-start justify-center'
