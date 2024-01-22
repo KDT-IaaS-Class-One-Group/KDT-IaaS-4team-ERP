@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import OrderListNav from "../../../components/orderListComponent/orderListNav/OrderListNav";
-import OrderList from "../../../components/orderListComponent/orderList/OrderList";
-import React, { useState, useEffect } from "react";
+import OrderListNav from '@/components/orderListComponent/orderListNav/OrderListNav';
+import OrderList from '@/components/orderListComponent/orderList/OrderList';
+import React, { useState, useEffect } from 'react';
 
 interface Order {
   id: number;
@@ -17,27 +17,27 @@ const OrderListComponent: React.FC = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem('token');
         const response = await fetch(
           `http://localhost:3560/orderpage/getdata`,
           {
-            method: "GET",
+            method: 'GET',
             headers: {
-              "Content-Type": "application/json",
+              'Content-Type': 'application/json',
               Authorization: `Bearer ${token}`,
             },
-          }
+          },
         );
 
         if (!response.ok) {
-          throw new Error("주문 목록을 가져오는 데 실패했습니다.");
+          throw new Error('주문 목록을 가져오는 데 실패했습니다.');
         }
 
         const data = await response.json();
         console.log(data);
         setOrderList(data);
       } catch (error) {
-        console.error("Error fetching orders:", error);
+        console.error('Error fetching orders:', error);
       }
     };
 
@@ -47,11 +47,11 @@ const OrderListComponent: React.FC = () => {
   return (
     <>
       <OrderListNav />
-      <div className="h-full w-full flex flex-col">
+      <div className='h-full w-full flex flex-col'>
         {orderList.length === 0 ? (
           <p>주문 목록이 비어 있습니다.</p>
         ) : (
-          <ul className="flex flex-col justify-start h-full w-full">
+          <ul className='flex flex-col justify-start h-full w-full'>
             {orderList.map((order) => (
               <OrderList key={order.id} data={order} />
             ))}

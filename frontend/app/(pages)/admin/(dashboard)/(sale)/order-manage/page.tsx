@@ -109,62 +109,106 @@ export default function OrderManagement() {
   };
 
   return (
-    <div className='container mx-auto p-4'>
-      {orders.map((order) => (
-        <div
-          key={order.orderIndex}
-          className='bg-white p-4 shadow-md rounded-lg mb-4'
-        >
-          <h3 className='text-lg font-semibold mb-2'>
-            주문 번호: {order.orderIndex}
-          </h3>
-          <p>요청 사항: {order.orderRequest}</p>
-          <p>배송 주소: {order.orderDeliveryDone}</p>
-          <p>주문 상품 개수: {order.orderPaymentCount}</p>
-          <p>주문 날짜: {order.orderPaymentDatetime}</p>
-          <p>주문 금액: {order.orderPaymentPriceAtOrder}원</p>
-          <p className='mb-4'>
-            배송 상태:{' '}
-            {order.orderDeliveryDone === 0 ? '배송 준비' : '배송 완료'}
-          </p>
-          <div className='flex'>
-            {order.orderIsOrderAccepted === 0 && (
-              <>
-                <button
-                  onClick={() => handleOrderAcceptance(order.orderIndex, true)}
-                  className='...'
-                >
-                  주문 수락
-                </button>
-                <button
-                  onClick={() => handleOrderAcceptance(order.orderIndex, false)}
-                  className='...'
-                >
-                  주문 거절
-                </button>
-              </>
-            )}
-
-            {/* 배송 상태 버튼 */}
-            {order.orderIsOrderAccepted === 1 && (
-              <>
-                <button
-                  onClick={() => handleDeliveryStatus(order.orderIndex, 0)}
-                  className='...'
-                >
-                  배송 준비
-                </button>
-                <button
-                  onClick={() => handleDeliveryStatus(order.orderIndex, 1)}
-                  className='...'
-                >
-                  배송 완료
-                </button>
-              </>
-            )}
-          </div>
+    <div className='flex container mx-auto p-4 items-center flex-col'>
+      <div className='overflow-x-auto w-full'>
+        <div className='max-h-[800px] overflow-y-auto'>
+          <table className='min-w-full leading-normal'>
+            <thead>
+              <tr>
+                <th className='px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider'>
+                  주문 번호
+                </th>
+                <th className='px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider'>
+                  요청 사항
+                </th>
+                <th className='px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider'>
+                  배송 주소
+                </th>
+                <th className='px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider'>
+                  주문 상품 개수
+                </th>
+                <th className='px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider'>
+                  주문 날짜
+                </th>
+                <th className='px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider'>
+                  주문 금액
+                </th>
+                <th className='px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider'>
+                  배송 상태
+                </th>
+                <th className='px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider'>
+                  조치
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {orders.map((order) => (
+                <tr key={order.orderIndex}>
+                  <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                    <div className='text-gray-900 whitespace-no-wrap'>
+                      {order.orderIndex}
+                    </div>
+                  </td>
+                  <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                    <div className='text-gray-900 whitespace-no-wrap'>
+                      {order.orderRequest}
+                    </div>
+                  </td>
+                  <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                    <div className='text-gray-900 whitespace-no-wrap'>
+                      {order.orderDeliveryDone}
+                    </div>
+                  </td>
+                  <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                    <div className='text-gray-900 whitespace-no-wrap'>
+                      {order.orderPaymentCount}
+                    </div>
+                  </td>
+                  <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                    <div className='text-gray-900 whitespace-no-wrap'>
+                      {order.orderPaymentDatetime}
+                    </div>
+                  </td>
+                  <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                    <div className='text-gray-900 whitespace-no-wrap'>
+                      {order.orderPaymentPriceAtOrder}원
+                    </div>
+                  </td>
+                  <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                    <div className='text-gray-900 whitespace-no-wrap'>
+                      {order.orderDeliveryDone === 0
+                        ? '배송 준비'
+                        : '배송 완료'}
+                    </div>
+                  </td>
+                  <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                    {order.orderIsOrderAccepted === 1 && (
+                      <>
+                        <button
+                          onClick={() =>
+                            handleDeliveryStatus(order.orderIndex, 0)
+                          }
+                          className='text-blue-500 hover:text-blue-800'
+                        >
+                          배송 준비
+                        </button>
+                        <button
+                          onClick={() =>
+                            handleDeliveryStatus(order.orderIndex, 1)
+                          }
+                          className='text-green-500 hover:text-green-800 ml-4'
+                        >
+                          배송 완료
+                        </button>
+                      </>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-      ))}
+      </div>
     </div>
   );
 }
