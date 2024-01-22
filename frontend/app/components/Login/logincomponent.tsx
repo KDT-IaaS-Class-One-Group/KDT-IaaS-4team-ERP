@@ -63,7 +63,7 @@ const LoginHome = () => {
       }
     } catch (error) {
       console.error(error);
-      alert('로그인 실패');
+      alert('회원정보가 존재하지 않습니다.');
     }
   };
 
