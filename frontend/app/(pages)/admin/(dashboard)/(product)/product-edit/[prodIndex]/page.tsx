@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-export default function ProductEditPage({ params }) {
+export default function ProductEditPage(params: any) {
   const [prodName, setProdName] = useState('');
   const [prodDescription, setProdDescription] = useState('');
   const [prodCategory, setProdCategory] = useState('');
