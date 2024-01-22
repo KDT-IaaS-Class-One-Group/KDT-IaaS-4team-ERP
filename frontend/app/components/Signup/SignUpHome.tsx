@@ -35,20 +35,22 @@ const SignUpHome: React.FC = () => {
         return;
       }
 
-      if (Signup.userPassword !== Signup.userPassword1) {
+      if (Signup.userPassword !== Signup.userPassword1) {// 기존에 입력한 userPassword와 userPassword1이 같지 않을 경우 경고창 출력
         alert('비밀번호가 서로 같지 않습니다.');
         return;
       }
 
-      if (!Signup.userEmail.trim()) {
-        alert('이메일을 입력해주세요.');
+      //이메일 형식에 '@'가 포함 되어있는지 검사
+      const isValidEmailFormat = (email: string): boolean => {
+        const hasAtSymbol = email.includes('@'); //includes : 배열에 특정 값('@')이 포함되어 있는지를 확인
+        return hasAtSymbol;
+      }
+
+      if (!isValidEmailFormat(Signup.userEmail)) {
+        alert('올바른 이메일 형식으로 입력해주세요.');
         return;
       }
 
-      if (!Signup.userPhoneNum.trim()) {
-        alert('휴대폰 번호를 입력해주세요.');
-        return;
-      }
 
       const response = await fetch(`http://localhost:3560/signup`, {
         method: 'POST',
