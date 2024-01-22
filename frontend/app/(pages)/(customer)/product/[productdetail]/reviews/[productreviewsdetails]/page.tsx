@@ -5,6 +5,8 @@
 
 import { useSearchParams } from "next/navigation";
 import ProductCommentdetails from "@/app/components/ProductCommentListfull/ProductCommentdetails";
+import { urlLastIndexPop } from "@/app/utils/urlLastIndexPop";
+import { useEffect } from "react";
 
 interface Productcommentdetails {
   reviewTitle: string; //제목
@@ -14,11 +16,15 @@ interface Productcommentdetails {
   // userId: string; //아이디
 }
 
-// todo : queryString으로 받아온 데이터를 활용하여,
+// todo 1. 마운트가 될 때, reviews/:producutreviewdetails로 부터 데이터를 가져온다.
+// todo 2. reviewsIndex를 조사하였을 때, 해당 인덱스에 reviewAdminContent를 체크한다.
+// todo 3. 있다면, 컴포넌트를 생성하며 마운트하고, 없다면 컴포넌트를 생성하지 않는다.
 
 const CommentFullHome = () => {
+  // useSearchParams()를 이용하여 쿼리스트링을 가져온다.
+  // 그러나 reviewIndex를 가져오지 못하므로, window.location.pathname를 활용하는 방안을 채택한다.
+
   const searchParams = useSearchParams();
-  const productIndex: string | null = searchParams.get("productIndex");
   const title = searchParams.get("title");
   const rating = searchParams.get("rating");
   const content = searchParams.get("content");
@@ -29,6 +35,12 @@ const CommentFullHome = () => {
     reviewRating: rating || "",
     // 다른 프로퍼티들도 필요에 따라 추가
   };
+  // 디버깅용 콘솔로그
+  console.log(productDetailsProps);
+  useEffect(() => {
+    const reviewIndex = urlLastIndexPop();
+    console.log("reviewIndex : ", reviewIndex);
+  }, []);
 
   return (
     <>
