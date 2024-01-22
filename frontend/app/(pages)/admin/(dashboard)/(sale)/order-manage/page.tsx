@@ -45,6 +45,13 @@ export default function OrderManagement() {
     isAccepted: boolean,
   ) => {
     try {
+      // 주문 정보가 비어있을 경우 알림창
+    if (!orderIndex || typeof isAccepted === 'undefined') {
+      alert('내용을 모두 입력해주세요.');
+      return;
+    }
+
+
       const response = await fetch(
         `http://localhost:3560/api/orders/acceptance/${orderIndex}`,
         {
