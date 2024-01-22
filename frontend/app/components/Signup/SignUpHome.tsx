@@ -35,8 +35,8 @@ const SignUpHome: React.FC = () => {
         return;
       }
 
-      if (!Signup.userPassword1.trim()) {
-        alert('비밀번호 확인을 입력해주세요.');
+      if (Signup.userPassword !== Signup.userPassword1) {
+        alert('비밀번호가 서로 같지 않습니다.');
         return;
       }
 
