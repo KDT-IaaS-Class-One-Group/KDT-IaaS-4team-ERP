@@ -15,7 +15,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productdetails }) => {
     totalPrice: productdetails.prodPrice,
     // 다른 필요한 결제 정보들을 추가할 수 있습니다.
   });
-  console.log("productdetails", productdetails);
+  // console.log("productdetails", productdetails);
 
   const handlePurchase = async () => {
     try {
@@ -28,17 +28,18 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productdetails }) => {
         },
         body: JSON.stringify({
           quantity: paymentInfo.quantity,
-          prodIndex: productdetails.prodIndex,
+          prodIndex: productdetailsprodIndex,
         }),
       });
 
       if (response.ok) {
-        console.log("장바구니에 추가되었습니다.");
+        alert("장바구니에 추가되었습니다.");
       } else {
-        console.error("장바구니에 추가되지 않았습니다.");
+        alert("장바구니에 추가되지 않았습니다.");
       }
     } catch (error) {
       console.error("Error during cart:", error);
+      alert("장바구니에 추가 중 오류가 발생했습니다.");
     }
   };
 

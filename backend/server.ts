@@ -63,6 +63,7 @@ app.post("/signup", customerSignup);
 // 상품 페이지
 app.get('/product/:prodIndex', product);
 app.post('/product/buy', buybutton);
+app.post("/addingcart", addingcart);
 // 구매 페이지
 app.get("/product/:prodIndex/payment", paymentDataForProductPage); // 구매페이지 초기 useeffect로 인한 상품정보 요청
 app.post("/product/:prodIndex/payment", buybutton); // 구매페이지 구매완료 버튼 클릭시 오는 포스트 요청
@@ -79,7 +80,6 @@ app.get("/cart", cartpage); // cartpage 조회 로직
 // todo 수정 필요 지금도 테스팅 중
 app.post("/cart/cartToPayment", cartToPaymentTransition); // cartpage에서 결제하기
 app.post("/cartToPayment", paymentDataForCart);
-app.post("/addingcart", addingcart)
 
 app.get('/api/products', adminProducts);
 app.post('/api/addproduct', adminAddProduct);
