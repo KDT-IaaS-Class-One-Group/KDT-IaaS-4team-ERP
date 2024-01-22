@@ -20,7 +20,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productdetails }) => {
   const handlePurchase = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("/addingcart", {
+      const response = await fetch("http://localhost:3560/addingcart", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

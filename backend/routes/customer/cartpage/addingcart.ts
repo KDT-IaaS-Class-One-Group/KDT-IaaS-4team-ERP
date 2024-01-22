@@ -7,6 +7,7 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 const addingcart = express();
 
 addingcart.post("/addingcart", async (req, res) => {
+  console.log('요청이 옴')
   let conn;
   
   // * 수량, prodIndex를 body에서 가져오기.
