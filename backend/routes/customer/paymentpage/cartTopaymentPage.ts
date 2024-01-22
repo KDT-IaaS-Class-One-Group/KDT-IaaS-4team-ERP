@@ -6,7 +6,7 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 
 const paymentDataForCart = express();
 
-paymentDataForCart.post("/cartToPayment", async (req, res) => {
+paymentDataForCart.post("/cart/cartToPayment", async (req, res) => {
   let conn;
 
   // * 클라이언트 측에서 header로 tokken을 보내준 것을 갖고옴.
@@ -19,10 +19,10 @@ paymentDataForCart.post("/cartToPayment", async (req, res) => {
 
   //* 토큰을 검증하여 userIndex 정보를 가져옴
   let userIndex: string | JwtPayload;
-
   try {
     const decoded: JwtPayload = jwt.verify(token, "1234") as JwtPayload;
     userIndex = decoded.userIndex as string;
+    console.log("userIndex : ", userIndex);
 
     //* userIndex를 사용해서 cartIndex 추출
     conn = await pool.getConnection();
@@ -40,7 +40,6 @@ paymentDataForCart.post("/cartToPayment", async (req, res) => {
     const productQuery = "SELECT * FROM products WHERE cartIndex IN (?)";
     const [productResult] = await conn.query(productQuery, [cartIndexes]);
     res.json(productResult);
-
   } catch (err) {
     return res.status(401).json({ error: "토큰이 유효하지 않습니다." });
   } finally {

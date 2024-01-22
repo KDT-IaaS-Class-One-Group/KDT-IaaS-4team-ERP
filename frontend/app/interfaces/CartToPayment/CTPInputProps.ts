@@ -3,4 +3,5 @@ export interface CTPInputProps {
   inputPlaceholder: string;
   listName: string;
   liClassName: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
