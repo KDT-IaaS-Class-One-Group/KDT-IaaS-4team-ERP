@@ -1,8 +1,9 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import handleImageUpload from '@/app/utils/admin/imageUpload';
 
-export default function ProductEditPage({ params }) {
+export default function ProductEditPage(params: any) {
   const [prodName, setProdName] = useState('');
   const [prodDescription, setProdDescription] = useState('');
   const [prodCategory, setProdCategory] = useState('');
@@ -11,6 +12,7 @@ export default function ProductEditPage({ params }) {
   const [prodStock, setProdStock] = useState('');
   const prodIndex = params.prodIndex;
   const router = useRouter(); // Next.js의 라우터 사용
+
 
   const submitProduct = async () => {
     const submitProduct = async () => {
@@ -124,18 +126,17 @@ export default function ProductEditPage({ params }) {
       </div>
       <div className='mb-4'>
         <label
-          htmlFor='prodImgUrl'
+          htmlFor='prodImg'
           className='block text-gray-700 text-sm font-bold mb-2'
         >
-          상품 이미지 URL
+          상품 이미지
         </label>
         <input
-          type='text'
-          id='prodImgUrl'
-          value={prodImgUrl}
-          onChange={(e) => setProdImgUrl(e.target.value)}
+          type='file'
+          id='prodImg'
+          accept='image/*'
+          onChange={handleImageUpload}
           className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-          placeholder='상품 이미지 URL'
         />
       </div>
       <div className='mb-4'>
@@ -177,7 +178,7 @@ export default function ProductEditPage({ params }) {
           onClick={submitProduct}
           className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
         >
-          상품 등록
+          상품 수정
         </button>
       </div>
     </div>
