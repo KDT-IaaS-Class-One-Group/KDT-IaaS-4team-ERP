@@ -19,6 +19,7 @@ import customerLogin from './routes/customer/customerLogin';
 import customerSignup from './routes/customer/customerSignup';
 
 import product from './routes/customer/productpage/productpage';
+import addingcart from './routes/customer/cartpage/addingcart';
 
 import paymentDataForProductPage from './routes/customer/paymentpage/productTopaymentpage';
 import paymentDataForCart from './routes/customer/paymentpage/cartTopaymentPage';
@@ -78,6 +79,7 @@ app.get("/cart", cartpage); // cartpage 조회 로직
 // todo 수정 필요 지금도 테스팅 중
 app.post("/cart/cartToPayment", cartToPaymentTransition); // cartpage에서 결제하기
 app.post("/cartToPayment", paymentDataForCart);
+app.post("/addingcart", addingcart)
 
 app.get('/api/products', adminProducts);
 app.post('/api/addproduct', adminAddProduct);
