@@ -1,14 +1,14 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { orderIndexProp } from '@/app/types/Order/OrderIndexProp';
-import { OrderRequestProp } from '@/app/types/Order/OrderRequestProp';
-import { OrderDeliveryAddressProp } from '@/app/types/Order/OrderDeliveryAddressProp';
-import { OrderPaymentCountProp } from '@/app/types/Order/OrderPaymentCountProp';
-import { OrderPaymentDatetimeProps } from '@/app/types/Order/OrderPaymentDatetimeProp';
-import { OrderPaymentPriceAtOrderProp } from '@/app/types/Order/OrderPaymentPriceAtOrderProp';
-import { OrderDeliveryDoneProp } from '@/app/types/Order/OrderDeliveryDoneProp';
-import { UserIndexProp } from '@/app/types/Order/UserIndexProp';
-import { ProdIndexProp } from '@/app/types/Order/ProdIndexProp';
+import { orderIndexProp } from '@/types/Order/OrderIndexProp';
+import { OrderRequestProp } from '@/types/Order/OrderRequestProp';
+import { OrderDeliveryAddressProp } from '@/types/Order/OrderDeliveryAddressProp';
+import { OrderPaymentCountProp } from '@/types/Order/OrderPaymentCountProp';
+import { OrderPaymentDatetimeProps } from '@/types/Order/OrderPaymentDatetimeProp';
+import { OrderPaymentPriceAtOrderProp } from '@/types/Order/OrderPaymentPriceAtOrderProp';
+import { OrderDeliveryDoneProp } from '@/types/Order/OrderDeliveryDoneProp';
+import { UserIndexProp } from '@/types/Order/UserIndexProp';
+import { ProdIndexProp } from '@/types/Order/ProdIndexProp';
 
 interface OrderProps
   extends orderIndexProp,

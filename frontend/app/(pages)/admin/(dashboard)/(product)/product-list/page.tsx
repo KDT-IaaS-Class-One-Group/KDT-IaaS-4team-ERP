@@ -1,13 +1,13 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { ProductIndexProp } from '@/app/types/Product/ProductIndexProp';
-import { ProductNameProp } from '@/app/types/Product/ProductNameProp';
-import { ProductPriceProp } from '@/app/types/Product/ProductPriceProp';
-import { ProductCategoryProp } from '@/app/types/Product/ProductCategoryProp';
-import { ProductStockProp } from '@/app/types/Product/ProductStockProp';
-import { ProductDescriptionProp } from '@/app/types/Product/ProductDescriptionProp';
-import { ProductImgUrlProp } from '@/app/types/Product/ProductImgUrlProp';
+import { ProductIndexProp } from '@/types/Product/ProductIndexProp';
+import { ProductNameProp } from '@/types/Product/ProductNameProp';
+import { ProductPriceProp } from '@/types/Product/ProductPriceProp';
+import { ProductCategoryProp } from '@/types/Product/ProductCategoryProp';
+import { ProductStockProp } from '@/types/Product/ProductStockProp';
+import { ProductDescriptionProp } from '@/types/Product/ProductDescriptionProp';
+import { ProductImgUrlProp } from '@/types/Product/ProductImgUrlProp';
 
 interface ProductListProps
   extends ProductIndexProp,
