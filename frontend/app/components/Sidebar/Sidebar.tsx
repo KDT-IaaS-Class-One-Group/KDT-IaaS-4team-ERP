@@ -6,8 +6,8 @@ import MenuLink from './MenuLink';
 
 export default function Sidebar() {
   return (
-    <div className='h-full w-64 bg-blue-700 text-white'>
-      <nav className='p-4'>
+    <div className='flex flex-col h-full w-64 bg-blue-700 text-white'>
+      <nav className='p-4 flex-grow'>
         <ul>
           <li className='flex pb-10 items-center'>
             <Link
@@ -18,12 +18,10 @@ export default function Sidebar() {
             </Link>
           </li>
           <MenuItem title='상품 관리'>
-            <MenuLink href='/admin/product-list'>상품 조회</MenuLink>
-            <MenuLink href='/admin/product-add'>상품 등록</MenuLink>
+            <MenuLink href='/admin/product-list'>상품 관리</MenuLink>
           </MenuItem>
           <MenuItem title='판매 관리'>
             <MenuLink href='/admin/order-manage'>주문 관리</MenuLink>
-            <MenuLink href='/admin/delivery-manage'>배송 관리</MenuLink>
           </MenuItem>
           <MenuItem title='매출 관리'>
             <MenuLink href='/admin/revenue-view'>매출 통계 </MenuLink>
@@ -33,6 +31,23 @@ export default function Sidebar() {
           </MenuItem>
         </ul>
       </nav>
+      <div className='p-4 border-t border-gray-600'>
+        <ul>
+          <li className='mb-2'>
+            <Link className='block p-2 hover:bg-gray-700 rounded' href='/admin/login'>
+              로그인
+            </Link>
+          </li>
+          <li>
+            <Link
+              className='block p-2 hover:bg-gray-700 rounded'
+              href='/logout'
+            >
+              로그아웃
+            </Link>
+          </li>
+        </ul>
+      </div>
     </div>
   );
 }

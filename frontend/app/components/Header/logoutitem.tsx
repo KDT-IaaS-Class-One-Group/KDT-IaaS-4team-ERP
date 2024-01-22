@@ -7,7 +7,7 @@ interface LogoutProps {
 
 export default function Logout({ onClick }: LogoutProps) {
   return (
-    <li className='mr-4' onClick={onClick}>
+    <li className='mr-4 hover:cursor-pointer' onClick={onClick}>
       로그아웃
     </li>
   );

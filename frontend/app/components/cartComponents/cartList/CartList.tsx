@@ -1,54 +1,104 @@
 // 현재 폴더 : components/cartComponents/CartList
 // CartList.tsx는 장바구니 목록 컴포넌트입니다.
-
-import Link from 'next/link';
-import React from 'react';
-import Btn from '@/components/Btn/Btn';
-import Image from 'next/image';
-import { PList } from '@/interfaces/interfaces';
+"use client";
+import Link from "next/link";
+import React, { useState } from "react";
+import Btn from "@/app/components/Btn/Btn";
+import Image from "next/image";
+// import { PList } from "@/app/interfaces/interfaces";
+import handleDelete from "app/utils/custom/handleDelete";
+import { PList } from "@/app/types/interfaces";
 
 /**
- * 장바구니 목록 컴포넌트입니다.
- *
- * @param pUrl - 상품 이미지 URL : string
- * @param pSub - 상품 제목 : string
- * @param pPrice - 상품 가격 : number
- * @param pCount - 상품 수량 : number
- * @param className - 추가적인 CSS 클래스 이름 : string
- * @returns 장바구니 목록 리스트 컴포넌트를 생성하는 생성 컴포넌트입니다.
+ * 장바구니 목록 컴포넌트
+ * @param prodIndex - 상품 인덱스
+ * @param prodImgUrl - 상품 이미지 URL
+ * @param prodDescription - 상품 설명
+ * @param prodPrice - 상품 가격
+ * @param cartIndex - 장바구니 인덱스
+ * @param cartProductCount - 장바구니 상품 수량
+ * @param className - 컴포넌트 클래스 이름
  */
-const CartList: React.FC<PList> = ({
-  pUrl,
-  pSub,
-  pPrice,
-  pCount,
+const CartList: React.FC<
+  PList & { onQuantityChange: (quantity: number) => void }
+> = ({
+  prodIndex,
+  prodImgUrl,
+  prodDescription,
+  prodPrice,
+  cartIndex,
+  cartProductCount,
   className,
+  onQuantityChange,
 }) => {
   const combinedClassName = `w-full flex justify-between items-center border-2 border-slate-800 p-4 ${className}`;
+  const linkHref = `/product/${prodIndex}`;
+  const idToString = cartIndex.toString();
+  // console.log("idToString", idToString);
+
+  const [quantity, setQuantity] = useState(cartProductCount);
+
+  const handleIncrease = () => {
+    if (quantity < 50) {
+      const newQuantity = quantity + 1;
+      setQuantity(newQuantity);
+      onQuantityChange(newQuantity);
+    }
+  };
+  const handleDecrease = () => {
+    if (quantity > 1) {
+      const newQuantity = quantity - 1;
+      setQuantity(newQuantity);
+      onQuantityChange(newQuantity);
+    }
+  };
 
   return (
-    <li className={combinedClassName}>
-      <Image
-        src={`${pUrl}`}
-        alt='이미지가 들어갈 자리입니다.'
-        width={65}
-        height={65}
-      />
-      <p className='text-xs'>{pSub}</p>
-      <div className='flex gap-3 w-2/3'>
-        <div className='flex-1 flex-center'>{pPrice}원</div>
-        <div className='flex-1 flex-center'>{pCount}</div>
-        <Btn
-          textContent='삭제'
-          className='h-10 w-28 border border-slate-950 flex-center flex-1'
+    <li className={combinedClassName} id={idToString}>
+      <Link
+        href={linkHref}
+        className="flex justify-between items-center gap-4 cursor-pointer"
+      >
+        <Image
+          src={`/images${prodImgUrl}`}
+          alt="이미지가 들어갈 자리입니다."
+          width={70}
+          height={70}
         />
-        <Link href='/product'>
-          <Btn
-            textContent='옵션 변경'
-            className='h-10 w-28 border border-slate-950 flex-center flex-1'
-          />
-          {/* 옵션 변경에 대한 기능이 들어가야 합니다. */}
-        </Link>
+        <p className="text-xs">{prodDescription}</p>
+      </Link>
+      <div className="flex items-center gap-3 w-2/3">
+        <div className="flex-1 flex justify-center items-center">
+          {prodPrice}원
+        </div>
+        <div className="ctpButton flex justify-center items-center gap-2">
+          <span className="cartProductCount text-xl font-medium block">
+            {quantity}
+          </span>
+          <div className="flex flex-col justify-center items-center gap-0 w-7">
+            <button
+              type="button"
+              className="w-full flex justify-center items-center text-center"
+              onClick={handleIncrease}
+            >
+              +
+            </button>
+            <button
+              type="button"
+              className="w-full flex justify-center items-center text-center"
+              onClick={handleDecrease}
+            >
+              -
+            </button>
+          </div>
+          {/* 버튼 세로 묶음 */}
+        </div>
+        {/* 버튼 컴포넌트 */}
+        <Btn
+          textContent="리스트 삭제"
+          className="h-10 w-28 border border-slate-950 flex justify-center items-center marker:text-sm"
+          onClick={() => handleDelete(idToString)}
+        />
       </div>
     </li>
   );

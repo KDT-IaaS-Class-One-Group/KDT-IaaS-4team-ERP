@@ -1,3 +1,5 @@
+// 백단 업데이트 24/01/12/오후8시
+
 import express from 'express';
 import pool from '../database';
 
@@ -20,7 +22,7 @@ adminLogin.get('/post', async (req, res) => {
     res.status(500).send('로그인 처리 중 오류 발생: ' + err);
   } finally {
     // 연결 반환
-    if (conn) conn.release();
+    if (conn) conn.release(); 
   }
 });
 

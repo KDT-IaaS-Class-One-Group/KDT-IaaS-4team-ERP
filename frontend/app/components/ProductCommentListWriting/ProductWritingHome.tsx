@@ -1,16 +1,18 @@
 'use client'
 
 import { useState, useEffect } from 'react';
-import ProductText from '@/components/ProductCommentListWriting/ProductText';
+import ProductText from '@/app/components/ProductCommentListWriting/ProductText';
 // import Link from 'next/link';
 import ProductRating from './productrating';
 // import { useSearchParams } from 'next/navigation';
 import { useParams } from 'next/navigation';
 import ProdWritingButton from './ProdWritingButton';
+import { useRouter } from 'next/navigation';
 
 const ProductWritingHome = () => {
   const prodIndex = useParams().productdetail
-  console.log(prodIndex)
+  const router = useRouter();
+
 
 
   const [productWrite, setProductWrite] = useState({
@@ -60,8 +62,8 @@ const ProductWritingHome = () => {
       console.log(data);
 
       if (data.success) {
-        // router.push('/');//내가 원하는 페이지로 이동시 사용
         alert('글 등록 성공');
+        router.push(`/product/${prodIndex}`);//내가 원하는 페이지로 이동시 사용
       } else {
         alert('글 등록 실패');
       }

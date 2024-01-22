@@ -4,22 +4,19 @@ import { productType } from "./types";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { Productpaymentprops } from "@/interfaces/Product/ProductpaymentProps";
 
 
-type ProductType = {
-  productInfo: productType;
-};
-
-const ProductInformation: React.FC<ProductType> = ({ setpaymentcompleteinfo }) => {
-  const [productinfo, setproductinfo] =useState([])
+const ProductInformation: React.FC<Productpaymentprops> = ({ setpaymentcompleteinfo }) => {
+  const [productinfo, setproductinfo] = useState([])
   const searchparams = useSearchParams()
   const quantity = searchparams.get('quantity')
   const totalPrice = searchparams.get('totalPrice')
   const prodIndex = searchparams.get('prodIndex')
 
-  
 
-  useEffect(()=> {
+
+  useEffect(() => {
 
     const prodinfo = async () => {
       try {
@@ -28,39 +25,18 @@ const ProductInformation: React.FC<ProductType> = ({ setpaymentcompleteinfo }) =
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
-
         const data = await response.json();
-        console.log(data);
-     
-        setproductinfo(data[0]); 
-        console.log(data[0])
-        // setpaymentcompleteinfo({orderPaymentCount : quantity,
-        //   orderPaymentTotalPrice : totalPrice, prodIndex : prodIndex })       
-        
-        // 가져온 데이터를 상태에 저장
+        setproductinfo(data[0]);
+
       } catch (error) {
         console.error('Error fetching comments:', error);
       }
     };
 
-    // 데이터 조회 함수 호출
     prodinfo()
-
   }, [])
 
 
-  // useEffect(() => {
-  //   // setproductinfo 함수가 완료된 후에 setpaymentcompleteinfo 함수를 호출
-  //   setpaymentcompleteinfo({
-  //     orderPaymentCount: quantity,
-  //     orderPaymentTotalPrice: totalPrice,
-  //     prodIndex: prodIndex
-  //   });
-  // }, []);
-
-  // const [date, setdate] =useState(todaydate)
-  // const buyerinformation = await fetchbuyerinformationdata()
-  // console.log(productinfo)
   return (
     <div className="flex justify-center items-center mt-5">
       <div className={`${styles.productInformation}`}>

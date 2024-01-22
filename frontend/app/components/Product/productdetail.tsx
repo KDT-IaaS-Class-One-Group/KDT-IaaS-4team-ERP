@@ -2,31 +2,21 @@ import ProductPriceCalculator from './pricecalculator'
 
 import React from "react";
 import styles from "./style/productdetail.module.css";
-import { ProductDetail } from "./types";
 import Link from 'next/link';
 import Image from 'next/image';
-import { ProductDescriptionProps } from '../../interfaces/Product/ProductDescriptionProps';
 import { useState } from 'react';
 import { useParams } from 'next/navigation';
+import { ProductsTableProps } from '@/interfaces/Product/ProductsTableProps';
 
 
-type ProductDetailProps = {
-  productdetails: ProductDetail;
-};
-
-
-
-const ProductDetail: React.FC<ProductDetailProps> = ({ productdetails }) => {
-  const productdetailsprodIndex = productdetails.prodIndex
+const ProductDetail: React.FC<> = ({ productdetails }) => {
+  const productdetailsprodIndex = productdetails.prodIndex;
   const [paymentInfo, setPaymentInfo] = useState({
     quantity: 1,
     totalPrice: 0
     // 다른 필요한 결제 정보들을 추가할 수 있습니다.
   });
-  console.log(productdetails)
-
-
-
+  console.log("productdetails", productdetails);
 
   return (
     <div className="product-detail w-full h-screen flex flex-col items-center ">
@@ -70,13 +60,6 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productdetails }) => {
       </div>
 
       <div className="w-4/5 h-1/3 mt-10 flex justify-center items-center overflow-y-scroll">
-        {productdetails.prodDescription}
-        {productdetails.prodDescription}
-        {productdetails.prodDescription}
-        {productdetails.prodDescription}
-        {productdetails.prodDescription}
-        {productdetails.prodDescription}
-        {productdetails.prodDescription}
         {productdetails.prodDescription}
       </div>
     </div>

@@ -3,32 +3,35 @@
 // ? 상태관리 및 데이터 전달가능확인
 // ? 추후 MariaDB와 EXPRESS로 수정 예정
 import { useState, useEffect } from 'react';
-import ProductCommentList from '@/components/ProductComment/ProductCommentList';
-import ProductUploadButton from '@/components/ProductComment/ProductUploadButton';
+import ProductCommentList from '@/app/components/ProductComment/ProductCommentList';
+import ProductUploadButton from '@/app/components/ProductComment/ProductUploadButton';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 
-interface productcomment {
+interface ProductReview {
   userId: string;
   reviewUpdatedAt: Date;
   reviewRating: string;
   reviewTitle: string;
+  reviewIndex: string; // 예시로 추가
+  reviewContent: string; // 예시로 추가
+  // 필요한 다른 데이터들도 여기에 추가합니다.
 }
 
 export default function ProductReviews() {
 
 
 
-  const [reviews, setReviews] = useState([]);
+  const [reviews, setReviews] = useState<ProductReview[]>([]);
   const searchparams = useSearchParams()
-  const prodIndex = searchparams.get('prodIndex')
+  const prodIndex = searchparams.get('prodIndex') || '';
   // console.log(prodIndex)
 
   useEffect(() => {
     const fetchreviews = async () => {
       try {
         const response = await fetch(`http://localhost:3560/product/${prodIndex}/reviews`); //로컬환경 테스트 실행 () http://192.168.100.83:3560/productcomment)
-        const data = await response.json();//DB에서 가져온 
+        const data: ProductReview[] = await response.json();//DB에서 가져온 
 
 
         // }));
@@ -41,7 +44,7 @@ export default function ProductReviews() {
     }
     // 함수를 호출하여 데이터 가져오기
     fetchreviews();
-  }, [])
+  }, [prodIndex])
   console.log(reviews)
 
   return (
