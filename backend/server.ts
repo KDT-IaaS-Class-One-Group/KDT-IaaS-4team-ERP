@@ -77,8 +77,9 @@ app.post("/:prodIndex/reviews", productcommentwrite);
 
 // 카트 페이지
 app.get("/cart", cartpage); // cartpage 조회 로직
-app.post("/cart/cartToPayment", cartToPaymentTransition);
-// cartpage에서 결제하기, 주문하기 버튼 클릭시 오는 포스트 요청 - userIndex를 식별하여 트랜지션을 통해 cart 에 있는 정보를 토대로 orders에 추가, 성공 시 cart에 있는 정보 삭제 실패시 에러메세지 전달 + 이전 상태로 반환
+// todo 수정 필요 지금도 테스팅 중
+app.post("/cart/cartToPayment", cartToPaymentTransition); // cartpage에서 결제하기
+app.post("/cartToPayment", paymentDataForCart);
 
 app.get("/api/products", adminProducts);
 app.post("/api/addproduct", adminAddProduct);
