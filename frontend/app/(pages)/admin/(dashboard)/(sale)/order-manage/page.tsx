@@ -12,6 +12,8 @@ import { ProdIndexProp } from '@/app/types/Order/ProdIndexProp';
 import { ProductNameProp } from '@/app/types/Product/ProductNameProp';
 import { ProductImgUrlProp } from '@/app/types/Product/ProductImgUrlProp';
 import Image from 'next/image';
+import { formatDate } from '@/app/utils/formatDate';
+
 interface OrderProps
   extends orderIndexProp,
     OrderRequestProp,
@@ -87,10 +89,10 @@ export default function OrderManagement() {
                   주문 번호
                 </th>
                 <th className='px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider'>
-                  상품명
+                  이미지
                 </th>
                 <th className='px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider'>
-                  이미지
+                  상품명
                 </th>
                 <th className='px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider'>
                   요청 사항
@@ -118,55 +120,56 @@ export default function OrderManagement() {
             <tbody>
               {orders.map((order) => (
                 <tr key={order.orderIndex}>
-                  <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                  <td className='px-5 py-3 border-b border-gray-200 bg-white text-sm'>
                     <div className='text-gray-900 whitespace-no-wrap'>
                       {order.orderIndex}
                     </div>
                   </td>
-                  <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                    {order.prodName}
-                  </td>
-                  <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                  <td className='px-5 py-3 border-b border-gray-200 bg-white text-sm'>
                     <Image
-                      width={100}
-                      height={100}
+                      width={50}
+                      height={50}
                       className='w-full h-full rounded-full'
                       src={`/images${order.prodImgUrl}`}
                     />
                   </td>
-                  <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                  <td className='px-5 py-3 border-b border-gray-200 bg-white text-sm'>
+                    {order.prodName}
+                  </td>
+
+                  <td className='px-5 py-3 border-b border-gray-200 bg-white text-sm'>
                     <div className='text-gray-900 whitespace-no-wrap'>
                       {order.orderRequest}
                     </div>
                   </td>
-                  <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                  <td className='px-5 py-3 border-b border-gray-200 bg-white text-sm'>
                     <div className='text-gray-900 whitespace-no-wrap'>
                       {order.orderDeliveryDone}
                     </div>
                   </td>
-                  <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                  <td className='px-5 py-3 border-b border-gray-200 bg-white text-sm'>
                     <div className='text-gray-900 whitespace-no-wrap'>
                       {order.orderPaymentCount}
                     </div>
                   </td>
-                  <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                  <td className='px-5 py-3 border-b border-gray-200 bg-white text-sm'>
                     <div className='text-gray-900 whitespace-no-wrap'>
-                      {order.orderPaymentDatetime}
+                      {formatDate(order.orderPaymentDatetime)}
                     </div>
                   </td>
-                  <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                  <td className='px-5 py-3 border-b border-gray-200 bg-white text-sm'>
                     <div className='text-gray-900 whitespace-no-wrap'>
                       {order.orderPaymentPriceAtOrder}원
                     </div>
                   </td>
-                  <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                  <td className='px-5 py-3 border-b border-gray-200 bg-white text-sm'>
                     <div className='text-gray-900 whitespace-no-wrap'>
                       {order.orderDeliveryDone === 0
                         ? '배송 준비'
                         : '배송 완료'}
                     </div>
                   </td>
-                  <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                  <td className='px-5 py-3 border-b border-gray-200 bg-white text-sm'>
                     {order.orderIsOrderAccepted === 1 && (
                       <>
                         <button
