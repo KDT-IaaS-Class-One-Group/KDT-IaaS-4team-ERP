@@ -2,9 +2,42 @@ import express from 'express';
 import session from 'express-session';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import multer from 'multer';
 
-import test from './routes/test';
+const app = express();
+const port = 3560;
 
+app.use(
+  session({
+    secret: 'test',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }, // HTTPS를 사용할 경우 true로 설정
+  }),
+);
+app.use(cors());
+app.use(bodyParser.json());
+app.use(express.static('public'));
+
+// 이미지 업로드
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, '../frontend/public/images/');
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now() + '.png');
+  },
+});
+
+const upload = multer({ storage: storage });
+
+app.post('/upload', upload.single('image'), (req, res) => {
+  if (!req.file) {
+    return res.status(400).send('No file uploaded.');
+  }
+  const imageUrl = `/${req.file.filename}`; // 클라이언트가 접근할 수 있는 이미지 URL
+  res.json({ imageUrl });
+});
 
 // 관리자
 import { adminLogin } from './routes/admin/login/adminLogin';
@@ -15,6 +48,7 @@ import { adminUpdateProduct } from './routes/admin/products/adminUpdateProduct';
 import { adminDeleteProduct } from './routes/admin/products/adminDeleteProduct';
 
 // 고객페이지
+
 import mainPage from './routes/customer/mainPage';
 
 import customerLogin from './routes/customer/customerLogin';
@@ -34,24 +68,6 @@ import productcommentfull from './routes/customer/review/productcommentfull';
 import productcommentwrite from './routes/customer/review/productcommentwrite';
 import cartpage from './routes/customer/cartpage/cartpage';
 import cartToPaymentTransition from './routes/customer/cartpage/cartToPaymentTransition';
-
-const app = express();
-const port = 3560;
-
-app.use(
-  session({
-    secret: 'test',
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false }, // HTTPS를 사용할 경우 true로 설정
-  }),
-);
-app.use(cors());
-app.use(bodyParser.json());
-app.use(express.static('public'));
-
-// 테스트
-app.get('/post', test);
 
 // * admin
 app.post('/api/adminlogin', adminLogin);
