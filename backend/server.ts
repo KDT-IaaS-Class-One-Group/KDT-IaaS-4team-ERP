@@ -19,6 +19,8 @@ import customerLogin from "./routes/customer/customerLogin";
 import customerSignup from "./routes/customer/customerSignup";
 
 import product from "./routes/customer/productpage/productpage";
+import product from "./routes/customer/productpage/productpage";
+import addingcart from "./routes/customer/cartpage/addingcart";
 
 import paymentDataForProductPage from "./routes/customer/paymentpage/productTopaymentpage";
 import paymentDataForCart from "./routes/customer/paymentpage/cartTopaymentPage";

@@ -13,7 +13,7 @@ export default function ProductPage() {
       try {
         const response = await fetch(`http://localhost:3560/product/${productdetail}`);
         const data = await response.json();
-        console.log("Received product data:", data); // Add console log to check received data
+        // console.log("Received product data:", data); // Add console log to check received data
         setproductdata(data);
       } catch (error) {
         console.error(error);
