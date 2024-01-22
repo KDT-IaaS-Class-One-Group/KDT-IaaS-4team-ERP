@@ -25,6 +25,18 @@ const LoginHome = () => {
 
   const handleLogin = async () => {
     try {
+      // 아이디 비어있을 경고창
+      if (!loginUser.userId.trim()) {
+        alert('아이디를 입력해주세요.');
+        return;
+      }
+
+      // 페스워드 비어있을 경우 경고창
+      if (!loginUser.userPassword.trim()) {
+        alert('비밀번호를 입력해주세요.');
+        return;
+      }
+
       const response = await fetch(`http://localhost:3560/login`, {
         method: 'POST',
         headers: {
@@ -37,7 +49,7 @@ const LoginHome = () => {
       });
 
       if (!response.ok) {
-        throw new Error('로그인 실패');
+        throw new Error('정보가 올바르지 않습니다.');
       }
 
       const data = await response.json();

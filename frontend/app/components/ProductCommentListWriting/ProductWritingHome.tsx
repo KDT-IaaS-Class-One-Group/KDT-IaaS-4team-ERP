@@ -55,12 +55,12 @@ const ProductWritingHome = () => {
       });
 
       // 제목이 비어있을 경우
-      if (!productWrite.reviewTitle.trim()) { //trim으로 공백 제거
+      if (!productWrite.reviewTitle.trim()) { //trim으로 앞뒤 공백 제거
         alert('제목을 입력해주세요.');
         return;
       }
       // 내용이 비어있을 경우
-      if (!productWrite.reviewContent.trim()) { //trim으로 공백 제거
+      if (!productWrite.reviewContent.trim()) {
         alert('내용을 입력해주세요.');
         return;
       }
