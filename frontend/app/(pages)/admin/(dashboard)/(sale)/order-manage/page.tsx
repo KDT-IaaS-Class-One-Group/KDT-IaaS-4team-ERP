@@ -9,7 +9,9 @@ import { OrderPaymentPriceAtOrderProp } from '@/app/types/Order/OrderPaymentPric
 import { OrderDeliveryDoneProp } from '@/app/types/Order/OrderDeliveryDoneProp';
 import { UserIndexProp } from '@/app/types/Order/UserIndexProp';
 import { ProdIndexProp } from '@/app/types/Order/ProdIndexProp';
-
+import { ProductNameProp } from '@/app/types/Product/ProductNameProp';
+import { ProductImgUrlProp } from '@/app/types/Product/ProductImgUrlProp';
+import Image from 'next/image';
 interface OrderProps
   extends orderIndexProp,
     OrderRequestProp,
@@ -20,7 +22,9 @@ interface OrderProps
     OrderIsOrderAccepted,
     OrderDeliveryDoneProp,
     UserIndexProp,
-    ProdIndexProp {}
+    ProdIndexProp,
+    ProductNameProp,
+    ProductImgUrlProp {}
 
 export default function OrderManagement() {
   const [orders, setOrders] = useState<OrderProps[]>([]);
@@ -38,42 +42,6 @@ export default function OrderManagement() {
     };
     fetchOrders();
   }, []);
-
-  // 주문 수락 또는 거절 처리 함수
-  const handleOrderAcceptance = async (
-    orderIndex: number,
-    isAccepted: boolean,
-  ) => {
-    try {
-      const response = await fetch(
-        `http://localhost:3560/api/orders/acceptance/${orderIndex}`,
-        {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ isAccepted }),
-        },
-      );
-
-      const data = await response.json();
-      if (data.success) {
-        // 주문 상태 업데이트
-        setOrders(
-          orders.map((order) => {
-            if (order.orderIndex === orderIndex) {
-              return { ...order, orderIsOrderAccepted: isAccepted ? 1 : 2 };
-            }
-            return order;
-          }),
-        );
-      } else {
-        // 오류 처리
-      }
-    } catch (error) {
-      console.error('주문 상태 업데이트 오류:', error);
-    }
-  };
 
   // 배송 상태 변경 처리 함수
   const handleDeliveryStatus = async (orderIndex: number, status: number) => {
@@ -119,6 +87,12 @@ export default function OrderManagement() {
                   주문 번호
                 </th>
                 <th className='px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider'>
+                  상품명
+                </th>
+                <th className='px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider'>
+                  이미지
+                </th>
+                <th className='px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider'>
                   요청 사항
                 </th>
                 <th className='px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider'>
@@ -148,6 +122,17 @@ export default function OrderManagement() {
                     <div className='text-gray-900 whitespace-no-wrap'>
                       {order.orderIndex}
                     </div>
+                  </td>
+                  <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                    {order.prodName}
+                  </td>
+                  <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                    <Image
+                      width={100}
+                      height={100}
+                      className='w-full h-full rounded-full'
+                      src={`/images${order.prodImgUrl}`}
+                    />
                   </td>
                   <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
                     <div className='text-gray-900 whitespace-no-wrap'>
