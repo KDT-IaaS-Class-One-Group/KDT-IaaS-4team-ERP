@@ -3,8 +3,8 @@
 // ? 상태관리 및 데이터 전달가능확인
 // ? 추후 MariaDB와 EXPRESS로 수정 예정
 import { useState, useEffect } from 'react';
-import ProductCommentList from '@/components/ProductComment/ProductCommentList';
-import ProductUploadButton from '@/components/ProductComment/ProductUploadButton';
+import ProductCommentList from '@/app/components/ProductComment/ProductCommentList';
+import ProductUploadButton from '@/app/components/ProductComment/ProductUploadButton';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 

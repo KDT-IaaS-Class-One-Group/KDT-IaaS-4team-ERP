@@ -1,7 +1,7 @@
 'use client';
 
-import OrderListNav from '@/components/orderListComponent/orderListNav/OrderListNav';
-import OrderList from '@/components/orderListComponent/orderList/OrderList';
+import OrderListNav from '@/app/components/orderListComponent/orderListNav/OrderListNav';
+import OrderList from '@/app/components/orderListComponent/orderList/OrderList';
 import React, { useState, useEffect } from 'react';
 
 interface Order {

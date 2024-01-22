@@ -1,5 +1,5 @@
 'use client';
-import ProductWritingHome from '@/components/ProductCommentListWriting/ProductWritingHome';
+import ProductWritingHome from '@/app/components/ProductCommentListWriting/ProductWritingHome';
 
 export default function ProductWriting() {
   return (

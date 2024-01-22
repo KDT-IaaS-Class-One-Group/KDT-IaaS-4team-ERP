@@ -4,7 +4,7 @@
 // ? 추후 MariaDB와 EXPRESS로 수정 예정
 
 import { useSearchParams } from 'next/navigation';
-import ProductCommentdetails from '@/components/ProductCommentListfull/ProductCommentdetails';
+import ProductCommentdetails from '@/app/components/ProductCommentListfull/ProductCommentdetails';
 
 
 interface Productcommentdetails {

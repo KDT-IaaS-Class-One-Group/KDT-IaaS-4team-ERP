@@ -1,13 +1,14 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { ProductIndexProp } from '@/types/Product/ProductIndexProp';
-import { ProductNameProp } from '@/types/Product/ProductNameProp';
-import { ProductPriceProp } from '@/types/Product/ProductPriceProp';
-import { ProductCategoryProp } from '@/types/Product/ProductCategoryProp';
-import { ProductStockProp } from '@/types/Product/ProductStockProp';
-import { ProductDescriptionProp } from '@/types/Product/ProductDescriptionProp';
-import { ProductImgUrlProp } from '@/types/Product/ProductImgUrlProp';
+import Image from 'next/image';
+import { ProductIndexProp } from '@/app/types/Product/ProductIndexProp';
+import { ProductNameProp } from '@/app/types/Product/ProductNameProp';
+import { ProductPriceProp } from '@/app/types/Product/ProductPriceProp';
+import { ProductCategoryProp } from '@/app/types/Product/ProductCategoryProp';
+import { ProductStockProp } from '@/app/types/Product/ProductStockProp';
+import { ProductDescriptionProp } from '@/app/types/Product/ProductDescriptionProp';
+import { ProductImgUrlProp } from '@/app/types/Product/ProductImgUrlProp';
 
 interface ProductListProps
   extends ProductIndexProp,
@@ -120,10 +121,11 @@ export default function ProductListPage() {
                   </td>
                   <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
                     <div className='flex-shrink-0 w-10 h-10'>
-                      <img
+                      <Image
+                        width={100}
+                        height={100}
                         className='w-full h-full rounded-full'
-                        src={product.prodImgUrl}
-                        alt={product.prodName}
+                        src={`/images${product.prodImgUrl}`}
                       />
                     </div>
                   </td>
