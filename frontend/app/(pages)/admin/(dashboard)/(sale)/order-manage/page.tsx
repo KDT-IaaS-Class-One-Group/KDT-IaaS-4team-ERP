@@ -7,12 +7,14 @@ import { OrderPaymentCountProp } from '@/app/types/Order/OrderPaymentCountProp';
 import { OrderPaymentDatetimeProps } from '@/app/types/Order/OrderPaymentDatetimeProp';
 import { OrderPaymentPriceAtOrderProp } from '@/app/types/Order/OrderPaymentPriceAtOrderProp';
 import { OrderDeliveryDoneProp } from '@/app/types/Order/OrderDeliveryDoneProp';
+import { OrderReceiverPhoneProp } from '@/app/types/Order/OrderReceiverPhoneProp';
 import { UserIndexProp } from '@/app/types/Order/UserIndexProp';
 import { ProdIndexProp } from '@/app/types/Order/ProdIndexProp';
 import { ProductNameProp } from '@/app/types/Product/ProductNameProp';
 import { ProductImgUrlProp } from '@/app/types/Product/ProductImgUrlProp';
 import Image from 'next/image';
 import { formatDate } from '@/app/utils/formatDate';
+import { OrderReceiverProp } from '@/app/types/Order/OrderReceiverProp';
 
 interface OrderProps
   extends orderIndexProp,
@@ -21,7 +23,9 @@ interface OrderProps
     OrderPaymentCountProp,
     OrderPaymentDatetimeProps,
     OrderPaymentPriceAtOrderProp,
+    OrderReceiverPhoneProp,
     OrderIsOrderAccepted,
+    OrderReceiverProp,
     OrderDeliveryDoneProp,
     UserIndexProp,
     ProdIndexProp,
@@ -72,6 +76,7 @@ export default function OrderManagement() {
         );
       } else {
         // 오류 처리
+        console.error('배송 상태 업데이트 실패');
       }
     } catch (error) {
       console.error('배송 상태 업데이트 오류:', error);
@@ -83,7 +88,7 @@ export default function OrderManagement() {
       <div className='overflow-x-auto w-full'>
         <div className='max-h-[800px] overflow-y-auto'>
           <table className='min-w-full leading-normal'>
-            <thead>
+            <thead className='sticky top-0 bg-gray-100'>
               <tr>
                 <th className='px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider'>
                   주문 번호
@@ -98,10 +103,16 @@ export default function OrderManagement() {
                   요청 사항
                 </th>
                 <th className='px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider'>
+                  수령인
+                </th>
+                <th className='px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider'>
                   배송 주소
                 </th>
                 <th className='px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider'>
-                  주문 상품 개수
+                  연락처
+                </th>
+                <th className='px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider'>
+                  주문 개수
                 </th>
                 <th className='px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider'>
                   주문 날짜
@@ -131,6 +142,7 @@ export default function OrderManagement() {
                       height={50}
                       className='w-full h-full rounded-full'
                       src={`/images${order.prodImgUrl}`}
+                      alt='image'
                     />
                   </td>
                   <td className='px-5 py-3 border-b border-gray-200 bg-white text-sm'>
@@ -144,7 +156,17 @@ export default function OrderManagement() {
                   </td>
                   <td className='px-5 py-3 border-b border-gray-200 bg-white text-sm'>
                     <div className='text-gray-900 whitespace-no-wrap'>
-                      {order.orderDeliveryDone}
+                      {order.orderReceiver}
+                    </div>
+                  </td>
+                  <td className='px-5 py-3 border-b border-gray-200 bg-white text-sm'>
+                    <div className='text-gray-900 whitespace-no-wrap'>
+                      {order.orderDeliveryAddress}
+                    </div>
+                  </td>
+                  <td className='px-5 py-3 border-b border-gray-200 bg-white text-sm'>
+                    <div className='text-gray-900 whitespace-no-wrap'>
+                      {order.orderReceiverPhone}
                     </div>
                   </td>
                   <td className='px-5 py-3 border-b border-gray-200 bg-white text-sm'>
@@ -170,25 +192,15 @@ export default function OrderManagement() {
                     </div>
                   </td>
                   <td className='px-5 py-3 border-b border-gray-200 bg-white text-sm'>
-                    {order.orderIsOrderAccepted === 1 && (
-                      <>
-                        <button
-                          onClick={() =>
-                            handleDeliveryStatus(order.orderIndex, 0)
-                          }
-                          className='text-blue-500 hover:text-blue-800'
-                        >
-                          배송 준비
-                        </button>
-                        <button
-                          onClick={() =>
-                            handleDeliveryStatus(order.orderIndex, 1)
-                          }
-                          className='text-green-500 hover:text-green-800 ml-4'
-                        >
-                          배송 완료
-                        </button>
-                      </>
+                    {order.orderDeliveryDone === 0 && (
+                      <button
+                        onClick={() =>
+                          handleDeliveryStatus(order.orderIndex, 1)
+                        }
+                        className='text-green-500 hover:text-green-800 ml-4'
+                      >
+                        배송하기
+                      </button>
                     )}
                   </td>
                 </tr>

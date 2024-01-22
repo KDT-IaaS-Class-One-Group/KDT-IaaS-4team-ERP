@@ -10,7 +10,9 @@ adminOrders.get('/api/orders', async (req, res) => {
     SELECT 
     orders.orderIndex, 
     orders.orderRequest, 
+    orders.orderReceiver,
     orders.orderDeliveryAddress, 
+    orders.orderReceiverPhone,
     orders.orderPaymentCount, 
     orders.orderPaymentDatetime, 
     orders.orderIsOrderAccepted, 
@@ -28,24 +30,6 @@ adminOrders.get('/api/orders', async (req, res) => {
     res.json(rows);
   } catch (err) {
     res.status(500).send();
-  }
-});
-
-adminOrders.patch('/api/orders/acceptance/:orderIndex', async (req, res) => {
-  const { orderIndex } = req.params;
-  const { isAccepted } = req.body; // true: 수락, false: 거절
-
-  try {
-    const conn = await pool.getConnection();
-    const status = isAccepted ? 1 : 2; // 1: 수락, 2: 거절
-    const updateQuery =
-      'UPDATE orders SET orderIsOrderAccepted = ? WHERE orderIndex = ?';
-    await conn.query(updateQuery, [status, orderIndex]);
-    conn.release();
-
-    res.json({ success: true, message: '주문 상태 업데이트 성공' });
-  } catch (err) {
-    res.status(500).send('주문 상태 업데이트 실패: ' + err);
   }
 });
 

@@ -126,6 +126,7 @@ export default function ProductListPage() {
                         height={50}
                         className='w-full h-full rounded-full'
                         src={`/images${product.prodImgUrl}`}
+                        alt='image'
                       />
                     </div>
                   </td>
