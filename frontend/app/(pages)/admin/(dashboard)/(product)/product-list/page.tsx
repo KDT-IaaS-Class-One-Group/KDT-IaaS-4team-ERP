@@ -74,6 +74,7 @@ export default function ProductListPage() {
     router.push(`/admin/product-edit/${prodIndex}`); // 상품 수정 페이지로 라우팅
   };
 
+
   const navigateToAddProductPage = () => {
     router.push('/admin/product-add');
   };

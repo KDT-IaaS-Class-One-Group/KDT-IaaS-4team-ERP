@@ -81,8 +81,8 @@ app.post('/cartToPayment', paymentDataForCart);
 
 app.get('/api/products', adminProducts);
 app.post('/api/addproduct', adminAddProduct);
+app.patch('/api/updateproduct/:prodIndex', adminUpdateProduct);
 app.delete('/api/deleteproduct/:prodIndex', adminDeleteProduct);
-app.put('/api/product/:id', adminUpdateProduct);
 
 app.get('/api/orders', adminOrders);
 app.patch('/api/orders/delivery/:orderIndex', adminOrders);
