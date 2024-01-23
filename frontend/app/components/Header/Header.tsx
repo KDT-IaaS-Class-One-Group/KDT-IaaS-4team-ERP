@@ -1,11 +1,10 @@
 'use client';
 import React, { ReactNode, useEffect, useState } from 'react';
 import Link from 'next/link';
-import { ChildrenProp } from '@/app/types/ChildrenProp';
 import HeaderItem from './HeaderItem';
 import Logout from './logoutitem';
 
-export default function Header({ children }: ChildrenProp) {
+export default function Header() {
   const [isToken, setIsToken] = useState(false);
 
   useEffect(() => {
@@ -23,9 +22,9 @@ export default function Header({ children }: ChildrenProp) {
   };
 
   return (
-    <header className='flex bg-blue-500 text-white p-4 justify-between '>
+    <header className='flex border-b-2 border-wine p-4 justify-between '>
       <Link href='/'>
-        <h1 className='text-xl hover:cursor-pointer'>form 미쳤다.</h1>
+        <h1 className='text-xl cursor-pointer'>StarCraft Shop</h1>
       </Link>
       <ul className='flex ml-auto '>
         {isToken ? (

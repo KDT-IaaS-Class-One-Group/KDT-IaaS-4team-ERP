@@ -1,16 +1,23 @@
-'use client';
-import React, { useState } from 'react';
-import Link from 'next/link';
-import LoginButton from './loginbutton';
-import LoginText from './logintext';
-import Modal from '@/app/components/Modal/Modal';
-import { useRouter } from 'next/navigation';
+"use client";
+import React, { useState } from "react";
+import Link from "next/link";
+import LoginButton from "./loginbutton";
+import LoginText from "./logintext";
+import Modal from "@/app/components/Modal/Modal";
+import { useRouter } from "next/navigation";
+import LoginPassword from "./loginPassword";
 
 const LoginHome = () => {
   const router = useRouter();
   const [loginUser, setLoginUser] = useState({
-    userId: '',
-    userPassword: '',
+    userId: "",
+    userPassword: "",
+  });
+
+  const [modalContent, setModalContent] = useState({
+    isOpen: false,
+    title: '',
+    message: '',
   });
 
   const [modalContent, setModalContent] = useState({
@@ -37,7 +44,7 @@ const LoginHome = () => {
         setModalContent({
           isOpen: true,
           title: '경고',
-          message: '아이디를 입력해주세요.',
+          message: "아이디를 입력해주세요.",
         });
         return;
       }
@@ -46,16 +53,16 @@ const LoginHome = () => {
         setModalContent({
           isOpen: true,
           title: '경고',
-          message: '비밀번호를 입력해주세요.',
+          message: "비밀번호를 입력해주세요.",
         });
         return;
       }
 
       // 서버에 로그인 요청
       const response = await fetch(`http://localhost:3560/login`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           userId: loginUser.userId,
@@ -64,7 +71,8 @@ const LoginHome = () => {
       });
 
       if (!response.ok) {
-        throw new Error('정보가 올바르지 않습니다.');
+        throw new Error("로그인 실패");
+        throw new Error("정보가 올바르지 않습니다.");
       }
 
       const data = await response.json();
@@ -107,12 +115,14 @@ const LoginHome = () => {
       <div className='h-2/5 flex flex-col justify-around items-center w-full'>
         {/* 로그인 입력 필드 */}
         <LoginText
-          title='ID'
-          inputchange={(value: string) => handleInputChange('userId', value)}
+          title="ID"
+          inputchange={(value: string) => handleInputChange("userId", value)}
         />
-        <LoginText
-          title='PASSWORD'
-          inputchange={(value: string) => handleInputChange('userPassword', value)}
+        <LoginPassword
+          title="PASSWORD"
+          inputchange={(value: string) =>
+            handleInputChange("userPassword", value)
+          }
         />
       </div>
       <div className='h-1/5 flex items-center justify-end w-full'>

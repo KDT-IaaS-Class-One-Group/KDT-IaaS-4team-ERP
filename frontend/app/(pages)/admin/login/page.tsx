@@ -32,11 +32,11 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className='flex items-center justify-center h-screen bg-gray-100'>
-      <div className='w-full max-w-xs'>
+    <div className='flex items-center justify-center h-screen '>
+      <div className='w-full max-w-xs border-2 border-wine'>
         <form
           onSubmit={handleLogin}
-          className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'
+          className='shadow-md rounded px-8 pt-6 pb-8 mb-4'
         >
           <h1 className='text-lg font-bold mb-5 text-center'>관리자 로그인</h1>
           <div className='mb-4'>

@@ -6,15 +6,12 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 
 const addingcart = express();
 
-addingcart.post("/addingcart/:prodIndex/:quantity", async (req, res) => {
+addingcart.post("/addingcart", async (req, res) => {
+  console.log("요청이 옴");
   let conn;
 
-  // * quantity를 라우팅 매개변수를 사용해서 가져옴.
-  const quantity = parseInt(req.params.quantity, 10);
-
-  // * prodIndex를 라우팅 매개변수를 사용해서 가져옴.
-  const prodIndex = parseInt(req.params.prodIndex, 10);
-
+  // * 수량, prodIndex를 body에서 가져오기.
+  const { quantity, prodIndex } = req.body;
   // * 클라이언트 측에서 header로 tokken을 보내준 것을 갖고옴.
   const tokenHeader = req.headers.authorization;
   if (!tokenHeader) {
@@ -47,7 +44,10 @@ addingcart.post("/addingcart/:prodIndex/:quantity", async (req, res) => {
     console.error("Error during addingcart:", error);
     res
       .status(500)
-      .json({ success: false, message: "장바구니가 상품에 추가되는데 오류가 있습니다." });
+      .json({
+        success: false,
+        message: "장바구니가 상품에 추가되는데 오류가 있습니다.",
+      });
   } finally {
     if (conn) conn.release();
   }

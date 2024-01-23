@@ -1,16 +1,24 @@
-// 상품 등록 페이지
-
 'use client';
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
-export default function ProductAddPage() {
+export default function ProductEditPage(params: any) {
   const [prodName, setProdName] = useState('');
   const [prodDescription, setProdDescription] = useState('');
   const [prodCategory, setProdCategory] = useState('');
   const [prodImgUrl, setProdImgUrl] = useState('');
   const [prodPrice, setProdPrice] = useState('');
   const [prodStock, setProdStock] = useState('');
+  const prodIndex = params.params.prodIndex;
 
+  const router = useRouter();
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      setSelectedFile(event.target.files[0]);
+    }
+  };
   const submitProduct = async () => {
     if (!prodName.trim()) {
       alert('상품명을 입력해주세요.');
@@ -24,10 +32,6 @@ export default function ProductAddPage() {
       alert('상품 카테고리를 선택해주세요.');
       return;
     }
-    if (!prodImgUrl.trim()) {
-      alert('상품 이미지 URL을 입력해주세요.');
-      return;
-    }
     if (!prodPrice.trim() || prodPrice === '0') {
       alert('상품 가격을 올바르게 입력해주세요.');
       return;
@@ -37,28 +41,52 @@ export default function ProductAddPage() {
       return;
     }
 
+    if (!selectedFile) return;
+
+    const formData = new FormData();
+    formData.append('image', selectedFile);
+
     try {
-      const response = await fetch('http://localhost:3560/api/addproduct', {
+      const uploadResponse = await fetch('http://localhost:3560/upload', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          prodName,
-          prodDescription,
-          prodCategory,
-          prodImgUrl,
-          prodPrice,
-          prodStock,
-        }),
+        body: formData,
       });
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
+
+      if (!uploadResponse.ok) {
+        throw new Error('Image upload failed');
       }
-      alert('상품이 성공적으로 추가되었습니다!');
+
+      const uploadData = await uploadResponse.json();
+      const prodImgUrl = uploadData.imageUrl; // 업로드된 이미지 URL
+
+      // 상품 정보 제출 부분
+      const productResponse = await fetch(
+        `http://localhost:3560/api/updateproduct/${prodIndex}`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            prodName,
+            prodDescription,
+            prodCategory,
+            prodImgUrl, // 이미지 URL 포함하여 전송
+            prodPrice,
+            prodStock,
+          }),
+        },
+      );
+
+      if (!productResponse.ok) {
+        throw new Error('Product submission failed');
+      }
+
+      alert('상품이 성공적으로 수정되었습니다!');
+      router.push('/admin/product-list');
     } catch (error) {
-      console.error('Error adding product:', error);
-      alert('상품 추가에 실패했습니다.');
+      console.error('Error:', error);
+      alert('상품 수정에 실패했습니다.');
     }
   };
 
@@ -117,19 +145,19 @@ export default function ProductAddPage() {
       </div>
       <div className='mb-4'>
         <label
-          htmlFor='prodImgUrl'
+          htmlFor='prodImg'
           className='block text-gray-700 text-sm font-bold mb-2'
         >
-          상품 이미지 URL
+          상품 이미지
         </label>
-        <input
-          type='text'
-          id='prodImgUrl'
-          value={prodImgUrl}
-          onChange={(e) => setProdImgUrl(e.target.value)}
-          className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-          placeholder='상품 이미지 URL'
-        />
+        <div>
+          <input
+            type='file'
+            id='prodImg'
+            onChange={handleFileChange}
+            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+          />
+        </div>
       </div>
       <div className='mb-4'>
         <label
@@ -170,7 +198,7 @@ export default function ProductAddPage() {
           onClick={submitProduct}
           className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
         >
-          상품 등록
+          상품 수정
         </button>
       </div>
     </div>

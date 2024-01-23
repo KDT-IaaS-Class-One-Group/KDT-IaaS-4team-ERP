@@ -2,38 +2,42 @@ import express from 'express';
 import pool from '../../../database';
 
 export const adminUpdateProduct = express();
+// 상품 정보 업데이트 라우트
+adminUpdateProduct.patch('/api/updateproduct/:prodIndex', async (req, res) => {
+  const { prodIndex } = req.params;
+  const {
+    prodName,
+    prodDescription,
+    prodPrice,
+    prodCategory,
+    prodStock,
+    prodImgUrl,
+  } = req.body;
 
-adminUpdateProduct.put('/api/product/:id', async (req, res) => {
   try {
-    const { id } = req.params;
-    const {
-      prodName,
-      prodDescription,
-      prodCategory,
-      prodImgUrl,
-      prodPrice,
-      prodStock,
-    } = req.body;
-
     const conn = await pool.getConnection();
-    const query =
-      'UPDATE products SET prodName = ?, prodDescription = ?, prodCategory = ?, prodImgUrl = ?, prodPrice = ?, prodStock = ? WHERE prodId = ?';
-
-    await conn.query(query, [
+    const updateQuery = `
+      UPDATE products SET 
+      prodName = ?, 
+      prodDescription = ?, 
+      prodPrice = ?, 
+      prodCategory = ?, 
+      prodStock = ?, 
+      prodImgUrl = ?
+      WHERE prodIndex = ?`;
+    await conn.query(updateQuery, [
       prodName,
       prodDescription,
+      prodPrice,
       prodCategory,
+      prodStock,
       prodImgUrl,
-      Number(prodPrice),
-      Number(prodStock),
-      id
+      prodIndex,
     ]);
-
     conn.release();
 
-    res.status(200).send({ message: 'Product updated successfully' });
+    res.json({ success: true, message: '상품 정보 업데이트 성공' });
   } catch (err) {
-    console.error(err);
-    res.status(500).send();
+    res.status(500).send('상품 정보 업데이트 실패: ' + err);
   }
 });

@@ -1,5 +1,5 @@
-import React, { ClipboardEventHandler } from 'react';
-import { ReactNode } from 'react';
+import React, { ClipboardEventHandler } from "react";
+import { ReactNode } from "react";
 
 interface LogoutProps {
   onClick: () => void;
@@ -7,7 +7,7 @@ interface LogoutProps {
 
 export default function Logout({ onClick }: LogoutProps) {
   return (
-    <li className='mr-4 hover:cursor-pointer' onClick={onClick}>
+    <li className="mr-4 cursor-pointer" onClick={onClick}>
       로그아웃
     </li>
   );

@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className='bg-gray-200 text-center p-4'>
+    <footer className='border-t-2 border-wine text-center p-4'>
       <p>ⓒ 2024</p>
     </footer>
   );
