@@ -6,7 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 // import { useParams } from 'next/navigation';
-import { ProductDetailProps } from '../../types/Product/ProductDetailProps';
+import { ProductDetailProps } from '@/app/types/Product/ProductDetailProps';
 
 const ProductDetail: React.FC<ProductDetailProps> = ({ productdetails }) => {
   const productdetailsprodIndex = productdetails.prodIndex;

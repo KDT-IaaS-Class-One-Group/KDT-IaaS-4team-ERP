@@ -1,7 +1,6 @@
 'use client';
-import React, { useState, useEffect } from 'react';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import handleImageUpload from '@/app/utils/admin/imageUpload';
+import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function ProductEditPage(params: any) {
   const [prodName, setProdName] = useState('');
@@ -10,40 +9,58 @@ export default function ProductEditPage(params: any) {
   const [prodImgUrl, setProdImgUrl] = useState('');
   const [prodPrice, setProdPrice] = useState('');
   const [prodStock, setProdStock] = useState('');
-  const prodIndex = params.prodIndex;
-  const router = useRouter(); // Next.js의 라우터 사용
+  const prodIndex = params.params.prodIndex;
 
+  const router = useRouter();
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      setSelectedFile(event.target.files[0]);
+    }
+  };
   const submitProduct = async () => {
-    const submitProduct = async () => {
-      if (!prodName.trim()) {
-        alert('상품명을 입력해주세요.');
-        return;
-      }
-      if (!prodDescription.trim()) {
-        alert('상품 설명을 입력해주세요.');
-        return;
-      }
-      if (!prodCategory) {
-        alert('상품 카테고리를 선택해주세요.');
-        return;
-      }
-      if (!prodImgUrl.trim()) {
-        alert('상품 이미지 URL을 입력해주세요.');
-        return;
-      }
-      if (!prodPrice.trim() || prodPrice === '0') {
-        alert('상품 가격을 올바르게 입력해주세요.');
-        return;
-      }
-      if (!prodStock.trim() || prodPrice === '0') {
-        alert('상품 재고를 올바르게 입력해주세요.');
-        return;
-      }
-    };
+    if (!prodName.trim()) {
+      alert('상품명을 입력해주세요.');
+      return;
+    }
+    if (!prodDescription.trim()) {
+      alert('상품 설명을 입력해주세요.');
+      return;
+    }
+    if (!prodCategory) {
+      alert('상품 카테고리를 선택해주세요.');
+      return;
+    }
+    if (!prodPrice.trim() || prodPrice === '0') {
+      alert('상품 가격을 올바르게 입력해주세요.');
+      return;
+    }
+    if (!prodStock.trim() || prodPrice === '0') {
+      alert('상품 재고를 올바르게 입력해주세요.');
+      return;
+    }
+
+    if (!selectedFile) return;
+
+    const formData = new FormData();
+    formData.append('image', selectedFile);
 
     try {
-      const response = await fetch(
+      const uploadResponse = await fetch('http://localhost:3560/upload', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!uploadResponse.ok) {
+        throw new Error('Image upload failed');
+      }
+
+      const uploadData = await uploadResponse.json();
+      const prodImgUrl = uploadData.imageUrl; // 업로드된 이미지 URL
+
+      // 상품 정보 제출 부분
+      const productResponse = await fetch(
         `http://localhost:3560/api/updateproduct/${prodIndex}`,
         {
           method: 'PATCH',
@@ -54,19 +71,21 @@ export default function ProductEditPage(params: any) {
             prodName,
             prodDescription,
             prodCategory,
-            prodImgUrl,
+            prodImgUrl, // 이미지 URL 포함하여 전송
             prodPrice,
             prodStock,
           }),
         },
       );
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
+
+      if (!productResponse.ok) {
+        throw new Error('Product submission failed');
       }
+
       alert('상품이 성공적으로 수정되었습니다!');
       router.push('/admin/product-list');
     } catch (error) {
-      console.error('Error updating product:', error);
+      console.error('Error:', error);
       alert('상품 수정에 실패했습니다.');
     }
   };
@@ -131,13 +150,14 @@ export default function ProductEditPage(params: any) {
         >
           상품 이미지
         </label>
-        <input
-          type='file'
-          id='prodImg'
-          accept='image/*'
-          onChange={handleImageUpload}
-          className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-        />
+        <div>
+          <input
+            type='file'
+            id='prodImg'
+            onChange={handleFileChange}
+            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+          />
+        </div>
       </div>
       <div className='mb-4'>
         <label

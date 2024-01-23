@@ -22,7 +22,7 @@ export default function Header() {
   };
 
   return (
-    <header className='flex border-b-2 border-wine text-white p-4 justify-between '>
+    <header className='flex border-b-2 border-wine p-4 justify-between '>
       <Link href='/'>
         <h1 className='text-xl cursor-pointer'>StarCraft Shop</h1>
       </Link>
