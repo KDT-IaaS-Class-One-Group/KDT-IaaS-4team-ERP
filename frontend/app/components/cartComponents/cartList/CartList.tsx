@@ -33,7 +33,7 @@ const CartList: React.FC<
 }) => {
   const combinedClassName = `w-full flex justify-between items-center border-2 border-slate-800 p-4 ${className}`;
   const linkHref = `/product/${prodIndex}`;
-  const idToString = cartIndex.toString();
+  const idToString = cartIndex.toString(); // cartIndex를 문자열로 변환
   // console.log("idToString", idToString);
 
   const [quantity, setQuantity] = useState(cartProductCount);
@@ -51,6 +51,27 @@ const CartList: React.FC<
       setQuantity(newQuantity);
       onQuantityChange(newQuantity);
     }
+  };
+
+  // 모듈화 할 때, handleDelete 함수를 불러와야 함.
+  const handleDeleteCart = (cartIndex: number): void => {
+    // Create dynamic endpoint using cartIndex
+    const endpoint = `http://localhost:3560/api/cartTable/${cartIndex}`;
+
+    // 엔드포인트를 사용하여 삭제 작업 수행
+    fetch(endpoint, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("데이터: ", data);
+        console.log("장바구니가 성공적으로 삭제되었습니다.");
+        // 성공하면 cartIndex를 인계받아
+        handleDelete(cartIndex);
+      })
+      .catch((error) => {
+        console.error("장바구니 삭제 오류:", error);
+      });
   };
 
   return (
@@ -96,8 +117,11 @@ const CartList: React.FC<
         {/* 버튼 컴포넌트 */}
         <Btn
           textContent="리스트 삭제"
-          className="h-10 w-28 border border-slate-950 flex justify-center items-center marker:text-sm"
-          onClick={() => handleDelete(idToString)}
+          className="h-10 w-28 border border-slate-950 flex justify-center items-center marker:text-smr"
+          onClick={() => {
+            // * 코드가 순차적으로 실행되어야 함.
+            handleDeleteCart(cartIndex);
+          }}
         />
       </div>
     </li>

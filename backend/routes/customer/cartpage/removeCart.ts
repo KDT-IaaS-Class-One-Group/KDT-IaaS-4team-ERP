@@ -3,7 +3,7 @@ import pool from "../../../database";
 
 const removeCart = express();
 
-removeCart.delete("/cartTable/:cartIndex", async (req, res) => {
+removeCart.delete("/api/cartTable/:cartIndex", async (req, res) => {
   console.log("요청이 옴");
   const { cartIndex } = req.params;
   console.log("cartIndex :", cartIndex);
@@ -14,9 +14,9 @@ removeCart.delete("/cartTable/:cartIndex", async (req, res) => {
     // * 장바구니에서 해당 상품을 삭제하는 쿼리문
     // userIndex와 cartIndex를 검사하여 해당 상품을 삭제한다.
     await conn.query(
-      // `DELETE FROM cartTable WHERE userIndex = ? AND cartIndex = ?`,
+      // `DELETE FROM cart WHERE userIndex = ? AND cartIndex = ?`,
       // [userIndex, cartIndex] // 유저 인덱스와 카트 인덱스를 받아와서 검증하는 쿼리문
-      `DELETE FROM cartTable WHERE cartIndex = ?`,
+      `DELETE FROM cart WHERE cartIndex = ?`,
       [cartIndex]
     );
 
