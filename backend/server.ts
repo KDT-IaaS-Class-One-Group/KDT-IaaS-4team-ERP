@@ -12,6 +12,7 @@ import { adminAddProduct } from "./routes/admin/products/adminAddProduct";
 import { adminUpdateProduct } from "./routes/admin/products/adminUpdateProduct";
 import { adminDeleteProduct } from "./routes/admin/products/adminDeleteProduct";
 import { adminRevenue } from "./routes/admin/revenue/adminRevenue";
+import adminTopcustomer from "./routes/admin/revenue/adminTopcustomer";
 
 // 고객페이지
 import mainPage from "./routes/customer/mainPage";
@@ -64,6 +65,7 @@ app.get("/api/orders", adminOrders);
 
   // 매출
 app.get("/api/adminRevenue", adminRevenue)
+app.get("/api/adminTopCustomer", adminTopcustomer)
 
 //* customer----------------------------
 

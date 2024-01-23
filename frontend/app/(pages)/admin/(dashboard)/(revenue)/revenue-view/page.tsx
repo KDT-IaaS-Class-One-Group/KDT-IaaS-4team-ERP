@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React, { useState } from "react";
 
@@ -6,8 +6,15 @@ export default function RevenueView() {
   // 날짜 상태
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [category, setCategory] = useState(""); // 추가: 카테고리 상태
-
+  // 추가: 카테고리 상태
+  const [category, setCategory] = useState("");
+  // 우수고객 상태
+  const [topCustomer, setTopCustomer] = useState<{
+    userIndex: number;
+    orderCount: number;
+    totalAmount: number;
+  } | null>(null);
+  // 총 판매량
   const [revenue, setRevenue] = useState<number | null>(null);
 
   // 날짜 변경 핸들러
@@ -46,6 +53,30 @@ export default function RevenueView() {
 
       // 수익 설정
       setRevenue(data.totalSales);
+    } catch (error) {
+      console.error("서버와의 통신 중 오류 발생:", error);
+    }
+  };
+
+  // 최고의 고객 조회 함수
+  const fetchTopCustomer = async () => {
+    try {
+      // 서버로부터 데이터를 가져오는 fetch 요청
+      const response = await fetch(
+        `http://localhost:3560/api/adminTopCustomer?startDate=${startDate}&endDate=${endDate}`
+      );
+
+      if (!response.ok) {
+        throw new Error(
+          `서버에서 데이터를 가져오지 못했습니다. 상태 코드: ${response.status}`
+        );
+      }
+
+      // 서버에서 받은 데이터를 JSON으로 파싱
+      const data = await response.json();
+
+      // 최고의 고객 설정
+      setTopCustomer(data.topCustomerData);
     } catch (error) {
       console.error("서버와의 통신 중 오류 발생:", error);
     }
@@ -118,9 +149,29 @@ export default function RevenueView() {
         </div>
         {revenue !== null && (
           <p className="text-green-500">
-            선택한 기간 동안의 수익: {revenue.toLocaleString()}원
+            선택한 기간 동안의 총 수익: {revenue.toLocaleString()}원
           </p>
         )}
+      </div>
+      <div className="container mx-auto p-4">
+        <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+          {/* ... (기존 코드) */}
+          <div className="mb-4">
+            <button
+              onClick={fetchTopCustomer}
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+              최고의 고객 조회
+            </button>
+          </div>
+          {topCustomer !== null && (
+            <p className="text-green-500">
+              선택한 기간 동안 가장 많이 구매한 고객: #{topCustomer.userIndex}{" "}
+              (주문 횟수: {topCustomer.orderCount}, 총 구매액:{" "}
+              {topCustomer.totalAmount.toLocaleString()}원)
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );
