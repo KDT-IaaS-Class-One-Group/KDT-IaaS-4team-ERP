@@ -2,13 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --neon-blue: #74f94c;
+  --bg: white;
+}
+
 * {
   cursor: url('../../public/images/cursor.png'), default;
 }
 
 body {
   background-color: #000;
-  color: white;
+  color: #74f94c;
 }
 
 .cursor-pointer {
@@ -21,7 +26,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #ffff00;
+  background: #74f94c;
   border-radius: calc(15px / 2);
 }
 
