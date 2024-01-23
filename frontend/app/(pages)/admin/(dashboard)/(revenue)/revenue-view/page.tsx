@@ -137,7 +137,6 @@ export default function RevenueView() {
   return (
     <div className="container mx-auto p-4">
       <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-
         {/* 날짜 선택 */}
         <h1 className="text-xl font-semibold mb-6">매출 조회</h1>
         <div className="mb-4">
@@ -234,28 +233,32 @@ export default function RevenueView() {
               </ul>
             </div>
           )}
-           <div className="mb-4">
-          <button
-            onClick={fetchTopProducts}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          >
-            Top 상품 조회
-          </button>
         </div>
-        {topProducts !== null && (
-          <div>
-            <p className="text-green-500">Top 상품 정보:</p>
-            <ul>
-              {topProducts.map((product, index) => (
-                <li key={index}>
-                  상품명: {product.prodName}, 주문 횟수: {product.orderCount}, 총 판매액:{" "}
-                  {product.totalAmount.toLocaleString()}원
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
       </div>
+
+      <div className="container mx-auto">
+        <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+          <div className="mb-4">
+            <button
+              onClick={fetchTopProducts}
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+              Top 상품 조회
+            </button>
+          </div>
+          {topProducts !== null && (
+            <div>
+              <p className="text-green-500">Top 상품 정보:</p>
+              <ul>
+                {topProducts.map((product, index) => (
+                  <li key={index}>
+                    상품명: {product.prodName}, 주문 횟수: {product.orderCount},
+                    총 판매액: {product.totalAmount.toLocaleString()}원
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     </div>
