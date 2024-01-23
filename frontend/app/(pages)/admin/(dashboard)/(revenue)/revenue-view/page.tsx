@@ -37,6 +37,10 @@ export default function RevenueView() {
   // 수익 계산 함수
   const calculateRevenue = async () => {
     try {
+      if (!startDate || !endDate) {
+        alert("날짜를 선택하세요.");
+        return;
+      }
       // 서버로부터 데이터를 가져오는 fetch 요청
       const response = await fetch(
         `http://localhost:3560/api/adminRevenue?startDate=${startDate}&endDate=${endDate}&category=${category}`
@@ -61,6 +65,10 @@ export default function RevenueView() {
   // 최고의 고객 조회 함수
   const fetchTopCustomer = async () => {
     try {
+      if (!startDate || !endDate) {
+        alert("날짜를 선택하세요.");
+        return;
+      }
       // 서버로부터 데이터를 가져오는 fetch 요청
       const response = await fetch(
         `http://localhost:3560/api/adminTopCustomer?startDate=${startDate}&endDate=${endDate}`

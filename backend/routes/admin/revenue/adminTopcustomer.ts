@@ -15,6 +15,7 @@ interface Order {
 
 adminTopcustomer.get("/api/adminTopCustomer", async (req, res) => {
   const { startDate, endDate } = req.query;
+  console.log(req.query)
 
   try {
     const conn = await pool.getConnection();
@@ -32,6 +33,7 @@ adminTopcustomer.get("/api/adminTopCustomer", async (req, res) => {
       LIMIT 1`;
 
     const topCustomerData = (await conn.query(query, [startDate, endDate]))[0];
+    console.log(topCustomerData)
 
     // 조회된 데이터를 클라이언트에 응답
     res.json({ topCustomerData });
