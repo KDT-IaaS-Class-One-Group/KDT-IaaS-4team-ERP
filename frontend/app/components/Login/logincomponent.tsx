@@ -124,7 +124,6 @@ const LoginHome = () => {
         <LoginButton value='login' onClick={handleLogin} />
       </div>
       <div className='flex justify-center items-center flex-col h-2/6 w-2/6'>
-            {/*...*/}
             <Modal
                 isOpen={modalContent.isOpen}
                 onClose={closeModal}
