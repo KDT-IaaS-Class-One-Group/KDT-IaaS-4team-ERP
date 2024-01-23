@@ -24,7 +24,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, message }) => {
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
-            <div className="modal-overlay fixed inset-0 bg-black opacity-50"></div>
+            {/* <div className="modal-overlay fixed inset-0 bg-black opacity-50"></div> */}
             <div className="modal bg-white p-4 rounded shadow-lg">
                 <div className="modal-header flex justify-between items-center border-b pb-2 mb-2">
                     <h2 className="text-lg font-semibold">{title}</h2>
