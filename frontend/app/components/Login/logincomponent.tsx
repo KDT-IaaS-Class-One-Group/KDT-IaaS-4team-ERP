@@ -1,10 +1,9 @@
 'use client';
-import React, { ChangeEvent } from 'react';
-
+import React, { useState } from 'react';
 import Link from 'next/link';
 import LoginButton from './loginbutton';
 import LoginText from './logintext';
-import { useState } from 'react';
+import Modal from '@/app/components/Modal/Modal';
 import { useRouter } from 'next/navigation';
 
 const LoginHome = () => {
@@ -14,6 +13,12 @@ const LoginHome = () => {
     userPassword: '',
   });
 
+  const [modalContent, setModalContent] = useState({
+    isOpen: false,
+    title: '',
+    message: '',
+  });
+
   const handleInputChange = (field: string, value: string) => {
     setLoginUser({
       ...loginUser,
@@ -21,22 +26,32 @@ const LoginHome = () => {
     });
   };
 
-  const handleSignup = () => {};
+  const handleSignup = () => {
+    // 추가적인 회원가입 로직이 필요하면 구현
+  };
 
   const handleLogin = async () => {
     try {
-      // 아이디 비어있을 경고창
+      // 로그인 시도 시 입력값 유효성 검사
       if (!loginUser.userId.trim()) {
-        alert('아이디를 입력해주세요.');
+        setModalContent({
+          isOpen: true,
+          title: '경고',
+          message: '아이디를 입력해주세요.',
+        });
         return;
       }
 
-      // 페스워드 비어있을 경우 경고창
       if (!loginUser.userPassword.trim()) {
-        alert('비밀번호를 입력해주세요.');
+        setModalContent({
+          isOpen: true,
+          title: '경고',
+          message: '비밀번호를 입력해주세요.',
+        });
         return;
       }
 
+      // 서버에 로그인 요청
       const response = await fetch(`http://localhost:3560/login`, {
         method: 'POST',
         headers: {
@@ -53,23 +68,44 @@ const LoginHome = () => {
       }
 
       const data = await response.json();
-      console.log(data);
+
       if (data.success) {
-        location.href='/'
-        localStorage.setItem('token', data.token)
-        alert('로그인 성공');
+        router.push('/'); // 페이지 이동
+        localStorage.setItem('token', data.token);
+        setModalContent({
+          isOpen: true,
+          title: '알림',
+          message: '로그인 성공',
+        });
       } else {
-        alert('로그인 실패');
+        setModalContent({
+          isOpen: true,
+          title: '알림',
+          message: '로그인 실패',
+        });
       }
     } catch (error) {
       console.error(error);
-      alert('회원정보가 존재하지 않습니다.');
+      setModalContent({
+        isOpen: true,
+        title: '알림',
+        message: '회원 정보가 존재하지 않습니다.',
+      });
     }
+  };
+
+  const closeModal = () => {
+    setModalContent({
+      isOpen: false,
+      title: '',
+      message: '',
+    });
   };
 
   return (
     <div className='flex justify-center items-center flex-col h-2/6 w-2/6'>
       <div className='h-2/5 flex flex-col justify-around items-center w-full'>
+        {/* 로그인 입력 필드 */}
         <LoginText
           title='ID'
           inputchange={(value: string) => handleInputChange('userId', value)}
@@ -80,11 +116,21 @@ const LoginHome = () => {
         />
       </div>
       <div className='h-1/5 flex items-center justify-end w-full'>
+        {/* 회원가입 버튼 */}
         <Link href='/signup'>
           <LoginButton value='sign up' onClick={handleSignup} />
         </Link>
+        {/* 로그인 버튼 */}
         <LoginButton value='login' onClick={handleLogin} />
       </div>
+
+      {/* 모달 컴포넌트 */}
+      <Modal
+        isOpen={modalContent.isOpen}
+        onClose={closeModal}
+        title={modalContent.title}
+        message={modalContent.message}
+      />
     </div>
   );
 };
