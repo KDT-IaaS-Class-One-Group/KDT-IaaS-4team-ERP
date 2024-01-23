@@ -36,7 +36,7 @@ export default function RevenueView() {
       const data = await response.json();
 
       // 수익 설정
-      setRevenue(data.revenue);
+      setRevenue(data.revenue[0].orderPaymentPriceAtOrder);
     } catch (error) {
       console.error("서버와의 통신 중 오류 발생:", error);
     }
