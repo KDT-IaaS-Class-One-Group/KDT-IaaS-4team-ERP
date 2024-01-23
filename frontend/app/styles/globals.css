@@ -12,10 +12,10 @@
 
 ::-webkit-scrollbar {
   width: 15px;
-  background: #f7ece1;
+  background: #080808;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cf5c36;
+  background: #ffff00;
   border-radius: calc(15px / 2);
 }
