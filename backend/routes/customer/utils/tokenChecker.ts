@@ -1,6 +1,16 @@
 import { Request, Response } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
 
+/**
+ * 토큰을 검증하는 함수입니다.
+ * 결과값은 userIndex입니다.
+ *
+ * @param req Request
+ * @param res Response
+ * @returns {string} userIndex
+ * @returns error
+ *
+ */
 export const tokenChecker = (req: Request, res: Response) => {
   const tokenHeader = req.headers.authorization;
   if (!tokenHeader) {
