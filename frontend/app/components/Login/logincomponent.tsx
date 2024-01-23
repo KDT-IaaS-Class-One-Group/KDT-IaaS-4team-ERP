@@ -123,14 +123,15 @@ const LoginHome = () => {
         {/* 로그인 버튼 */}
         <LoginButton value='login' onClick={handleLogin} />
       </div>
-
-      {/* 모달 컴포넌트 분리필요 */}
-      <Modal
-        isOpen={modalContent.isOpen}
-        onClose={closeModal}
-        title={modalContent.title}
-        message={modalContent.message}
-      />
+      <div className='flex justify-center items-center flex-col h-2/6 w-2/6'>
+            {/*...*/}
+            <Modal
+                isOpen={modalContent.isOpen}
+                onClose={closeModal}
+                title={modalContent.title}
+                message={modalContent.message}
+            />
+        </div>
     </div>
   );
 };
