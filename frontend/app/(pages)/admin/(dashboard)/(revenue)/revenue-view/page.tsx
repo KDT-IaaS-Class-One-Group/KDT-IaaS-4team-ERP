@@ -13,6 +13,7 @@ export default function RevenueView() {
     userIndex: number;
     orderCount: number;
     totalAmount: number;
+    userName: string;
   } | null>(null);
   // 총 판매량
   const [revenue, setRevenue] = useState<number | null>(null);
@@ -161,7 +162,7 @@ export default function RevenueView() {
           </p>
         )}
       </div>
-      <div className="container mx-auto p-4">
+      <div className="container mx-auto">
         <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
           {/* ... (기존 코드) */}
           <div className="mb-4">
@@ -174,7 +175,7 @@ export default function RevenueView() {
           </div>
           {topCustomer !== null && (
             <p className="text-green-500">
-              선택한 기간 동안 가장 많이 구매한 고객: #{topCustomer.userIndex}{" "}
+              선택한 기간 동안 가장 많이 구매한 고객: {topCustomer.userName}{" "}
               (주문 횟수: {topCustomer.orderCount}, 총 구매액:{" "}
               {topCustomer.totalAmount.toLocaleString()}원)
             </p>
