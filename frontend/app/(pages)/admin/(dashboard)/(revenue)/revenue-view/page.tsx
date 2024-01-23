@@ -23,6 +23,7 @@ export default function RevenueView() {
   // Top products 상태
   const [topProducts, setTopProduct] = useState<{
     prodIndex: number;
+    prodCategory: string;
     prodName: string;
     orderCount: number;
     totalAmount: number;
@@ -252,8 +253,9 @@ export default function RevenueView() {
               <ul>
                 {topProducts.map((product, index) => (
                   <li key={index}>
-                    상품명: {product.prodName}, 주문 횟수: {product.orderCount},
-                    총 판매액: {product.totalAmount.toLocaleString()}원
+                    순위 {index + 1}: {product.prodName}, 상품분류:{" "}
+                    {product.prodCategory}, 주문 횟수: {product.orderCount}, 총
+                    판매액: {product.totalAmount.toLocaleString()}원
                   </li>
                 ))}
               </ul>

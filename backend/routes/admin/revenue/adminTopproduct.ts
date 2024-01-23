@@ -21,6 +21,7 @@ adminTopProduct.get("/api/adminTopProduct", async (req, res) => {
       SELECT 
         products.prodIndex,
         products.prodName,
+        products.prodCategory,
         COUNT(orders.orderIndex) AS orderCount,
         SUM(orders.orderPaymentTotalPrice) AS totalAmount
       FROM orders 
@@ -32,6 +33,7 @@ adminTopProduct.get("/api/adminTopProduct", async (req, res) => {
     `;
 
     const topProductData = (await conn.query(query, [startDate, endDate]));
+    console.log(topProductData)
 
     // 조회된 데이터를 클라이언트에 응답
     res.json({ topProductData });
