@@ -2,6 +2,7 @@
 import LoginText from '../Login/logintext';
 import LoginButton from '../Login/loginbutton';
 import { useRouter } from 'next/navigation';
+import Modal from "@/app/components/Modal/Modal";
 import { useState } from 'react';
 
 const SignUpHome: React.FC = () => {
@@ -15,6 +16,14 @@ const SignUpHome: React.FC = () => {
     userEmail: '',
     userPhoneNum: '',
   });
+
+  //Modal code
+  const [modalContent, setModalContent] = useState({
+    isOpen: false,
+    title: '',
+    message: '',
+  })
+
   const handleInputChange = (field: string, value: string) => {
     setSignup({
       ...Signup,
@@ -26,17 +35,30 @@ const SignUpHome: React.FC = () => {
     try {
       // Check if any required field is empty
       if (!Signup.userId.trim()) {
-        alert('아이디를 입력해주세요.');
+        setModalContent({
+          isOpen: true,
+          title: '경고',
+          message: '아이디를 입력해주세요.',
+        });
+        
         return;
       }
 
       if (!Signup.userPassword.trim()) {
-        alert('비밀번호를 입력해주세요.');
+        setModalContent({
+          isOpen: true,
+          title: '경고',
+          message: '비밀번호를 입력해주세요.',
+        });
         return;
       }
 
-      if (Signup.userPassword !== Signup.userPassword1) {// 기존에 입력한 userPassword와 userPassword1이 같지 않을 경우 경고창 출력
-        alert('비밀번호가 서로 같지 않습니다.');
+      if (Signup.userPassword !== Signup.userPassword1) {// 기존에 입력한 userPassword와 userPassword1이 같지 않을 경우 경고창 출력함
+        setModalContent({
+          isOpen: true,
+          title: '경고',
+          message: '비밀번호가 일치하지 않습니다.',
+        });
         return;
       }
 
@@ -47,7 +69,11 @@ const SignUpHome: React.FC = () => {
       }
 
       if (!isValidEmailFormat(Signup.userEmail)) {
-        alert('올바른 이메일 형식으로 입력해주세요');
+        setModalContent({
+          isOpen: true,
+          title: '경고',
+          message: '올바른 이메일 형식을 입력해주세요',
+        });
         return;
       }
 
@@ -73,15 +99,37 @@ const SignUpHome: React.FC = () => {
       const data = await response.json();
       console.log(data);
       if (data.success) {
-        alert('회원가입 성공');
+        setModalContent({
+          isOpen: true,
+          title: '알림',
+          message: '회원가입 성공',
+        });
         router.push('/login');
       } else {
-        alert('회원가입 실패');
+        setModalContent({
+          isOpen: true,
+          title: '경고',
+          message: '회원가입 실패',
+        });
+
       }
     } catch (error) {
       console.error(error);
-      alert('회원가입 실패');
+      setModalContent({
+        isOpen: true,
+        title: '경고',
+        message: '회원가입 실패',
+      });
     }
+  }
+
+  const closeModal = () => {
+    setModalContent({
+      isOpen: false,
+      title: '',
+      message: '',
+    });
+
   }
 
   return (
@@ -108,9 +156,16 @@ const SignUpHome: React.FC = () => {
           inputchange={(value: string) => handleInputChange('userPhoneNumber', value)}
         />
       </div>
+      {/* 회원가입 완료 버튼 */}
       <div className='h-1/6 w-full flex justify-end'>
-        <LoginButton value='Submit' onClick={handleButtonClick} />
+        <LoginButton value='Submit' onClick={handleButtonClick} />        
       </div>
+      <Modal
+        isOpen={modalContent.isOpen}
+        onClose={closeModal}
+        title={modalContent.title}
+        message={modalContent.message}
+      />
     </div>
   );
 };
