@@ -1,13 +1,15 @@
 'use client';
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '@/app/contexts/AuthContext';
 
 export default function AdminLoginPage() {
-  const [adminId, setAdminId] = useState('');
-  const [adminPassword, setAdminPassword] = useState('');
+  const [adminId, setAdminId] = useState<string>('');
+  const [adminPassword, setAdminPassword] = useState<string>('');
   const router = useRouter();
+  const { login } = useAuth();
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const response = await fetch('http://localhost:3560/api/adminlogin', {
@@ -19,11 +21,9 @@ export default function AdminLoginPage() {
       });
       const data = await response.json();
       if (data.success) {
-        // 로그인 성공 처리
-        alert(`${data.adminName}님 환영합니다.`);
+        login(data.adminName);
         router.push('/admin');
       } else {
-        // 로그인 실패 처리
         alert('로그인 실패');
       }
     } catch (error) {
