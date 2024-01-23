@@ -3,11 +3,16 @@
 @tailwind utilities;
 
 * {
-  cursor: url("../../public/images/cursor.png"), default;
+  cursor: url('../../public/images/cursor.png'), default;
+}
+
+body {
+  background-color: #000;
+  color: white;
 }
 
 .cursor-pointer {
-  cursor: url("../../public/images/cursor-pointer.png"), pointer;
+  cursor: url('../../public/images/cursor-pointer.png'), pointer;
 }
 
 ::-webkit-scrollbar {
@@ -18,4 +23,29 @@
 ::-webkit-scrollbar-thumb {
   background: #ffff00;
   border-radius: calc(15px / 2);
+}
+
+header > a {
+  position: relative;
+  display: inline-block;
+  border-radius: 2px;
+  color: var(--neon-blue);
+  font-size: 24px;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: 0.5s;
+  letter-spacing: 4px;
+  overflow: hidden;
+  -webkit-box-reflect: below 1px linear-gradient(transparent, #0003);
+}
+
+header > a:hover {
+  background: var(--neon-blue);
+  color: var(--bg);
+  box-shadow:
+    0 0 5px var(--neon-blue),
+    0 0 25px var(--neon-blue),
+    0 0 50px var(--neon-blue),
+    0 0 200px var(--neon-blue);
+  transition-delay: 0.4s;
 }

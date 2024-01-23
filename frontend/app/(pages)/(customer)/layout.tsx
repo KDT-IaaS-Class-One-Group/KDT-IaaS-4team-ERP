@@ -2,10 +2,8 @@ import React from 'react';
 import Header from '@/app/components/Header/Header';
 import Footer from '@/app/components/Footer/Footer';
 import { ChildrenProp } from '@/app/types/ChildrenProp';
-import HeaderItem from '@/app/components/Header/HeaderItem';
 
-export default function CustomerLayout({ children }: ChildrenProps) {
-  
+export default function CustomerLayout({ children }: ChildrenProp) {
   const sendRequest = async (url: string, token: string) => {
     try {
       const response = await fetch(url, {
@@ -23,7 +21,7 @@ export default function CustomerLayout({ children }: ChildrenProps) {
 
   return (
     <>
-      <Header />
+      <Header></Header>
       {children}
       <Footer></Footer>
     </>

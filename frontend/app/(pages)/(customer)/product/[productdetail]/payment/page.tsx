@@ -5,7 +5,7 @@ import BuyButton from '@/app/components/Payment/buyButton';
 import { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
-import { Productpaymentprops } from '@/app/interfaces/Product/ProductpaymentProps';
+import { Productpaymentprops } from '@/app/types/Product/ProductpaymentProps';
 
 export default function PaymentPage() {
   const router = useRouter();
