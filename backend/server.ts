@@ -33,6 +33,7 @@ import productcommentfull from "./routes/customer/review/productcommentfull";
 import productcommentwrite from "./routes/customer/review/productcommentwrite";
 import cartpage from "./routes/customer/cartpage/cartpage";
 import cartToPaymentTransition from "./routes/customer/cartpage/cartToPaymentTransition";
+import removeCart from "./routes/customer/cartpage/removeCart";
 
 const app = express();
 const port = 3560;
@@ -108,6 +109,7 @@ app.get("/cart", cartpage); // cartpage 조회 로직
 app.post("/cart/cartToPayment", cartToPaymentTransition); // cartpage에서 결제하기
 // app.post("/cartToPayment", paymentDataForCart);
 app.post("/addingcart", addingcart); // 카트 추가하는 api 라우터
+app.delete("/api/cartTable/:cartIndex", removeCart); // 카트 삭제하는 api 라우터
 
 app.listen(port, () => {
   console.log(`Express 서버가 ${port}번 포트에서 실행중입니다.`);
