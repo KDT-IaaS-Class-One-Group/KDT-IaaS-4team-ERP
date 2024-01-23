@@ -11,6 +11,7 @@ import { adminOrders } from "./routes/admin/order/adminOrders";
 import { adminAddProduct } from "./routes/admin/products/adminAddProduct";
 import { adminUpdateProduct } from "./routes/admin/products/adminUpdateProduct";
 import { adminDeleteProduct } from "./routes/admin/products/adminDeleteProduct";
+import { adminRevenue } from "./routes/admin/revenue/adminRevenue";
 
 // 고객페이지
 import mainPage from "./routes/customer/mainPage";
@@ -60,6 +61,9 @@ app.delete("/api/deleteproduct/:prodIndex", adminDeleteProduct);
 app.put("/api/product/:id", adminUpdateProduct);
 
 app.get("/api/orders", adminOrders);
+
+  // 매출
+app.get("/api/adminRevenue", adminRevenue)
 
 //* customer----------------------------
 
