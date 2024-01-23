@@ -34,9 +34,10 @@ export default function RevenueView() {
 
       // 서버에서 받은 데이터를 JSON으로 파싱
       const data = await response.json();
+      console.log(data)
 
       // 수익 설정
-      setRevenue(data.revenue[0].orderPaymentPriceAtOrder);
+      setRevenue(data.totalSales);
     } catch (error) {
       console.error("서버와의 통신 중 오류 발생:", error);
     }
