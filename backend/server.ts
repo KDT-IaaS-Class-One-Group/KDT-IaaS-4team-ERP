@@ -90,6 +90,7 @@ app.post("/:prodIndex/reviews", productcommentwrite);
 app.get("/cart", cartpage); // cartpage 조회 로직
 app.post("/cart/cartToPayment", cartToPaymentTransition); // cartpage에서 결제하기
 // app.post("/cartToPayment", paymentDataForCart);
+app.post("/addingcart", addingcart); // 카트 추가하는 api 라우터
 
 app.listen(port, () => {
   console.log(`Express 서버가 ${port}번 포트에서 실행중입니다.`);
