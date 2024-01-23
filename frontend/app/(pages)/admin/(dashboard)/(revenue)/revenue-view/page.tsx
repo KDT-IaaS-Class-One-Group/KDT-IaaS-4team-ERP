@@ -3,11 +3,15 @@
 import React, { useState } from "react";
 
 export default function RevenueView() {
+  // * 상태들
+
   // 날짜 상태
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+
   // 추가: 카테고리 상태
   const [category, setCategory] = useState("");
+
   // 우수고객 상태
   const [topCustomers, setTopCustomer] = useState<{
     userName: string;
@@ -15,8 +19,19 @@ export default function RevenueView() {
     orderCount: number;
     totalAmount: number;
   } | null>(null);
+
+  // Top products 상태
+  const [topProducts, setTopProduct] = useState<{
+    prodIndex: number;
+    prodName: string;
+    orderCount: number;
+    totalAmount: number;
+  } | null>(null);
+
   // 총 판매량
   const [revenue, setRevenue] = useState<number | null>(null);
+
+  // * 핸들러 및 함수들
 
   // 날짜 변경 핸들러
   const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -91,9 +106,39 @@ export default function RevenueView() {
     }
   };
 
+  // Top 상품 조회 함수
+  const fetchTopProducts = async () => {
+    try {
+      if (!startDate || !endDate) {
+        alert("날짜를 선택하세요.");
+        return;
+      }
+      // 서버로부터 데이터를 가져오는 fetch 요청
+      const response = await fetch(
+        `http://localhost:3560/api/adminTopProduct?startDate=${startDate}&endDate=${endDate}`
+      );
+
+      if (!response.ok) {
+        throw new Error(
+          `서버에서 데이터를 가져오지 못했습니다. 상태 코드: ${response.status}`
+        );
+      }
+
+      // 서버에서 받은 데이터를 JSON으로 파싱
+      const data = await response.json();
+
+      // Top 상품 상태 설정
+      setTopProduct(data.topProductData);
+    } catch (error) {
+      console.error("서버와의 통신 중 오류 발생:", error);
+    }
+  };
+
   return (
     <div className="container mx-auto p-4">
       <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+
+        {/* 날짜 선택 */}
         <h1 className="text-xl font-semibold mb-6">매출 조회</h1>
         <div className="mb-4">
           <label
@@ -127,7 +172,8 @@ export default function RevenueView() {
             className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
-        {/* 추가: 카테고리 선택 */}
+
+        {/* 카테고리 선택 */}
         <div className="mb-4">
           <label
             htmlFor="category"
@@ -162,6 +208,8 @@ export default function RevenueView() {
           </p>
         )}
       </div>
+
+      {/* 상위고객, 상위 상품 조회 */}
       <div className="container mx-auto">
         <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
           <div className="mb-4">
@@ -186,6 +234,28 @@ export default function RevenueView() {
               </ul>
             </div>
           )}
+           <div className="mb-4">
+          <button
+            onClick={fetchTopProducts}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          >
+            Top 상품 조회
+          </button>
+        </div>
+        {topProducts !== null && (
+          <div>
+            <p className="text-green-500">Top 상품 정보:</p>
+            <ul>
+              {topProducts.map((product, index) => (
+                <li key={index}>
+                  상품명: {product.prodName}, 주문 횟수: {product.orderCount}, 총 판매액:{" "}
+                  {product.totalAmount.toLocaleString()}원
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
         </div>
       </div>
     </div>
