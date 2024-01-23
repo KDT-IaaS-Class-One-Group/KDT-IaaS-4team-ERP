@@ -2,7 +2,7 @@ import express from "express";
 import session from "express-session";
 import bodyParser from "body-parser";
 import cors from "cors";
-import test from "./routes/test";
+import multer from "multer";
 
 // 관리자
 import { adminLogin } from "./routes/admin/login/adminLogin";
@@ -13,6 +13,7 @@ import { adminUpdateProduct } from "./routes/admin/products/adminUpdateProduct";
 import { adminDeleteProduct } from "./routes/admin/products/adminDeleteProduct";
 
 // 고객페이지
+
 import mainPage from "./routes/customer/mainPage";
 
 import customerLogin from "./routes/customer/customerLogin";
@@ -48,8 +49,25 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static("public"));
 
-// 테스트
-app.get("/post", test);
+// 이미지 업로드
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "../frontend/public/images/");
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + "-" + Date.now() + ".png");
+  },
+});
+
+const upload = multer({ storage: storage });
+
+app.post("/upload", upload.single("image"), (req, res) => {
+  if (!req.file) {
+    return res.status(400).send("No file uploaded.");
+  }
+  const imageUrl = `/${req.file.filename}`; // 클라이언트가 접근할 수 있는 이미지 URL
+  res.json({ imageUrl });
+});
 
 // * admin----------------------------
 app.post("/api/adminlogin", adminLogin);
@@ -58,9 +76,8 @@ app.get("/api/products", adminProducts);
 app.post("/api/addproduct", adminAddProduct);
 app.delete("/api/deleteproduct/:prodIndex", adminDeleteProduct);
 app.put("/api/product/:id", adminUpdateProduct);
-
 app.get("/api/orders", adminOrders);
-
+app.patch("/api/orders/delivery/:orderIndex", adminOrders);
 //* customer----------------------------
 
 // 메인페이지
