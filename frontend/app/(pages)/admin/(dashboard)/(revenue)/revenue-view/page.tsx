@@ -9,11 +9,11 @@ export default function RevenueView() {
   // 추가: 카테고리 상태
   const [category, setCategory] = useState("");
   // 우수고객 상태
-  const [topCustomer, setTopCustomer] = useState<{
+  const [topCustomers, setTopCustomer] = useState<{
+    userName: string;
     userIndex: number;
     orderCount: number;
     totalAmount: number;
-    userName: string;
   } | null>(null);
   // 총 판매량
   const [revenue, setRevenue] = useState<number | null>(null);
@@ -64,7 +64,7 @@ export default function RevenueView() {
   };
 
   // 최고의 고객 조회 함수
-  const fetchTopCustomer = async () => {
+  const fetchTopCustomers = async () => {
     try {
       if (!startDate || !endDate) {
         alert("날짜를 선택하세요.");
@@ -164,21 +164,27 @@ export default function RevenueView() {
       </div>
       <div className="container mx-auto">
         <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-          {/* ... (기존 코드) */}
           <div className="mb-4">
             <button
-              onClick={fetchTopCustomer}
+              onClick={fetchTopCustomers}
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
-              최고의 고객 조회
+              상위 고객 조회
             </button>
           </div>
-          {topCustomer !== null && (
-            <p className="text-green-500">
-              선택한 기간 동안 가장 많이 구매한 고객: {topCustomer.userName}{" "}
-              (주문 횟수: {topCustomer.orderCount}, 총 구매액:{" "}
-              {topCustomer.totalAmount.toLocaleString()}원)
-            </p>
+          {topCustomers !== null && (
+            <div>
+              <p className="text-green-500">상위 고객 순위:</p>
+              <ul>
+                {topCustomers.map((customer, index) => (
+                  <li key={customer.userIndex}>
+                    순위 {index + 1}: {customer.userName} (주문 횟수:{" "}
+                    {customer.orderCount}, 총 구매액:{" "}
+                    {customer.totalAmount.toLocaleString()}원)
+                  </li>
+                ))}
+              </ul>
+            </div>
           )}
         </div>
       </div>

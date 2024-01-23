@@ -22,20 +22,19 @@ adminTopcustomer.get("/api/adminTopCustomer", async (req, res) => {
 
     // 해당 기간 동안의 주문 데이터 가져오기
     const query = `
-  SELECT 
-    u.userName,
-    o.userIndex, 
-    COUNT(o.orderIndex) AS orderCount,
-    SUM(o.orderPaymentTotalPrice) AS totalAmount
-  FROM orders o
-  JOIN user u ON o.userIndex = u.userIndex
-  WHERE o.orderPaymentDatetime BETWEEN ? AND ?
-  GROUP BY o.userIndex
+    SELECT 
+    orders.userIndex, 
+    user.userName,
+    COUNT(orders.orderIndex) AS orderCount,
+    SUM(orders.orderPaymentTotalPrice) AS totalAmount
+  FROM orders 
+  JOIN user ON orders.userIndex = user.userIndex
+  WHERE orders.orderPaymentDatetime BETWEEN ? AND ?
+  GROUP BY orders.userIndex
   ORDER BY totalAmount DESC
-  LIMIT 1
-`;
+  LIMIT 4`;
 
-    const topCustomerData = (await conn.query(query, [startDate, endDate]))[0];
+    const topCustomerData = (await conn.query(query, [startDate, endDate]));
     console.log(topCustomerData);
 
     // 조회된 데이터를 클라이언트에 응답
