@@ -3,5 +3,19 @@
 @tailwind utilities;
 
 * {
-  cursor: url('../../public/images/cursor.png'), auto;
+  cursor: url("../../public/images/cursor.png"), default;
+}
+
+.cursor-pointer {
+  cursor: url("../../public/images/cursor-pointer.png"), pointer;
+}
+
+::-webkit-scrollbar {
+  width: 15px;
+  background: #f7ece1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cf5c36;
+  border-radius: calc(15px / 2);
 }
