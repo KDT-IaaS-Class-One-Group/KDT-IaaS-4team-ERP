@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 import React, { useState } from "react";
 
@@ -6,6 +6,8 @@ export default function RevenueView() {
   // 날짜 상태
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [category, setCategory] = useState(""); // 추가: 카테고리 상태
+
   const [revenue, setRevenue] = useState<number | null>(null);
 
   // 날짜 변경 핸들러
@@ -18,12 +20,19 @@ export default function RevenueView() {
     }
   };
 
+  // 카테고리 변경 핸들러
+  const handleCategoryChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    setCategory(event.target.value);
+  };
+
   // 수익 계산 함수
   const calculateRevenue = async () => {
     try {
       // 서버로부터 데이터를 가져오는 fetch 요청
       const response = await fetch(
-        `http://localhost:3560/api/adminRevenue?startDate=${startDate}&endDate=${endDate}`
+        `http://localhost:3560/api/adminRevenue?startDate=${startDate}&endDate=${endDate}&category=${category}`
       );
 
       if (!response.ok) {
@@ -34,7 +43,6 @@ export default function RevenueView() {
 
       // 서버에서 받은 데이터를 JSON으로 파싱
       const data = await response.json();
-      console.log(data)
 
       // 수익 설정
       setRevenue(data.totalSales);
@@ -78,6 +86,27 @@ export default function RevenueView() {
             onChange={handleDateChange}
             className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
+        </div>
+        {/* 추가: 카테고리 선택 */}
+        <div className="mb-4">
+          <label
+            htmlFor="category"
+            className="block text-gray-700 text-sm font-bold mb-2"
+          >
+            카테고리:
+          </label>
+          <select
+            id="category"
+            name="category"
+            value={category}
+            onChange={handleCategoryChange}
+            className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          >
+            <option value="">전체</option>
+            <option value="Zerg">Zerg</option>
+            <option value="Terran">Terran</option>
+            <option value="Protoss">Protoss</option>
+          </select>
         </div>
         <div className="mb-4">
           <button
