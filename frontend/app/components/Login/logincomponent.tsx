@@ -124,7 +124,7 @@ const LoginHome = () => {
         <LoginButton value='login' onClick={handleLogin} />
       </div>
 
-      {/* 모달 컴포넌트 */}
+      {/* 모달 컴포넌트 분리필요 */}
       <Modal
         isOpen={modalContent.isOpen}
         onClose={closeModal}

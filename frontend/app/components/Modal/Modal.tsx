@@ -1,6 +1,5 @@
-// Modal.tsx
-
-import React from 'react';
+'use client'
+import React, { useState } from 'react';
 
 interface ModalProps {
     isOpen: boolean;    // 모달이 열려있는지 여부를 나타내는 prop
@@ -10,10 +9,17 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, message }) => {
+
+    const [info, data] = useState({
+        isOpen: '',
+        title:'',
+        message:''
+    })
     // 모달이 열려있지 않으면 아무것도 렌더링하지 않음
     if (!isOpen) {
         return null;
     }
+
 
     return (
         <div className="modal-overlay">
