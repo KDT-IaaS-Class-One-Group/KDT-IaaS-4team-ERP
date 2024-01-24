@@ -7,10 +7,7 @@ import { Review } from "@/app/interfaces/Review/Review";
 import { formatDate } from "@/app/utils/formatDate";
 import React, { useEffect, useState } from "react";
 
-// 전역 변수를 저장할 Context 생성
-
 export default function ReviewManagePage() {
-  // const { reviews } = useContext(ReviewContext);
   const [reviews, setReviews] = useState<Review[]>([]);
 
   // Logic for loading data (e.g., Fetch API)
@@ -19,7 +16,7 @@ export default function ReviewManagePage() {
       .then((response) => response.json())
       // * data가공하는 파트
       .then((data) => {
-        const reviews = data.map((review) => ({
+        const reviews = data.map((review: Review) => ({
           ...review,
           // 형변환
           reviewCreatedAt: formatDate(review.reviewCreatedAt),

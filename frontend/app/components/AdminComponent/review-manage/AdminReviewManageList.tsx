@@ -15,7 +15,14 @@ export default function AdminReviewManageList({
   review,
   className = "",
 }: AdminReviewManageListProps) {
-  const { reviewIndex, userId, reviewImgUrl, reviewContent } = review;
+  const {
+    reviewIndex,
+    userId,
+    reviewImgUrl,
+    reviewContent,
+    reviewAdminContent,
+    reviewRating,
+  } = review;
   const defaultClassName = `AdminReviewManageList bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 ${className}`;
 
   const [reply, setReply] = useState("");
@@ -25,9 +32,10 @@ export default function AdminReviewManageList({
   };
 
   const handleReplySubmit = () => {
+    console.log("handleReplySubmit 시작 reply : ", reply);
     fetch(`http://localhost:3560/api/reviewReplySubmit/${reviewIndex}`, {
       method: "PATCH",
-      body: JSON.stringify({ reviewIndex, reply }),
+      body: JSON.stringify({ reply }),
       headers: {
         "Content-Type": "application/json",
       },
@@ -35,9 +43,11 @@ export default function AdminReviewManageList({
       .then((response) => response.json())
       .then((data) => {
         console.log("Reply submitted successfully", data);
+        // 등록 성공 모달 띄우기
       })
       .catch((error) => {
         console.error("Error submitting reply", error);
+        // 등록 실패 모달 띄우기
       });
   };
 
@@ -45,13 +55,16 @@ export default function AdminReviewManageList({
     <div key={reviewIndex} className={defaultClassName}>
       <div className="reviewArea mb-4 flex justify-between items-center">
         <div className="reviewLeft">
-          <h2 className="text-lg font-bold">사용자 : {userId}</h2>
+          <h2 className="text-lg font-bold">
+            사용자 : {userId} 별점 : {reviewRating}
+          </h2>
           <p>{reviewContent}</p>
         </div>
         <div className="reviewRight flex justify-center items-center">
-          {reviewImgUrl && (
+          {/* todo : img 태그, 추후 수정해봄직 함. */}
+          {reviewImgUrl !== null && (
             <img
-              src={reviewImgUrl}
+              src={`/images/${reviewImgUrl}`}
               alt={`리뷰 이미지 ${reviewIndex}`}
               className="w-full max-w-xs mt-3"
             />
@@ -62,7 +75,9 @@ export default function AdminReviewManageList({
         <textarea
           className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker mb-3"
           rows={3}
-          placeholder="답변을 입력하세요..."
+          placeholder={
+            reviewAdminContent ? reviewAdminContent : "답변을 작성해주세요"
+          }
           value={reply}
           onChange={handleReplyChange}
         />
