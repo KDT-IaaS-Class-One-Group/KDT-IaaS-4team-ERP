@@ -2,7 +2,7 @@ import express from "express";
 import session from "express-session";
 import bodyParser from "body-parser";
 import cors from "cors";
-import test from "./routes/test";
+import multer from "multer";
 
 // 관리자
 import { adminLogin } from "./routes/admin/login/adminLogin";
@@ -16,6 +16,7 @@ import { adminTopcustomer } from "./routes/admin/revenue/adminTopcustomer";
 import { adminTopProduct } from "./routes/admin/revenue/adminTopproduct";
 
 // 고객페이지
+
 import mainPage from "./routes/customer/mainPage";
 
 import customerLogin from "./routes/customer/customerLogin";
@@ -35,6 +36,7 @@ import productcommentfull from "./routes/customer/review/productcommentfull";
 import productcommentwrite from "./routes/customer/review/productcommentwrite";
 import cartpage from "./routes/customer/cartpage/cartpage";
 import cartToPaymentTransition from "./routes/customer/cartpage/cartToPaymentTransition";
+import removeCart from "./routes/customer/cartpage/removeCart";
 
 const app = express();
 const port = 3560;
@@ -51,8 +53,25 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static("public"));
 
-// 테스트
-app.get("/post", test);
+// 이미지 업로드
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "../frontend/public/images/");
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + "-" + Date.now() + ".png");
+  },
+});
+
+const upload = multer({ storage: storage });
+
+app.post("/upload", upload.single("image"), (req, res) => {
+  if (!req.file) {
+    return res.status(400).send("No file uploaded.");
+  }
+  const imageUrl = `/${req.file.filename}`; // 클라이언트가 접근할 수 있는 이미지 URL
+  res.json({ imageUrl });
+});
 
 // * admin----------------------------
 app.post("/api/adminlogin", adminLogin);
@@ -61,8 +80,8 @@ app.get("/api/products", adminProducts);
 app.post("/api/addproduct", adminAddProduct);
 app.delete("/api/deleteproduct/:prodIndex", adminDeleteProduct);
 app.put("/api/product/:id", adminUpdateProduct);
-
 app.get("/api/orders", adminOrders);
+app.patch("/api/orders/delivery/:orderIndex", adminOrders);
 
 // 매출 통계
 app.get("/api/adminRevenue", adminRevenue);
@@ -99,6 +118,7 @@ app.get("/cart", cartpage); // cartpage 조회 로직
 app.post("/cart/cartToPayment", cartToPaymentTransition); // cartpage에서 결제하기
 // app.post("/cartToPayment", paymentDataForCart);
 app.post("/addingcart", addingcart); // 카트 추가하는 api 라우터
+app.delete("/api/cartTable/:cartIndex", removeCart); // 카트 삭제하는 api 라우터
 
 app.listen(port, () => {
   console.log(`Express 서버가 ${port}번 포트에서 실행중입니다.`);

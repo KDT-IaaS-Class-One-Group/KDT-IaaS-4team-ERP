@@ -2,10 +2,9 @@
 
 import CustomerMain from "@/app/components/homeComp/customerMain";
 
-
 export default function Customer() {
   return (
-    <div className='flex justify-center items-center flex-col w-screen h-screen overflow-y-scroll overflow-x-hidden'>
+    <div className="flex justify-center items-center flex-col w-screen h-screen overflow-x-hidden">
       <CustomerMain />
     </div>
   );
