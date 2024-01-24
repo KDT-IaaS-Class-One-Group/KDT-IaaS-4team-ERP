@@ -26,7 +26,7 @@ product.get("/product/:prodIndex", async (req, res) => {
     } else {
       // 결과를 클라이언트로 전송
       res.json(result); 
-      console.log(result)
+      // console.log(result)
     }
   } catch (error) {
     console.error("Error fetching product:", error);
