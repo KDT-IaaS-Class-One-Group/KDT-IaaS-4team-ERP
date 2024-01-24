@@ -78,7 +78,7 @@ app.post('/api/adminlogin', adminLogin);
 
 app.get('/api/products', adminProducts);
 app.post('/api/addproduct', adminAddProduct);
-app.delete('/api/deleteproduct/:prodIndex', adminDeleteProduct);
+app.patch('/api/deleteproduct/:prodIndex', adminDeleteProduct);
 app.patch('/api/updateproduct/:prodIndex', adminUpdateProduct);
 app.get('/api/orders', adminOrders);
 app.patch('/api/orders/delivery/:orderIndex', adminOrders);

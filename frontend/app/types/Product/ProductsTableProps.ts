@@ -6,4 +6,5 @@ export interface ProductsTableProps {
   prodDescription: string;
   prodStock: number;
   prodCategory: string;
+  prodStatus: number;
 }
