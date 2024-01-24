@@ -20,6 +20,10 @@ body {
   cursor: url('../../public/images/cursor-pointer.png'), pointer;
 }
 
+.cursor-text {
+  cursor: url('../../public/images/cursor-text.png'), text;
+}
+
 ::-webkit-scrollbar {
   width: 15px;
   background: #080808;
