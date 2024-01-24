@@ -1,23 +1,27 @@
-import express from 'express';
-import session from 'express-session';
+// Express API 서버 (adminLogin.ts)
+
+import express, { Request, Response } from 'express';
+import jwt from 'jsonwebtoken';
 import pool from '../../../database';
 
-export const adminLogin = express();
+export const adminLogin = express.Router();
 
-adminLogin.post('/api/adminlogin', async (req, res) => {
+adminLogin.post('/api/adminlogin', async (req: Request, res: Response) => {
   let conn;
   try {
     conn = await pool.getConnection();
     const { adminId, adminPassword } = req.body;
-    // 관리자 이름도 함께 검색
-    const query =
-      'SELECT adminName FROM administrators WHERE adminId = ? AND adminPassword = ?';
+    const query = 'SELECT adminName FROM administrators WHERE adminId = ? AND adminPassword = ?';
     const rows = await conn.query(query, [adminId, adminPassword]);
 
     if (rows.length > 0) {
-      // 관리자 이름을 응답에 포함
       const adminName = rows[0].adminName;
-      res.json({ success: true, adminName });
+
+      // JWT 생성
+      const token = jwt.sign({ adminId, adminName }, 'YourSecretKey', { expiresIn: '1h' });
+
+      // 클라이언트로 JWT 전송
+      res.json({ success: true, token, adminName });
     } else {
       res.json({ success: false });
     }

@@ -18,7 +18,10 @@ export default function AdminLoginPage() {
       });
       const data = await response.json();
       if (data.success) {
-        alert('로그인 성공');
+        // JWT 저장
+        localStorage.setItem('token', data.token);
+
+        alert(`${data.adminName}님 반갑습니다.`);
         router.push('/admin');
       } else {
         alert('로그인 실패');

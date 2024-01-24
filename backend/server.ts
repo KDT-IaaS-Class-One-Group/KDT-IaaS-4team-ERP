@@ -4,6 +4,8 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import multer from 'multer';
 
+import { adminAuth } from './middlewares/adminAuth';
+
 // 관리자
 import { adminLogin } from './routes/admin/login/adminLogin';
 import { adminLogout } from './routes/admin/login/adminLogout';
@@ -73,6 +75,8 @@ app.post('/upload', upload.single('image'), (req, res) => {
   const imageUrl = `/${req.file.filename}`; // 클라이언트가 접근할 수 있는 이미지 URL
   res.json({ imageUrl });
 });
+
+app.use('/api/admin', adminAuth);
 
 // * admin----------------------------
 app.post('/api/adminlogin', adminLogin);

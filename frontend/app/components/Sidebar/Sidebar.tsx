@@ -7,25 +7,11 @@ import { useRouter } from 'next/navigation';
 
 export default function Sidebar() {
   const router = useRouter();
-  const handleLogout = async () => {
-    try {
-      // 서버의 로그아웃 엔드포인트로 POST 요청을 보냅니다.
-      const response = await fetch('http://localhost:3560/api/adminlogout', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
 
-      // 요청이 성공적으로 처리되면 로그인 페이지로 이동합니다.
-      if (response.ok) {
-        router.push('/admin/login');
-      } else {
-        throw new Error('로그아웃 실패');
-      }
-    } catch (error) {
-      console.error('로그아웃 오류:', error);
-    }
+  const handleLogout = () => {
+    alert('로그아웃 완료');
+    localStorage.removeItem('token');
+    router.push('/admin/login');
   };
   return (
     <div className='flex flex-col h-full w-64 border-r-2 border-wine'>
