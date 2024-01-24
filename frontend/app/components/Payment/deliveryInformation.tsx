@@ -14,14 +14,7 @@ const DeliveryInformation: React.FC<Productpaymentprops> = ({
     (field: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
       setpaymentcompleteinfo(field, event.target.value);
     };
-  setpaymentcompleteinfo,
-}) => {
-  const handleInputChange =
-    (field: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
-      setpaymentcompleteinfo(field, event.target.value);
-    };
 
-  // const buyerinformation = await fetchbuyerinformationdata()
 
   return (
     <div className="w-screen h-1/4 border border-slate-950 flex justify-around items-center">
