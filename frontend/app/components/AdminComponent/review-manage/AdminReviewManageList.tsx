@@ -50,7 +50,7 @@ export default function AdminReviewManageList({
         </div>
         <div className="reviewRight flex justify-center items-center">
           {reviewImgUrl && (
-            <Image
+            <img
               src={reviewImgUrl}
               alt={`리뷰 이미지 ${reviewIndex}`}
               className="w-full max-w-xs mt-3"
