@@ -1,6 +1,6 @@
-import styles from "./style/deliveryInformation.module.css";
-import { productType } from "./types";
-import { Productpaymentprops } from "@/interfaces/Product/ProductpaymentProps";
+import styles from './style/deliveryInformation.module.css';
+import { productType } from './types';
+import { Productpaymentprops } from '@/app/types/Product/ProductpaymentProps';
 
 // type DeliveryInfo = {
 //   deliveryinfo: deliveryType;
@@ -8,6 +8,12 @@ import { Productpaymentprops } from "@/interfaces/Product/ProductpaymentProps";
 // };
 
 const DeliveryInformation: React.FC<Productpaymentprops> = ({
+  setpaymentcompleteinfo,
+}) => {
+  const handleInputChange =
+    (field: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
+      setpaymentcompleteinfo(field, event.target.value);
+    };
   setpaymentcompleteinfo,
 }) => {
   const handleInputChange =

@@ -1,12 +1,12 @@
-import ProductPriceCalculator from "./pricecalculator";
+import ProductPriceCalculator from './pricecalculator';
 
-import React from "react";
-import styles from "./style/productdetail.module.css";
-import Link from "next/link";
-import Image from "next/image";
-import { useState, useEffect } from "react";
+import React from 'react';
+import styles from './style/productdetail.module.css';
+import Link from 'next/link';
+import Image from 'next/image';
+import { useState, useEffect } from 'react';
 // import { useParams } from 'next/navigation';
-import { ProductDetailProps } from "../../interfaces/Product/ProductDetailProps";
+import { ProductDetailProps } from '@/app/types/Product/ProductDetailProps';
 
 const ProductDetail: React.FC<ProductDetailProps> = ({ productdetails }) => {
   const productdetailsprodIndex = productdetails.prodIndex;
@@ -27,11 +27,11 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productdetails }) => {
 
   const handlePurchase = async () => {
     try {
-      const token = localStorage.getItem("token");
-      const response = await fetch("http://localhost:3560/addingcart", {
-        method: "POST",
+      const token = localStorage.getItem('token');
+      const response = await fetch('http://localhost:3560/addingcart', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
@@ -41,29 +41,29 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productdetails }) => {
       });
 
       if (response.ok) {
-        alert("장바구니에 추가되었습니다.");
+        alert('장바구니에 추가되었습니다.');
       } else {
-        alert("장바구니에 추가되지 않았습니다.");
+        alert('장바구니에 추가되지 않았습니다.');
       }
     } catch (error) {
-      console.error("Error during cart:", error);
-      alert("장바구니에 추가 중 오류가 발생했습니다.");
+      console.error('Error during cart:', error);
+      alert('장바구니에 추가 중 오류가 발생했습니다.');
     }
   };
 
   return (
-    <div className="product-detail w-full h-screen flex flex-col items-center ">
-      <div className="w-4/5 h-2/5 flex justify-center">
-        <div className="mt-10">
+    <div className='product-detail w-full h-screen flex flex-col items-center '>
+      <div className='w-4/5 h-2/5 flex justify-center'>
+        <div className='mt-10'>
           <Image
             src={`/images${productdetails.prodImgUrl}`}
             width={300}
             height={300}
-            alt="제품 사진 "
+            alt='제품 사진 '
           />
         </div>
 
-        <div className="ml-20 mt-10 font-sans text-2xl">
+        <div className='ml-20 mt-10 font-sans text-2xl'>
           <p>{`상품제목 : ${productdetails.prodName}`}</p>
           <p>{`상품가격 : ${productdetails.prodPrice}`}</p>
           <p>{`상품설명 : ${productdetails.prodDescription}`}</p>
@@ -72,7 +72,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productdetails }) => {
             setPaymentInfo={setPaymentInfo}
           />
 
-          <div className="flex justify-around mt-10">
+          <div className='flex justify-around mt-10'>
             <Link
               href={{
                 pathname: `/product/${productdetailsprodIndex}/payment`,
@@ -83,10 +83,10 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productdetails }) => {
                 },
               }}
             >
-              <button className="bg-blue-400 w-28 h-16">구매</button>
+              <button className='bg-blue-400 w-28 h-16'>구매</button>
             </Link>
 
-            <button className="bg-blue-400 w-28 h-16" onClick={handlePurchase}>
+            <button className='bg-blue-400 w-28 h-16' onClick={handlePurchase}>
               장바구니
             </button>
 
@@ -98,13 +98,13 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productdetails }) => {
                 },
               }}
             >
-              <button className="bg-blue-400 w-28 h-16">상품평</button>
+              <button className='bg-blue-400 w-28 h-16'>상품평</button>
             </Link>
           </div>
         </div>
       </div>
 
-      <div className="w-4/5 h-1/3 mt-10 flex justify-center items-center overflow-y-scroll">
+      <div className='w-4/5 h-1/3 mt-10 flex justify-center items-center overflow-y-scroll'>
         {productdetails.prodDescription}
       </div>
     </div>

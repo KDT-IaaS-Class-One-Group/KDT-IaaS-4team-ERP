@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import Btn from "@/components/Btn/Btn";
-import { CTPPaymentListProps } from "@/interfaces/CartToPayment/CTPPaymentListProps";
-import handleDelete from "app/utils/custom/handleDelete";
-import Image from "next/image";
-import { useState } from "react";
+import Btn from '@/app/components/Btn/Btn';
+import { CTPPaymentListProps } from '@/app/types/CartToPayment/CTPPaymentListProps';
+import handleDelete from 'app/utils/custom/handleDelete';
+import Image from 'next/image';
+import { useState } from 'react';
 
 export default function CTPPaymentList({
   className,
@@ -32,25 +32,25 @@ export default function CTPPaymentList({
 
   return (
     <li className={paymentListDefault} id={idToString}>
-      <div className="flex justify-start items-center gap-6 w-2/5 h-full p-1">
-        <Image alt="" src={prodImgUrl} width={85} height={85} />
-        <p className="productSub text-xs h-20 w-1/2 flex items-center">
+      <div className='flex justify-start items-center gap-6 w-2/5 h-full p-1'>
+        <Image alt='' src={prodImgUrl} width={85} height={85} />
+        <p className='productSub text-xs h-20 w-1/2 flex items-center'>
           {prodDescription}
         </p>
       </div>
-      <div className="ctpButton flex justify-center items-center gap-2">
-        <span className="cartProductCount text-xl font-medium">{quantity}</span>
-        <div className="flex flex-col justify-center items-center gap-0 w-7">
+      <div className='ctpButton flex justify-center items-center gap-2'>
+        <span className='cartProductCount text-xl font-medium'>{quantity}</span>
+        <div className='flex flex-col justify-center items-center gap-0 w-7'>
           <button
-            type="button"
-            className="w-full flex justify-center items-center text-center"
+            type='button'
+            className='w-full flex justify-center items-center text-center'
             onClick={handleDecrease}
           >
             -
           </button>
           <button
-            type="button"
-            className="w-full flex justify-center items-center text-center"
+            type='button'
+            className='w-full flex justify-center items-center text-center'
             onClick={handleIncrease}
           >
             +
@@ -61,8 +61,8 @@ export default function CTPPaymentList({
       {/* 버튼 컴포넌트 */}
 
       <Btn
-        className="w-1/6 h-10 border border-slate-950 text-sm "
-        textContent="리스트 삭제"
+        className='w-1/6 h-10 border border-slate-950 text-sm '
+        textContent='리스트 삭제'
         onClick={() => handleDelete(cartIndex)}
       />
       {/* todo : 리스트 삭제 기능 추가해야함

@@ -2,25 +2,10 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { ProductIndexProp } from '@/app/types/Product/ProductIndexProp';
-import { ProductNameProp } from '@/app/types/Product/ProductNameProp';
-import { ProductPriceProp } from '@/app/types/Product/ProductPriceProp';
-import { ProductCategoryProp } from '@/app/types/Product/ProductCategoryProp';
-import { ProductStockProp } from '@/app/types/Product/ProductStockProp';
-import { ProductDescriptionProp } from '@/app/types/Product/ProductDescriptionProp';
-import { ProductImgUrlProp } from '@/app/types/Product/ProductImgUrlProp';
-
-interface ProductListProps
-  extends ProductIndexProp,
-    ProductNameProp,
-    ProductDescriptionProp,
-    ProductPriceProp,
-    ProductCategoryProp,
-    ProductImgUrlProp,
-    ProductStockProp {}
+import { ProductsTableProps } from '@/app/types/Product/ProductsTableProps';
 
 // 상품 목록을 가져오는 함수 (API 호출)
-const fetchProducts = async (): Promise<ProductListProps[]> => {
+const fetchProducts = async (): Promise<ProductsTableProps[]> => {
   try {
     const response = await fetch('http://localhost:3560/api/products');
     if (!response.ok) {
@@ -34,7 +19,7 @@ const fetchProducts = async (): Promise<ProductListProps[]> => {
 };
 
 export default function ProductListPage() {
-  const [products, setProducts] = useState<ProductListProps[]>([]);
+  const [products, setProducts] = useState<ProductsTableProps[]>([]);
   const router = useRouter(); // Next.js의 라우터 사용
 
   useEffect(() => {
@@ -74,7 +59,6 @@ export default function ProductListPage() {
     router.push(`/admin/product-edit/${prodIndex}`); // 상품 수정 페이지로 라우팅
   };
 
-
   const navigateToAddProductPage = () => {
     router.push('/admin/product-add');
   };
@@ -84,30 +68,30 @@ export default function ProductListPage() {
       <div className='overflow-x-auto w-full'>
         <div className='max-h-[800px] overflow-y-auto'>
           <table className='min-w-full leading-normal'>
-            <thead className='sticky top-0 bg-gray-100'>
+            <thead className='sticky top-0 bg-gray-500'>
               <tr>
-                <th className='px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider'>
+                <th className='px-5 py-3 border-b-2 border-wine text-yellow-300 text-left text-xs font-semibold uppercase tracking-wider'>
                   상품 번호
                 </th>
-                <th className='px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider'>
+                <th className='px-5 py-3 border-b-2 border-wine text-yellow-300 text-left text-xs font-semibold uppercase tracking-wider'>
                   이미지
                 </th>
-                <th className='px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider'>
+                <th className='px-5 py-3 border-b-2 border-wine text-yellow-300 text-left text-xs font-semibold uppercase tracking-wider'>
                   상품명
                 </th>
-                <th className='px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider'>
+                <th className='px-5 py-3 border-b-2 border-wine text-yellow-300 text-left text-xs font-semibold uppercase tracking-wider'>
                   설명
                 </th>
-                <th className='px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider'>
+                <th className='px-5 py-3 border-b-2 border-wine text-yellow-300 text-left text-xs font-semibold uppercase tracking-wider'>
                   가격
                 </th>
-                <th className='px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider'>
+                <th className='px-5 py-3 border-b-2 border-wine text-yellow-300 text-left text-xs font-semibold uppercase tracking-wider'>
                   재고
                 </th>
-                <th className='px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider'>
+                <th className='px-5 py-3 border-b-2 border-wine text-yellow-300 text-left text-xs font-semibold uppercase tracking-wider'>
                   카테고리
                 </th>
-                <th className='px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider'>
+                <th className='px-5 py-3 border-b-2 border-wine text-yellow-300 text-left text-xs font-semibold uppercase tracking-wider'>
                   작업
                 </th>
               </tr>
@@ -115,12 +99,10 @@ export default function ProductListPage() {
             <tbody>
               {products.map((product) => (
                 <tr key={product.prodIndex}>
-                  <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                    <p className='text-gray-900 whitespace-no-wrap'>
-                      {product.prodIndex}
-                    </p>
+                  <td className='px-5 py-5 border-b border-wine text-sm'>
+                    <p className='whitespace-no-wrap'>{product.prodIndex}</p>
                   </td>
-                  <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                  <td className='px-5 py-5 border-b border-wine text-sm'>
                     <div className='flex-shrink-0 w-10 h-10'>
                       <Image
                         width={50}
@@ -132,32 +114,24 @@ export default function ProductListPage() {
                     </div>
                   </td>
 
-                  <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                    <p className='text-gray-900 whitespace-no-wrap'>
-                      {product.prodName}
-                    </p>
+                  <td className='px-5 py-5 border-b border-wine text-sm'>
+                    <p className='whitespace-no-wrap'>{product.prodName}</p>
                   </td>
-                  <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                    <p className='text-gray-900 whitespace-no-wrap'>
+                  <td className='px-5 py-5 border-b border-wine text-sm'>
+                    <p className='whitespace-no-wrap'>
                       {product.prodDescription}
                     </p>
                   </td>
-                  <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                    <p className='text-gray-900 whitespace-no-wrap'>
-                      {product.prodPrice}원
-                    </p>
+                  <td className='px-5 py-5 border-b border-wine text-sm'>
+                    <p className='whitespace-no-wrap'>{product.prodPrice}원</p>
                   </td>
-                  <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                    <p className='text-gray-900 whitespace-no-wrap'>
-                      {product.prodStock}개
-                    </p>
+                  <td className='px-5 py-5 border-b border-wine text-sm'>
+                    <p className='whitespace-no-wrap'>{product.prodStock}개</p>
                   </td>
-                  <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                    <p className='text-gray-900 whitespace-no-wrap'>
-                      {product.prodCategory}
-                    </p>
+                  <td className='px-5 py-5 border-b border-wine text-sm'>
+                    <p className='whitespace-no-wrap'>{product.prodCategory}</p>
                   </td>
-                  <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                  <td className='px-5 py-5 border-b border-wine text-sm'>
                     <button
                       onClick={() => editProduct(product.prodIndex)}
                       className='text-blue-500 hover:text-blue-800'
