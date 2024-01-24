@@ -11,6 +11,8 @@ import { adminOrders } from "./routes/admin/order/adminOrders";
 import { adminAddProduct } from "./routes/admin/products/adminAddProduct";
 import { adminUpdateProduct } from "./routes/admin/products/adminUpdateProduct";
 import { adminDeleteProduct } from "./routes/admin/products/adminDeleteProduct";
+import { getReviewTableAll } from "./routes/admin/reviews/getReviewTableAll";
+import { patchReviewAdminContent } from "./routes/admin/reviews/patchReviewAdminContent";
 
 // 고객페이지
 
@@ -34,7 +36,6 @@ import productcommentwrite from "./routes/customer/review/productcommentwrite";
 import cartpage from "./routes/customer/cartpage/cartpage";
 import cartToPaymentTransition from "./routes/customer/cartpage/cartToPaymentTransition";
 import removeCart from "./routes/customer/cartpage/removeCart";
-import { getReviewTableAll } from "./routes/admin/reviews/getReviewTableAll";
 
 const app = express();
 const port = 3560;
@@ -81,6 +82,7 @@ app.put("/api/product/:id", adminUpdateProduct);
 app.get("/api/orders", adminOrders);
 app.patch("/api/orders/delivery/:orderIndex", adminOrders);
 app.get("/api/reviewTable", getReviewTableAll);
+app.patch("/api/reviewReplySubmit/:reviewIndex", patchReviewAdminContent);
 // todo : 리뷰테이블 모두 가져오기 함수 작성필요
 //* customer----------------------------
 
