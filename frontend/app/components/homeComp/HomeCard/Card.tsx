@@ -28,24 +28,24 @@ const Card: React.FC<CardProps> = ({
 }) => {
   // console.log(prodImgUrl)
   return (
-    <div className="flex flex-col justify-between items-center w-80 border border-black p-4 gap-6 cursor-pointer">
+    <div className="flex flex-col justify-between items-center w-80 h-full border border-black p-4 gap-6 cursor-pointer">
       <Image
         src={`/images${prodImgUrl}`}
         alt="homepageCardImage"
-        width={280}
-        height={280}
-        className=" outline-1 outline cursor-pointer"
+        width={250}
+        height={250}
+        className=" outline-1 outline cursor-pointer h-2/3 w-2/3"
         priority
       />
       <div className="card-subArea w-full h-1/3 flex justify-between flex-col cursor-pointer">
         <div>
-          <div className="w-1/3 h-1 border-b-2 border-slate-800 mb-1"></div>
+          <div className="w-1/3 border-b-2 border-slate-800 mb-1"></div>
           <h3 className="text-base font-bold mb-1 cursor-pointer">
             {prodName}
           </h3>
           <p className="text-xs cursor-pointer">{prodDescription}</p>
         </div>
-        <p className="text-xs cursor-pointer">{prodPrice}원</p>
+        <p className="text-xs cursor-pointer mt-1">{prodPrice}원</p>
       </div>
     </div>
   );
