@@ -1,10 +1,14 @@
-app.get('/admin/logout', (req, res) => {
+import express from 'express';
+
+export const adminLogout = express();
+
+adminLogout.post('/api/adminlogout', async (req, res) => {
   req.session.destroy((err) => {
     if (err) {
       res.status(500).send('로그아웃 실패');
     } else {
-      res.clearCookie('connect.sid'); // 세션 쿠키 삭제
-      res.redirect('/admin/login');
+      res.clearCookie('connect.sid');
+      console.log('test');
     }
   });
 });

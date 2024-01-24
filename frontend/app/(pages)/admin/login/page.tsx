@@ -1,13 +1,10 @@
 'use client';
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAuth } from '@/app/contexts/AuthContext';
-
 export default function AdminLoginPage() {
   const [adminId, setAdminId] = useState<string>('');
   const [adminPassword, setAdminPassword] = useState<string>('');
   const router = useRouter();
-  const { login } = useAuth();
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -21,7 +18,7 @@ export default function AdminLoginPage() {
       });
       const data = await response.json();
       if (data.success) {
-        login(data.adminName);
+        alert('로그인 성공');
         router.push('/admin');
       } else {
         alert('로그인 실패');
