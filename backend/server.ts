@@ -34,6 +34,7 @@ import productcommentwrite from "./routes/customer/review/productcommentwrite";
 import cartpage from "./routes/customer/cartpage/cartpage";
 import cartToPaymentTransition from "./routes/customer/cartpage/cartToPaymentTransition";
 import removeCart from "./routes/customer/cartpage/removeCart";
+import { getReviewTableAll } from "./routes/admin/reviews/getReviewTableAll";
 
 const app = express();
 const port = 3560;
@@ -79,6 +80,8 @@ app.delete("/api/deleteproduct/:prodIndex", adminDeleteProduct);
 app.put("/api/product/:id", adminUpdateProduct);
 app.get("/api/orders", adminOrders);
 app.patch("/api/orders/delivery/:orderIndex", adminOrders);
+app.get("/api/reviewTable", getReviewTableAll);
+// todo : 리뷰테이블 모두 가져오기 함수 작성필요
 //* customer----------------------------
 
 // 메인페이지
