@@ -2,24 +2,44 @@
 // reivew-manage/AdminReviewManage.tsx 에서 사용
 // 경로 : /admin/review-manage
 
+import { useState } from "react";
 import { Review } from "@/app/interfaces/Review/Review";
 import Image from "next/image";
 
 interface AdminReviewManageListProps {
   review: Review;
-  handleReplyChange: (reviewIndex: number, reply: string) => void;
-  handleReplySubmit: (reviewIndex: number) => void;
   className?: string;
 }
 
 export default function AdminReviewManageList({
   review,
-  handleReplyChange,
-  handleReplySubmit,
   className = "",
 }: AdminReviewManageListProps) {
   const { reviewIndex, userId, reviewImgUrl, reviewContent } = review;
   const defaultClassName = `AdminReviewManageList bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 ${className}`;
+
+  const [reply, setReply] = useState("");
+
+  const handleReplyChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setReply(e.target.value);
+  };
+
+  const handleReplySubmit = () => {
+    fetch(`http://localhost:3560/api/reviewReplySubmit/${reviewIndex}`, {
+      method: "PATCH",
+      body: JSON.stringify({ reviewIndex, reply }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Reply submitted successfully", data);
+      })
+      .catch((error) => {
+        console.error("Error submitting reply", error);
+      });
+  };
 
   return (
     <div key={reviewIndex} className={defaultClassName}>
@@ -43,11 +63,12 @@ export default function AdminReviewManageList({
           className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker mb-3"
           rows={3}
           placeholder="답변을 입력하세요..."
-          onChange={(e) => handleReplyChange(reviewIndex, e.target.value)}
+          value={reply}
+          onChange={handleReplyChange}
         />
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          onClick={() => handleReplySubmit(reviewIndex)}
+          onClick={handleReplySubmit}
         >
           답변 등록
         </button>
