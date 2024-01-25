@@ -12,7 +12,7 @@
 }
 
 input {
-  color : black;
+  color: black;
 }
 body {
   background-color: #000;
@@ -21,7 +21,7 @@ body {
 
 .adminBtnStyle {
   display: block;
-  padding: 0.5rem;
+  padding-top: 0.5rem;
   /* background-color: #1f2937; */
   border-radius: 0.25rem;
 }
