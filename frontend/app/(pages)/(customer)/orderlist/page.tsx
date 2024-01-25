@@ -8,7 +8,14 @@ interface Order {
   id: number;
   productName: string;
   quantity: number;
-  // 다른 필요한 주문 정보들을 추가할 수 있습니다.
+  prodIndex: number;
+  prodImgUrl: string;
+  prodDescription: string;
+  prodPrice: number;
+  orderPaymentDatetime: string;
+  orderIndex: number;
+  orderPaymentCount: number;
+  orderDeliveryDone: number;
 }
 
 const OrderListComponent: React.FC = () => {
@@ -47,7 +54,7 @@ const OrderListComponent: React.FC = () => {
   return (
     <>
       <OrderListNav />
-      <div className='h-full w-full flex flex-col'>
+      <div className='h-full w-full flex flex-col overflow-y-auto'>
         {orderList.length === 0 ? (
           <p>주문 목록이 비어 있습니다.</p>
         ) : (
