@@ -7,6 +7,7 @@ import Btn from "../Btn/Btn";
 import CartList from "./cartList/CartList";
 import CTPDeliveryinfo from "../Payment/CartToPayment/CTPDeliveryinfo";
 import { checkAllValuesNotEmpty } from "@/app/utils/checkAllValuesNotEmpty";
+import Modal from "../Modal/Modal";
 // import Image from 'next/image';
 
 /**
@@ -28,6 +29,32 @@ export default function CartMain() {
     orderDeliveryAddress: "",
     orderRequest: "",
   });
+
+  //Modal 코드
+  const [modalContent, setModalContent] = useState({
+    isOpen: false,
+    title: '',
+    message: '',
+  });
+
+ // Modal을 열기 위한 함수
+ const openModal = (title: string, message: string) => {
+  setModalContent({
+    isOpen: true,
+    title,
+    message,
+  });
+};
+
+  // Modal을 닫기 위한 함수
+  const closeModal = () => {
+    setModalContent({
+      isOpen: false,
+      title: '',
+      message: '',
+    });
+  };
+
 
   // 수량 변경 콜백 함수
   const handleQuantityChange = (cartIndex: number, newQuantity: number) => {
@@ -149,6 +176,7 @@ export default function CartMain() {
         id="productUl"
         className="flex flex-col gap-6 overflow-x-hidden w-full h-1/2"
       >
+        {/* 서버에서 가져온 DB 데이터 */}
         {requestData.map((item, index) => (
           <CartList
             key={item.cartIndex} // 반드시 고유한 key를 제공해야 함
@@ -177,6 +205,15 @@ export default function CartMain() {
           }}
         />
       </Link>
+
+      {/* Modal 컴포넌트 추가 */}
+      <Modal
+        isOpen={modalContent.isOpen}
+        onClose={closeModal}
+        title={modalContent.title}
+        message={modalContent.message}
+      />
+
     </main>
   );
 }
