@@ -23,7 +23,7 @@ export default function AdminReviewManageList({
     reviewAdminContent,
     reviewRating,
   }: Review = review;
-  const defaultClassName = `AdminReviewManageList bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 ${className}`;
+  const defaultClassName = `AdminReviewManageList shadow-md rounded px-8 pt-6 pb-8 mb-4 border border-slate-500 ${className}`;
 
   const [reply, setReply] = useState("");
 
@@ -42,12 +42,12 @@ export default function AdminReviewManageList({
     })
       .then((response) => response.json())
       .then((data) => {
-        alert('Reply submitted successfully')
+        alert("Reply submitted successfully");
         // console.log("Reply submitted successfully", data);
         // 등록 성공 모달 띄우기
       })
       .catch((error) => {
-        alert('Error submitting reply')
+        alert("Error submitting reply");
         // console.error("Error submitting reply", error);
         // 등록 실패 모달 띄우기
       });
@@ -57,26 +57,28 @@ export default function AdminReviewManageList({
     <div key={reviewIndex} className={defaultClassName}>
       <div className="reviewArea mb-4 flex justify-between items-center">
         <div className="reviewLeft">
-          <h2 className="text-lg font-bold">
-            사용자 : {userId} 별점 : {reviewRating}
+          <h2 className="text-lg font-bold">사용자 : {userId}</h2>
+          <h2 className="text-sm font-bold  text-yellow-500 mb-4 flex items-center gap-1">
+            별점 : <div>{"★".repeat(reviewRating)}</div>
           </h2>
-          <p>{reviewContent}</p>
+          <p className="reviewContent">내용 : {reviewContent}</p>
         </div>
         <div className="reviewRight flex justify-center items-center">
-          {/* todo : img 태그, 추후 수정해봄직 함. */}
-          {reviewImgUrl !== null && (
+          {reviewImgUrl !== null ? (
             <img
               src={`/images/${reviewImgUrl}`}
               alt={`리뷰 이미지 ${reviewIndex}`}
               className="w-full max-w-xs mt-3"
             />
+          ) : (
+            <p className="text-xs">리뷰 사진 없음</p>
           )}
         </div>
       </div>
       <div className="adminTextArea">
         <textarea
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker mb-3"
-          rows={3}
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker mb-3 text-slate-800 bg-slate-200"
+          rows={2}
           placeholder={
             reviewAdminContent ? reviewAdminContent : "답변을 작성해주세요"
           }
@@ -84,10 +86,12 @@ export default function AdminReviewManageList({
           onChange={handleReplyChange}
         />
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="adminBtnStyle border border-slate-800 px-4 transition-all font-bold rounded"
           onClick={handleReplySubmit}
         >
-          답변 등록
+          {reviewAdminContent === null || reviewAdminContent === ""
+            ? "답변 등록"
+            : "답변 수정"}
         </button>
       </div>
     </div>
