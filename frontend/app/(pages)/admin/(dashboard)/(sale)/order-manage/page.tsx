@@ -119,8 +119,8 @@ export default function OrderManagement() {
 
   return (
     <div className="flex container mx-auto p-4 items-center flex-col">
-      <div className="overflow-x-auto w-full">
-        <div className="max-h-[800px] overflow-y-auto">
+      <div className="overflow-x-auto w-full h-full">
+        <div className="overflow-y-auto h-full">
           <table className="min-w-full leading-normal">
             <thead className="sticky top-0 bg-gray-500">
               <tr>
@@ -168,11 +168,11 @@ export default function OrderManagement() {
                   <td className="px-5 py-3 border-b text-sm">
                     <div className="whitespace-no-wrap">{order.orderIndex}</div>
                   </td>
-                  <td className="px-5 py-3 border-b text-sm">
+                  <td className="px-4 py-2 border-b text-sm">
                     <Image
                       width={50}
                       height={50}
-                      className="w-full h-full rounded-full"
+                      className="rounded-full"
                       src={`/images${order.prodImgUrl}`}
                       alt="image"
                     />
