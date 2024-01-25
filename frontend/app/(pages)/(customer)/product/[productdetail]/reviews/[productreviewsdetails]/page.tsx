@@ -46,23 +46,13 @@ const CommentFullHome = () => {
   // }, []);
 
   return (
-    <div className="w-screen h-screen flex justify-start items-center flex-col pt-4 pb-4 bg-blue-200 text-white ">
+    <div className="w-screen h-screen flex justify-start items-center flex-col pt-4 pb-4 ">
       <ProductCommentdetails
         reviewTitle={productDetailsProps.reviewTitle}
         reviewContent={productDetailsProps.reviewContent}
-        // reviewImgUrl={commentsfull.reviewImgUrl}
-        // reviewUpdatedAt={commentsfull.reviewUpdatedAt}
-        reviewRating={productDetailsProps.reviewRating}
-        // userId={commentsfull.userId}
-      />
-      {/* <Link href="/productcommentwriting">
-        <div className='mr-40 mb-20'>
-        <ProductUploadFullButton value='상품평 등록' />
-        </div>
-      </Link> */}
 
-      {/* 댓글 컴포넌트 들어갈 자리 */}
-      {/* adminContent가 아무런 데이터가 없을 때 컴포넌트가 나타나는 로직 적용 */}
+        reviewRating={productDetailsProps.reviewRating}
+      />
       {adminContent !== "" && (
         <ul className="AdminArea w-4/5 h-1/4 outline-1 outline flex flex-col items-start justify-center">
           <AdminCommentList

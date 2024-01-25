@@ -89,7 +89,7 @@ const ProductWritingHome = () => {
 
 
   return (
-    <div className='flex flex-col items-center bg-blue-400 text-white w-full h-full justify-center'>
+    <div className='flex flex-col items-center bg-black w-full h-full justify-center'>
       <div className='w-4/5 h-4/5 flex flex-col justify-center items-center'>
         <ProductText
           title='TITLE' textheight={titletext}

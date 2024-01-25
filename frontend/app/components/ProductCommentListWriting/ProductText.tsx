@@ -20,7 +20,7 @@ const ProductText: React.FC<ProductTextProps> = ({ title, inputchange, textheigh
       <textarea
         id={`inputText-${title}`}
         
-        className='w-full h-full text-black flex-wrap'
+        className='cursor-text w-full h-full text-black flex-wrap'
         onChange={(e) => {
           inputchange(e.target.value);
         }}

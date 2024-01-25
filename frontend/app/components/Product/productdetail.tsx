@@ -72,8 +72,8 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productdetails }) => {
             setPaymentInfo={setPaymentInfo}
           />
 
-          <div className='flex justify-between mt-10 w-2/5'>
-            <Link
+          <div className='flex justify-start mt-10 w-2/5'>
+            <Link className='w-28 mr-4'
               href={{
                 pathname: `/product/${productdetailsprodIndex}/payment`,
                 query: {
@@ -85,12 +85,13 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productdetails }) => {
             >
               <button className='bg-slate-700 rounded-md w-28 h-16 cursor-pointer'>구매</button>
             </Link>
+            <div className='w-28 h-16 mr-4'>
+              <button className='bg-slate-700 rounded-md w-28 h-16 cursor-pointer' onClick={handlePurchase}>
+                장바구니
+              </button>
+            </div>
 
-            <button className='bg-slate-700 rounded-md w-28 h-16 cursor-pointer' onClick={handlePurchase}>
-              장바구니
-            </button>
-
-            <Link
+            <Link className='w-28'
               href={{
                 pathname: `/product/${productdetailsprodIndex}/reviews`,
                 query: {

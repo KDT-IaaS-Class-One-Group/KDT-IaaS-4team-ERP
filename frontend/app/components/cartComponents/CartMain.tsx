@@ -171,7 +171,7 @@ export default function CartMain() {
       >
         <Btn
           textContent="결제 하기"
-          className="h-10 w-28 border border-black flex items-center justify-center"
+          className="h-10 w-28 border border-black flex items-center justify-center cursor-pointer"
           onClick={() => {
             handlePaymentClick();
           }}
