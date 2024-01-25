@@ -114,6 +114,7 @@ const CartList: React.FC<
           </div>
           {/* 버튼 세로 묶음 */}
         </div>
+        
         {/* 버튼 컴포넌트 */}
         <Btn
           textContent="리스트 삭제"

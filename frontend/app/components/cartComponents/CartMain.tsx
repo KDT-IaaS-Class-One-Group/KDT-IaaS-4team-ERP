@@ -127,6 +127,19 @@ export default function CartMain() {
     fetchData();
   }, []);
 
+  // 총 가격을 계산하는 함수
+  const calculateTotalPrice = () => {
+    let totalPrice = 0;
+
+    requestData.forEach((item) => {
+      // 만약 quantities에서 업데이트된 cartProductCount를 사용할 수 있다면 사용합니다.
+      const quantity = quantities[item.cartIndex] || item.cartProductCount;
+      totalPrice += item.prodPrice * quantity;
+    });
+
+    return totalPrice;
+  };
+
   // 결제하기 버튼 클릭 이벤트 핸들러 (최종 실행 함수)
   const handlePaymentClick = () => {
     if (checkAllValuesNotEmpty(deliveryInfo) === true) {
@@ -165,18 +178,23 @@ export default function CartMain() {
           />
         ))}
       </ul>
-      <Link
-        href={checkAllValuesNotEmpty(deliveryInfo) ? "/orderlist" : "#"}
-        className="ml-auto"
-      >
-        <Btn
-          textContent="결제 하기"
-          className="h-10 w-28 border border-black flex items-center justify-center"
-          onClick={() => {
-            handlePaymentClick();
-          }}
-        />
-      </Link>
+      <div className="flex flex-row">
+        <div className="h-10 w-7/12 ml-48 border border-black flex items-center justify-center">
+          총 금액: {calculateTotalPrice()}원
+        </div>
+        <Link
+          href={checkAllValuesNotEmpty(deliveryInfo) ? "/orderlist" : "#"}
+          className="ml-auto"
+        >
+          <Btn
+            textContent="결제 하기"
+            className="h-10 w-28 border border-black flex items-center justify-center"
+            onClick={() => {
+              handlePaymentClick();
+            }}
+          />
+        </Link>
+      </div>
     </main>
   );
 }
