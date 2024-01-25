@@ -11,20 +11,20 @@ const DeliveryInformation: React.FC<Productpaymentprops> = ({
   setpaymentcompleteinfo,
 }) => {
   const handleInputChange =
-    (field: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
+    (field: string) => (event: React.ChangeEvent<HTMLInputElement  | HTMLTextAreaElement>) => {
       setpaymentcompleteinfo(field, event.target.value);
     };
 
 
   return (
-    <div className="w-screen h-1/4 border border-slate-950 flex justify-around items-center">
-      <div className={`flex flex-col justify-center h-3/5`}>
+    <div className="w-screen h-1/4 border  border-slate-950 flex justify-around items-center">
+      <div className='flex flex-col justify-center h-3/5 w-1/3'>
         {/* tailwind와 css모듈 같이 사용하기 */}
         <div className="flex w-full justify-around mt-2 mb-2">
-          <label htmlFor="deliveryname">이름:</label>
+          <label className='w-20' htmlFor="deliveryname">이름:</label>
           <input
             type="text"
-            className="w-5/6 border border-gray-400 p-1"
+            className="w-5/6 border border-gray-400 p-1 cursor-text"
             id="deliveryname"
             onChange={handleInputChange("orderReceiver")}
             placeholder="이름을 입력하세요"
@@ -32,7 +32,7 @@ const DeliveryInformation: React.FC<Productpaymentprops> = ({
         </div>
 
         <div className="flex w-full justify-around mt-2 mb-2">
-          <label htmlFor="deliveryphone">연락처:</label>
+          <label className='w-20' htmlFor="deliveryphone">연락처:</label>
           <input
             type="text"
             className="w-5/6 border border-gray-400 p-1"
@@ -43,10 +43,9 @@ const DeliveryInformation: React.FC<Productpaymentprops> = ({
         </div>
 
         <div className="flex w-full justify-around mt-2 mb-2">
-          <label htmlFor="deliveryaddress">주소:</label>
-          <input
-            type="text"
-            className="w-5/6 border border-gray-400 p-1"
+          <label className='w-20' htmlFor="deliveryaddress">주소:</label>
+          <textarea
+            className="w-5/6 border border-gray-400 p-1 text-black"
             id="deliveryaddress"
             onChange={handleInputChange("orderDeliveryAddress")}
             placeholder="주소를 입력하세요"
@@ -54,7 +53,7 @@ const DeliveryInformation: React.FC<Productpaymentprops> = ({
         </div>
 
         <div className="flex w-full justify-around mt-2 mb-2">
-          <label htmlFor="deliveryrequest">요청사항:</label>
+          <label className='w-20 text-center' htmlFor="deliveryrequest">요청사항:</label>
           <input
             type="text"
             className="w-5/6 border border-gray-400 p-1"

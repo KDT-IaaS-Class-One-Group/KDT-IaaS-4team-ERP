@@ -6,7 +6,7 @@ import { productType } from "./types";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { Productpaymentprops } from "@/interfaces/Product/ProductpaymentProps";
+import { Productpaymentprops } from "@/app/interfaces/Product/ProductpaymentProps";
 
 const ProductInformation: React.FC<Productpaymentprops> = ({
   setpaymentcompleteinfo,
