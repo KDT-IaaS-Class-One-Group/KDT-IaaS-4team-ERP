@@ -7,18 +7,6 @@ import { Review } from "@/app/interfaces/Review/Review";
 import { formatDate } from "@/app/utils/formatDate";
 import React, { useEffect, useState } from "react";
 
-// 새로운 컴포넌트: 댓글이 있는 리뷰 섹션
-const ReviewsWithCommentSection: React.FC<{ reviews: Review[] }> = ({
-  reviews,
-}) => (
-  <section>
-    <h2 className="text-lg font-semibold mb-2">댓글이 있는 리뷰</h2>
-    {reviews.map((review, index) => (
-      <AdminReviewManageList key={index} review={review} />
-    ))}
-  </section>
-);
-
 // 새로운 컴포넌트: 댓글이 없는 리뷰 섹션
 const ReviewsWithoutCommentSection: React.FC<{ reviews: Review[] }> = ({
   reviews,
@@ -31,12 +19,27 @@ const ReviewsWithoutCommentSection: React.FC<{ reviews: Review[] }> = ({
   </section>
 );
 
+// 새로운 컴포넌트: 댓글이 있는 리뷰 섹션
+const ReviewsWithCommentSection: React.FC<{ reviews: Review[] }> = ({
+  reviews,
+}) => (
+  <section>
+    <h2 className="text-lg font-semibold mb-2">댓글이 있는 리뷰</h2>
+    {reviews.map((review, index) => (
+      <AdminReviewManageList key={index} review={review} />
+    ))}
+  </section>
+);
+
 export default function ReviewManagePage() {
   const [reviewsWithComment, setReviewsWithComment] = useState<Review[]>([]);
   const [reviewsWithoutComment, setReviewsWithoutComment] = useState<Review[]>(
     []
   );
-  const [selectedSection, setSelectedSection] = useState<string>("withComment");
+  const [selectedSection, setSelectedSection] = useState<string>("withoutComment");
+
+  // React의 forceUpdate를 사용하기 위한 상태
+  const [, forceUpdate] = useState<number>(0);
 
   // Logic for loading data (e.g., Fetch API)
   useEffect(() => {
@@ -62,6 +65,9 @@ export default function ReviewManagePage() {
 
         setReviewsWithComment(reviewsWithComment);
         setReviewsWithoutComment(reviewsWithoutComment);
+
+        // forceUpdate를 호출하여 즉각적으로 페이지를 다시 렌더링
+        forceUpdate((prev) => prev + 1);
         console.log("Fetched and processed review data: ", processedReviews); // 추가된 로그
       })
       .catch((error) => console.error(error));
@@ -74,11 +80,11 @@ export default function ReviewManagePage() {
 
       {/* Toggle buttons to switch between sections */}
       <div className="mb-4">
-        <button onClick={() => setSelectedSection("withComment")}>
-          댓글이 있는 리뷰/
-        </button>
         <button onClick={() => setSelectedSection("withoutComment")}>
-          댓글이 없는 리뷰
+          댓글이 없는 리뷰/
+        </button>
+        <button onClick={() => setSelectedSection("withComment")}>
+          댓글이 있는 리뷰
         </button>
       </div>
 
