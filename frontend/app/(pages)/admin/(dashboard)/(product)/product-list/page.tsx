@@ -88,7 +88,7 @@ export default function ProductListPage() {
                 <th className="px-5 py-3 border-b-2 border-wine text-yellow-300 text-center text-xs font-semibold uppercase tracking-wider">
                   이미지
                 </th>
-                <th className="px-5 py-3 border-b-2 border-wine text-yellow-300 text-center text-xs font-semibold uppercase tracking-wider">
+                <th className="w-1/12 px-5 py-3 border-b-2 border-wine text-yellow-300 text-center text-xs font-semibold uppercase tracking-wider">
                   상품명
                 </th>
                 <th className="px-5 py-3 border-b-2 border-wine text-yellow-300 text-center text-xs font-semibold uppercase tracking-wider w-1/2">
@@ -126,7 +126,7 @@ export default function ProductListPage() {
                     </div>
                   </td>
 
-                  <td className="pl-6 pr-5 py-5 border-b border-wine text-sm">
+                  <td className="pl-6 pr-5 py-5 border-b border-wine text-sm w-1/12">
                     <p className="whitespace-no-wrap text-left">
                       {product.prodName}
                     </p>
