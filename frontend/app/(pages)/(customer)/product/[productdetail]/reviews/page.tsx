@@ -9,14 +9,15 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
 interface ProductReview {
-  userId: string;
-  reviewUpdatedAt: Date;
-  reviewRating: string;
+  reviewIndex: number; // 예시로 추가
+  reviewRating: number;
   reviewTitle: string;
-  reviewIndex: string; // 예시로 추가
   reviewContent: string; // 예시로 추가
-  reviewAdminContent: string; // 예시로 추가
-  // 필요한 다른 데이터들도 여기에 추가합니다.
+  reviewCreatedAt: string;
+  reviewUpdatedAt: string;
+  userId: string;
+  prodIndex: number;
+  reviewAdminContent: string | null; // 예시로 수정
 }
 
 export default function ProductReviews() {
@@ -35,14 +36,20 @@ export default function ProductReviews() {
 
         // }));
         setReviews(data); // 데이터 업데이트
+        console.log("data : ", data);
       } catch (error) {
         console.error("데이터를 불러오는 동안 에러 발생:", error);
       }
     };
     // 함수를 호출하여 데이터 가져오기
-    fetchreviews();
+    fetchreviews(); // console.log("reviews : ", reviews);
+    // console.log(typeof reviews[0].reviewUpdatedAt);
+    // console.log(typeof reviews[0].reviewRating);
+    // console.log(typeof reviews[0].reviewTitle);
+    // console.log(typeof reviews[0].reviewIndex);
+    // console.log(typeof reviews[0].reviewContent);
+    // console.log(typeof reviews[0].reviewAdminContent);
   }, [prodIndex]);
-  console.log(reviews);
 
   return (
     <div className="w-screen h-screen flex flex-col overflow-y-scroll">
@@ -72,10 +79,10 @@ export default function ProductReviews() {
               // as={`/product/${prodIndex}/reviews/${list.reviewIndex}`} // as 속성을 사용하여 링크 URL을 생성합니다.
             >
               <ProductCommentList
-                writerid={list.userId}
+                writerId={list.userId}
                 date={list.reviewUpdatedAt}
-                starcount={list.reviewRating}
-                commenttitle={list.reviewTitle}
+                starCount={list.reviewRating}
+                commentTitle={list.reviewTitle}
               />
             </Link>
           </div>
