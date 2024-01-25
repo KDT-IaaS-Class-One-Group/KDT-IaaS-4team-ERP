@@ -80,7 +80,7 @@ export default function PaymentPage() {
       const data = await response.json();
       console.log(data);
       if (data.success) {
-        alert('결제 성공');
+        alert('주문이 성공적으로 완료되었습니다.');
         router.push('/');
       } else {
         // 결제 실패 시 Modal 열기
