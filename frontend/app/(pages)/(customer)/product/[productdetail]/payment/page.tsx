@@ -80,7 +80,7 @@ export default function PaymentPage() {
       const data = await response.json();
       console.log(data);
       if (data.success) {
-        openModal('결제 성공', '주문이 성공적으로 완료되었습니다.');
+        alert('결제 성공');
         router.push('/');
       } else {
         // 결제 실패 시 Modal 열기
@@ -88,7 +88,7 @@ export default function PaymentPage() {
       }
     } catch (error) {
       // 에러 발생 시 Modal 열기
-      openModal('에러', error.message);
+      openModal('에러',"구매 정보가 올바르지 않습니다.");
     }
   };
 
