@@ -132,7 +132,7 @@ export default function CartMain() {
     if (checkAllValuesNotEmpty(deliveryInfo) === true) {
       handleCartToPayment(requestData);
     } else {
-      // 경고 모달이 떠야할 자리
+      // 알림 모달이 떠야할 자리
       // alert("배송 정보에 정보가 없습니다.");
       console.log("배송 정보에 정보가 없습니다.");
     }

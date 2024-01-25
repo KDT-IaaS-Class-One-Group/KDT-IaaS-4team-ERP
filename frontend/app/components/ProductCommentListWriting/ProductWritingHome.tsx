@@ -68,7 +68,7 @@ const ProductWritingHome = () => {
       if (!productWrite.reviewTitle.trim()) {
         setModalContent({
           isOpen: true,
-          title: '경고',
+          title: '알림',
           message: '제목을 입력해주세요.',
         });
         return;
@@ -79,7 +79,7 @@ const ProductWritingHome = () => {
       if (!productWrite.reviewContent.trim()) {
         setModalContent({
           isOpen: true,
-          title: '경고',
+          title: '알림',
           message: '내용을 입력해주세요.',
         });
         return;
@@ -88,7 +88,7 @@ const ProductWritingHome = () => {
       if (!productWrite.reviewRating.trim()) {
         setModalContent({
           isOpen: true,
-          title: '경고',
+          title: '알림',
           message: '별점을 설정해주세요.',
         });
         return;

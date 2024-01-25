@@ -37,7 +37,7 @@ const SignUpHome: React.FC = () => {
       if (!Signup.userId.trim()) {
         setModalContent({
           isOpen: true,
-          title: '경고',
+          title: '알림',
           message: '아이디를 입력해주세요.',
         });
         
@@ -47,16 +47,16 @@ const SignUpHome: React.FC = () => {
       if (!Signup.userPassword.trim()) {
         setModalContent({
           isOpen: true,
-          title: '경고',
+          title: '알림',
           message: '비밀번호를 입력해주세요.',
         });
         return;
       }
 
-      if (Signup.userPassword !== Signup.userPassword1) {// 기존에 입력한 userPassword와 userPassword1이 같지 않을 경우 경고창 출력함
+      if (Signup.userPassword !== Signup.userPassword1) {// 기존에 입력한 userPassword와 userPassword1이 같지 않을 경우 알림창 출력함
         setModalContent({
           isOpen: true,
-          title: '경고',
+          title: '알림',
           message: '비밀번호가 일치하지 않습니다.',
         });
         return;
@@ -71,7 +71,7 @@ const SignUpHome: React.FC = () => {
       if (!isValidEmailFormat(Signup.userEmail)) {
         setModalContent({
           isOpen: true,
-          title: '경고',
+          title: '알림',
           message: '올바른 이메일 형식을 입력해주세요',
         });
         return;
@@ -108,7 +108,7 @@ const SignUpHome: React.FC = () => {
       } else {
         setModalContent({
           isOpen: true,
-          title: '경고',
+          title: '알림',
           message: '회원가입 실패',
         });
 
@@ -117,7 +117,7 @@ const SignUpHome: React.FC = () => {
       console.error(error);
       setModalContent({
         isOpen: true,
-        title: '경고',
+        title: '알림',
         message: '회원가입 실패',
       });
     }
