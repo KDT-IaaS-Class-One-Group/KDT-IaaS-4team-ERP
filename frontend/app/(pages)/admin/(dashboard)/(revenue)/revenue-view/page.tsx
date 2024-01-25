@@ -153,7 +153,7 @@ export default function RevenueView() {
             name='startDate'
             value={startDate}
             onChange={handleDateChange}
-            className='shadow appearance-none border rounded py-2 px-3  leading-tight focus:outline-none focus:shadow-outline'
+            className='shadow appearance-none border rounded py-2 px-3  leading-tight focus:outline-none focus:shadow-outline text-black'
           />
         </div>
         <div className='mb-4'>
@@ -166,7 +166,7 @@ export default function RevenueView() {
             name='endDate'
             value={endDate}
             onChange={handleDateChange}
-            className='shadow appearance-none border rounded py-2 px-3  leading-tight focus:outline-none focus:shadow-outline'
+            className='shadow appearance-none border rounded py-2 px-3  leading-tight focus:outline-none focus:shadow-outline text-black'
           />
         </div>
 
@@ -180,7 +180,7 @@ export default function RevenueView() {
             name='category'
             value={category}
             onChange={handleCategoryChange}
-            className='shadow appearance-none border rounded py-2 px-3  leading-tight focus:outline-none focus:shadow-outline'
+            className='shadow appearance-none border rounded py-2 px-3  leading-tight focus:outline-none focus:shadow-outline text-black'
           >
             <option value=''>전체</option>
             <option value='Zerg'>Zerg</option>
