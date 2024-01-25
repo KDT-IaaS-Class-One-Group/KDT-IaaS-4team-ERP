@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "forceConsistentCasingInFileNames": true,
     "target": "es5",
     "baseUrl": ".",
     "lib": ["dom", "dom.iterable", "esnext"],

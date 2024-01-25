@@ -86,15 +86,15 @@ const CartList: React.FC<
           width={70}
           height={70}
         />
-        <p className="text-xs">{prodDescription}</p>
       </Link>
-      <div className="flex items-center gap-3 w-2/3">
-        <div className="flex-1 flex justify-center items-center">
-          {prodPrice}원
+      <p className="text-xs ml-5 mr-5 w-5/12">{prodDescription}</p>
+      <div className="flex justify-between gap-3 w-6/12">
+        <div className="flex justify-center items-center w-24 ml-24">
+          {prodPrice * quantity}원
         </div>
-        <div className="ctpButton flex justify-center items-center gap-2">
+        <div className="ctpButton flex justify-center items-center gap-2 ml-5">
           <span className="cartProductCount text-xl font-medium block">
-            {quantity}
+            {prodPrice}원({quantity}개)
           </span>
           <div className="flex flex-col justify-center items-center gap-0 w-7">
             <button
@@ -114,10 +114,11 @@ const CartList: React.FC<
           </div>
           {/* 버튼 세로 묶음 */}
         </div>
+        
         {/* 버튼 컴포넌트 */}
         <Btn
           textContent="리스트 삭제"
-          className="h-10 w-28 border border-slate-950 flex justify-center items-center marker:text-smr"
+          className="h-10 w-28 border border-slate-950 flex justify-center items-center marker:text-smr mr-20"
           onClick={() => {
             // * 코드가 순차적으로 실행되어야 함.
             handleDeleteCart(cartIndex);

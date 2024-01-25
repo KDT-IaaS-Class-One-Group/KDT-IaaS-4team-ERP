@@ -33,7 +33,7 @@ customerLogin.post("/login", async (req, res) => {
       const token = jwt.sign(
         { userId: user.userId, userIndex: user.userIndex },
         "1234",
-        { expiresIn: "1h" }
+        { expiresIn: "7h" }
       );
       res.status(200).json({ success: true, message: "로그인 성공", token });
     } else {

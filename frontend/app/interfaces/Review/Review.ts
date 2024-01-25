@@ -11,4 +11,5 @@ export interface Review {
   userId: string;
   prodIndex: number;
   reviewAdminContent?: string;
+  hasComment?: boolean;
 }
