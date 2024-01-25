@@ -4,9 +4,9 @@ export default function AdminPage() {
   return (
     <>
       <Image
-        width={700}
-        height={700}
-        src={'/images/starcraft.png'}
+        width={1300}
+        height={900}
+        src={'/images/starcraftwall.jpg'}
         alt={'스타크래프트'}
       />
     </>
