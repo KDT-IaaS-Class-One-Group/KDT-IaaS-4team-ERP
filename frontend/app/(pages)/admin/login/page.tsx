@@ -1,13 +1,10 @@
 'use client';
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAuth } from '@/app/contexts/AuthContext';
-
 export default function AdminLoginPage() {
   const [adminId, setAdminId] = useState<string>('');
   const [adminPassword, setAdminPassword] = useState<string>('');
   const router = useRouter();
-  const { login } = useAuth();
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -21,7 +18,10 @@ export default function AdminLoginPage() {
       });
       const data = await response.json();
       if (data.success) {
-        login(data.adminName);
+        // JWT 저장
+        localStorage.setItem('token', data.token);
+
+        alert(`${data.adminName}님 반갑습니다.`);
         router.push('/admin');
       } else {
         alert('로그인 실패');
@@ -45,7 +45,7 @@ export default function AdminLoginPage() {
               placeholder='아이디'
               value={adminId}
               onChange={(e) => setAdminId(e.target.value)}
-              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline cursor-text'
             />
           </div>
           <div className='mb-6'>
@@ -54,13 +54,13 @@ export default function AdminLoginPage() {
               placeholder='비밀번호'
               value={adminPassword}
               onChange={(e) => setAdminPassword(e.target.value)}
-              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline'
+              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline cursor-text'
             />
           </div>
           <div className='flex'>
             <button
               type='submit'
-              className='w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+              className='w-full border-2 border-wine text-yellow-300 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer'
             >
               로그인
             </button>

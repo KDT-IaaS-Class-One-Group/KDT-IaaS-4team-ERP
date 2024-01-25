@@ -4,16 +4,21 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import multer from 'multer';
 
+import { adminAuth } from './middlewares/adminAuth';
+
 // 관리자
 import { adminLogin } from './routes/admin/login/adminLogin';
+import { adminLogout } from './routes/admin/login/adminLogout';
 import { adminProducts } from './routes/admin/products/adminProducts';
 import { adminOrders } from './routes/admin/order/adminOrders';
 import { adminAddProduct } from './routes/admin/products/adminAddProduct';
 import { adminUpdateProduct } from './routes/admin/products/adminUpdateProduct';
 import { adminDeleteProduct } from './routes/admin/products/adminDeleteProduct';
-import { adminRevenue } from "./routes/admin/revenue/adminRevenue";
-import { adminTopcustomer } from "./routes/admin/revenue/adminTopcustomer";
-import { adminTopProduct } from "./routes/admin/revenue/adminTopproduct";
+import { adminRevenue } from './routes/admin/revenue/adminRevenue';
+import { adminTopcustomer } from './routes/admin/revenue/adminTopcustomer';
+import { adminTopProduct } from './routes/admin/revenue/adminTopproduct';
+import { getReviewTableAll } from "./routes/admin/reviews/getReviewTableAll";
+import { patchReviewAdminContent } from "./routes/admin/reviews/patchReviewAdminContent";
 
 // 고객페이지
 
@@ -36,7 +41,7 @@ import productcommentfull from './routes/customer/review/productcommentfull';
 import productcommentwrite from './routes/customer/review/productcommentwrite';
 import cartpage from './routes/customer/cartpage/cartpage';
 import cartToPaymentTransition from './routes/customer/cartpage/cartToPaymentTransition';
-import removeCart from "./routes/customer/cartpage/removeCart";
+import removeCart from './routes/customer/cartpage/removeCart';
 
 const app = express();
 const port = 3560;
@@ -73,21 +78,25 @@ app.post('/upload', upload.single('image'), (req, res) => {
   res.json({ imageUrl });
 });
 
+app.use('/api/admin', adminAuth);
+
 // * admin----------------------------
 app.post('/api/adminlogin', adminLogin);
-
+app.post('/api/adminlogout', adminLogout);
 app.get('/api/products', adminProducts);
 app.post('/api/addproduct', adminAddProduct);
 app.patch('/api/deleteproduct/:prodIndex', adminDeleteProduct);
 app.patch('/api/updateproduct/:prodIndex', adminUpdateProduct);
 app.get('/api/orders', adminOrders);
 app.patch('/api/orders/delivery/:orderIndex', adminOrders);
+app.get("/api/reviewTable", getReviewTableAll);
+app.patch("/api/reviewReplySubmit/:reviewIndex", patchReviewAdminContent);
+// todo : 리뷰테이블 모두 가져오기 함수 작성필요
 
 // 매출 통계
-app.get("/api/adminRevenue", adminRevenue);
-app.get("/api/adminTopCustomer", adminTopcustomer);
-app.get("/api/adminTopProduct", adminTopProduct);
-
+app.get('/api/adminRevenue', adminRevenue);
+app.get('/api/adminTopCustomer', adminTopcustomer);
+app.get('/api/adminTopProduct', adminTopProduct);
 
 //* customer----------------------------
 
@@ -119,7 +128,7 @@ app.get('/cart', cartpage); // cartpage 조회 로직
 app.post('/cart/cartToPayment', cartToPaymentTransition); // cartpage에서 결제하기
 // app.post("/cartToPayment", paymentDataForCart);
 app.post('/addingcart', addingcart); // 카트 추가하는 api 라우터
-app.delete("/api/cartTable/:cartIndex", removeCart); // 카트 삭제하는 api 라우터
+app.delete('/api/cartTable/:cartIndex', removeCart); // 카트 삭제하는 api 라우터
 
 app.listen(port, () => {
   console.log(`Express 서버가 ${port}번 포트에서 실행중입니다.`);

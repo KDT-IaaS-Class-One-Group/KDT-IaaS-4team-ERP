@@ -3,8 +3,16 @@ import React, { useState } from 'react';
 import { IoMdHome } from 'react-icons/io';
 import { MenuItem } from './MenuItem';
 import MenuLink from './MenuLink';
+import { useRouter } from 'next/navigation';
 
 export default function Sidebar() {
+  const router = useRouter();
+
+  const handleLogout = () => {
+    alert('로그아웃 완료');
+    localStorage.removeItem('token');
+    router.push('/admin/login');
+  };
   return (
     <div className='flex flex-col h-full w-64 border-r-2 border-wine'>
       <nav className='p-4 flex-grow'>
@@ -33,21 +41,13 @@ export default function Sidebar() {
       </nav>
       <div className='p-4 border-t border-gray-600'>
         <ul>
-          <li className='mb-2'>
-            <Link
-              className='block p-2 hover:bg-gray-700 rounded'
-              href='/admin/login'
-            >
-              로그인
-            </Link>
-          </li>
           <li>
-            <Link
+            <button
+              onClick={handleLogout}
               className='block p-2 hover:bg-gray-700 rounded'
-              href='/logout'
             >
               로그아웃
-            </Link>
+            </button>
           </li>
         </ul>
       </div>
