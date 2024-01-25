@@ -123,48 +123,48 @@ export default function OrderManagement() {
         <div className="overflow-y-auto h-full">
           <table className="min-w-full leading-normal">
             <thead className="sticky top-0 bg-gray-500">
-              <tr>
-                <th className="px-5 py-3 border-b-2 border-wine text-yellow-300 text-left text-xs font-semibold uppercase tracking-wider">
+              <tr className="text-center">
+                <th className="px-5 py-3 border-b-2 border-wine text-yellow-300  text-xs font-semibold uppercase tracking-wider">
                   주문 번호
                 </th>
-                <th className="px-5 py-3 border-b-2 border-wine text-yellow-300 text-left text-xs font-semibold uppercase tracking-wider">
+                <th className="px-5 py-3 border-b-2 border-wine text-yellow-300  text-xs font-semibold uppercase tracking-wider">
                   이미지
                 </th>
-                <th className="px-5 py-3 border-b-2 border-wine text-yellow-300 text-left text-xs font-semibold uppercase tracking-wider">
+                <th className="px-5 py-3 border-b-2 border-wine text-yellow-300  text-xs font-semibold uppercase tracking-wider">
                   상품명
                 </th>
-                <th className="px-5 py-3 border-b-2 border-wine text-yellow-300 text-left text-xs font-semibold uppercase tracking-wider">
+                <th className="px-5 py-3 border-b-2 border-wine text-yellow-300  text-xs font-semibold uppercase tracking-wider">
                   요청 사항
                 </th>
-                <th className="px-5 py-3 border-b-2 border-wine text-yellow-300 text-left text-xs font-semibold uppercase tracking-wider">
+                <th className="px-5 py-3 border-b-2 border-wine text-yellow-300  text-xs font-semibold uppercase tracking-wider">
                   수령인
                 </th>
-                <th className="px-5 py-3 border-b-2 border-wine text-yellow-300 text-left text-xs font-semibold uppercase tracking-wider">
+                <th className="px-5 py-3 border-b-2 border-wine text-yellow-300  text-xs font-semibold uppercase tracking-wider">
                   배송 주소
                 </th>
-                <th className="px-5 py-3 border-b-2 border-wine text-yellow-300 text-left text-xs font-semibold uppercase tracking-wider">
+                <th className="px-5 py-3 border-b-2 border-wine text-yellow-300  text-xs font-semibold uppercase tracking-wider">
                   연락처
                 </th>
-                <th className="px-5 py-3 border-b-2 border-wine text-yellow-300 text-left text-xs font-semibold uppercase tracking-wider">
+                <th className="px-5 py-3 border-b-2 border-wine text-yellow-300  text-xs font-semibold uppercase tracking-wider">
                   주문 개수
                 </th>
-                <th className="px-5 py-3 border-b-2 border-wine text-yellow-300 text-left text-xs font-semibold uppercase tracking-wider">
+                <th className="px-5 py-3 border-b-2 border-wine text-yellow-300  text-xs font-semibold uppercase tracking-wider">
                   주문 날짜
                 </th>
-                <th className="px-5 py-3 border-b-2 border-wine text-yellow-300 text-left text-xs font-semibold uppercase tracking-wider">
+                <th className="px-5 py-3 border-b-2 border-wine text-yellow-300  text-xs font-semibold uppercase tracking-wider">
                   주문 금액
                 </th>
-                <th className="px-5 py-3 border-b-2 border-wine text-yellow-300 text-left text-xs font-semibold uppercase tracking-wider">
+                <th className="px-5 py-3 border-b-2 border-wine text-yellow-300  text-xs font-semibold uppercase tracking-wider">
                   배송 상태
                 </th>
-                <th className="px-5 py-3 border-b-2 border-wine text-yellow-300 text-left text-xs font-semibold uppercase tracking-wider">
+                <th className="px-5 py-3 border-b-2 border-wine text-yellow-300  text-xs font-semibold uppercase tracking-wider">
                   조치
                 </th>
               </tr>
             </thead>
             <tbody>
               {orders.map((order) => (
-                <tr key={order.orderIndex}>
+                <tr key={order.orderIndex} className="text-center">
                   <td className="px-5 py-3 border-b text-sm">
                     <div className="whitespace-no-wrap">{order.orderIndex}</div>
                   </td>
