@@ -139,12 +139,15 @@ export default function RevenueView() {
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
   return (
-    <div className='container mx-auto p-4 max-h-[800px] overflow-y-auto'>
-      <div className='border-2 border-wine shadow-md rounded px-8 pt-6 pb-8 mb-4 '>
+    <div className='container mx-auto p-4 h-full overflow-y-auto'>
+      <div className='shadow-md rounded px-8 pt-6 pb-8 mb-4 '>
         {/* 날짜 선택 */}
         <h1 className='text-xl font-semibold mb-6'>매출 조회</h1>
         <div className='mb-4'>
-          <label htmlFor='startDate' className='block  text-sm font-bold mb-2'>
+          <label
+            htmlFor='startDate'
+            className='block text-gray-700 text-sm font-bold mb-2'
+          >
             시작 날짜:
           </label>
           <input
@@ -153,11 +156,14 @@ export default function RevenueView() {
             name='startDate'
             value={startDate}
             onChange={handleDateChange}
-            className='shadow appearance-none border rounded py-2 px-3  leading-tight focus:outline-none focus:shadow-outline text-black'
+            className='shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
           />
         </div>
         <div className='mb-4'>
-          <label htmlFor='endDate' className='block  text-sm font-bold mb-2'>
+          <label
+            htmlFor='endDate'
+            className='block text-gray-700 text-sm font-bold mb-2'
+          >
             끝 날짜:
           </label>
           <input
@@ -166,13 +172,16 @@ export default function RevenueView() {
             name='endDate'
             value={endDate}
             onChange={handleDateChange}
-            className='shadow appearance-none border rounded py-2 px-3  leading-tight focus:outline-none focus:shadow-outline text-black'
+            className='shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
           />
         </div>
 
         {/* 카테고리 선택 */}
         <div className='mb-4'>
-          <label htmlFor='category' className='block  text-sm font-bold mb-2'>
+          <label
+            htmlFor='category'
+            className='block text-gray-700 text-sm font-bold mb-2'
+          >
             카테고리:
           </label>
           <select
@@ -180,7 +189,7 @@ export default function RevenueView() {
             name='category'
             value={category}
             onChange={handleCategoryChange}
-            className='shadow appearance-none border rounded py-2 px-3  leading-tight focus:outline-none focus:shadow-outline text-black'
+            className='shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
           >
             <option value=''>전체</option>
             <option value='Zerg'>Zerg</option>
@@ -191,37 +200,37 @@ export default function RevenueView() {
         <div className='mb-4'>
           <button
             onClick={calculateRevenue}
-            className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+            className='bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
           >
             수익 계산
           </button>
-          <button
-            onClick={fetchTopCustomers}
-            className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
-          >
-            상위 고객 조회
-          </button>
-          <button
-            onClick={fetchTopProducts}
-            className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
-          >
-            Top 상품 조회
-          </button>
         </div>
-        <div className='flex flex-row'>
-          {revenue !== null && (
-            <BarChart
-              width={600}
-              height={300}
-              data={[{ name: '총 매출', amount: revenue }]}
+        {revenue !== null && (
+          <BarChart
+            width={600}
+            height={300}
+            data={[{ name: '총 매출', amount: revenue }]}
+          >
+            <CartesianGrid strokeDasharray='3 3' />
+            <XAxis dataKey='name' />
+            <YAxis />
+            <Tooltip />
+            <Bar dataKey='amount' fill='#8884d8' />
+          </BarChart>
+        )}
+      </div>
+
+      {/* 상위고객, 상위 상품 조회 */}
+      <div className='container mx-auto'>
+        <div className='shadow-md rounded px-8 pt-6 pb-8 mb-4'>
+          <div className='mb-4'>
+            <button
+              onClick={fetchTopCustomers}
+              className='bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
             >
-              <CartesianGrid strokeDasharray='3 3' />
-              <XAxis dataKey='name' />
-              <YAxis />
-              <Tooltip />
-              <Bar dataKey='amount' fill='#8884d8' />
-            </BarChart>
-          )}
+              상위 고객 조회
+            </button>
+          </div>
           {topCustomers !== null && (
             <div>
               <p className='text-green-500'>상위 고객 순위:</p>
@@ -249,6 +258,19 @@ export default function RevenueView() {
               </ResponsiveContainer>
             </div>
           )}
+        </div>
+      </div>
+
+      <div className='container mx-auto'>
+        <div className='shadow-md rounded px-8 pt-6 pb-8 mb-4'>
+          <div className='mb-4'>
+            <button
+              onClick={fetchTopProducts}
+              className='bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+            >
+              Top 상품 조회
+            </button>
+          </div>
           {topProducts !== null && (
             <div>
               <p className='text-green-500'>Top 상품 정보:</p>
