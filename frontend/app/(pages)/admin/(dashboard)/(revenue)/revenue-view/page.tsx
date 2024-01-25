@@ -1,41 +1,34 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, ChangeEvent } from "react";
+
+
+interface Customer {
+  userName: string;
+  userIndex: number;
+  orderCount: number;
+  totalAmount: number;
+}
+
+interface Product {
+  prodIndex: number;
+  prodCategory: string;
+  prodName: string;
+  orderCount: number;
+  totalAmount: number;
+}
+
 
 export default function RevenueView() {
   // * 상태들
-
-  // 날짜 상태
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-
-  // 추가: 카테고리 상태
-  const [category, setCategory] = useState("");
-
-  // 우수고객 상태
-  const [topCustomers, setTopCustomer] = useState<{
-    userName: string;
-    userIndex: number;
-    orderCount: number;
-    totalAmount: number;
-  } | null>(null);
-
-  // Top products 상태
-  const [topProducts, setTopProduct] = useState<{
-    prodIndex: number;
-    prodCategory: string;
-    prodName: string;
-    orderCount: number;
-    totalAmount: number;
-  } | null>(null);
-
-  // 총 판매량
+  const [startDate, setStartDate] = useState<string>("");
+  const [endDate, setEndDate] = useState<string>("");
+  const [category, setCategory] = useState<string>("");
+  const [topCustomers, setTopCustomer] = useState<Customer[] | null>(null);
+  const [topProducts, setTopProduct] = useState<Product[] | null>(null);
   const [revenue, setRevenue] = useState<number | null>(null);
 
-  // * 핸들러 및 함수들
-
-  // 날짜 변경 핸들러
-  const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleDateChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     if (name === "startDate") {
       setStartDate(value);
@@ -44,12 +37,10 @@ export default function RevenueView() {
     }
   };
 
-  // 카테고리 변경 핸들러
-  const handleCategoryChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
+  const handleCategoryChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setCategory(event.target.value);
   };
+
 
   // 수익 계산 함수
   const calculateRevenue = async () => {
