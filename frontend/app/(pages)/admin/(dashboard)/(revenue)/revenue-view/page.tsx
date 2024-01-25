@@ -1,6 +1,19 @@
 'use client';
 
 import React, { useState, ChangeEvent } from 'react';
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  PieChart,
+  Pie,
+  Cell,
+  Legend,
+  ResponsiveContainer,
+} from 'recharts';
 
 interface Customer {
   userName: string;
@@ -123,9 +136,11 @@ export default function RevenueView() {
     }
   };
 
+  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+
   return (
-    <div className='container mx-auto p-4'>
-      <div className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'>
+    <div className='container mx-auto p-4 max-h-[800px] overflow-y-auto'>
+      <div className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 '>
         {/* 날짜 선택 */}
         <h1 className='text-xl font-semibold mb-6'>매출 조회</h1>
         <div className='mb-4'>
@@ -191,9 +206,17 @@ export default function RevenueView() {
           </button>
         </div>
         {revenue !== null && (
-          <p className='text-green-500'>
-            선택한 기간 동안의 총 수익: {revenue.toLocaleString()}원
-          </p>
+          <BarChart
+            width={600}
+            height={300}
+            data={[{ name: '총 매출', amount: revenue }]}
+          >
+            <CartesianGrid strokeDasharray='3 3' />
+            <XAxis dataKey='name' />
+            <YAxis />
+            <Tooltip />
+            <Bar dataKey='amount' fill='#8884d8' />
+          </BarChart>
         )}
       </div>
 
@@ -211,15 +234,28 @@ export default function RevenueView() {
           {topCustomers !== null && (
             <div>
               <p className='text-green-500'>상위 고객 순위:</p>
-              <ul>
-                {topCustomers.map((customer, index) => (
-                  <li key={customer.userIndex}>
-                    순위 {index + 1}: {customer.userName} (주문 횟수:{' '}
-                    {customer.orderCount}, 총 구매액:{' '}
-                    {customer.totalAmount.toLocaleString()}원)
-                  </li>
-                ))}
-              </ul>
+              <ResponsiveContainer width='100%' height={300}>
+                <BarChart data={topCustomers}>
+                  <CartesianGrid strokeDasharray='3 3' />
+                  <XAxis dataKey='userName' />
+                  <YAxis yAxisId='left' orientation='left' stroke='#8884d8' />
+                  <YAxis yAxisId='right' orientation='right' stroke='#82ca9d' />
+                  <Tooltip />
+                  <Legend />
+                  <Bar
+                    yAxisId='left'
+                    dataKey='orderCount'
+                    fill='#8884d8'
+                    name='주문 횟수'
+                  />
+                  <Bar
+                    yAxisId='right'
+                    dataKey='totalAmount'
+                    fill='#82ca9d'
+                    name='총 구매액'
+                  />
+                </BarChart>
+              </ResponsiveContainer>
             </div>
           )}
         </div>
@@ -238,15 +274,28 @@ export default function RevenueView() {
           {topProducts !== null && (
             <div>
               <p className='text-green-500'>Top 상품 정보:</p>
-              <ul>
-                {topProducts.map((product, index) => (
-                  <li key={index}>
-                    순위 {index + 1}: {product.prodName}, 상품분류:{' '}
-                    {product.prodCategory}, 주문 횟수: {product.orderCount}, 총
-                    판매액: {product.totalAmount.toLocaleString()}원
-                  </li>
-                ))}
-              </ul>
+              <ResponsiveContainer width='100%' height={300}>
+                <BarChart data={topProducts}>
+                  <CartesianGrid strokeDasharray='3 3' />
+                  <XAxis dataKey='prodName' />
+                  <YAxis yAxisId='left' orientation='left' stroke='#8884d8' />
+                  <YAxis yAxisId='right' orientation='right' stroke='#82ca9d' />
+                  <Tooltip />
+                  <Legend />
+                  <Bar
+                    yAxisId='left'
+                    dataKey='orderCount'
+                    fill='#8884d8'
+                    name='주문 횟수'
+                  />
+                  <Bar
+                    yAxisId='right'
+                    dataKey='totalAmount'
+                    fill='#82ca9d'
+                    name='총 판매액'
+                  />
+                </BarChart>
+              </ResponsiveContainer>
             </div>
           )}
         </div>
