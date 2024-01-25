@@ -4,6 +4,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { formatDate } from "../../../utils/formatDate";
 
 interface OrderListProps {
   data: {
@@ -38,7 +39,7 @@ const OrderList: React.FC<OrderListProps> = ({ data }) => {
       </Link>
       <div className="flex gap-6 w-2/3 ">
         <div className="w-1/6 flex justify-center items-center text-xs">
-          {data.orderPaymentDatetime}
+          {formatDate(data.orderPaymentDatetime)}
         </div>
         {/* order테이블에 있는 orderPaymentDatetime */}
         <div className="w-1/6 flex justify-center items-center text-xs">
@@ -46,11 +47,9 @@ const OrderList: React.FC<OrderListProps> = ({ data }) => {
         </div>
         {/* orderIndex */}
         <div className="w-1/2 flex justify-center items-center">{`${data.prodPrice}원 (${data.orderPaymentCount}개)`}</div>
-        {/*  */}
         <div className="w-1/2 flex justify-center items-center">
-          {data.orderDeliveryDone ? "배송 중" : "배송 전"}
+          {data.orderDeliveryDone ? "배송 준비" : "배송 완료"}
         </div>
-        {/* todo : 배송중, 배송전 orderDeliveryDone 0,1로 구분?  */}
       </div>
     </li>
   );
