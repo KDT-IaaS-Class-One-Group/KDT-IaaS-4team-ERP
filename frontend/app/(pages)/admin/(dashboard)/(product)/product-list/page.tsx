@@ -82,35 +82,35 @@ export default function ProductListPage() {
           <table className="min-w-full leading-normal">
             <thead className="sticky top-0 bg-gray-500">
               <tr>
-                <th className="px-5 py-3 border-b-2 border-wine text-yellow-300 text-left text-xs font-semibold uppercase tracking-wider">
+                <th className="px-5 py-3 border-b-2 border-wine text-yellow-300 text-center text-xs font-semibold uppercase tracking-wider">
                   상품 번호
                 </th>
-                <th className="px-5 py-3 border-b-2 border-wine text-yellow-300 text-left text-xs font-semibold uppercase tracking-wider">
+                <th className="px-5 py-3 border-b-2 border-wine text-yellow-300 text-center text-xs font-semibold uppercase tracking-wider">
                   이미지
                 </th>
-                <th className="px-5 py-3 border-b-2 border-wine text-yellow-300 text-left text-xs font-semibold uppercase tracking-wider">
+                <th className="px-5 py-3 border-b-2 border-wine text-yellow-300 text-center text-xs font-semibold uppercase tracking-wider">
                   상품명
                 </th>
-                <th className="px-5 py-3 border-b-2 border-wine text-yellow-300 text-left text-xs font-semibold uppercase tracking-wider">
+                <th className="px-5 py-3 border-b-2 border-wine text-yellow-300 text-center text-xs font-semibold uppercase tracking-wider w-1/2">
                   설명
                 </th>
-                <th className="px-5 py-3 border-b-2 border-wine text-yellow-300 text-left text-xs font-semibold uppercase tracking-wider">
+                <th className="px-5 py-3 border-b-2 border-wine text-yellow-300 text-center text-xs font-semibold uppercase tracking-wider">
                   가격
                 </th>
-                <th className="px-5 py-3 border-b-2 border-wine text-yellow-300 text-left text-xs font-semibold uppercase tracking-wider">
+                <th className="px-5 py-3 border-b-2 border-wine text-yellow-300 text-center text-xs font-semibold uppercase tracking-wider">
                   재고
                 </th>
-                <th className="px-5 py-3 border-b-2 border-wine text-yellow-300 text-left text-xs font-semibold uppercase tracking-wider">
+                <th className="px-5 py-3 border-b-2 border-wine text-yellow-300 text-center text-xs font-semibold uppercase tracking-wider">
                   카테고리
                 </th>
-                <th className="px-5 py-3 border-b-2 border-wine text-yellow-300 text-left text-xs font-semibold uppercase tracking-wider">
+                <th className="px-5 py-3 border-b-2 border-wine text-yellow-300 text-center text-xs font-semibold uppercase tracking-wider">
                   작업
                 </th>
               </tr>
             </thead>
             <tbody className="overflow-scroll overflow-x-hidden">
               {products.map((product) => (
-                <tr key={product.prodIndex}>
+                <tr key={product.prodIndex} className="text-center">
                   <td className="px-5 py-5 border-b border-wine text-sm">
                     <p className="whitespace-no-wrap">{product.prodIndex}</p>
                   </td>
@@ -126,18 +126,20 @@ export default function ProductListPage() {
                     </div>
                   </td>
 
-                  <td className="px-5 py-5 border-b border-wine text-sm">
-                    <p className="whitespace-no-wrap">{product.prodName}</p>
-                  </td>
-                  <td className="px-5 py-5 border-b border-wine text-sm">
-                    <p className="whitespace-no-wrap">
-                      {product.prodDescription}
+                  <td className="pl-6 pr-5 py-5 border-b border-wine text-sm">
+                    <p className="whitespace-no-wrap text-left">
+                      {product.prodName}
                     </p>
                   </td>
                   <td className="px-5 py-5 border-b border-wine text-sm">
+                    <p className="whitespace-no-wrap cursor-text text-left">
+                      {product.prodDescription}
+                    </p>
+                  </td>
+                  <td className="px-4 py-5 border-b border-wine text-sm">
                     <p className="whitespace-no-wrap">{product.prodPrice}원</p>
                   </td>
-                  <td className="px-5 py-5 border-b border-wine text-sm">
+                  <td className="px-4 py-5 border-b border-wine text-sm">
                     <p className="whitespace-no-wrap">{product.prodStock}개</p>
                   </td>
                   <td className="px-5 py-5 border-b border-wine text-sm">
