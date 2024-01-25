@@ -40,7 +40,7 @@ const OrderListComponent: React.FC = () => {
   return (
     <>
       <OrderListNav />
-      <div className="h-full w-full flex flex-col">
+      <div className="h-full w-full flex flex-col overflow-scroll overflow-x-hidden">
         {orderList.length === 0 ? (
           <p>주문 목록이 비어 있습니다.</p>
         ) : (
