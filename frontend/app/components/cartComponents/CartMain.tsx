@@ -20,7 +20,7 @@ import { checkAllValuesNotEmpty } from "@/app/utils/checkAllValuesNotEmpty";
 export default function CartMain() {
   const [requestData, setRequestData] = useState<any[]>([]);
   // 수량 변경사항을 담는 state
-  const [quantities, setQuantities] = useState({});
+  const [quantities, setQuantities] = useState<{ [key: number]: number }>({});
   // 배송 정보를 담는 state
   const [deliveryInfo, setDeliveryInfo] = useState({
     orderReceiver: "",
@@ -125,7 +125,7 @@ export default function CartMain() {
     };
 
     fetchData();
-  }, []);
+  });
 
   // 총 가격을 계산하는 함수
   const calculateTotalPrice = (): number => {
@@ -139,7 +139,7 @@ export default function CartMain() {
 
     return totalPrice;
   };
-  
+
   // 결제하기 버튼 클릭 이벤트 핸들러 (최종 실행 함수)
   const handlePaymentClick = () => {
     if (checkAllValuesNotEmpty(deliveryInfo) === true) {
