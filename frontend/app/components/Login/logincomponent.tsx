@@ -37,7 +37,7 @@ const LoginHome = () => {
       if (!loginUser.userId.trim()) {
         setModalContent({
           isOpen: true,
-          title: '경고',
+          title: '알림',
           message: "아이디를 입력해주세요.",
         });
         return;
@@ -46,7 +46,7 @@ const LoginHome = () => {
       if (!loginUser.userPassword.trim()) {
         setModalContent({
           isOpen: true,
-          title: '경고',
+          title: '알림',
           message: "비밀번호를 입력해주세요.",
         });
         return;
