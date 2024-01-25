@@ -11,7 +11,7 @@ mainPage.get("/", async (req, res) => {
   try {
     conn = await pool.getConnection();
     const result = await conn.query(
-      "SELECT * FROM products"
+      "SELECT * FROM products WHERE prodStatus = 1"
     );
     // console.log(result)
     res.status(200).json(result);
