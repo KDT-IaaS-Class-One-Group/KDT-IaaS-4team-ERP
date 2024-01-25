@@ -51,15 +51,15 @@ const ProductInformation: React.FC<Productpaymentprops> = ({
           />
           <div className="mt-2 text-center">{productinfo.prodName}</div>
         </div>
-        <div className="flex flex-col items-center bg-gray-400 p-4 rounded-lg">
+        <div className="flex flex-col items-center justify-center bg-gray-400 p-4 rounded-lg">
           <div className="font-bold">주문 일자</div>
           <div className="text-center">{currentDate.toLocaleDateString()}</div>
         </div>
-        <div className="flex flex-col items-center bg-gray-400 p-4 rounded-lg">
+        <div className="flex flex-col items-center justify-center bg-gray-400 p-4 rounded-lg">
           <div className="font-bold">주문 갯수</div>
           <div className="text-center">{`${quantity}개`}</div>
         </div>
-        <div className="flex flex-col items-center bg-gray-400 p-4 rounded-lg">
+        <div className="flex flex-col items-center justify-center bg-gray-400 p-4 rounded-lg">
           <div className="font-bold">결제 금액</div>
           <div className="text-center">{`${totalPrice}원`}</div>
         </div>

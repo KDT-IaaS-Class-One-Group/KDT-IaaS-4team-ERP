@@ -35,7 +35,7 @@ const DeliveryInformation: React.FC<Productpaymentprops> = ({
           <label className='w-20' htmlFor="deliveryphone">연락처:</label>
           <input
             type="text"
-            className="w-5/6 border border-gray-400 p-1"
+            className="w-5/6 border border-gray-400 p-1 cursor-text"
             id="deliveryphone"
             onChange={handleInputChange("orderReceiverPhone")}
             placeholder="연락처를 입력하세요"
@@ -45,7 +45,7 @@ const DeliveryInformation: React.FC<Productpaymentprops> = ({
         <div className="flex w-full justify-around mt-2 mb-2">
           <label className='w-20' htmlFor="deliveryaddress">주소:</label>
           <textarea
-            className="w-5/6 border border-gray-400 p-1 text-black"
+            className="w-5/6 border border-gray-400 p-1 text-black cursor-text"
             id="deliveryaddress"
             onChange={handleInputChange("orderDeliveryAddress")}
             placeholder="주소를 입력하세요"
@@ -53,10 +53,9 @@ const DeliveryInformation: React.FC<Productpaymentprops> = ({
         </div>
 
         <div className="flex w-full justify-around mt-2 mb-2">
-          <label className='w-20 text-center' htmlFor="deliveryrequest">요청사항:</label>
-          <input
-            type="text"
-            className="w-5/6 border border-gray-400 p-1"
+          <label className='w-20' htmlFor="deliveryrequest">요청사항:</label>
+          <textarea
+            className="w-5/6 border border-gray-400 p-1 cursor-text"
             id="deliveryrequest"
             onChange={handleInputChange("orderRequest")}
             placeholder="요청사항을 입력하세요"

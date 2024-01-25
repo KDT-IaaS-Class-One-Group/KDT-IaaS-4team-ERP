@@ -6,7 +6,7 @@ export default function CTPDeliveryinfo({
   className?: string;
   onDeliveryInfoChange: (name: string, value: string) => void;
 }) {
-  const handleInputChange = (event) => {
+  const handleInputChange = (event : any) => {
     const { name, value } = event.target;
     onDeliveryInfoChange(name, value);
   };
@@ -16,7 +16,7 @@ export default function CTPDeliveryinfo({
       <CTPInput
         InputName="orderReceiver"
         inputPlaceholder="수령인을 작성해주세요"
-        liClassName="h-12 pr-3   "
+        liClassName="h-12 pr-3"
         listName="이름"
         onChange={handleInputChange}
       />
