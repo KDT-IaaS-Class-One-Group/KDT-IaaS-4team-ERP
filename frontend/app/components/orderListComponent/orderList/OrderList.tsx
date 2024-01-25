@@ -5,20 +5,25 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { formatDate } from "../../../utils/formatDate";
+import { OrderPageGetDataProps } from "@/app/interfaces/Order/OrderPageGetDataProps";
 
 interface OrderListProps {
-  data: {
-    prodIndex: number; // products 테이블의 prodIndex 필드와 관련된 데이터 타입
-    prodImgUrl: string; // products 테이블의 prodImgUrl 필드와 관련된 데이터 타입
-    prodDescription: string; // products 테이블의 prodDescription 필드와 관련된 데이터 타입
-    prodPrice: number; // products 테이블의 prodPrice 필드와 관련된 데이터 타입
-    orderPaymentDatetime: string; // order 테이블의 orderPaymentDatetime 필드와 관련된 데이터 타입
-    orderIndex: number; // order 테이블의 orderIndex 필드와 관련된 데이터 타입
-    orderPaymentCount: number; // order 테이블의 orderPaymentCount 필드와 관련된 데이터 타입
-    orderDeliveryDone: number; // order테이블의 배송전, 후를 구별하는 데이터 타입
-  };
+  data: OrderPageGetDataProps;
 }
-
+/**
+ * 주문 목록을 표시하는 컴포넌트입니다.
+ *
+ * @param {Object} data - 주문 목록 컴포넌트에 전달되는 props입니다.
+ * @param {string} data.prodIndex - 상품 인덱스입니다.
+ * @param {string} data.prodImgUrl - 상품 이미지 URL입니다.
+ * @param {string} data.prodDescription - 상품 설명입니다.
+ * @param {string} data.orderPaymentDatetime - 주문 결제 일시입니다.
+ * @param {string} data.orderIndex - 주문 인덱스입니다.
+ * @param {number} data.prodPrice - 상품 가격입니다.
+ * @param {number} data.orderPaymentCount - 주문 수량입니다.
+ * @param {boolean} data.orderDeliveryDone - 배송 완료 여부입니다.
+ * @returns {JSX.Element} - 주문 목록 컴포넌트의 JSX 요소입니다.
+ */
 const OrderList: React.FC<OrderListProps> = ({ data }) => {
   const linkHref = `/product/${data.prodIndex}`;
   return (
