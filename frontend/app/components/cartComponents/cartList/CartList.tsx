@@ -94,7 +94,7 @@ const CartList: React.FC<
         </div>
         <div className="ctpButton flex justify-center items-center gap-2 ml-5">
           <span className="cartProductCount text-xl font-medium block">
-            {quantity}
+            {prodPrice}원({quantity}개)
           </span>
           <div className="flex flex-col justify-center items-center gap-0 w-7">
             <button

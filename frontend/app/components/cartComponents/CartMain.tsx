@@ -128,7 +128,7 @@ export default function CartMain() {
   }, []);
 
   // 총 가격을 계산하는 함수
-  const calculateTotalPrice = () => {
+  const calculateTotalPrice = (): number => {
     let totalPrice = 0;
 
     requestData.forEach((item) => {
@@ -139,7 +139,7 @@ export default function CartMain() {
 
     return totalPrice;
   };
-
+  
   // 결제하기 버튼 클릭 이벤트 핸들러 (최종 실행 함수)
   const handlePaymentClick = () => {
     if (checkAllValuesNotEmpty(deliveryInfo) === true) {

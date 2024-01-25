@@ -13,7 +13,7 @@ const CartNav: React.FC = () => {
         금액
       </li>
       <li className="w-1/6 flex justify-center items-center text-sm border border-black h-full">
-        수량 설정
+        단가/수량설정
       </li>
       <li className="w-1/6 flex justify-center items-center text-sm border border-black h-full">
         주문 관리
