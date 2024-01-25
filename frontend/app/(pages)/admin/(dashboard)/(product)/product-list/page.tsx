@@ -77,7 +77,7 @@ export default function ProductListPage() {
 
   return (
     <div className="flex container mx-auto p-4 items-center justify-between flex-col">
-      <div className="overflow-x-auto w-full h-full">
+      <div className="overflow-x-auto w-full h-full border-b border-slate-800">
         <div className="overflow-y-auto h-full">
           <table className="min-w-full leading-normal">
             <thead className="sticky top-0 bg-gray-500">
@@ -165,7 +165,7 @@ export default function ProductListPage() {
       </div>
       <button
         onClick={navigateToAddProductPage}
-        className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded self-end"
+        className="adminBtnStyle mt-4 font-bold py-2 px-4 rounded self-end border border-slate-800 cursor-pointer"
       >
         상품 등록
       </button>
