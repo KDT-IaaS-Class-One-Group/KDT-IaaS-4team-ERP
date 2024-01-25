@@ -17,6 +17,8 @@ import { adminDeleteProduct } from './routes/admin/products/adminDeleteProduct';
 import { adminRevenue } from './routes/admin/revenue/adminRevenue';
 import { adminTopcustomer } from './routes/admin/revenue/adminTopcustomer';
 import { adminTopProduct } from './routes/admin/revenue/adminTopproduct';
+import { getReviewTableAll } from "./routes/admin/reviews/getReviewTableAll";
+import { patchReviewAdminContent } from "./routes/admin/reviews/patchReviewAdminContent";
 
 // 고객페이지
 
@@ -87,6 +89,9 @@ app.patch('/api/deleteproduct/:prodIndex', adminDeleteProduct);
 app.patch('/api/updateproduct/:prodIndex', adminUpdateProduct);
 app.get('/api/orders', adminOrders);
 app.patch('/api/orders/delivery/:orderIndex', adminOrders);
+app.get("/api/reviewTable", getReviewTableAll);
+app.patch("/api/reviewReplySubmit/:reviewIndex", patchReviewAdminContent);
+// todo : 리뷰테이블 모두 가져오기 함수 작성필요
 
 // 매출 통계
 app.get('/api/adminRevenue', adminRevenue);

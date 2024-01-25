@@ -1,13 +1,18 @@
-// 상품평 관리 페이지
-
-"use client";
-// import { ReviewContext } from "@/app/components/AdminComponent/ReviewProvier";
-import AdminReviewManageList from "@/app/components/AdminComponent/review-manage/AdminReviewManageList";
-import { Review } from "@/app/interfaces/Review/Review";
+import React, { createContext, useState, useEffect } from "react";
 import { formatDate } from "@/app/utils/formatDate";
-import React, { useEffect, useState } from "react";
+import { Review } from "@/app/interfaces/Review/Review";
 
-export default function ReviewManagePage() {
+interface ReviewProviderProps {
+  children: React.ReactNode;
+}
+
+interface ReviewContextType {
+  reviews: Review[];
+}
+export const ReviewContext = createContext<ReviewContextType>({ reviews: [] });
+
+export const ReviewProvider: React.FC<ReviewProviderProps> = ({ children }) => {
+  console.log("ReviewProvider 마운트 됨");
   const [reviews, setReviews] = useState<Review[]>([]);
 
   // Logic for loading data (e.g., Fetch API)
@@ -16,7 +21,7 @@ export default function ReviewManagePage() {
       .then((response) => response.json())
       // * data가공하는 파트
       .then((data) => {
-        const reviews = data.map((review: Review) => ({
+        const reviews = data.map((review) => ({
           ...review,
           // 형변환
           reviewCreatedAt: formatDate(review.reviewCreatedAt),
@@ -28,14 +33,9 @@ export default function ReviewManagePage() {
       .catch((error) => console.error(error));
   }, []);
 
-  // todo 함수 선언 필요
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-xl font-semibold mb-4">리뷰 관리</h1>
-
-      {reviews.map((review, index) => (
-        <AdminReviewManageList key={index} review={review} />
-      ))}
-    </div>
+    <ReviewContext.Provider value={{ reviews }}>
+      {children}
+    </ReviewContext.Provider>
   );
-}
+};
