@@ -11,6 +11,9 @@
   cursor: url("../../public/images/cursor.png"), default;
 }
 
+input {
+  color : black;
+}
 body {
   background-color: #000;
   color: #74f94c;

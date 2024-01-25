@@ -17,12 +17,12 @@ export default function CTPInput({
   liClassName,
   ...props
 }: CTPInputProps) {
-  const liClassNameDefault = `flex justify-between items-center gap-6 w-full ${liClassName}`;
+  const liClassNameDefault = `flex justify-center items-center gap-6 w-full ${liClassName}`;
   return (
     <li className={liClassNameDefault}>
       <p className='w-1/4 text-right'>{`${listName} : `}</p>
       <input
-        className='w-3/4 h-4/5 '
+        className='w-2/6 h-4/5 cursor-text mr-28'
         type='text'
         name={InputName}
         placeholder={inputPlaceholder}
@@ -32,3 +32,4 @@ export default function CTPInput({
     </li>
   );
 }
+const liClassName = `w-1 flex`

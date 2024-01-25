@@ -7,8 +7,39 @@ import { Review } from "@/app/interfaces/Review/Review";
 import { formatDate } from "@/app/utils/formatDate";
 import React, { useEffect, useState } from "react";
 
+// 새로운 컴포넌트: 댓글이 없는 리뷰 섹션
+const ReviewsWithoutCommentSection: React.FC<{ reviews: Review[] }> = ({
+  reviews,
+}) => (
+  <section>
+    <h2 className="text-lg font-semibold mb-2">댓글이 없는 리뷰</h2>
+    {reviews.map((review, index) => (
+      <AdminReviewManageList key={index} review={review} />
+    ))}
+  </section>
+);
+
+// 새로운 컴포넌트: 댓글이 있는 리뷰 섹션
+const ReviewsWithCommentSection: React.FC<{ reviews: Review[] }> = ({
+  reviews,
+}) => (
+  <section>
+    <h2 className="text-lg font-semibold mb-2">댓글이 있는 리뷰</h2>
+    {reviews.map((review, index) => (
+      <AdminReviewManageList key={index} review={review} />
+    ))}
+  </section>
+);
+
 export default function ReviewManagePage() {
-  const [reviews, setReviews] = useState<Review[]>([]);
+  const [reviewsWithComment, setReviewsWithComment] = useState<Review[]>([]);
+  const [reviewsWithoutComment, setReviewsWithoutComment] = useState<Review[]>(
+    []
+  );
+  const [selectedSection, setSelectedSection] = useState<string>("withoutComment");
+
+  // React의 forceUpdate를 사용하기 위한 상태
+  // const [, forceUpdate] = useState<number>(0);
 
   // Logic for loading data (e.g., Fetch API)
   useEffect(() => {
@@ -16,14 +47,28 @@ export default function ReviewManagePage() {
       .then((response) => response.json())
       // * data가공하는 파트
       .then((data) => {
-        const reviews = data.map((review: Review) => ({
+        const processedReviews = data.map((review: Review) => ({
           ...review,
-          // 형변환
           reviewCreatedAt: formatDate(review.reviewCreatedAt),
           reviewUpdateAt: formatDate(review.reviewUpdateAt),
         }));
-        setReviews(reviews);
-        console.log("Fetched and processed review data: ", reviews); // 추가된 로그
+
+        // 댓글이 있는 리뷰와 없는 리뷰로 분류
+        const reviewsWithComment = processedReviews.filter(
+          (review: Review) =>
+            review.reviewAdminContent !== null &&
+            review.reviewAdminContent !== ""
+        );
+        const reviewsWithoutComment = processedReviews.filter(
+          (review: Review) => review.reviewAdminContent === null
+        );
+
+        setReviewsWithComment(reviewsWithComment);
+        setReviewsWithoutComment(reviewsWithoutComment);
+
+        // forceUpdate를 호출하여 즉각적으로 페이지를 다시 렌더링
+        // forceUpdate((prev) => prev + 1);
+        console.log("Fetched and processed review data: ", processedReviews); // 추가된 로그
       })
       .catch((error) => console.error(error));
   }, []);
@@ -33,9 +78,22 @@ export default function ReviewManagePage() {
     <div className="container mx-auto p-4">
       <h1 className="text-xl font-semibold mb-4">리뷰 관리</h1>
 
-      {reviews.map((review, index) => (
-        <AdminReviewManageList key={index} review={review} />
-      ))}
+      {/* Toggle buttons to switch between sections */}
+      <div className="mb-4">
+        <button onClick={() => setSelectedSection("withoutComment")}>
+          댓글이 없는 리뷰/
+        </button>
+        <button onClick={() => setSelectedSection("withComment")}>
+          댓글이 있는 리뷰
+        </button>
+      </div>
+
+      {/* Render the selected section */}
+      {selectedSection === "withComment" ? (
+        <ReviewsWithCommentSection reviews={reviewsWithComment} />
+      ) : (
+        <ReviewsWithoutCommentSection reviews={reviewsWithoutComment} />
+      )}
     </div>
   );
 }

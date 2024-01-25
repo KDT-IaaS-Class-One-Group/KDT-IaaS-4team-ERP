@@ -22,7 +22,7 @@ export default function AdminReviewManageList({
     reviewContent,
     reviewAdminContent,
     reviewRating,
-  } = review;
+  }: Review = review;
   const defaultClassName = `AdminReviewManageList bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 ${className}`;
 
   const [reply, setReply] = useState("");
@@ -42,11 +42,13 @@ export default function AdminReviewManageList({
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Reply submitted successfully", data);
+        alert('Reply submitted successfully')
+        // console.log("Reply submitted successfully", data);
         // 등록 성공 모달 띄우기
       })
       .catch((error) => {
-        console.error("Error submitting reply", error);
+        alert('Error submitting reply')
+        // console.error("Error submitting reply", error);
         // 등록 실패 모달 띄우기
       });
   };

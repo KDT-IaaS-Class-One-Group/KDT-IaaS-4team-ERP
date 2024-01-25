@@ -61,9 +61,9 @@ export default function ProductReviews() {
           <ProductUploadButton value="상품평 등록" />
         </Link>
       </div>
-      <div className="w-full flex justify-start items-center flex-col gap-6 mt-10">
+      <div className="w-full flex justify-start items-center flex-col gap-6 mt-10 ">
         {reviews.map((list, index) => (
-          <div className="w-4/5" key={index}>
+          <div className="w-4/5 bg-slate-800" key={index}>
             <Link
               className="flex justify-center items-center h-full"
               href={{

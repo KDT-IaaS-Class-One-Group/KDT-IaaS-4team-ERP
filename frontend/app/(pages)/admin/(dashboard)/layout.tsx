@@ -21,7 +21,7 @@ export default function AdminLayout({ children }: ChildrenProp) {
   return (
     <div className='flex h-full'>
       <Sidebar></Sidebar>
-      {children}
+      <div className='flex items-center justify-center w-full'>{children}</div>
     </div>
   );
 }
