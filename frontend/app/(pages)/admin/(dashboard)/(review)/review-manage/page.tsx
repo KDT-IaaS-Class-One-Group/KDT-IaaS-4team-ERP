@@ -52,10 +52,10 @@ export default function ReviewManagePage() {
 
         // 댓글이 있는 리뷰와 없는 리뷰로 분류
         const reviewsWithComment = processedReviews.filter(
-          (review) => review.reviewAdminContent !== null
+          (review: Review) => review.reviewAdminContent !== null
         );
         const reviewsWithoutComment = processedReviews.filter(
-          (review) => review.reviewAdminContent === null
+          (review: Review) => review.reviewAdminContent === null
         );
 
         setReviewsWithComment(reviewsWithComment);
