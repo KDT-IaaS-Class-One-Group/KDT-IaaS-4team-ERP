@@ -25,7 +25,11 @@ export default function ProductListPage() {
   useEffect(() => {
     const fetchAndSetProducts = async () => {
       const fetchedProducts = await fetchProducts();
-      setProducts(fetchedProducts);
+      // prodStatus가 1인, 즉 활성화된 상품들만 필터링하여 상태에 저장
+      const activeProducts = fetchedProducts.filter(
+        (product) => product.prodStatus !== 0,
+      );
+      setProducts(activeProducts);
     };
 
     fetchAndSetProducts();
@@ -37,19 +41,27 @@ export default function ProductListPage() {
         const response = await fetch(
           `http://localhost:3560/api/deleteproduct/${prodIndex}`,
           {
-            method: 'DELETE',
+            method: 'PATCH',
           },
         );
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
-        // 상품 목록에서 삭제된 상품 제거
         setProducts(
-          products.filter((product) => product.prodIndex !== prodIndex),
+          products.map((product) =>
+            product.prodIndex === prodIndex
+              ? { ...product, prodStatus: 0 }
+              : product,
+          ),
         );
         alert('상품이 성공적으로 삭제되었습니다.');
+        const updatedProducts = await fetchProducts();
+        const activeProducts = updatedProducts.filter(
+          (product) => product.prodStatus !== 0,
+        );
+        setProducts(activeProducts);
       } catch (error) {
-        console.error('Error deleting product:', error);
+        console.error('Error deactivating product:', error);
         alert('상품 삭제에 실패했습니다.');
       }
     }

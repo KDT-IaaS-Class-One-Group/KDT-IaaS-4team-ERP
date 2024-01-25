@@ -6,6 +6,7 @@ import CartNav from "./CartNav/CartNav";
 import Btn from "../Btn/Btn";
 import CartList from "./cartList/CartList";
 import CTPDeliveryinfo from "../Payment/CartToPayment/CTPDeliveryinfo";
+import { checkAllValuesNotEmpty } from "@/app/utils/checkAllValuesNotEmpty";
 // import Image from 'next/image';
 
 /**
@@ -46,14 +47,16 @@ export default function CartMain() {
   // 결제 버튼 데이터 가공 로직
   const handleCartToPayment = async (requestData: object) => {
     // requestData에 수량 변경사항과 배송 정보 통합
-    const processedData = requestData.map((item) => ({
-      ...item,
-      cartProductCount: quantities[item.cartIndex] || item.cartProductCount,
-      orderReceiver: deliveryInfo.orderReceiver,
-      orderReceiverPhone: deliveryInfo.orderReceiverPhone,
-      orderDeliveryAddress: deliveryInfo.orderDeliveryAddress,
-      orderRequest: deliveryInfo.orderRequest,
-    }));
+    const processedData: any[] = Array.isArray(requestData)
+      ? requestData.map((item: any) => ({
+          ...item,
+          cartProductCount: quantities[item.cartIndex] || item.cartProductCount,
+          orderReceiver: deliveryInfo.orderReceiver,
+          orderReceiverPhone: deliveryInfo.orderReceiverPhone,
+          orderDeliveryAddress: deliveryInfo.orderDeliveryAddress,
+          orderRequest: deliveryInfo.orderRequest,
+        }))
+      : [];
 
     // processedData를 사용하여 결제 요청 전송
     // 예: fetch('/api/payment', { method: 'POST', body: JSON.stringify(processedData) })
@@ -124,6 +127,17 @@ export default function CartMain() {
     fetchData();
   }, []);
 
+  // 결제하기 버튼 클릭 이벤트 핸들러 (최종 실행 함수)
+  const handlePaymentClick = () => {
+    if (checkAllValuesNotEmpty(deliveryInfo) === true) {
+      handleCartToPayment(requestData);
+    } else {
+      // 경고 모달이 떠야할 자리
+      // alert("배송 정보에 정보가 없습니다.");
+      console.log("배송 정보에 정보가 없습니다.");
+    }
+  };
+
   return (
     <main className="flex flex-col overflow-hidden w-full h-full p-3 gap-2">
       <CTPDeliveryinfo
@@ -151,12 +165,15 @@ export default function CartMain() {
           />
         ))}
       </ul>
-      <Link href="/orderlist" className="ml-auto">
+      <Link
+        href={checkAllValuesNotEmpty(deliveryInfo) ? "/orderlist" : "#"}
+        className="ml-auto"
+      >
         <Btn
           textContent="결제 하기"
           className="h-10 w-28 border border-black flex items-center justify-center"
           onClick={() => {
-            handleCartToPayment(requestData);
+            handlePaymentClick();
           }}
         />
       </Link>

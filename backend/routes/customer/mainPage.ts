@@ -13,7 +13,7 @@ mainPage.get("/", async (req, res) => {
     const result = await conn.query(
       "SELECT * FROM products"
     );
-    console.log(result)
+    // console.log(result)
     res.status(200).json(result);
   } catch (error) {
     console.error("Error fetching products:", error);

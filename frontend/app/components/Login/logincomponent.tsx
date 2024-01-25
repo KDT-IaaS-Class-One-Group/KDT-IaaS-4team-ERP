@@ -20,12 +20,6 @@ const LoginHome = () => {
     message: '',
   });
 
-  const [modalContent, setModalContent] = useState({
-    isOpen: false,
-    title: '',
-    message: '',
-  });
-
   const handleInputChange = (field: string, value: string) => {
     setLoginUser({
       ...loginUser,
@@ -78,8 +72,8 @@ const LoginHome = () => {
       const data = await response.json();
 
       if (data.success) {
-        router.push('/'); // 페이지 이동
         localStorage.setItem('token', data.token);
+        location.href='/'
         setModalContent({
           isOpen: true,
           title: '알림',
