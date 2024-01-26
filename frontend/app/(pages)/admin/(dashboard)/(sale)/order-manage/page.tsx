@@ -118,7 +118,7 @@ export default function OrderManagement() {
   };
 
   return (
-    <div className="flex container mx-auto p-4 items-center flex-col">
+    <main className="flex container mx-auto p-4 items-center flex-col w-full h-full">
       <div className="overflow-x-auto w-full h-full">
         <div className="overflow-y-auto h-full">
           <table className="min-w-full leading-normal">
@@ -139,7 +139,7 @@ export default function OrderManagement() {
                 <th className="px-5 py-3 border-b-2 border-wine text-yellow-300  text-xs font-semibold uppercase tracking-wider">
                   수령인
                 </th>
-                <th className="px-5 py-3 border-b-2 border-wine text-yellow-300  text-xs font-semibold uppercase tracking-wider">
+                <th className="w-1/6 px-5 py-3 border-b-2 border-wine text-yellow-300  text-xs font-semibold uppercase tracking-wider">
                   배송 주소
                 </th>
                 <th className="px-5 py-3 border-b-2 border-wine text-yellow-300  text-xs font-semibold uppercase tracking-wider">
@@ -177,11 +177,11 @@ export default function OrderManagement() {
                       alt="image"
                     />
                   </td>
-                  <td className="px-5 py-3 border-b text-sm">
+                  <td className="w-1/12 px-5 py-3 border-b text-sm">
                     {order.prodName}
                   </td>
 
-                  <td className="px-5 py-3 border-b text-sm">
+                  <td className="px-2 py-3 border-b text-sm">
                     <div className="whitespace-no-wrap">
                       {order.orderRequest}
                     </div>
@@ -211,25 +211,29 @@ export default function OrderManagement() {
                       {formatDate(order.orderPaymentDatetime)}
                     </div>
                   </td>
-                  <td className="px-5 py-3 border-b text-sm">
+                  <td className="py-3 border-b text-sm">
                     <div className="whitespace-no-wrap">
                       {order.orderPaymentPriceAtOrder}원
                     </div>
                   </td>
-                  <td className="px-5 py-3 border-b text-sm">
-                    <div className="whitespace-no-wrap">
+                  <td className="-ml-2 py-3 border-b text-sm">
+                    <div
+                      className={`whitespace-no-wrap ${
+                        order.orderDeliveryDone === 0 ? "text-red-500" : ""
+                      }`}
+                    >
                       {order.orderDeliveryDone === 0
                         ? "배송 준비"
                         : "배송 완료"}
                     </div>
                   </td>
-                  <td className="px-5 py-3 border-b text-sm">
+                  <td className="pr-5 py-3 border-b text-sm">
                     {order.orderDeliveryDone === 0 && (
                       <button
                         onClick={() =>
                           handleDeliveryStatus(order.orderIndex, 1)
                         }
-                        className="text-blue-500 hover:text-blue-800 ml-4 cursor-pointer"
+                        className="text-blue-500 hover:text-blue-800 cursor-pointer text-center w-full mr-1 mb-1"
                       >
                         배송하기
                       </button>
@@ -241,6 +245,6 @@ export default function OrderManagement() {
           </table>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

@@ -17,10 +17,10 @@ export default function Sidebar() {
     <div className="flex flex-col h-full w-64 border-r-2 border-wine">
       <nav className="p-4 flex-grow">
         <ul>
-          <li className="flex pb-10 items-center cursor-pointer">
+          <li className="flex pb-10 items-center">
             <Link
               href="/admin"
-              className="flex p-2 hover:bg-gray-700 rounded border-2 text-3xl items-center"
+              className="flex p-2 hover:bg-gray-700 rounded border-2 text-3xl items-center cursor-pointer"
             >
               <IoMdHome />
             </Link>
@@ -44,7 +44,7 @@ export default function Sidebar() {
           <li>
             <button
               onClick={handleLogout}
-              className="block p-2 hover:bg-gray-700 rounded cursor-pointer w-full text-left"
+              className="block p-2 hover:bg-gray-700 rounded cursor-pointer w-full text-left h-16"
             >
               로그아웃
             </button>
