@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React, { useState, ChangeEvent } from 'react';
+import React, { useState, ChangeEvent } from "react";
 import {
   BarChart,
   Bar,
@@ -13,7 +13,7 @@ import {
   Cell,
   Legend,
   ResponsiveContainer,
-} from 'recharts';
+} from "recharts";
 
 interface Customer {
   userName: string;
@@ -32,18 +32,18 @@ interface Product {
 
 export default function RevenueView() {
   // * 상태들
-  const [startDate, setStartDate] = useState<string>('');
-  const [endDate, setEndDate] = useState<string>('');
-  const [category, setCategory] = useState<string>('');
+  const [startDate, setStartDate] = useState<string>("");
+  const [endDate, setEndDate] = useState<string>("");
+  const [category, setCategory] = useState<string>("");
   const [topCustomers, setTopCustomer] = useState<Customer[] | null>(null);
   const [topProducts, setTopProduct] = useState<Product[] | null>(null);
   const [revenue, setRevenue] = useState<number | null>(null);
 
   const handleDateChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    if (name === 'startDate') {
+    if (name === "startDate") {
       setStartDate(value);
-    } else if (name === 'endDate') {
+    } else if (name === "endDate") {
       setEndDate(value);
     }
   };
@@ -56,17 +56,17 @@ export default function RevenueView() {
   const calculateRevenue = async () => {
     try {
       if (!startDate || !endDate) {
-        alert('날짜를 선택하세요.');
+        alert("날짜를 선택하세요.");
         return;
       }
       // 서버로부터 데이터를 가져오는 fetch 요청
       const response = await fetch(
-        `http://localhost:3560/api/adminRevenue?startDate=${startDate}&endDate=${endDate}&category=${category}`,
+        `http://localhost:3560/api/adminRevenue?startDate=${startDate}&endDate=${endDate}&category=${category}`
       );
 
       if (!response.ok) {
         throw new Error(
-          `서버에서 데이터를 가져오지 못했습니다. 상태 코드: ${response.status}`,
+          `서버에서 데이터를 가져오지 못했습니다. 상태 코드: ${response.status}`
         );
       }
 
@@ -76,7 +76,7 @@ export default function RevenueView() {
       // 수익 설정
       setRevenue(data.totalSales);
     } catch (error) {
-      console.error('서버와의 통신 중 오류 발생:', error);
+      console.error("서버와의 통신 중 오류 발생:", error);
     }
   };
 
@@ -84,17 +84,17 @@ export default function RevenueView() {
   const fetchTopCustomers = async () => {
     try {
       if (!startDate || !endDate) {
-        alert('날짜를 선택하세요.');
+        alert("날짜를 선택하세요.");
         return;
       }
       // 서버로부터 데이터를 가져오는 fetch 요청
       const response = await fetch(
-        `http://localhost:3560/api/adminTopCustomer?startDate=${startDate}&endDate=${endDate}`,
+        `http://localhost:3560/api/adminTopCustomer?startDate=${startDate}&endDate=${endDate}`
       );
 
       if (!response.ok) {
         throw new Error(
-          `서버에서 데이터를 가져오지 못했습니다. 상태 코드: ${response.status}`,
+          `서버에서 데이터를 가져오지 못했습니다. 상태 코드: ${response.status}`
         );
       }
 
@@ -104,7 +104,7 @@ export default function RevenueView() {
       // 최고의 고객 설정
       setTopCustomer(data.topCustomerData);
     } catch (error) {
-      console.error('서버와의 통신 중 오류 발생:', error);
+      console.error("서버와의 통신 중 오류 발생:", error);
     }
   };
 
@@ -112,17 +112,17 @@ export default function RevenueView() {
   const fetchTopProducts = async () => {
     try {
       if (!startDate || !endDate) {
-        alert('날짜를 선택하세요.');
+        alert("날짜를 선택하세요.");
         return;
       }
       // 서버로부터 데이터를 가져오는 fetch 요청
       const response = await fetch(
-        `http://localhost:3560/api/adminTopProduct?startDate=${startDate}&endDate=${endDate}`,
+        `http://localhost:3560/api/adminTopProduct?startDate=${startDate}&endDate=${endDate}`
       );
 
       if (!response.ok) {
         throw new Error(
-          `서버에서 데이터를 가져오지 못했습니다. 상태 코드: ${response.status}`,
+          `서버에서 데이터를 가져오지 못했습니다. 상태 코드: ${response.status}`
         );
       }
 
@@ -132,11 +132,11 @@ export default function RevenueView() {
       // Top 상품 상태 설정
       setTopProduct(data.topProductData);
     } catch (error) {
-      console.error('서버와의 통신 중 오류 발생:', error);
+      console.error("서버와의 통신 중 오류 발생:", error);
     }
   };
 
-  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
   return (
     <div className='container mx-auto p-4 h-full overflow-y-auto'>
@@ -185,19 +185,19 @@ export default function RevenueView() {
             카테고리:
           </label>
           <select
-            id='category'
-            name='category'
+            id="category"
+            name="category"
             value={category}
             onChange={handleCategoryChange}
             className='shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
           >
-            <option value=''>전체</option>
-            <option value='Zerg'>Zerg</option>
-            <option value='Terran'>Terran</option>
-            <option value='Protoss'>Protoss</option>
+            <option value="">전체</option>
+            <option value="Zerg">Zerg</option>
+            <option value="Terran">Terran</option>
+            <option value="Protoss">Protoss</option>
           </select>
         </div>
-        <div className='mb-4'>
+        <div className="buttonOutterDiv mt-16 flex justify-start items-center w-full gap-4">
           <button
             onClick={calculateRevenue}
             className='bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
@@ -233,26 +233,26 @@ export default function RevenueView() {
           </div>
           {topCustomers !== null && (
             <div>
-              <p className='text-green-500'>상위 고객 순위:</p>
-              <ResponsiveContainer width='100%' height={300}>
+              <p className="text-green-500">상위 고객 순위:</p>
+              <ResponsiveContainer width="100%" height={300}>
                 <BarChart data={topCustomers}>
-                  <CartesianGrid strokeDasharray='3 3' />
-                  <XAxis dataKey='userName' />
-                  <YAxis yAxisId='left' orientation='left' stroke='#8884d8' />
-                  <YAxis yAxisId='right' orientation='right' stroke='#82ca9d' />
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="userName" />
+                  <YAxis yAxisId="left" orientation="left" stroke="#8884d8" />
+                  <YAxis yAxisId="right" orientation="right" stroke="#82ca9d" />
                   <Tooltip />
                   <Legend />
                   <Bar
-                    yAxisId='left'
-                    dataKey='orderCount'
-                    fill='#8884d8'
-                    name='주문 횟수'
+                    yAxisId="left"
+                    dataKey="orderCount"
+                    fill="#8884d8"
+                    name="주문 횟수"
                   />
                   <Bar
-                    yAxisId='right'
-                    dataKey='totalAmount'
-                    fill='#82ca9d'
-                    name='총 구매액'
+                    yAxisId="right"
+                    dataKey="totalAmount"
+                    fill="#82ca9d"
+                    name="총 구매액"
                   />
                 </BarChart>
               </ResponsiveContainer>
@@ -273,26 +273,26 @@ export default function RevenueView() {
           </div>
           {topProducts !== null && (
             <div>
-              <p className='text-green-500'>Top 상품 정보:</p>
-              <ResponsiveContainer width='100%' height={300}>
+              <p className="text-green-500">Top 상품 정보:</p>
+              <ResponsiveContainer width="100%" height={300}>
                 <BarChart data={topProducts}>
-                  <CartesianGrid strokeDasharray='3 3' />
-                  <XAxis dataKey='prodName' />
-                  <YAxis yAxisId='left' orientation='left' stroke='#8884d8' />
-                  <YAxis yAxisId='right' orientation='right' stroke='#82ca9d' />
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="prodName" />
+                  <YAxis yAxisId="left" orientation="left" stroke="#8884d8" />
+                  <YAxis yAxisId="right" orientation="right" stroke="#82ca9d" />
                   <Tooltip />
                   <Legend />
                   <Bar
-                    yAxisId='left'
-                    dataKey='orderCount'
-                    fill='#8884d8'
-                    name='주문 횟수'
+                    yAxisId="left"
+                    dataKey="orderCount"
+                    fill="#8884d8"
+                    name="주문 횟수"
                   />
                   <Bar
-                    yAxisId='right'
-                    dataKey='totalAmount'
-                    fill='#82ca9d'
-                    name='총 판매액'
+                    yAxisId="right"
+                    dataKey="totalAmount"
+                    fill="#82ca9d"
+                    name="총 판매액"
                   />
                 </BarChart>
               </ResponsiveContainer>

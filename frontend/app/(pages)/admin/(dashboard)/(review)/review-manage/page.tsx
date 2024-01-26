@@ -36,7 +36,8 @@ export default function ReviewManagePage() {
   const [reviewsWithoutComment, setReviewsWithoutComment] = useState<Review[]>(
     []
   );
-  const [selectedSection, setSelectedSection] = useState<string>("withoutComment");
+  const [selectedSection, setSelectedSection] =
+    useState<string>("withoutComment");
 
   // React의 forceUpdate를 사용하기 위한 상태
   // const [, forceUpdate] = useState<number>(0);
@@ -75,25 +76,34 @@ export default function ReviewManagePage() {
 
   // todo 함수 선언 필요
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-xl font-semibold mb-4">리뷰 관리</h1>
-
-      {/* Toggle buttons to switch between sections */}
-      <div className="mb-4">
-        <button onClick={() => setSelectedSection("withoutComment")}>
-          댓글이 없는 리뷰/
-        </button>
-        <button onClick={() => setSelectedSection("withComment")}>
-          댓글이 있는 리뷰
-        </button>
+    <div className="container mx-auto p-4 w-full h-screen overflow-scroll overflow-x-hidden">
+      <div className="rivewTopArea pt-8 pb-8 sticky -top-8 bg-black opacity-95">
+        <h1 className="text-xl font-semibold mb-4">상품평 관리</h1>
+        {/* Toggle buttons to switch between sections */}
+        <div className="flex justify-start items-center">
+          <button
+            className="adminBtnStyle border border-slate-800 px-4 transition-all"
+            onClick={() => setSelectedSection("withoutComment")}
+          >
+            댓글이 없는 리뷰
+          </button>
+          <div className="mx-6">/</div>
+          <button
+            className="adminBtnStyle border border-slate-800 px-4 transition-all"
+            onClick={() => setSelectedSection("withComment")}
+          >
+            댓글이 있는 리뷰
+          </button>
+        </div>
       </div>
-
-      {/* Render the selected section */}
-      {selectedSection === "withComment" ? (
-        <ReviewsWithCommentSection reviews={reviewsWithComment} />
-      ) : (
-        <ReviewsWithoutCommentSection reviews={reviewsWithoutComment} />
-      )}
+      <div className="">
+        {/* Render the selected section */}
+        {selectedSection === "withComment" ? (
+          <ReviewsWithCommentSection reviews={reviewsWithComment} />
+        ) : (
+          <ReviewsWithoutCommentSection reviews={reviewsWithoutComment} />
+        )}
+      </div>
     </div>
   );
 }
