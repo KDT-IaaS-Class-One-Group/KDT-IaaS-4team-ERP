@@ -11,7 +11,7 @@ const LoginText: FC<LoginTextProps> = ({ title, inputchange }) => {
     <div className='flex h-20 m-2 w-full justify-between'>
       <label
         htmlFor='Idiputtext'
-        className='w-32 text-center flex justify-center items-center '
+        className='w-36 text-center flex justify-center items-center '
       >
         {`${title} :`}
       </label>
