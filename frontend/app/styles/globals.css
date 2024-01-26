@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --neon-blue: #74f94c;
+  --bg: white;
+}
+
+* {
+  cursor: url("../../public/images/cursor.png"), default;
+}
+
+input {
+  color: black;
+}
+body {
+  background-color: #000;
+  color: #74f94c;
+}
+
+.adminBtnStyle {
+  display: block;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  /* background-color: #1f2937; */
+  border-radius: 0.25rem;
+}
+
+.adminBtnStyle:hover {
+  background-color: #4b5563;
+}
+
+.cursor-pointer {
+  cursor: url("../../public/images/cursor-pointer.png"), pointer;
+}
+
+.cursor-text {
+  cursor: url("../../public/images/cursor-text.png"), text;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  background: #080808;
+  transition: all 0.5s;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #74f94c2e;
+  border-radius: calc(15px / 2);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #74f94c;
+}
+
+header > a {
+  position: relative;
+  display: inline-block;
+  border-radius: 2px;
+  color: var(--neon-blue);
+  font-size: 24px;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: 0.5s;
+  letter-spacing: 4px;
+  overflow: hidden;
+  -webkit-box-reflect: below 1px linear-gradient(transparent, #0003);
+}
+
+header > a:hover {
+  background: var(--neon-blue);
+  color: var(--bg);
+  box-shadow: 0 0 5px var(--neon-blue), 0 0 25px var(--neon-blue),
+    0 0 50px var(--neon-blue), 0 0 200px var(--neon-blue);
+  transition-delay: 0.4s;
+}
