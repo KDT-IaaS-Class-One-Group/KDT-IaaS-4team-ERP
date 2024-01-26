@@ -45,7 +45,7 @@ const OrderList: React.FC<OrderListProps> = ({ data }) => {
         {/* *products테이블에서 prodDescription을 가져와야함 */}
       </Link>
       <div className="flex gap-6 w-2/3 ">
-        <div className="w-1/6 flex justify-center items-center text-xs">
+        <div className="w-1/6 flex justify-center items-center text-xs text-right">
           {formatDate(data.orderPaymentDatetime)}
         </div>
         {/* order테이블에 있는 orderPaymentDatetime */}
@@ -54,7 +54,7 @@ const OrderList: React.FC<OrderListProps> = ({ data }) => {
         </div>
         {/* orderIndex */}
         <div className="w-1/2 flex justify-center items-center">{`${data.prodPrice}원 (${data.orderPaymentCount}개)`}</div>
-        <div className="w-1/2 flex justify-center items-center">
+        <div className="w-1/2 flex justify-center items-center">  
           {data.orderDeliveryDone ? "배송 준비" : "배송 완료"}
         </div>
       </div>

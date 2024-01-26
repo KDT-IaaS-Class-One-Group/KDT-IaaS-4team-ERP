@@ -68,11 +68,10 @@ export default function ReviewManagePage() {
         setReviewsWithoutComment(reviewsWithoutComment);
 
         // forceUpdate를 호출하여 즉각적으로 페이지를 다시 렌더링
-        // forceUpdate((prev) => prev + 1);
-        console.log("Fetched and processed review data: ", processedReviews); // 추가된 로그
+        // forceUpdate((prev) => prev + 1);/ 추가된 로그
       })
       .catch((error) => console.error(error));
-  }, []);
+  }, [reviewsWithoutComment]);
 
   // todo 함수 선언 필요
   return (

@@ -152,7 +152,7 @@ export default function CartMain() {
     };
 
     fetchData();
-  });
+  },[]);
 
   // 총 가격을 계산하는 함수
   const calculateTotalPrice = (): number => {

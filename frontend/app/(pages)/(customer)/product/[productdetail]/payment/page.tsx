@@ -30,7 +30,7 @@ export default function PaymentPage() {
   };
 
    // Modal state 및 함수 추가
-   const [modalContent, setModalContent] = useState({
+  const [modalContent, setModalContent] = useState({
     isOpen: false,
     title: '',
     message: '',

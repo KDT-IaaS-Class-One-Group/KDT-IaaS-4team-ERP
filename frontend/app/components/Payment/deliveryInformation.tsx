@@ -55,7 +55,7 @@ const DeliveryInformation: React.FC<Productpaymentprops> = ({
         <div className="flex w-full justify-around mt-2 mb-2">
           <label className='w-20' htmlFor="deliveryrequest">요청사항:</label>
           <textarea
-            className="w-5/6 border border-gray-400 p-1 cursor-text"
+            className="w-5/6 border border-gray-400 p-1 cursor-text text-black"
             id="deliveryrequest"
             onChange={handleInputChange("orderRequest")}
             placeholder="요청사항을 입력하세요"

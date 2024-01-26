@@ -143,44 +143,46 @@ export default function RevenueView() {
       <div className='shadow-md rounded px-8 pt-6 pb-8 mb-4 '>
         {/* 날짜 선택 */}
         <h1 className='text-xl font-semibold mb-6'>매출 조회</h1>
-        <div className='mb-4'>
-          <label
-            htmlFor='startDate'
-            className='block text-gray-700 text-sm font-bold mb-2'
-          >
-            시작 날짜:
-          </label>
-          <input
-            type='date'
-            id='startDate'
-            name='startDate'
-            value={startDate}
-            onChange={handleDateChange}
-            className='shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-          />
-        </div>
-        <div className='mb-4'>
-          <label
-            htmlFor='endDate'
-            className='block text-gray-700 text-sm font-bold mb-2'
-          >
-            끝 날짜:
-          </label>
-          <input
-            type='date'
-            id='endDate'
-            name='endDate'
-            value={endDate}
-            onChange={handleDateChange}
-            className='shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-          />
+        <div className="daySelectors flex justify-start items-center gap-12">
+          <div className='mb-4'>
+            <label
+              htmlFor='startDate'
+              className='block text-sm font-bold mb-2'
+            >
+              시작 날짜:
+            </label>
+            <input
+              type='date'
+              id='startDate'
+              name='startDate'
+              value={startDate}
+              onChange={handleDateChange}
+              className='shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+            />
+          </div>
+          <div className='mb-4'>
+            <label
+              htmlFor='endDate'
+              className='block  text-sm font-bold mb-2'
+            >
+              끝 날짜:
+            </label>
+            <input
+              type='date'
+              id='endDate'
+              name='endDate'
+              value={endDate}
+              onChange={handleDateChange}
+              className='shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+            />
+          </div>
         </div>
 
         {/* 카테고리 선택 */}
         <div className='mb-4'>
           <label
             htmlFor='category'
-            className='block text-gray-700 text-sm font-bold mb-2'
+            className='block  text-sm font-bold mb-2'
           >
             카테고리:
           </label>
@@ -197,10 +199,11 @@ export default function RevenueView() {
             <option value="Protoss">Protoss</option>
           </select>
         </div>
+        <div className="liner w-full h-1 border-b border-slate-700 mt-12"></div>
         <div className="buttonOutterDiv mt-16 flex justify-start items-center w-full gap-4">
           <button
             onClick={calculateRevenue}
-            className='bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+            className='adminBtnStyle border border-slate-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
           >
             수익 계산
           </button>
@@ -226,7 +229,7 @@ export default function RevenueView() {
           <div className='mb-4'>
             <button
               onClick={fetchTopCustomers}
-              className='bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+              className='adminBtnStyle border border-slate-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
             >
               상위 고객 조회
             </button>
@@ -266,7 +269,7 @@ export default function RevenueView() {
           <div className='mb-4'>
             <button
               onClick={fetchTopProducts}
-              className='bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+              className='adminBtnStyle border border-slate-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
             >
               Top 상품 조회
             </button>

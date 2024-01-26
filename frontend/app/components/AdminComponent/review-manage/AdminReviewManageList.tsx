@@ -43,6 +43,7 @@ export default function AdminReviewManageList({
       .then((response) => response.json())
       .then((data) => {
         alert("Reply submitted successfully");
+        setReply(''); 
         // console.log("Reply submitted successfully", data);
         // 등록 성공 모달 띄우기
       })
