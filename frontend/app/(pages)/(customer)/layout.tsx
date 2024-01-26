@@ -1,18 +1,27 @@
 import React from 'react';
-import Header from '@/components/Header/Header';
-import Footer from '@/components/Footer/Footer';
-import ChildrenProps from '@/interfaces/ChildrenProps';
-import HeaderItem from '@/components/Header/HeaderItem';
+import Header from '@/app/components/Header/Header';
+import Footer from '@/app/components/Footer/Footer';
+import { ChildrenProp } from '@/app/types/ChildrenProp';
 
-export default function CustomerLayout({ children }: ChildrenProps) {
+export default function CustomerLayout({ children }: ChildrenProp) {
+  const sendRequest = async (url: string, token: string) => {
+    try {
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await response.json();
+      // Process the response data here
+    } catch (error) {
+      // Handle any errors here
+    }
+  };
+
   return (
     <>
-      <Header>
-        <HeaderItem href='/login'>로그인/로그아웃</HeaderItem>
-        <HeaderItem href='/orderlist'>주문조회</HeaderItem>
-        <HeaderItem href='/cart'>장바구니</HeaderItem>
-        <HeaderItem href='/cs'>고객센터</HeaderItem>
-      </Header>
+      <Header></Header>
       {children}
       <Footer></Footer>
     </>

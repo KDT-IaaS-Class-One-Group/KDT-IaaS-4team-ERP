@@ -1,155 +1,206 @@
 // 상품 등록 페이지
 
-'use client';
-import React, { useState } from 'react';
-import { ProductNameProps } from '@/interfaces/Product/ProductNameProps';
-import { ProductDescriptionProps } from '@/interfaces/Product/ProductDescriptionProps';
-import { ProductPriceProps } from '../../../../interfaces/Product/ProductPriceProps';
-import { ProductStockProps } from '@/interfaces/Product/ProductStockProps';
-import { ProductImageFileProps } from '@/interfaces/Product/ProductImageFileProps';
+"use client";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
-interface ProductProps
-  extends ProductNameProps,
-    ProductDescriptionProps,
-    ProductPriceProps,
-    ProductStockProps,
-    ProductImageFileProps {}
+export default function ProductAddPage() {
+  const [prodName, setProdName] = useState("");
+  const [prodDescription, setProdDescription] = useState("");
+  const [prodCategory, setProdCategory] = useState("");
+  const [prodImgUrl, setProdImgUrl] = useState("");
+  const [prodPrice, setProdPrice] = useState("");
+  const [prodStock, setProdStock] = useState("");
 
-export default function ProductAdd() {
-  const [productForm, setProductForm] = useState<ProductProps>({
-    name: '',
-    description: '',
-    price: '',
-    stock: 0,
-    imageFile: null,
-  });
+  const router = useRouter();
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
-  // 입력 필드의 변경을 처리하는 함수
-  const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const target = event.target as HTMLInputElement; // 타입 단언을 사용하여 HTMLInputElement로 처리
-    const { name, value } = target;
-    const files = target.files; // 이제 안전하게 접근 가능
-  
-    setProductForm((prevForm) => ({
-      ...prevForm,
-      [name]: files && files.length > 0 ? files[0] : value,
-    }));
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      setSelectedFile(event.target.files[0]);
+    }
   };
-
-  // 폼 제출을 처리하는 함수
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
-
-    const formData = new FormData();
-
-    formData.append('name', productForm.name);
-    formData.append('description', productForm.description);
-    formData.append('price', productForm.price);
-    formData.append('stock', productForm.stock.toString());
-    if (productForm.imageFile) {
-      formData.append('image', productForm.imageFile);
+  const submitProduct = async () => {
+    if (!prodName.trim()) {
+      alert("상품명을 입력해주세요.");
+      return;
+    }
+    if (!prodDescription.trim()) {
+      alert("상품 설명을 입력해주세요.");
+      return;
+    }
+    if (!prodCategory) {
+      alert("상품 카테고리를 선택해주세요.");
+      return;
+    }
+    if (!prodPrice.trim() || prodPrice === "0") {
+      alert("상품 가격을 올바르게 입력해주세요.");
+      return;
+    }
+    if (!prodStock.trim() || prodPrice === "0") {
+      alert("상품 재고를 올바르게 입력해주세요.");
+      return;
     }
 
+    if (!selectedFile) return;
+
+    const formData = new FormData();
+    formData.append("image", selectedFile);
+
     try {
-      const response = await fetch('/api/products', {
-        method: 'POST',
+      const uploadResponse = await fetch("http://localhost:3560/upload", {
+        method: "POST",
         body: formData,
       });
 
-      if (response.ok) {
-        console.log('Product registered successfully');
-        // 여기에 성공 시의 로직을 추가하세요
-      } else {
-        console.error('Failed to register the product');
-        // 여기에 실패 시의 로직을 추가하세요
+      if (!uploadResponse.ok) {
+        throw new Error("Image upload failed");
       }
+
+      const uploadData = await uploadResponse.json();
+      const prodImgUrl = uploadData.imageUrl; // 업로드된 이미지 URL
+
+      // 상품 정보 제출 부분
+      const productResponse = await fetch(
+        "http://localhost:3560/api/addproduct",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            prodName,
+            prodDescription,
+            prodCategory,
+            prodImgUrl, // 이미지 URL 포함하여 전송
+            prodPrice,
+            prodStock,
+          }),
+        }
+      );
+
+      if (!productResponse.ok) {
+        throw new Error("Product submission failed");
+      }
+
+      alert("상품이 성공적으로 추가되었습니다!");
+      router.push("/admin/product-list");
     } catch (error) {
-      console.error('There was an error submitting the form:', error);
+      console.error("Error:", error);
+      alert("상품 추가에 실패했습니다.");
     }
   };
 
   return (
-    <div className='container mx-auto p-4'>
-      <div className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'>
-        <h1 className='text-xl font-semibold mb-6'>상품 등록</h1>
-        <form onSubmit={handleSubmit}>
-          <div className='mb-4'>
-            <label className='block text-gray-700 text-sm font-bold mb-2'>
-              상품명
-            </label>
-            <input
-              type='text'
-              name='name'
-              required
-              onChange={handleChange}
-              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700'
-            />
-          </div>
-
-          <div className='mb-4'>
-            <label className='block text-gray-700 text-sm font-bold mb-2'>
-              상품설명
-            </label>
-            <textarea
-              name='description'
-              required
-              onChange={handleChange}
-              rows={18}
-              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 resize-none'
-            ></textarea>
-          </div>
-
-          <div className='mb-4 flex justify-between items-center'>
-            <div className='flex-grow mr-2'>
-              <label className='block text-gray-700 text-sm font-bold mb-2'>
-                가격
-              </label>
-              <input
-                type='text'
-                name='price'
-                required
-                onChange={handleChange}
-                className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700'
-              />
-            </div>
-
-            <div className='flex-grow mr-2'>
-              <label className='block text-gray-700 text-sm font-bold mb-2'>
-                재고
-              </label>
-              <input
-                type='text'
-                name='stock'
-                required
-                onChange={handleChange}
-                className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700'
-              />
-            </div>
-
-            <div className='flex-grow'>
-              <label className='block text-gray-700 text-sm font-bold mb-2'>
-                이미지 업로드
-              </label>
-              <input
-                type='file'
-                name='image'
-                onChange={handleChange}
-                className='shadow appearance-none border rounded py-2 px-3 text-gray-700 w-full'
-              />
-            </div>
-          </div>
-
-          <div className='flex items-center justify-between'>
-            <button
-              type='submit'
-              className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
-            >
-              상품 등록
-            </button>
-          </div>
-        </form>
+    <div className="max-w-md mx-auto mt-10">
+      <div className="mb-4">
+        <label
+          htmlFor="prodName"
+          className="block text-gray-700 text-sm font-bold mb-2"
+        >
+          상품명
+        </label>
+        <input
+          type="text"
+          id="prodName"
+          value={prodName}
+          onChange={(e) => setProdName(e.target.value)}
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          placeholder="상품명"
+        />
+      </div>
+      <div className="mb-4">
+        <label
+          htmlFor="prodDescription"
+          className="block text-gray-700 text-sm font-bold mb-2"
+        >
+          상품 설명
+        </label>
+        <input
+          type="text"
+          id="prodDescription"
+          value={prodDescription}
+          onChange={(e) => setProdDescription(e.target.value)}
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          placeholder="상품 설명"
+        />
+      </div>
+      <div className="mb-4">
+        <label
+          htmlFor="prodCategory"
+          className="block text-gray-700 text-sm font-bold mb-2"
+        >
+          상품 카테고리
+        </label>
+        <select
+          id="prodCategory"
+          value={prodCategory}
+          onChange={(e) => setProdCategory(e.target.value)}
+          className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline text-gray-400"
+        >
+          <option value="">카테고리 선택</option>
+          <option value="Zerg">Zerg</option>
+          <option value="Terran">Terran</option>
+          <option value="Protoss">Protoss</option>
+        </select>
+      </div>
+      <div className="mb-4">
+        <label
+          htmlFor="prodImg"
+          className="block text-gray-700 text-sm font-bold mb-2"
+        >
+          상품 이미지
+        </label>
+        <div>
+          <input
+            type="file"
+            id="prodImg"
+            onChange={handleFileChange}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          />
+        </div>
+      </div>
+      <div className="mb-4">
+        <label
+          htmlFor="prodPrice"
+          className="block text-gray-700 text-sm font-bold mb-2"
+        >
+          상품 가격
+        </label>
+        <input
+          type="number"
+          id="prodPrice"
+          value={prodPrice}
+          onChange={(e) => setProdPrice(e.target.value)}
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          placeholder="상품 가격"
+          min="0"
+        />
+      </div>
+      <div className="mb-6">
+        <label
+          htmlFor="prodStock"
+          className="block text-gray-700 text-sm font-bold mb-2"
+        >
+          상품 재고
+        </label>
+        <input
+          type="number"
+          id="prodStock"
+          value={prodStock}
+          onChange={(e) => setProdStock(e.target.value)}
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+          placeholder="상품 재고"
+          min="0"
+        />
+      </div>
+      <div className="flex items-center justify-between">
+        <button
+          onClick={submitProduct}
+          className="adminBtnStyle font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline border border-slate-800"
+        >
+          상품 등록
+        </button>
       </div>
     </div>
   );

@@ -1,26 +1,36 @@
 // custom home 페이지의 카테고리 네비게이션 바입니다.
 // 버튼이 눌렀을 때 카테고리 별 컴포넌트가 수정됩니다.
 
-import React from 'react';
+interface HomeCategoryNavProps {
+  categories: string[];
+}
 
-export default function HomeCategoryNav() {
+// HomeCategoryNav 컴포넌트
+import React from "react";
+
+interface HomeCategoryNavProps {
+  categories: string[];
+  onSelectCategory: (category: string) => void;
+}
+
+const HomeCategoryNav: React.FC<HomeCategoryNavProps> = ({
+  categories,
+  onSelectCategory,
+}) => {
   return (
-    // 임시 스타일링 : 호버시 밑줄
-    <nav className='w-screen h-1/6'>
-      <ul className='flex-center gap-6'>
-        <li>
-          <a href='/' className='transition-all hover:underline'>카테고리1</a>
+    <nav className="w-screen h-20">
+      <ul className="flex justify-center items-center gap-6 h-32 font-serif font-bold text-5xl">
+        <li className="cursor-pointer" onClick={() => onSelectCategory("")}>
+          All
         </li>
-        <li>
-          <a href='/a' className='transition-all hover:underline '>카테고리2</a>
-        </li>
-        <li>
-          <a href='/b' className='transition-all hover:underline '>카테고리3</a>
-        </li>
-        <li>
-          <a href='/c' className='transition-all hover:underline '>카테고리4</a>
-        </li>
+        {categories.map((category, index) => (
+          <li key={index} onClick={() => onSelectCategory(category)}>
+            <div className="transition-all cursor-pointer">{category}</div>
+          </li>
+        ))}
       </ul>
     </nav>
   );
-}
+};
+
+export default HomeCategoryNav;

@@ -1,23 +1,84 @@
 // customerMain.tsx 는 홈페이지의 메인 컴포넌트 입니다.
 // 주의사항 : 이 컴포넌트는 DB에 따라 자동으로 카드가 생성되어야 합니다. 컴포넌트 생성 로직을 작성해야 합니다. 그리고 root 컴포넌트 혹은 부모에 절대 값이 포함된 스타일링이 필요합니다. 
 // 예시) root div에 w-screen, h-screen 등이 필요합니다.
+// CustomerMain 컴포넌트
+'use client'
+import React, { useEffect, useState } from "react";
+import Card from "./HomeCard/Card";
+import HomeCategoryNav from './HomeCategoryNav/HomeCategoryNav';
+import Link from "next/link";
 
-import React from "react"; 
-import Card from "./HomeCard/Card"; //상품 정보
-import HomeCategoryNav from './HomeCategoryNav/HomeCategoryNav'; //상품 카테고리
+interface Product {
+  prodImgUrl: string;
+  prodName: string;
+  prodDescription: string;
+  prodPrice: number;
+  prodCategory: string;
+  prodIndex: number;
+}
 
-export default function CustomerMain(){
+interface HomeProps {
+  categorylist: string[];
+  productwhole: Product[];
+  value : string;
+}
+
+export default function CustomerMain() {
+  const [productwhole, setProductWhole] = useState<Product[]>([]);
+  const [categorylist, setCategoryList] = useState<string[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const response = await fetch('http://localhost:3560/');
+        const data = await response.json();
+
+        if (!Array.isArray(data)) {
+          throw new Error('데이터 형식 오류: 배열이 아닙니다.');
+        }
+
+        const extractedData: Product[] = data.map((list: any) => ({
+          prodCategory: list.prodCategory,
+          prodImgUrl: list.prodImgUrl,
+          prodName: list.prodName,
+          prodDescription: list.prodDescription,
+          prodPrice: list.prodPrice,
+          prodIndex: list.prodIndex
+        }));
+
+        const uniqueCategories: string[] = Array.from(new Set(extractedData.map(item => item.prodCategory)));
+        setCategoryList(uniqueCategories);
+        setProductWhole(extractedData);
+      } catch (error) {
+        console.error('데이터를 불러오는 동안 에러 발생:', error);
+      }
+    };
+
+    fetchProduct();
+  }, []);
+
+  const filteredProducts = selectedCategory
+    ? productwhole.filter(product => product.prodCategory === selectedCategory)
+    : productwhole;
+
   return (
-    // 병합 후 크기에 대한 스타일링 필요.
-    <main className="flex overflow-hidden outline flex-wrap justify-center max-w-5xl h-3/5 gap-6">
-      <HomeCategoryNav />
-      {/* 이곳에 DB에 따라 관련 카드가 자동으로 생성되는 로직이 들어갑니다. 조건 : 최대 6개, db를 조회할 예정*/}
-      <Card pUrl='' pTitle='상품명' pSub='상품설명' pPrice={1000}/>
-      <Card pUrl='' pTitle='상품명' pSub='상품설명' pPrice={1000}/>
-      <Card pUrl='' pTitle='상품명' pSub='상품설명' pPrice={1000}/>
-      <Card pUrl='' pTitle='상품명' pSub='상품설명' pPrice={1000}/>
-      <Card pUrl='' pTitle='상품명' pSub='상품설명' pPrice={1000}/>
-      <Card pUrl='' pTitle='상품명' pSub='상품설명' pPrice={1000}/>
-    </main>
+    <>
+    <div className="h-1/6 overflow-x-hidden">
+      <HomeCategoryNav categories={categorylist} onSelectCategory={setSelectedCategory} />
+    </div>
+      <main className="flex overflow-y-scroll  flex-wrap justify-center w-4/5 h-5/6 gap-6 ">
+        {filteredProducts.map((list, index) => (
+          <Link href={`/product/${list.prodIndex}`} key={index}>
+            <Card
+              prodImgUrl={list.prodImgUrl}
+              prodName={list.prodName}
+              prodDescription={list.prodDescription}
+              prodPrice={list.prodPrice}
+            />
+          </Link>
+        ))}
+      </main>
+    </>
   );
-} 
+}

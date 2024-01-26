@@ -1,46 +1,69 @@
-import styles from "./style/deliveryInformation.module.css";
-import { deliveryType } from "./types"
+import styles from './style/deliveryInformation.module.css';
+import { productType } from './types';
+import { Productpaymentprops } from '@/app/types/Product/ProductpaymentProps';
 
-type DeliveryInfo = {
-  deliveryinfo: deliveryType;
-};
+// type DeliveryInfo = {
+//   deliveryinfo: deliveryType;
+//   setpaymentcompleteinfo: (field: string, value: string) => void;
+// };
 
+const DeliveryInformation: React.FC<Productpaymentprops> = ({
+  setpaymentcompleteinfo,
+}) => {
+  const handleInputChange =
+    (field: string) => (event: React.ChangeEvent<HTMLInputElement  | HTMLTextAreaElement>) => {
+      setpaymentcompleteinfo(field, event.target.value);
+    };
 
-const DeliveryInformation: React.FC<DeliveryInfo> = ({ deliveryinfo }) => {
-  // const buyerinformation = await fetchbuyerinformationdata()
 
   return (
-    <div className="flex justify-center items-center mt-5">
-      <div
-        className={`${styles.buyerInformation} flex flex-col justify-center`}
-      >
+    <div className="w-screen h-1/4 border  border-slate-950 flex justify-around items-center">
+      <div className='flex flex-col justify-center h-3/5 w-1/3'>
         {/* tailwind와 css모듈 같이 사용하기 */}
-        <div className="relative mt-2 mb-2">
-          <p>배송정보:</p>
-          <p>product data</p>
-          {/* {deliveryinfo.productData} */}
+        <div className="flex w-full justify-around mt-2 mb-2">
+          <label className='w-20' htmlFor="deliveryname">이름:</label>
+          <input
+            type="text"
+            className="w-5/6 border border-gray-400 p-1 cursor-text"
+            id="deliveryname"
+            onChange={handleInputChange("orderReceiver")}
+            placeholder="이름을 입력하세요"
+          />
         </div>
 
-        <div className="relative mt-2 mb-2">
-          <p>이름/연락처:</p>
-          <p>buyerInfo data</p>
-          {/* {deliveryinfo.buyerInfo} */}
+        <div className="flex w-full justify-around mt-2 mb-2">
+          <label className='w-20' htmlFor="deliveryphone">연락처:</label>
+          <input
+            type="text"
+            className="w-5/6 border border-gray-400 p-1 cursor-text"
+            id="deliveryphone"
+            onChange={handleInputChange("orderReceiverPhone")}
+            placeholder="연락처를 입력하세요"
+          />
         </div>
 
-        <div className="relative mt-2 mb-2">
-          <p>주소:</p>
-          <p>address data</p>
-          {/* {deliveryinfo.address} */}
+        <div className="flex w-full justify-around mt-2 mb-2">
+          <label className='w-20' htmlFor="deliveryaddress">주소:</label>
+          <textarea
+            className="w-5/6 border border-gray-400 p-1 text-black cursor-text"
+            id="deliveryaddress"
+            onChange={handleInputChange("orderDeliveryAddress")}
+            placeholder="주소를 입력하세요"
+          />
         </div>
 
-        <div className="relative mt-2 mb-2">
-          <p>요청사항:</p>
-          <p>request data </p>
-          {/* {deliveryinfo.request} */}
+        <div className="flex w-full justify-around mt-2 mb-2">
+          <label className='w-20' htmlFor="deliveryrequest">요청사항:</label>
+          <textarea
+            className="w-5/6 border border-gray-400 p-1 cursor-text text-black"
+            id="deliveryrequest"
+            onChange={handleInputChange("orderRequest")}
+            placeholder="요청사항을 입력하세요"
+          />
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default DeliveryInformation;
