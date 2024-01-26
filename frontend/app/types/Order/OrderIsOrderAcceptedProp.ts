@@ -1,3 +1,0 @@
-interface OrderIsOrderAccepted {
-  orderIsOrderAccepted: number;
-}
