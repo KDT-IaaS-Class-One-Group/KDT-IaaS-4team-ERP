@@ -17,12 +17,6 @@ interface Product {
   prodIndex: number;
 }
 
-interface HomeProps {
-  categorylist: string[];
-  productwhole: Product[];
-  value : string;
-}
-
 export default function CustomerMain() {
   const [productwhole, setProductWhole] = useState<Product[]>([]);
   const [categorylist, setCategoryList] = useState<string[]>([]);
