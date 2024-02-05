@@ -1,6 +1,26 @@
-git clone https://github.com/KDT-IaaS-Class-One-Group/KDT-IaaS-4team-ERP 
+## 프로젝트 주제
+**스타크래프트 테마를 적용한 ERP시스템**
 
-터미널 분할 후 1개의 터미널은 cd backend로 디렉토리 열고 npm install ->  next run start
+## 사용 기술 스택
+### 프론트엔드 백엔드 공통
+- TypeScript
+- TS-Node
+- Git/GitHub
 
-터미널 분할 후 1개의 터미널은 cd front로 디렉토리 열고 npm install ->  next run dev
+### **프론트엔드**
+- Next.js (버전 14)
+- React-Chartjs
+- Tailwind CSS
 
+### **백엔드**
+
+- MariaDB
+- Express
+- Nodemon
+- Multer
+- JSON Web Token (JWT)
+
+## 데이터베이스 설계
+
+
+## 사용 방법
