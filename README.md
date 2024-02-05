@@ -21,6 +21,14 @@
 - JSON Web Token (JWT)
 
 ## 데이터베이스 설계
-
+https://www.figma.com/file/5KDz54ixEJir3fd9V6fJ1L/ERP-DB?type=whiteboard&t=wBO2i1tvB6OCadzJ-0
 
 ## 사용 방법
+```
+cd frontend
+npm install
+```
+```
+cd backend
+npm install
+```
