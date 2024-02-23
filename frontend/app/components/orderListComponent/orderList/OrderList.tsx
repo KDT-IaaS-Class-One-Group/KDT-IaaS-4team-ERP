@@ -55,7 +55,7 @@ const OrderList: React.FC<OrderListProps> = ({ data }) => {
         {/* orderIndex */}
         <div className="w-1/2 flex justify-center items-center">{`${data.prodPrice}원 (${data.orderPaymentCount}개)`}</div>
         <div className="w-1/2 flex justify-center items-center">  
-          {data.orderDeliveryDone ? "배송 준비" : "배송 완료"}
+          {data.orderDeliveryDone ? "배송 완료" : "배송 준비"}
         </div>
       </div>
     </li>
