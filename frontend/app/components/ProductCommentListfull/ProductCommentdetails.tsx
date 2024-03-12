@@ -26,7 +26,7 @@ const ProductCommentdetails = ({
   // useRouter를 활용한 url 조작 함수
   const router = useRouter();
   function goback() {
-    router.push("/product");
+    router.push("/");
   }
   return (
     <div className="flex flex-col items-center w-full h-3/4 justify-center">
